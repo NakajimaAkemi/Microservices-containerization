@@ -1,6 +1,6 @@
-package com.baeuldung.ls.controller;
+package com.baeldung.ls.controller;
 
-import com.baeuldung.ls.persistence.model.Project;
+import com.baeldung.ls.persistence.model.Project;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,6 +1,5 @@
 package com.baeldung.ls.persistence.repository.impl;
 
-import com.baeuldung.ls.persistence.repository.impl.ProjectRepositoryImpl;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;

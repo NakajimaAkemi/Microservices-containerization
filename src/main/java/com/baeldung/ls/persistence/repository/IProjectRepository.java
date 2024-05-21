@@ -1,5 +1,5 @@
-package com.baeuldung.ls.persistence.repository;
-import com.baeuldung.ls.persistence.model.Project;
+package com.baeldung.ls.persistence.repository;
+import com.baeldung.ls.persistence.model.Project;
 import java.util.Collection;
 import java.util.Optional;
 

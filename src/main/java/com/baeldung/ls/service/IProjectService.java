@@ -1,5 +1,5 @@
-package com.baeuldung.ls.service;
-import com.baeuldung.ls.persistence.model.Project;
+package com.baeldung.ls.service;
+import com.baeldung.ls.persistence.model.Project;
 
 import java.util.Collection;
 import java.util.Optional;
