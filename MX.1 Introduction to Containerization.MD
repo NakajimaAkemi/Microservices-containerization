@@ -10,7 +10,7 @@ underutilized.
 
 Virtualization is a technology that allows to create one or mode 
 
-##Introduction to Container technology##
+## Introduction to Container technology##
 Containers are a software unit exexuted by the physical host's OS, it's a similar aproach to VM with the
 difference that its lighter thanks to the fact that it contains only the neccessary components to allow
 the application to run correctly and efficently, such as runtime, code, tools, libraries and other
