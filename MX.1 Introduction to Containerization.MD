@@ -1,4 +1,4 @@
-#**Introduction to Containerization**
+# **Introduction to Containerization**
 
 ##Traditional Deployment
 Initially applications were deployed in a physical server, sharing the resources, this approach was the 
@@ -6,7 +6,7 @@ source of many problems, caused by conflicts of libraries, dependencies and othe
 One solution was to deploy applications in different servers, but it was costly and the respurces were 
 underutilized.
 
-##Virtualized Deployment
+## Virtualized Deployment
 
 Virtualization is a technology that allows to create one or mode 
 
@@ -18,10 +18,10 @@ kinds of dependencies. The advantage of this approach is the fact that there is 
 application in order to adapt it to the host's enviroment, allowing and easy and seamless transition between
 enviroments.
 
-###Examples of Container Technologies###
+### Examples of Container Technologies###
 
 
-#How containers are structured#
+# How containers are structured#
 
 
 
