@@ -1,5 +1,7 @@
 # **Introduction to Containerization**
 
+In this section, we will introduce containerization technology, providing a basic overview of containers and their use case in microservices deployment.
+
 ## Traditional Deployment
 Initially applications were deployed in a physical server, sharing the resources, this approach was the 
 source of many problems, caused by conflicts of libraries, dependencies and other needs of performance.
@@ -8,7 +10,10 @@ underutilized.
 
 ## Virtualized Deployment
 
-Virtualization is a technology that allows to create one or mode 
+Virtualization is a technology that allows to create one or mode running enviroments simulated in a pool of
+shared resources efficiently coordinated and provided in the form of virtual resources by the Hypervisor. 
+
+
 
 ## Introduction to Container technology
 Containers are a software unit exexuted by the physical host's OS, it's a similar aproach to VM with the
