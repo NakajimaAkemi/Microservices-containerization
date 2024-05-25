@@ -35,15 +35,6 @@ The OCI specifies:
 
 
 
---Podman's infrastructure--
-
-
-
---Differences between Podman and Docker--
-
-
---Advantages and used cases--
-
 
 
 
