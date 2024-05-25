@@ -20,11 +20,18 @@ They are similar to virtual machines but much lighter, as they contain only the 
 - tools 
 - libraries
 
-### Examples of Container Technologies
-
 
 ## How containers are structured
 
+
+### Container's lifecycle
+A container implements an incremental file system (overlay), with layer on top of others
+
+### Examples of Container Technologies
+
+
+
+### From Dockerfile to Image
 
 
 ## What is Open Container Initiative (OCI)?
@@ -34,7 +41,6 @@ The OCI specifies:
 - OCI runtime specification
 
 
-### From Dockerfile to Image
 
 
 
