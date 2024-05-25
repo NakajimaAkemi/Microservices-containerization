@@ -4,4 +4,23 @@ containerized applications. Podman can be obtained by installing Podman Desktop 
 Docker, making the switch of the workflow from Docker to Podman and viceversa easier.
 
 
---Differences with Docker--
+
+
+
+
+
+
+
+--Podman's infrastructure--
+
+
+
+--Differences between Podman and Docker--
+
+
+--Advantages and used cases--
+
+
+--Podman Desktop--
+
+--Deployment in Podman--
