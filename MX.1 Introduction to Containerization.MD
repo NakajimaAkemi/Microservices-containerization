@@ -2,17 +2,18 @@
 
 In this section, we will introduce containerization technology, providing a basic overview of containers and their use case in microservices deployment.
 
-## Traditional Deployment
+## Types of Deployment
+### Traditional Deployment
 Initially, applications were deployed on physical servers, sharing the resources. This approach led to many problems due to conflicts with libraries, dependencies, and other performance needs. One solution was to deploy applications on separate servers, but this was costly and resulted in underutilized resources.
 
-## Virtualized Deployment
+### Virtualized Deployment
 
 Virtualization is a technology that allows to create one or mode running enviroments simulated in a pool of
 shared resources efficiently coordinated and provided in the form of virtual resources by the Hypervisor. 
 
 
 
-## Introduction to Container technology
+### Introduction to Container technology
 Containers are a software unit exexuted by the physical host's OS, it's a similar aproach to VM with the
 difference that its lighter thanks to the fact that it contains only the neccessary components to allow
 the application to run correctly and efficently, such as runtime, code, tools, libraries and other
@@ -23,7 +24,7 @@ enviroments.
 ### Examples of Container Technologies
 
 
-# How containers are structured
+## How containers are structured
 
 
 
