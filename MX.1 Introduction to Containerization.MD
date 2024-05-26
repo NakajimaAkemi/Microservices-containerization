@@ -24,6 +24,9 @@ They are similar to virtual machines but much lighter, as they contain only the 
 - tools 
 - libraries
 
+<p align="center">
+  <img src="images/Containers.jpg" alt="Esempio di immagine" />
+</p>
 ### Examples of Container Technologies
 
 - Docker
