@@ -74,7 +74,7 @@ Once an image is created, we can save the image in a public or private repositor
 These registries can allow other users to pull images and use them. Be aware to use only images from trusted
 authors or official distributors.
 
-#### Plugins
+### Plugins
 (Todo)
 - Isolation customization
 - Volumes
