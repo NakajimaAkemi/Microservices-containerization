@@ -9,9 +9,10 @@ Initially, applications were deployed on physical servers, sharing the resources
 ### Virtualized Deployment
 Virtualization is a technology that allows the creation of one or more running environments simulated within a pool of shared resources. These resources are efficiently coordinated and provided as virtual resources by the hypervisor. This technology enhances resource utilization, improves scalability, and simplifies the management of IT infrastructure by allowing multiple virtual machines to run on a single physical machine.
 
-<div style="text-align: center;">
+
+<p align="center">
   <img src="images/VMS.png" alt="Esempio di immagine" />
-</div>
+</p>
 
 
 
