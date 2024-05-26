@@ -72,7 +72,7 @@ authors or official distributors.
 
 
 
-Sources and additional readings:
+## Sources and additional readings:
 - https://www.oracle.com/it/cloud/cloud-native/container-registry/what-is-docker/
 
 
