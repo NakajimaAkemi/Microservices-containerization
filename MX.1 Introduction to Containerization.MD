@@ -18,15 +18,18 @@ Virtualization is a technology that allows the creation of one or more running e
 
 ## Introduction to Container technology
 Containers are software units that run on the host's operating system. This approach offers the advantage of not requiring any modifications to the application to adapt it to the host's environment, making transitions between environments easy and seamless.
-They are similar to virtual machines but much lighter, as they contain only the essential components needed to run an application, such as:
+
+
+<p align="center">
+  <img src="images/Containers.JPG" alt="Esempio di immagine" />
+</p>
+
+Containers are similar to virtual machines but much lighter, as they contain only the essential components needed to run an application, such as:
 - runtime
 - code 
 - tools 
 - libraries
 
-<p align="center">
-  <img src="images/Containers.JPG" alt="Esempio di immagine" />
-</p>
 ### Examples of Container Technologies
 
 - Docker
