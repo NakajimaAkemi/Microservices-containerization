@@ -48,6 +48,10 @@ Once used a container can be turned into an image, turning the container layer i
 #### Container
 (Todo)
 
+<p align="center">
+  <img src="images/DockerProcess.png" alt="Esempio di immagine" />
+</p>
+
 
 #### What is Open Container Initiative (OCI)?
 The OCI is a vendor-neutral initiative established by Docker, CoreOS and other industies with the objective of creating an industry standard around container technology to ensure that different tools and platforms can work together seamlessly.
