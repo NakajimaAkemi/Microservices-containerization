@@ -25,7 +25,7 @@ They are similar to virtual machines but much lighter, as they contain only the 
 - libraries
 
 <p align="center">
-  <img src="images/Containers.jpg" alt="Esempio di immagine" />
+  <img src="images/Containers.JPG" alt="Esempio di immagine" />
 </p>
 ### Examples of Container Technologies
 
