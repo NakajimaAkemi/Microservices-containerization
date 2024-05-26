@@ -49,7 +49,7 @@ Once used a container can be turned into an image, turning the container layer i
 (Todo)
 
 <p align="center">
-  <img src="images/DockerProcess.png" alt="Esempio di immagine" />
+  <img src="images/DockerProcess.jpg" alt="Esempio di immagine" />
 </p>
 
 
