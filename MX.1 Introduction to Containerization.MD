@@ -7,7 +7,6 @@ In this section, we will introduce containerization technology, providing a basi
 Initially, applications were deployed on physical servers, sharing the resources. This approach led to many problems due to conflicts with libraries, dependencies, and other performance needs. One solution was to deploy applications on separate servers, but this was costly and resulted in underutilized resources.
 
 ### Virtualized Deployment
-
 Virtualization is a technology that allows the creation of one or more running environments simulated within a pool of shared resources. These resources are efficiently coordinated and provided as virtual resources by the hypervisor. This technology enhances resource utilization, improves scalability, and simplifies the management of IT infrastructure by allowing multiple virtual machines to run on a single physical machine.
 
 
@@ -27,11 +26,11 @@ They are similar to virtual machines but much lighter, as they contain only the 
 - Kurbenets
 
 ### Use cases of Containers
-#### Microservices
-
+#### Microservices and Applications Isolation
+(Todo)
 #### CI/CD
+(Todo)
 
-#### Applications Isolation
 
 ### Container's lifecycle
 #### Image
@@ -42,6 +41,7 @@ Once used a container can be turned into an image, turning the container layer i
 
 
 #### Container
+(Todo)
 
 
 #### What is Open Container Initiative (OCI)?
@@ -51,6 +51,7 @@ The OCI specifies:
 - OCI runtime specification
 
 #### Image example
+(Todo)
 
 
 #### Container distribution
@@ -59,6 +60,7 @@ These registries can allow other users to pull images and use them. Be aware to 
 authors or official distributors.
 
 #### Plugins
+(Todo)
 
 
 
