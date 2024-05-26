@@ -66,6 +66,10 @@ authors or official distributors.
 
 #### Plugins
 (Todo)
+- Isolation customization
+- Volumes
+- Secrets
+- Networks
 
 
 
