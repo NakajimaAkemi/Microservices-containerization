@@ -32,10 +32,10 @@ Containers are similar to virtual machines but much lighter, as they contain onl
 - **libraries**: the dependencies and libraries that the application relies on to run, ensuring all necessary software is included without the overhead of a full operating system.
 
 ### Examples of Container Technologies
-
-- Docker
-- Podman 
-- Kurbenets
+Of continuation they want to bring back some technologies that offer various options of containerizzazione, each with own points of force and areas of interest, in order to satisfy various requirements and use cases in the management and orchestration of the container.
+- **Docker**: the most widely used containerization platform; it allows you to package applications and their dependencies into lightweight containers; Docker images are read-only templates used for building containers; Dockerfiles instead provides instructions for creating these images.
+- **Podman**: an open source daemonless container management tool; it focuses on security and compatibility, making it a great alternative for those who prefer not to use Docker (it provides a Docker-compatible CLI).
+- **Kurbenets**:  it is not a container technology itself, it is an open-source container orchestration platform that automates deploying, scaling, and managing containerized applications (important to say that Kubernetes works seamlessly with Docker and other container runtimes).
 
 ### Use cases of Containers
 #### Microservices and Applications Isolation
