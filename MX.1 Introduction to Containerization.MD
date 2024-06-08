@@ -32,17 +32,30 @@ Containers are similar to virtual machines but much lighter, as they contain onl
 - **libraries**: the dependencies and libraries that the application relies on to run, ensuring all necessary software is included without the overhead of a full operating system.
 
 ### Examples of Container Technologies
-Of continuation they want to bring back some technologies that offer various options of containerizzazione, each with own points of force and areas of interest, in order to satisfy various requirements and use cases in the management and orchestration of the container.
+Of continuation, they want to bring back some technologies that offer various options of containerizzazione, each with own points of force and areas of interest, in order to satisfy various requirements and use cases in the management and orchestration of the container.
 - **Docker**: the most widely used containerization platform; it allows you to package applications and their dependencies into lightweight containers; Docker images are read-only templates used for building containers; Dockerfiles instead provides instructions for creating these images.
 - **Podman**: an open source daemonless container management tool; it focuses on security and compatibility, making it a great alternative for those who prefer not to use Docker (it provides a Docker-compatible CLI).
 - **Kurbenets**:  it is not a container technology itself, it is an open-source container orchestration platform that automates deploying, scaling, and managing containerized applications (important to say that Kubernetes works seamlessly with Docker and other container runtimes).
 
 ### Use cases of Containers
 #### Microservices and Applications Isolation
-(Todo)
+In recent years, the use of distributed applications, microservices, etc., has become extremely widespread.
+When we talk about these techniques for software development the use of containter is crucial. Let’s analyze the reasons.
+- Decoupling of Services: [...].
+- Consistent Environment: [...].
+- Resource Isolation: [...].
+- Scalability: Containers can be easily scaled up or down to meet demand (particularly important in fog and cloud) - Kubernetes and other orchestration tools manage containerized applications at scale, enabling efficient resource utilization and load balancing.
+- Fault Isolation: If one microservice in a container crashes, it doesn’t affect the others; this feature ensures that an issues in one part of the application don’t bring down the entire system.
 #### CI/CD
-(Todo)
-
+By integrating containers into CI/CD workflows, organizations can achieve greater efficiency, reliability, and speed in their software development processes.
+Containers have revolutionized the CI/CD process, offering numerous benefits that streamline software development, testing, and deployment.
+Here’s how containers enhance CI/CD workflows:
+- Consistent Build Environments: [...].
+- Faster Build and Deployment: [...].
+- Isolation of CI/CD Processes: [...].
+- Parallel Testing: [...].
+- Environment Parity: [...].
+- Rollback Capability: [...].
 
 ### Container's lifecycle
 #### Image
