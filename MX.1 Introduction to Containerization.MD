@@ -45,6 +45,7 @@ When we talk about these techniques for software development the use of containt
 - **Resource Isolation**: this feature helps prevent conflicts and enhances security by limiting the impact of potential vulnerabilities; containers provide a lightweight form of isolation by packaging applications and their dependencies separately from the host system and other containers.
 - **Scalability**: containers can be easily scaled up or down to meet demand (particularly important in fog and cloud) - Kubernetes and other orchestration tools manage containerized applications at scale, enabling efficient resource utilization and load balancing.
 - **Fault Isolation**: if one microservice in a container crashes, it doesn’t affect the others; this feature ensures that an issues in one part of the application don’t bring down the entire system.
+
 #### CI/CD
 By integrating containers into CI/CD workflows, organizations can achieve greater efficiency, reliability, and speed in their software development processes.
 Containers have revolutionized the CI/CD process, offering numerous benefits that streamline software development, testing, and deployment.
@@ -85,13 +86,13 @@ Once used a container can be turned into an image, turning the container layer i
 </p>
 
 #### What is Open Container Initiative (OCI)?
-The OCI is a vendor-neutral initiative established by Docker, CoreOS and other industies with the objective of creating an industry standard around container technology to ensure that different tools and platforms can work together seamlessly.
-The OCI specifies:
-- OCI image format
-- OCI runtime specification
+The OCI is a vendor-neutral initiative established by Docker, CoreOS and other leaders in the container industry with the objective of creating an industry standard around container technology to ensure that different tools and platforms can work together seamlessly.\
+The aim is to ensure standardization and interoperability among various tools and platforms within the container ecosystem, facilitating seamless collaboration and development across different projects and organizations.
 
-#### Image example
-(Todo)
+The Open Container Initiative has developed two main specifications to standardize container technology:
+- **Image format**: this specification outlines how to create an OCI Image, which typically involves a build system generating an image manifest, a filesystem (layer) serialization, and an image configuration; at a high level, an OCI implementation would download an OCI Image, then unpack that image into an OCI Runtime filesystem bundle.
+- **Runtime specification**: a document that describes how to run a "filesystem bundle" that is unpacked on disk.
+- **Distribution Specification**: it was introduced to standardize the API to distribute container images; the specification is designed generically enough to be leveraged as a distribution mechanism for any type of content.
 
 
 #### Container distribution
@@ -100,20 +101,11 @@ These registries can allow other users to pull images and use them. Be aware to 
 authors or official distributors.
 
 ### Plugins
-(Todo)
+
 - Isolation customization
 - Volumes
 - Secrets
 - Networks
-
-
-
-
-
-
-
-
-
 
 
 ## Sources and additional readings:
