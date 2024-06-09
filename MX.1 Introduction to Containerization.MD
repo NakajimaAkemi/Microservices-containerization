@@ -10,7 +10,7 @@ Initially, applications were deployed on physical servers, sharing the resources
 Virtualization is a technology that allows the creation of one or more running environments simulated within a pool of shared resources. These resources are efficiently coordinated and provided as virtual resources by the hypervisor. This technology enhances resource utilization, improves scalability, and simplifies the management of IT infrastructure by allowing multiple virtual machines to run on a single physical machine.
 
 
-<p>
+<p align="center">
   <img src="images/VMS.png" alt="Esempio di immagine" />
 </p>
 
@@ -19,9 +19,7 @@ Virtualization is a technology that allows the creation of one or more running e
 ## Introduction to Container technology
 Containers are software units that run on the host's operating system. This approach offers the advantage of not requiring any modifications to the application to adapt it to the host's environment, making transitions between environments easy and seamless.\
 Containers provides also isolation, portability, and efficiency by packaging everything an application needs to run, without the overhead of a full OS.
-
-
-<p>
+<p align="center">
   <img src="images/Containers.JPG" alt="Esempio di immagine" />
 </p>
 
@@ -56,20 +54,35 @@ Here’s how containers enhance CI/CD workflows:
 - **Parallel Testing**: containers can run multiple instances of tests in parallel, speeding up the testing phase.
 - **Environment Parity**: this feature reduces the risk of deployment issues and ensures that the application behaves as expected - containers provide an isolated and consistent environment, the same container image used for testing can be deployed to production.
 - **Rollback Capability**: the images of the container are immutable, once built, do not change; this is important because allows easy rollback to previous versions if something goes wrong during deployment.
+<p align="center">
+  <img src="images/cicdPipelineForContainer_CloudKinetics.png" alt="Esempio di immagine" />
+</p>
+
+_**Jenkins** serves as a DevOps tool that automates the process of integrating code changes, testing, and deploying software applications; is an open-source automation server primarily used for implementing Continuous Integration (CI) and Continuous Delivery (CD) practices in software development._
+
 
 ### Container's lifecycle
 #### Image
 A container is created by the execution of an image, it implements an incremental file system (overlay), with layer on top of others, each command represents a layer and are read only. Each layer depends pn the layers underneat. When running, a container will have a writable layer on top called "container" layer.
 Once used a container can be turned into an image, turning the container layer in read only an image layer.
 
-
-#### Container
-(Todo)
-
-<p>
-  <img src="images/DockerProcess.jpg" alt="Esempio di immagine" />
+#### Container (e.g. with Docker)
+- **Dockerfile**: defines the environment and settings for your application's Docker image - script (instructions) to build a Docker image.
+- **Image**: a read-only template with instructions for creating a Docker container - it is built from a Dockerfile.
+- **Container**: a running instance of a Docker image - each container is isolated and can be started, stopped, moved, and deleted.
+<p align="center">
+  <img src="images/DockerProcess.jpg" alt="Esempio di immagine"/>
 </p>
 
+#### Lifecycle states (e.g. with Docker)
+- **Created**: The container has been created but not started (creating a new container from the image) - ```docker start <container_id>```.
+- **Running**: The container is currently executing on the host operating system but is isolated from it, it has its own filesystem and networking.
+- **Paused**: The container’s processes are temporarily suspended.
+- **Stopped**/**Restarting**: The container has been stopped and can be restarted - ```docker stop <container_id>``` and ```docker restart <container_id>```.
+- **Deletion**: Once the container is stopped, it can be deleted (removes the filesystem that was created when the container was instantiated from the image) - ```docker rm <container_id>```.
+<p align="center">
+  <img src="images/ContainerLifeCycle-JahiaAcademy.jpeg" alt="Esempio di immagine"/>
+</p>
 
 #### What is Open Container Initiative (OCI)?
 The OCI is a vendor-neutral initiative established by Docker, CoreOS and other industies with the objective of creating an industry standard around container technology to ensure that different tools and platforms can work together seamlessly.
