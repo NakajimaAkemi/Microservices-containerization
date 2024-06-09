@@ -10,7 +10,7 @@ Initially, applications were deployed on physical servers, sharing the resources
 Virtualization is a technology that allows the creation of one or more running environments simulated within a pool of shared resources. These resources are efficiently coordinated and provided as virtual resources by the hypervisor. This technology enhances resource utilization, improves scalability, and simplifies the management of IT infrastructure by allowing multiple virtual machines to run on a single physical machine.
 
 
-<p align="center">
+<p>
   <img src="images/VMS.png" alt="Esempio di immagine" />
 </p>
 
@@ -21,7 +21,7 @@ Containers are software units that run on the host's operating system. This appr
 Containers provides also isolation, portability, and efficiency by packaging everything an application needs to run, without the overhead of a full OS.
 
 
-<p align="center">
+<p>
   <img src="images/Containers.JPG" alt="Esempio di immagine" />
 </p>
 
@@ -41,33 +41,32 @@ Of continuation, they want to bring back some technologies that offer various op
 #### Microservices and Applications Isolation
 In recent years, the use of distributed applications, microservices, etc., has become extremely widespread.
 When we talk about these techniques for software development the use of containter is crucial. Let’s analyze the reasons.
-- Decoupling of Services: containers enable the decomposition of monolithic applications into smaller, independent microservices; in a microservices-based application, the monolithic architecture is decomposed into smaller services - each microservice handles a specific feature or task independently.
-- Team Efficiency: each teams can focus on specific services, leading to efficient deployment processes and service discovery (each microservice can be developed, deployed, and scaled independently - enhances agility and speed of delivery).
-- Consistent Environment: containers encapsulate all dependencies and configurations required to run a service - ensures that the application behaves consistently across different environments (development, testing, production - ideally no more "it works on my machine").
-- Resource Isolation: this feature helps prevent conflicts and enhances security by limiting the impact of potential vulnerabilities; containers provide a lightweight form of isolation by packaging applications and their dependencies separately from the host system and other containers.
-- Scalability: containers can be easily scaled up or down to meet demand (particularly important in fog and cloud) - Kubernetes and other orchestration tools manage containerized applications at scale, enabling efficient resource utilization and load balancing.
-- Fault Isolation: if one microservice in a container crashes, it doesn’t affect the others; this feature ensures that an issues in one part of the application don’t bring down the entire system.
+- **Decoupling of Services**: containers enable the decomposition of monolithic applications into smaller, independent microservices; in a microservices-based application, the monolithic architecture is decomposed into smaller services - each microservice handles a specific feature or task independently.
+- **Team Efficiency**: each teams can focus on specific services, leading to efficient deployment processes and service discovery (each microservice can be developed, deployed, and scaled independently - enhances agility and speed of delivery).
+- **Consistent Environment**: containers encapsulate all dependencies and configurations required to run a service - ensures that the application behaves consistently across different environments (development, testing, production - ideally no more "it works on my machine").
+- **Resource Isolation**: this feature helps prevent conflicts and enhances security by limiting the impact of potential vulnerabilities; containers provide a lightweight form of isolation by packaging applications and their dependencies separately from the host system and other containers.
+- **Scalability**: containers can be easily scaled up or down to meet demand (particularly important in fog and cloud) - Kubernetes and other orchestration tools manage containerized applications at scale, enabling efficient resource utilization and load balancing.
+- **Fault Isolation**: if one microservice in a container crashes, it doesn’t affect the others; this feature ensures that an issues in one part of the application don’t bring down the entire system.
 #### CI/CD
 By integrating containers into CI/CD workflows, organizations can achieve greater efficiency, reliability, and speed in their software development processes.
 Containers have revolutionized the CI/CD process, offering numerous benefits that streamline software development, testing, and deployment.
 Here’s how containers enhance CI/CD workflows:
-- Consistent Build Environments: [...].
-- Faster Build and Deployment: [...].
-- Isolation of CI/CD Processes: [...].
-- Parallel Testing: containers can run multiple instances of tests in parallel, speeding up the testing phase.
-- Environment Parity: [...].
-- Rollback Capability: the images of the container are immutable, once built, do not change; this is important because allows easy rollback to previous versions if something goes wrong during deployment.
+- **Faster Build and Deployment**: containers can be built and started quickly, which accelerates the build and deployment process - allow for rapid iteration and continuous delivery - ensuringg improving reliability and security.
+- **Isolation of CI/CD Processes**: each stage of the CI/CD pipeline (build, test, deploy) can run in its own container, isolated from the others.
+- **Parallel Testing**: containers can run multiple instances of tests in parallel, speeding up the testing phase.
+- **Environment Parity**: this feature reduces the risk of deployment issues and ensures that the application behaves as expected - containers provide an isolated and consistent environment, the same container image used for testing can be deployed to production.
+- **Rollback Capability**: the images of the container are immutable, once built, do not change; this is important because allows easy rollback to previous versions if something goes wrong during deployment.
 
 ### Container's lifecycle
 #### Image
-A container is created by the execution of an image, it implements an incremental file system (overlay), with layer on top of others, each command rapresents a layer and are read only. Each layer depends pn the layers underneat. When running, a container will have a writable layer on top called "container" layer.
+A container is created by the execution of an image, it implements an incremental file system (overlay), with layer on top of others, each command represents a layer and are read only. Each layer depends pn the layers underneat. When running, a container will have a writable layer on top called "container" layer.
 Once used a container can be turned into an image, turning the container layer in read only an image layer.
 
 
 #### Container
 (Todo)
 
-<p align="center">
+<p>
   <img src="images/DockerProcess.jpg" alt="Esempio di immagine" />
 </p>
 
