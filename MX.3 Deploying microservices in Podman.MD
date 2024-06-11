@@ -24,3 +24,11 @@ Docker, making the switch of the workflow from Docker to Podman and viceversa ea
 --Podman Desktop--
 
 --Deployment in Podman--
+
+
+
+<p align="center">
+  <img src="images/dockerAndPodman.png" alt="Esempio di immagine" />
+</p>
+
+_(while searching for images for docker I found this - in case it can be useful)_
