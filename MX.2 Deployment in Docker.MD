@@ -25,22 +25,39 @@ This ensures that the application will run on any others machine regardless of a
 - **Security**: docker containers are isolated from each other and the host system, providing an additional layer of security.
 
 ## Basic Information
-- dockerfile
-- docker-compose.yml
+- **dockerfile**\
+A Dockerfile is a script that contains a series of commands to build a Docker image.\
+It specifies the base image, commands to install dependencies, copy files, set environment variables, and specify the command to run the application. _We analyze it specifically in the next section._
+
+
+- **docker-compose.yml**
   - basics features (....)
-- application.yml
+
+
+- **application.yml**
   - (..... how it works, why it's important etc.)
-- _terminal commands (bash)_
+
+
+- _**terminal commands** (bash)_
   - ...
 
 (**todo**)
 
+#### Differences Docker - Docker Desktop
+(todo)
 
-### Base Project Example - Java, Docker and Spring boot
-(**todo** ... some code)
+### Base Project Example
+**Dockerfile**
+- With **FROM** we specify the base image for the Docker image - e.g.: ```FROM openjdk:11-jre-slim```;
+- With **WORKDIR** we set the working directory inside the container and all subsequent commands will be run in this directory - e.g.: ```WORKDIR /app```;
+- With **COPY** we copy the file(s) from the host machine into the container’s working directory. - e.g.```COPY --chown=user:group host_file.xyz /path/container_file.xyz```.
+- With **ADD** ......... - e.g. ```ADD file.xyz /file.xyz```
+- With **RUN** we can run some commands, e.g. for clear up and/or install something inside the container - e.g. ```RUN java -Djarmode=layertools -jar app.jar extract```.
+
+........
 
 
-## Analyze a real project
+## Analyze a real project  - Java, Docker and Spring boot
 (**todo** - here we take Chapter6 from the
 [Magnus Larsson repository](https://github.com/PacktPublishing/Microservices-with-Spring-Boot-and-Spring-Cloud-Third-Edition/tree/main/Chapter06) 
 and explain all the features of the project, analyzing -as we say- dockerfile, docker-compose and application.yml).
