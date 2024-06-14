@@ -30,12 +30,17 @@ A Dockerfile is a script that contains a series of commands to build a Docker im
 It specifies the base image, commands to install dependencies, copy files, set environment variables, and specify the command to run the application. _We analyze it specifically in the next section._
 
 
-- **docker-compose.yml**
-  - basics features (....)
+- **docker-compose.yml**\
+Docker Compose is a tool that simplifies the management of multi-container Docker applications through a YAML configuration file.\
+This file defines the services (containers) that make up your application, including their configurations such as images to use, ports to expose, network settings, and volume mounts.\
+You can start all services with a single terminal command, making it easier to replicate and manage complex applications across different environments.
 
 
-- **application.yml**
-  - (..... how it works, why it's important etc.)
+
+- **application.yml**\
+It is a YAML-based configuration file used in Spring Boot to externalize application settings - hierarchically properties, for a more readable configuration.\
+Spring Boot automatically loads these properties at runtime - flexible and centralized management. 
+_It is usually located in the resources package._
 
 
 - _**terminal commands** (bash)_

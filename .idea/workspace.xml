@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22544765-e58b-4421-9f6d-28c7ff314f01" name="Changes" comment="mX.2 Docker Overview and Key Features of Docker">
-      <change beforePath="$PROJECT_DIR$/MX.3 Deploying microservices in Podman.MD" beforeDir="false" afterPath="$PROJECT_DIR$/MX.3 Deploying microservices in Podman.MD" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/images/bait.MD" beforeDir="false" />
+    <list default="true" id="22544765-e58b-4421-9f6d-28c7ff314f01" name="Changes" comment="Base Project Example - Dockerfile">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MX.2 Deployment in Docker.MD" beforeDir="false" afterPath="$PROJECT_DIR$/MX.2 Deployment in Docker.MD" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,12 +23,16 @@
   &quot;associatedIndex&quot;: 8
 }</component>
   <component name="ProjectId" id="2hYMJr3cACDFkyRNaIDpg77OXi7" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;master&quot;,
@@ -77,6 +81,8 @@
       <workItem from="1718100516063" duration="2542000" />
       <workItem from="1718123459941" duration="169000" />
       <workItem from="1718123636689" duration="496000" />
+      <workItem from="1718124254124" duration="4470000" />
+      <workItem from="1718378927077" duration="1239000" />
     </task>
     <task id="LOCAL-00001" summary="Introduction to Container technology">
       <option name="closed" value="true" />
@@ -174,7 +180,31 @@
       <option name="project" value="LOCAL" />
       <updated>1718104895705</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Add Docker Architecture paragraph and some images">
+      <option name="closed" value="true" />
+      <created>1718125159249</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1718125159249</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Docker Architecture finished">
+      <option name="closed" value="true" />
+      <created>1718129734110</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1718129734110</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Base Project Example - Dockerfile">
+      <option name="closed" value="true" />
+      <created>1718132506435</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1718132506435</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -192,6 +222,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Introduction to Container technology" />
     <MESSAGE value="Examples of Container Technologies" />
     <MESSAGE value="Use cases of Containers (partial)" />
@@ -204,6 +235,9 @@
     <MESSAGE value="Changes for my project." />
     <MESSAGE value="MX.2 + Licence" />
     <MESSAGE value="mX.2 Docker Overview and Key Features of Docker" />
-    <option name="LAST_COMMIT_MESSAGE" value="mX.2 Docker Overview and Key Features of Docker" />
+    <MESSAGE value="Add Docker Architecture paragraph and some images" />
+    <MESSAGE value="Docker Architecture finished" />
+    <MESSAGE value="Base Project Example - Dockerfile" />
+    <option name="LAST_COMMIT_MESSAGE" value="Base Project Example - Dockerfile" />
   </component>
 </project>
