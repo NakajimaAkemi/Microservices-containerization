@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="22544765-e58b-4421-9f6d-28c7ff314f01" name="Changes" comment="Base Project Example - Dockerfile">
+    <list default="true" id="22544765-e58b-4421-9f6d-28c7ff314f01" name="Changes" comment="Basic Information - 1^ part">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MX.2 Deployment in Docker.MD" beforeDir="false" afterPath="$PROJECT_DIR$/MX.2 Deployment in Docker.MD" afterDir="false" />
     </list>
@@ -82,7 +82,7 @@
       <workItem from="1718123459941" duration="169000" />
       <workItem from="1718123636689" duration="496000" />
       <workItem from="1718124254124" duration="4470000" />
-      <workItem from="1718378927077" duration="1239000" />
+      <workItem from="1718378927077" duration="4994000" />
     </task>
     <task id="LOCAL-00001" summary="Introduction to Container technology">
       <option name="closed" value="true" />
@@ -204,7 +204,15 @@
       <option name="project" value="LOCAL" />
       <updated>1718132506435</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Basic Information - 1^ part">
+      <option name="closed" value="true" />
+      <created>1718380736939</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1718380736939</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -238,6 +246,7 @@
     <MESSAGE value="Add Docker Architecture paragraph and some images" />
     <MESSAGE value="Docker Architecture finished" />
     <MESSAGE value="Base Project Example - Dockerfile" />
-    <option name="LAST_COMMIT_MESSAGE" value="Base Project Example - Dockerfile" />
+    <MESSAGE value="Basic Information - 1^ part" />
+    <option name="LAST_COMMIT_MESSAGE" value="Basic Information - 1^ part" />
   </component>
 </project>
