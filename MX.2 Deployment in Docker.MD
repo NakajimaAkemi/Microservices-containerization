@@ -67,7 +67,7 @@ ____
 **Docker desktop** instead is an all-in-one easy-to-install application designed to simplify the use of Docker (whose has also a Graphical User Interface). It is a commercial application (some features may require a payment).
 ____
 
-### Base Project Example - Hello World
+### Base Project Example
 **Dockerfile**
 - With **FROM** we specify the base image for the Docker image - e.g.: ```FROM openjdk:11-jre-slim```;
 - With **WORKDIR** we set the working directory inside the container and all subsequent commands will be run in this directory - e.g.: ```WORKDIR /app```;
@@ -75,7 +75,12 @@ ____
 - With **ADD** we copy file(s) from the host machine to the container (it can manage remote URLs and directly extract compressed files) [ADD is a COPY with additional functionalities] - e.g. ```ADD file.xyz /file.xyz```;
 - With **RUN** we can run some commands, e.g. for clear up and/or install something inside the container - e.g. ```RUN java -Djarmode=layertools -jar app.jar extract```.
 ```
-...
+FROM eclipse-temurin:21-jdk as builder
+WORKDIR extracted
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} application.jar
+RUN java -Djarmode=layertools -jar application.jar extract
+EXPOSE 8080
 ```
 
 **Docker compose**
