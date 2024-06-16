@@ -62,7 +62,9 @@ _It is usually located in the resources package._
 
 
 #### Differences between Docker and Docker Desktop
-(todo)
+**Docker** is an open-source platform used for developing, shipping, and running applications inside containers.\
+**Docker desktop** instead is an all-in-one easy-to-install application designed to simplify the use of Docker (whose has also a Graphical User Interface). It is a commercial application (some features may require a payment).
+
 
 ### Base Project Example
 **Dockerfile**
