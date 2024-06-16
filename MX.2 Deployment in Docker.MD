@@ -24,6 +24,7 @@ This ensures that the application will run on any others machine regardless of a
 - **Scalability**: docker makes it easy to scale applications by starting new containers as needed.
 - **Security**: docker containers are isolated from each other and the host system, providing an additional layer of security.
 
+____
 ## Basic Information
 - **dockerfile**\
 A Dockerfile is a script that contains a series of commands to build a Docker image.\
@@ -60,26 +61,67 @@ _It is usually located in the resources package._
     - ```start <container-id>``` or ```stop <container-id>``` commands run or stop a container, ```rm <container-id>``` instead remove the container; rm
     - ```docker exec``` runs a command in a running container (e.g. ```docker exec -it <container-id> bash``` open an interactive -bash- shell).
 
-
+____
 #### Differences between Docker and Docker Desktop
 **Docker** is an open-source platform used for developing, shipping, and running applications inside containers.\
 **Docker desktop** instead is an all-in-one easy-to-install application designed to simplify the use of Docker (whose has also a Graphical User Interface). It is a commercial application (some features may require a payment).
+____
 
-
-### Base Project Example
+### Base Project Example - Hello World
 **Dockerfile**
 - With **FROM** we specify the base image for the Docker image - e.g.: ```FROM openjdk:11-jre-slim```;
 - With **WORKDIR** we set the working directory inside the container and all subsequent commands will be run in this directory - e.g.: ```WORKDIR /app```;
 - With **COPY** we copy the file(s) from the host machine into the container’s working directory. - e.g.```COPY --chown=user:group host_file.xyz /path/container_file.xyz```.
-- With **ADD** ......... - e.g. ```ADD file.xyz /file.xyz```
+- With **ADD** we copy file(s) from the host machine to the container (it can manage remote URLs and directly extract compressed files) [ADD is a COPY with additional functionalities] - e.g. ```ADD file.xyz /file.xyz```;
 - With **RUN** we can run some commands, e.g. for clear up and/or install something inside the container - e.g. ```RUN java -Djarmode=layertools -jar app.jar extract```.
+```
+...
+```
 
-........
+**Docker compose**
+- ...
+- ...
+```
+...
+```
 
+**Application (YML)**
+- ...
+- ...
+```
+...
+```
 
+Then we have to work from the **terminal**:
+```
+docker-compose build
+docker-compose up
+```
+
+____
 ## Analyze a real project  - Java, Docker and Spring boot
 (**todo** - here we take Chapter6 from the
 [Magnus Larsson repository](https://github.com/PacktPublishing/Microservices-with-Spring-Boot-and-Spring-Cloud-Third-Edition/tree/main/Chapter06) 
 and explain all the features of the project, analyzing -as we say- dockerfile, docker-compose and application.yml).
 
 
+...
+____
+To run all, we must write from terminal:\
+(Best practise)
+```
+mvn clean
+```
+Now we have to tell to Maven that has to compiles the source code, processes the resources, and packages into a JAR (if we want we can put the flag so we can skip the tests).
+```
+mvn package -Dmaven.test.skip=true
+```
+-If we have not already done-
+```
+docker-compose build
+```
+Then we have to run all with docker - in the environment
+```
+docker-compose up
+docker-compose down
+```
