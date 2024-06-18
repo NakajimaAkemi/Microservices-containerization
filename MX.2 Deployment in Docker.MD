@@ -67,7 +67,7 @@ ____
 **Docker desktop** instead is an all-in-one easy-to-install application designed to simplify the use of Docker (whose has also a Graphical User Interface). It is a commercial application (some features may require a payment).
 ____
 
-### Basics Examples
+### Basic More Significant Examples
 **Dockerfile**
 - With **FROM** we specify the base image for the Docker image - e.g.: ```FROM openjdk:11-jre-slim```.
 - With **WORKDIR** we set the working directory inside the container and all subsequent commands will be run in this directory - e.g.: ```WORKDIR /app```.
@@ -159,12 +159,208 @@ docker-compose up
 ```
 
 ____
+
+
+
+
+
+
 ## Analyze a real project  - Java, Docker and Spring boot
 In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](https://github.com/PacktPublishing/Microservices-with-Spring-Boot-and-Spring-Cloud-Third-Edition/tree/main/Chapter06) focussing on the containerization part.\
 We will analyze deeply Dockerfile, Docker-compose and Application (yaml) to comprehend how they work.
 
-**(todo)**
+It is important to notice that in the microservices folder there are 4 services. Let's analyze each Dockerfile, then we can watch the Docker Compose whose use this files.
 
+First of all lets analyze the **Dockerfile**s (all the microservices have the same Dockerfile).
+```dockerfile
+FROM eclipse-temurin:17.0.5_8-jre-focal as builder
+WORKDIR extracted
+ADD ./build/libs/*.jar app.jar
+RUN java -Djarmode=layertools -jar app.jar extract
+
+FROM eclipse-temurin:17.0.5_8-jre-focal
+WORKDIR application
+COPY --from=builder extracted/dependencies/ ./
+COPY --from=builder extracted/spring-boot-loader/ ./
+COPY --from=builder extracted/snapshot-dependencies/ ./
+COPY --from=builder extracted/application/ ./
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "org.springframework.boot.loader.JarLauncher"]
+```
+In the first row we specify **the base image** to use `eclipse-temurin` (`17.0.5_8-jre-focal` version) - Debian Focal Fossa image whose includes the Java Runtime Environment (JRE) needed to run Java applications.\
+Then we set the **working directory** inside the container: `/extracted`; from now on all commands will be executed in this directory.\
+With the 3rd row we copy all the JARs file (in the `./build/libs` directory of the host machine) into the container with the name of `app.jar`.\
+Then we do the `java -Djarmode=layertools -jar app.jar extract` with `RUN`. It extracts the contents of the JAR file into the current directory (`/extracted` as we say before).
+
+Now we have the second part. The base image is the same as before. The working directory is now `/application`.\
+We have also some copies to do. We go on the directory mentioned in the previous part (`builder`) and copy only the necessary things in the final image (dependencies and code) to reduce the size.\
+Finally specify that the application will use port `8080` and that the default command to execute when the container starts with `ENTRYPOINT`.
+
+Now we can analyze the **Docker Compose**.
+```yml
+version: '2.1'
+
+services:
+  product:
+    build: microservices/product-service
+    mem_limit: 512m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  recommendation:
+    build: microservices/recommendation-service
+    mem_limit: 512m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      mongodb:
+        condition: service_healthy
+
+  review:
+    build: microservices/review-service
+    mem_limit: 512m
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  product-composite:
+    build: microservices/product-composite-service
+    mem_limit: 512m
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+
+  mongodb:
+    image: mongo:6.0.4
+    mem_limit: 512m
+    ports:
+      - "27017:27017"
+    command: mongod
+    healthcheck:
+      test: "mongostat -n 1"
+      interval: 5s
+      timeout: 2s
+      retries: 60
+
+  mysql:
+    image: mysql:8.0.32
+    mem_limit: 512m
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=rootpwd
+      - MYSQL_DATABASE=review-db
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=pwd
+    healthcheck:
+      test: "/usr/bin/mysql --user=user --password=pwd --execute \"SHOW DATABASES;\""
+      interval: 5s
+      timeout: 2s
+      retries: 60
+```
+
+The file is particularly large -it has many services-, so let’s comment it for parts.
+First of all: the first line specifies the Docker Compose version used - `2.1`. Then there are the services. Below we will analyze them individually.
+
+```yaml
+product:
+  build: microservices/product-service
+  mem_limit: 512m
+  environment:
+    - SPRING_PROFILES_ACTIVE=docker
+  depends_on:
+    mongodb:
+      condition: service_healthy
+```
+```yaml
+recommendation:
+  build: microservices/recommendation-service
+  mem_limit: 512m
+  environment:
+    - SPRING_PROFILES_ACTIVE=docker
+  depends_on:
+    mongodb:
+      condition: service_healthy
+```
+```yaml
+review:
+  build: microservices/review-service
+  mem_limit: 512m
+  environment:
+    - SPRING_PROFILES_ACTIVE=docker
+  depends_on:
+    mysql:
+      condition: service_healthy
+```
+
+The first three are very similar to each other. With what explained in the previous part we are perfectly able to understand them.\
+In particular:
+- for building the **container image**, each of them use a Dockerfile located at `microservices/[...]` (the path of each microservice);
+- there is a limit of memory usage to 512MB;
+- there are each time the same environment variable (`SPRING_PROFILES_ACTIVE` whose value is `docker`). \
+  _[ ..... spiego bene a cosa serve collegandomi a application.yaml ..... ]_
+- Every service has a dependency: the first two have to wait for the mongodb service to become healthy before starting, the last one the same but with mysql.
+
+Now we have _our_ last service: product-composite
+```yaml
+product-composite:
+  build: microservices/product-composite-service
+  mem_limit: 512m
+  ports:
+    - "8080:8080"
+  environment:
+    - SPRING_PROFILES_ACTIVE=docker
+```
+_[ .... anche per lui creiamo l'immaigne dal nostro dockerfile, abbiamo la variabile d'ambiente ed il limite di memoria, in più però esponiamo la porta per connetterci al servizio .... ]_
+
+_[ .... Ora vi sono due servizio preconfezionati... .... ]_
+```yaml
+mongodb:
+  image: mongo:6.0.4
+  mem_limit: 512m
+  ports:
+    - "27017:27017"
+  command: mongod
+  healthcheck:
+    test: "mongostat -n 1"
+    interval: 5s
+    timeout: 2s
+    retries: 60
+```
+```yaml
+mysql:
+  image: mysql:8.0.32
+  mem_limit: 512m
+  ports:
+    - "3306:3306"
+  environment:
+    - MYSQL_ROOT_PASSWORD=rootpwd
+    - MYSQL_DATABASE=review-db
+    - MYSQL_USER=user
+    - MYSQL_PASSWORD=pwd
+  healthcheck:
+    test: "/usr/bin/mysql --user=user --password=pwd --execute \"SHOW DATABASES;\""
+    interval: 5s
+    timeout: 2s
+    retries: 60
+```
+.....
+
+
+
+
+
+
+
+**(todo APPLICATION.YML)**
 
 ...
 ____
