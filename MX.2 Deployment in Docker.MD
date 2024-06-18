@@ -304,10 +304,10 @@ review:
 The first three are very similar to each other. With what explained in the previous part we are perfectly able to understand them.\
 In particular:
 - for building the **container image**, each of them use a Dockerfile located at `microservices/[...]` (the path of each microservice);
-- there is a limit of memory usage to 512MB;
-- there are each time the same environment variable (`SPRING_PROFILES_ACTIVE` whose value is `docker`). \
-  _[ ..... spiego bene a cosa serve collegandomi a application.yaml ..... ]_
-- Every service has a dependency: the first two have to wait for the mongodb service to become healthy before starting, the last one the same but with mysql.
+- there is a **limit of memory** usage to 512MB;
+- there are each time the same **environment variable** (`SPRING_PROFILES_ACTIVE` whose value is `docker`). \
+  It is necessary to focus on this environment variable. **SPRING_PROFILES_ACTIVE** determines which profiles are active. The profiles are defined in the **application**(**.yml**) file that we analyze later.
+- Every service has a **dependency**: the first two have to wait for the mongodb service to become **healthy** before starting, the last one the same but with mysql.
 
 Now we have _our_ last service: product-composite
 ```yaml
@@ -319,9 +319,11 @@ product-composite:
   environment:
     - SPRING_PROFILES_ACTIVE=docker
 ```
-_[ .... anche per lui creiamo l'immaigne dal nostro dockerfile, abbiamo la variabile d'ambiente ed il limite di memoria, in più però esponiamo la porta per connetterci al servizio .... ]_
+Also for this service we create the image from our dockerfile, we have the environment variable and the memory limit, but in addition we expose the port to connect to the service (`8080`).
 
-_[ .... Ora vi sono due servizio preconfezionati... .... ]_
+
+Now there are two _"pre-packaged"_ services: **MongoDB** and **MySQL**.
+
 ```yaml
 mongodb:
   image: mongo:6.0.4
@@ -352,20 +354,23 @@ mysql:
     timeout: 2s
     retries: 60
 ```
-.....
+
+They start from a standard base image (`mongo` and `mysql` respectively) but has the memory limitation as the personalized services that we have seen before. Each service expose a specific port (the standard port for service - in this particular case: `27017` for mongodb and `3306` for mysql).\
+For MongoDB we execute the `mongod` command (to launch the primary daemon process for MongoDB).\
+In MySQL instead we set some environment variables to log correctly (user, password, db, root superuser account).\
+Then in both cases a test is made to do the **healthcheck**.
 
 
 
 
 
 
-
-**(todo APPLICATION.YML)**
+**<h2>(todo APPLICATION.YML)</h2>**
 
 ...
 ____
 To run all, we must write from terminal:\
-(Best practise)
+(First of all - to delete previously compiled files and resources)
 ```
 mvn clean
 ```
