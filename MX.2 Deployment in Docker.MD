@@ -170,7 +170,7 @@ In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](ht
 We will analyze deeply Dockerfile, Docker-compose and Application (yaml) to comprehend how they work.
 
 It is important to notice that in the microservices folder there are 4 services. Let's analyze each Dockerfile, then we can watch the Docker Compose whose use this files.
-
+___
 First of all lets analyze the **Dockerfile**s (all the microservices have the same Dockerfile).
 ```dockerfile
 FROM eclipse-temurin:17.0.5_8-jre-focal as builder
@@ -197,7 +197,7 @@ Then we do the `java -Djarmode=layertools -jar app.jar extract` with `RUN`. It e
 Now we have the second part. The base image is the same as before. The working directory is now `/application`.\
 We have also some copies to do. We go on the directory mentioned in the previous part (`builder`) and copy only the necessary things in the final image (dependencies and code) to reduce the size.\
 Finally specify that the application will use port `8080` and that the default command to execute when the container starts with `ENTRYPOINT`.
-
+___
 Now we can analyze the **Docker Compose**.
 ```yml
 version: '2.1'
@@ -365,9 +365,215 @@ Then in both cases a test is made to do the **healthcheck**.
 
 
 
-**<h2>(todo APPLICATION.YML)</h2>**
+
+
+
+
+
+
+
+
+
+____
+**Application** (**yml**)
+**<h2>TODO</h2>**
+You can set the active profiles in various ways including through system properties, environment variables, or directly in the application's configuration files as this **application.yml**.\
+Spring Boot and Spring frameworks natively supports application.yml files.\
+Let's analyze the files.
+**product-service** and **recommendation-service** have practically the same application.yml.
+
+_product-service:_
+```yaml
+server.port: 7001
+server.error.include-message: always
+
+spring.data.mongodb:
+  host: localhost
+  port: 27017
+  database: product-db
+
+logging:
+  level:
+    root: INFO
+    se.magnus: DEBUG
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+
+---
+spring.config.activate.on-profile: docker
+
+server.port: 8080
+
+spring.data.mongodb.host: mongodb
+```
+_recommendation-service:_
+```yaml
+server.port: 7002
+server.error.include-message: always
+
+spring.data.mongodb:
+  host: localhost
+  port: 27017
+  database: recommendation-db
+
+logging:
+  level:
+    root: INFO
+    se.magnus: DEBUG
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+
+---
+spring.config.activate.on-profile: docker
+
+server.port: 8080
+
+spring.data.mongodb.host: mongodb
+```
+
+**[..............]**
+
+There is a bit of difference regarding review-service.
+```yaml
+server.port: 7003
+server.error.include-message: always
+
+# Strongly recommend to set this property to "none" in a production environment!
+spring.jpa.hibernate.ddl-auto: update
+
+spring.datasource:
+url: jdbc:mysql://localhost/review-db
+username: user
+password: pwd
+
+spring.datasource.hikari.initializationFailTimeout: 60000
+
+logging:
+level:
+root: INFO
+se.magnus: DEBUG
+org.hibernate.SQL: DEBUG
+org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+
+---
+spring.config.activate.on-profile: docker
+
+server.port: 8080
+
+spring.datasource:
+url: jdbc:mysql://mysql/review-db
+```
+**[..............]**
+
+
+For **product-composite-service** instead is more long - because it wants to manage the api, and it tries to put all the services together (as we will see in the ```app``` tag) - but nevertheless not so much more complex. Let’s look at it.
+```yml
+springdoc:
+  swagger-ui.path: /openapi/swagger-ui.html
+  api-docs.path: /openapi/v3/api-docs
+  packagesToScan: se.magnus.microservices.composite.product
+  pathsToMatch: /**
+
+api:
+
+  common:
+    version: 1.0.0
+    title: Sample API
+    description: Description of the API...
+    termsOfService: MY TERMS OF SERVICE
+    license: MY LICENSE
+    licenseUrl: MY LICENSE URL
+
+    externalDocDesc: MY WIKI PAGE
+    externalDocUrl: MY WIKI URL
+    contact:
+      name: NAME OF CONTACT
+      url: URL TO CONTACT
+      email: contact@mail.com
+
+  responseCodes:
+    ok.description: OK
+    badRequest.description: Bad Request, invalid format of the request. See response message for more information
+    notFound.description: Not found, the specified id does not exist
+    unprocessableEntity.description: Unprocessable entity, input parameters caused the processing to fail. See response message for more information
+
+  product-composite:
+
+    get-composite-product:
+      description: Returns a composite view of the specified product id
+      notes: |
+        # Normal response
+        If the requested product id is found the method will return information regarding:
+        1. Product information
+        1. Reviews
+        1. Recommendations
+        1. Service Addresses\n(technical information regarding the addresses of the microservices that created the response)
+
+        # Expected partial and error responses
+        1. If no product information is found, a **404 - Not Found** error will be returned
+        1. In no recommendations or reviews are found for a product, a partial response will be returned
+
+    create-composite-product:
+      description: Creates a composite product
+      notes: |
+        # Normal response
+        The composite product information posted to the API will be split up and stored as separate product-info, recommendation and review entities.
+
+        # Expected error responses
+        1. If a product with the same productId as specified in the posted information already exists,
+           an **422 - Unprocessable Entity** error with a "duplicate key" error message will be returned
+
+    delete-composite-product:
+      description: Deletes a product composite
+      notes: |
+        # Normal response
+        Entities for product information, recommendations and reviews related to the specified productId will be deleted.
+        The implementation of the delete method is idempotent, i.e. it can be called several times with the same response.
+
+        This means that a delete request of a non-existing product will return **200 Ok**.
+
+server.port: 7000
+server.error.include-message: always
+
+app:
+  product-service:
+    host: localhost
+    port: 7001
+  recommendation-service:
+    host: localhost
+    port: 7002
+  review-service:
+    host: localhost
+    port: 7003
+
+logging:
+  level:
+    root: INFO
+    se.magnus: DEBUG
+
+---
+spring.config.activate.on-profile: docker
+
+server.port: 8080
+
+app:
+  product-service:
+    host: product
+    port: 8080
+  recommendation-service:
+    host: recommendation
+    port: 8080
+  review-service:
+    host: review
+    port: 8080
+```
 
 ...
+
+...
+
+
+...
+
+
 ____
 To run all, we must write from terminal:\
 (First of all - to delete previously compiled files and resources)
