@@ -360,23 +360,9 @@ For MongoDB we execute the `mongod` command (to launch the primary daemon proces
 In MySQL instead we set some environment variables to log correctly (user, password, db, root superuser account).\
 Then in both cases a test is made to do the **healthcheck**.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-____
+___
 **Application** (**yml**)
-**<h2>TODO</h2>**
+
 You can set the active profiles in various ways including through system properties, environment variables, or directly in the application's configuration files as this **application.yml**.\
 Spring Boot and Spring frameworks natively supports application.yml files.\
 Let's analyze the files.
@@ -428,10 +414,16 @@ server.port: 8080
 
 spring.data.mongodb.host: mongodb
 ```
+In the first line we can see the first difference between the two files. The first application is configured to run on `port` 7001 and the second one on the 7002.\
+With the second row we configure the server to always include error messages in responses.\
+Then, with `spring.data.mongodb` -and the following rows-, we specify the connection details to MongoDB (such as the username and the pw, but also the database that we want to use - and here we spot the 2nd difference because the two applications use two different db).\
+In the next part we can notice that there are configured different logging levels for different packages (`INFO` for `root`, and `DEBUG` for `se.magnus` and `org.springframework.data.mongodb.core.MongoTemplate`).
 
-**[..............]**
+Finally, we arrived at the so-called **_profiles_**. This configuration activates when the `docker` profile is active, it will listen on the `8080` port.\
+The last line is very important: in a development environment on your local machine, MongoDB might be running locally, so localhost is appropriate; _however_, in a **Dockerized environment**, MongoDB might be running in a different container.\
+For this reason, in such cases, you typically use the service name (e.g., `mongodb` in this case) to refer to the MongoDB container.
 
-There is a bit of difference regarding review-service.
+There is a bit of difference regarding **review-service**.
 ```yaml
 server.port: 7003
 server.error.include-message: always
@@ -440,18 +432,18 @@ server.error.include-message: always
 spring.jpa.hibernate.ddl-auto: update
 
 spring.datasource:
-url: jdbc:mysql://localhost/review-db
-username: user
-password: pwd
+  url: jdbc:mysql://localhost/review-db
+  username: user
+  password: pwd
 
 spring.datasource.hikari.initializationFailTimeout: 60000
 
 logging:
-level:
-root: INFO
-se.magnus: DEBUG
-org.hibernate.SQL: DEBUG
-org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  level:
+    root: INFO
+    se.magnus: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
 
 ---
 spring.config.activate.on-profile: docker
@@ -459,12 +451,14 @@ spring.config.activate.on-profile: docker
 server.port: 8080
 
 spring.datasource:
-url: jdbc:mysql://mysql/review-db
+  url: jdbc:mysql://mysql/review-db
 ```
-**[..............]**
+We have already seen the first two lines. The third insted sets the automatic updates the database schema but, as Larson says, it is not recommended in production since it might lead to unexpected schema changes.
+Then, with `spring.datasource`, we specify the URL and the credentials for the MySQL database. The line after this will tell to wait for 60 seconds before failing if the database connection initialization fails.\
+_The next section is the logging part, and we analyze it in the past application.yml._\
+Now we have the profile for this application, that is more or less the same as the last profiles analyzed but differs by `spring.datasource` that change the URL when `docker` profile is active.
 
-
-For **product-composite-service** instead is more long - because it wants to manage the api, and it tries to put all the services together (as we will see in the ```app``` tag) - but nevertheless not so much more complex. Let’s look at it.
+For **product-composite-service** instead is more long - because it wants to manage the api, and it tries to put all the services together (as we will see in the `app` tag) - but nevertheless not so much more complex. Let’s look at it.
 ```yml
 springdoc:
   swagger-ui.path: /openapi/swagger-ui.html
