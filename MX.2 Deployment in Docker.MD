@@ -118,7 +118,7 @@ services:
       retries: 60
 ```
 
-**Application (YML)**
+**Application (YML)**\
 In a Java Spring Boot applications this file is used to configure **various profiles** and settings for the application.\
 It is a central place to configure the application.
 - **server.port**: sets the port on which the Spring Boot application will listen, obviously.
@@ -608,7 +608,6 @@ api:
     badRequest.description: Bad Request, invalid format of the request. See response message for more information
     notFound.description: Not found, the specified id does not exist
     unprocessableEntity.description: Unprocessable entity, input parameters caused the processing to fail. See response message for more information
-
 ```
 
 This section instead defines three endpoints related to the **product-composite**.
@@ -646,7 +645,6 @@ This section instead defines three endpoints related to the **product-composite*
         The implementation of the delete method is idempotent, i.e. it can be called several times with the same response.
 
         This means that a delete request of a non-existing product will return **200 Ok**.
-
 ```
 As we can see, this part is absolutely readable, there are three actions of **CRUD** with some notes: _read_, _create_ and _delete_ (update -instead- is missing).
 
