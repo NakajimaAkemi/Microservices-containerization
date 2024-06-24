@@ -104,17 +104,46 @@ This means that a directory from the host machine (`./config-repo`) is mounted i
 ___
 ## Docker networking
 Communication Between Containers\
-allows containers to communicate with each other and with the external world\
-f
+allows containers to communicate with each other and with the external world; with the networking we can create complex applications composed of multiple services running in different containers.
 
-...
 
 ### Same network
-...
-
+Containers on the same Docker network can easily communicate with each other using their container names as hostnames.
+```yml
+services:
+  app:
+    build: ./app
+    networks:
+      - backend
+  db:
+    image: postgres
+    networks:
+      - backend
+  [...]
+```
+As we see in this example the same network (called `backend`) is shared between `app` and `db` containers.
 
 ### Different networks
 ...
+If we want to extend the previous example, we can add for example the proxy part, that can be in another network (because it doesn't have to communicate with the db for example).
+```yml
+services:
+  app:
+    build: ./app
+    networks:
+      - frontend
+      - backend
+  db:
+    image: postgres
+    networks:
+      - backend
+  proxy:
+    build: ./proxy
+    networks:
+      - frontend
+```
+So we can see that `db` is in a different network of `proxy`, but there is with one service connected to both networks: `app` is in the middle!
+
 
 #### How to connect
 ...
