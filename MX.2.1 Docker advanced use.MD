@@ -195,5 +195,121 @@ services:
 ```
 In the `update_config` section we specify that only one replica should be updated at a time -not all instances simultaneously- which helps avoid downtime; moreover is sets a delay of 10 seconds between updating each replica - this is important because it gives the time to the new replica to start up and stabilize before the next one is updated.
 
+___
 
+Here we want to provide some examples that shows all this features in the Docker Compose file.
+```yml
+services:
+  web:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+      replicas: 3
+      update_config:
+        parallelism: 1
+        delay: 10s
+    networks:
+      - my-overlay-network
+    volumes:
+      - web-content:/usr/share/nginx/html
+
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 2048M
+        reservations:
+          cpus: '0.25'
+          memory: 1024M
+    networks:
+      - my-overlay-network
+    volumes:
+      - db-data:/var/lib/mysql
+```
+In this example we have two services.
+The first one has `nginx` as base image (`latest` version), the second one instead has `mysql` (version `5.7`).
+Both has memory and resource limitation and reservation.
+The first service has 3 replicas with a single parallelism for update of 10 seconds.
+Both services are in the same network, so they can communicate each other without any problems, and they both have a named volume (`web-content` and `db-data`).
+
+In this example instead we have three services, connected to two different networks.
+
+```yml
+services:
+  frontend:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    deploy:
+      replicas: 3
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 256M
+        reservations:
+          cpus: '0.25'
+          memory: 128M
+      update_config:
+        parallelism: 1
+        delay: 10s
+    networks:
+      - frontend-network
+    volumes:
+      - frontend-data:/usr/share/nginx/html
+
+  backend:
+    image: mybackend:latest
+    build: ./backend
+    deploy:
+      replicas: 2
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 512M
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+      update_config:
+        parallelism: 1
+        delay: 5s
+    networks:
+      - frontend-network
+      - backend-network
+    volumes:
+      - backend-data:/app/data
+
+  database:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 1024M
+        reservations:
+          cpus: '0.25'
+          memory: 512M
+    networks:
+      - backend-network
+    volumes:
+      - db-data:/var/lib/postgresql/data
+```
+The `frontend` service is connected with the `frontend-network`; the `backend` instead is connected with the `frontend-network` but also with the `backend-network`; the `database` service is in the `backend-network` obviously. The `backend` service acts as a bridge to the three services, communicating to each one.\
+There are many replicas in this case too but with different update configurations (as we can see in the backend, with 5s).\
+It is important to note that all volumes are named, "persistence oriented", so we can immagine that the data are crucial for the system.
 
