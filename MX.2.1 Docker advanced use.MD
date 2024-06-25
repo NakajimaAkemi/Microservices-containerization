@@ -2,7 +2,7 @@
 In this file we will analyze a little more advanced aspects of Docker, such as the different types of volumes, the networking between containers and the replicas if the service is replicated.
 
 ____
-## Docker memory limitation
+## Docker resource limitation
 A container has no resource constraints by default configuration; but Docker provides ways to control how much memory or CPU a container can use - to ensure that no single container can monopolize system resources, lead to performance issues or service disruptions for other containers or host services.
 
 This is extremely important because if the kernel detects insufficient memory for critical system functions, it throws an **Out Of Memory** Exception (OOM), and can potentially kill processes (including Docker) - Docker daemon can manage this problem.
