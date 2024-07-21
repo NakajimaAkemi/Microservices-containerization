@@ -26,6 +26,15 @@ Docker, making the switch of the workflow from Docker to Podman and viceversa ea
 --Deployment in Podman--
 
 
+-- daemonless Architecture --
+
+
+-- Rootless containers -- 
+
+-- CI/CD integration --
+
+-- logging and monitoring -- 
+
 
 <p align="center">
   <img src="images/dockerAndPodman.png" alt="Esempio di immagine" />
