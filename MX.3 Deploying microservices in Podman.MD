@@ -4,6 +4,7 @@ Podman (short for pod manages) is an open-source container management tool devel
 
 ## Podman's architecture
 --Differences between Podman and Docker--
+
 Unlike Docker, Podman does not need a daemon running in the background, every command in Podman is executed as a process separated from the user. Every container process is managed with the current user's permissions, reducing the necessity of higher clearance, also a daemon may result in a single point of failure.
 
 Podman containers have always been rootless, while Docker is an all-in-1 tool for container management and creation, Podman is far more specific for its applications on the aspects of containerization.
