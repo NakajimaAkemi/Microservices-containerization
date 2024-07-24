@@ -44,3 +44,10 @@ Unlike Docker, Podman does not need a daemon running in the background, every co
 </p>
 
 _(while searching for images for docker I found this - in case it can be useful)_
+
+
+
+
+
+## Sources
+https://www.redhat.com/en/topics/containers/what-is-podman
