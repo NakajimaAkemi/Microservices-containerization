@@ -1,20 +1,18 @@
 # Podman Overview
-Podman is open-source container management tool developed by Red Hat, designed to deploy and manage containerized applications. Podman can be obtained by installing Podman Desktop and its compatible with Docker, making the switch of the workflow from Docker to Podman and viceversa
-easier.
+Podman is open-source container management tool developed by Red Hat, designed to deploy and manage containerized applications. Podman can be obtained by installing Podman Desktop.
+
+## Docker compatability
+Thanks to the OCI format, Podman is compatible with Docker, meaning that Podman can pull/push images to/from Docker's registries, also the switch of the workflow from Docker to Podman and viceversa easier.
 
 
-
-
-
-
-
-
-
---Podman's infrastructure--
-
+## Podman's architecture
+Unlike Docker, Podman does not need a daemon running in the background, every command in Podman is executed as a process separated from the user. Every container process is managed with the current user's permissions, reducing the necessity of higher clearance, also a daemon may result in a single point of failure.
 
 
 --Differences between Podman and Docker--
+
+
+
 
 
 --Advantages and used cases--
