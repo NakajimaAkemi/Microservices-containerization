@@ -1,5 +1,18 @@
 # Podman Overview
-Podman (short for pod manages) is an open-source container management tool developed by Red Hat, designed to deploy and manage containerized applications. 
+Podman (short for pod manages) is an open-source container management tool developed by Red Hat, designed to deploy and manage containerized applications. Provides a familiar command line experience compatible with the docker cli, grat for running/building/sharing containers outside of OpenShift, Can be Integrated in infrasturucture where docker daemon/cli are used today.
+Podman has no client-server architecture, so more agile in many use cases.
+
+## Why Podman?  
+Podman is fundamentally design with security in mind, leveraing SELinux.
+It has a smaller attack surface being just a running engine.
+Rootless support built in
+Integrated with systemd
+Default approcah on Fedora and RHEL.
+
+## Why should i care?
+Not everybody has the luxury to build all thier own containers from scratch, because it would be an added cost stemming from the maintenance needs, such as patching a security issue.
+Base OS also?
+Another issue it other tools that run along side the container technology.
 
 
 ## Podman's architecture
@@ -39,19 +52,24 @@ Podman is best suited for developers running containers without Kubernetes or Re
 Thanks to the OCI format, Podman is compatible with Docker, meaning that Podman can pull/push images to/from Docker's registries, also the switch of the workflow from Docker to Podman and viceversa easier.
 
 Podman is a powerful alternative to Docker, but the 2 can also work together. Users can easily switch between them by aliasing Docker to Podman (alias docker=podman) and vice versa. Additionally, an rpm called podman-docker can drop a “docker” into the system application path, which calls Podman for those environments where the “docker” command is needed, easing the transition from Docker. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
-
-
 Some developers combine Podman and Docker, using Docker during the development stage and transferring their program to Podman in runtime environments.
 
-## Rootless containers
 
-## Podman, Buildah, and Skopeo
+
+##  Podman Toolbox
 Podman is a modular container engine, so it must work alongside tools like Buildah and Skopeo to build and move its containers. With Buildah, you can build containers either from scratch or by using an image as a starting point. Skopeo moves container images between different types of storage systems, allowing you to copy images between registries like docker.io, quay.io, and your internal registry or between different types of storage on your local system. This modular approach to containerization results in a flexible, lightweight environment by reducing overhead and isolating the features you need. Working with containers makes it possible to use smaller, more modular tools that can focus on a single purpose and be updated as often as needed.
 
 Think of Podman, Buildah, and Skopeo as a set of specialized Swiss Army knives. Combined, they can satisfy almost all container use cases. Podman is the biggest of these knives.
 
 Podman and Buildah use runC―the OCI runtime―by default to launch containers. You can use runC to build and run an image, or you can use it to run Docker-formatted images. This Go language-based tool reads a runtime specification, configures the Linux kernel, and eventually creates and starts container processes. With some configuration changes, you can also use Podman with other footprints like crun.
 
+Docker is not only a standard but also a  swiss army knife of functionalities, runs, mantains and builds containers and so on. Podman applies tool for the specific functionalities such as Skopeo and Buildah to build images. 
+
+Buildah is all about building OCI compatible images, we can use the Docker format, or use Multi stage builds supported with and without dockerfiles. Has customizable image layer caching. We can build OCI images as non root user, if we got a multi-user development enviroment maybe linuc with their own shell access we can build them without doing it as root or without special privileges, basically with a smaller attack surface.
+
+## Rootless containers
+Why rootless containers? These containers can be created and run by users without admin rights.
+Aside from the security advantages they be run by different users.
 
 
 --Advantages and used cases--
