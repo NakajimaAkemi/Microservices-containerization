@@ -9,6 +9,11 @@ Unlike Docker, Podman does not need a daemon running in the background, every co
 
 Podman containers have always been rootless, while Docker is an all-in-1 tool for container management and creation, Podman is far more specific for its applications on the aspects of containerization.
 
+<p align="center">
+  <img src="images/dockerAndPodman.png" alt="Esempio di immagine" />
+</p>
+
+_(while searching for images for docker I found this - in case it can be useful)_
 ## Why Podman?
 Podman changed the container landscape by offering the same high-performance capabilities as leading container engines, but with the flexibility, accessibility, and security features that many development teams are seeking. Podman can help you:
 
@@ -73,11 +78,7 @@ Podman and Buildah use runC―the OCI runtime―by default to launch containers.
 -- buildah and skopeo -- 
 
 
-<p align="center">
-  <img src="images/dockerAndPodman.png" alt="Esempio di immagine" />
-</p>
 
-_(while searching for images for docker I found this - in case it can be useful)_
 
 
 
