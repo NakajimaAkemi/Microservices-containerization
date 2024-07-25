@@ -43,7 +43,7 @@ Podman is a powerful alternative to Docker, but the 2 can also work together. Us
 
 Some developers combine Podman and Docker, using Docker during the development stage and transferring their program to Podman in runtime environments.
 
-
+## Rootless containers
 
 ## Podman, Buildah, and Skopeo
 Podman is a modular container engine, so it must work alongside tools like Buildah and Skopeo to build and move its containers. With Buildah, you can build containers either from scratch or by using an image as a starting point. Skopeo moves container images between different types of storage systems, allowing you to copy images between registries like docker.io, quay.io, and your internal registry or between different types of storage on your local system. This modular approach to containerization results in a flexible, lightweight environment by reducing overhead and isolating the features you need. Working with containers makes it possible to use smaller, more modular tools that can focus on a single purpose and be updated as often as needed.
