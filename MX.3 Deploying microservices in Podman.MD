@@ -72,13 +72,22 @@ Docker is not only a standard but also a  swiss army knife of functionalities, r
 
 Buildah is all about building OCI compatible images, we can use the Docker format, or use Multi stage builds supported with and without dockerfiles. Has customizable image layer caching. We can build OCI images as non root user, if we got a multi-user development enviroment maybe linuc with their own shell access we can build them without doing it as root or without special privileges, basically with a smaller attack surface.
 
+-- buildah and skopeo -- 
+
+
+
 ## Rootless containers
 Why rootless containers? These containers can be created and run by users without admin rights.
 Aside from the security advantages they be run by different users.
 
 
 
+--  System md --
 
+
+-- Security politics -- 
+SELinux configuration user name spaces and volumes
+AppArmor
 
 
 
@@ -91,7 +100,6 @@ Aside from the security advantages they be run by different users.
 -- secrets management --
 
 
--- buildah and skopeo -- 
 
 
 
