@@ -1,7 +1,12 @@
 # Podman Overview
 Podman (short for pod manages) is an open-source container management tool developed by Red Hat, designed to deploy and manage containerized applications. Provides a familiar command line experience compatible with the docker cli, grat for running/building/sharing containers outside of OpenShift, Can be Integrated in infrasturucture where docker daemon/cli are used today.
 Podman has no client-server architecture, so more agile in many use cases.
+--Advantages and used cases--
 
+
+--Podman Desktop--
+
+--Deployment in Podman--
 ## Why Podman?  
 Podman is fundamentally design with security in mind, leveraing SELinux.
 It has a smaller attack surface being just a running engine.
@@ -72,18 +77,11 @@ Why rootless containers? These containers can be created and run by users withou
 Aside from the security advantages they be run by different users.
 
 
---Advantages and used cases--
 
 
---Podman Desktop--
-
---Deployment in Podman--
 
 
--- daemonless Architecture --
 
-
--- Rootless containers -- 
 
 -- CI/CD integration --
 
