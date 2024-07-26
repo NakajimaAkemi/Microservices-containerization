@@ -44,18 +44,10 @@ Podman is fundamentally design with security in mind, paving the way for running
 
 ## User-namespace support
 
-## Podman commands
-A container image consists of three components:
- A directory tree containing all the software required to run your application
- A JSON file that describes the contents of the rootfs
- Another JSON file called a manifest list that links multiple images together to
-support different architectures
-The directory tree is called a rootfs (root filesystem). The software is laid out like it was
-the root (/) of a Linux system.
- The executable to be run within the rootfs, the working directory, the environment variables to be used, the maintainer of the executable, and other labels to help
-identify the content of the image are defined in the first JSON file. You can see this
-JSON file using the podman inspect command:
-$ podman inspect docker:/ /registry.access.redhat.com/ubi8
+## Podman commands and Docker compatability
+Podman's commands are run from the  command-line interface, which are similar to Docker.
+
+Because Podman does almost everything that Docker can do with the same command line as Docker, users can easily switch between them by aliasing Docker to Podman (alias docker=podman) and vice versa. Additionally, an rpm called podman-docker can drop a “docker” into the system application path, which calls Podman for those environments where the “docker” command is needed, easing the transition from Docker. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
 
 
 **Dockerfile**
@@ -75,16 +67,11 @@ EXPOSE 8080
 
 
 Provides a familiar command line experience compatible with the docker cli, grat for running/building/sharing containers outside of OpenShift, Can be Integrated in infrasturucture where docker daemon/cli are used today.
-Podman's commands are run from the  command-line interface, which are similar to Docker
-
-
-## Docker compatability
 
 Thanks to the OCI format, Podman is compatible with Docker, meaning that Podman can pull/push images to/from Docker's registries, also the switch of the workflow from Docker to Podman and viceversa easier. Podman is a powerful alternative to Docker, but the 2 can also work together,supporting most Docker commands and Dockerfile syntax. This compatibility makes transitioning from Docker to Podman smoother for developers.
 
-Because Podman does almost everything that Docker can do with the same command line as Docker, users can easily switch between them by aliasing Docker to Podman (alias docker=podman) and vice versa. Additionally, an rpm called podman-docker can drop a “docker” into the system application path, which calls Podman for those environments where the “docker” command is needed, easing the transition from Docker. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
-
 Some developers combine Podman and Docker, using Docker during the development stage and transferring their program to Podman in runtime environments.
+
 
 ## _
 leveraing SELinux.
