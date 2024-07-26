@@ -1,5 +1,39 @@
 # Podman in action
 
+## _
+leveraing SELinux.
+Integrated with systemd
+Default approcah on Fedora and RHEL.
+
+Not everybody has the luxury to build all thier own containers from scratch, because it would be an added cost stemming from the maintenance needs, such as patching a security issue.
+Base OS also?
+Another issue it other tools that run along side the container technology.
+
+
+You can also use Podman to run secure, rootless containers. By joining a user namespace and setting root access inside, you can enable Podman to mount certain filesystems and set up the container with no escalation of privileges.
+
+**Dockerfile**
+
+
+```dockerfile
+FROM eclipse-temurin:21-jdk as builder
+WORKDIR extracted
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} application.jar
+RUN java -Djarmode=layertools -jar application.jar extract
+EXPOSE 8080
+```
+
+--Advantages and used cases--
+
+
+--Podman Desktop--
+
+--Deployment in Podman--
+
+
+
+
 ##  Podman's Toolbox
 
 Docker is an all-in-1 tool for container creation and management, whereas Podman and its associated tools like Buildah and Skopeo are more specialized for specific aspects of containerization. This makes it possible to customize your environments with only the tools you need.
