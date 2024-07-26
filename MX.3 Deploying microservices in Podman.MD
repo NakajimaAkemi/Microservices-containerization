@@ -21,15 +21,9 @@ One benefit of the fork-exec model, it integrates well into the Linux kernel's a
 
 ## Rootless containers
 
-Podman containers have always been rootless, while Docker only recently added a rootless mode to its daemon configuration.
+Probably the most significant feature of Podman is the ability to run containers in rootless mode. In many situations you don't want to give full root access to your users, but users and developers still need to run containers and build images. 
+Every container process is managed with the current user's permissions, reducing the necessity of higher clearance.
 
-This is probably the most significant feature of Podman, the ability to run containers in rootless mode.
-In many situations you don't want to give full root acess to your users, but users and developers still need to run containers and build images. Requiring root access prevents lots if security-conscious companies from widespread adoption of Docker.
-Docker has a client-server logic mediated by a daemon; the latter does not need the mediator
-
-Every container process is managed with the current user's permissions, reducing the necessity of higher clearance, 
-
-Podman containers have always been rootless, while Docker is an all-in-1 tool for container management and creation, Podman is far more specific for its applications on the aspects of containerization.
 
 ## Concept of Pods
 
@@ -56,6 +50,8 @@ Podman changed the container landscape by offering the same high-performance cap
 
 
 Podman really paved the way for running containers in high-security environments, including research labs, banks, and insurance companies. A daemon running as root generally does not meet these requirements.
+Podman containers have always been rootless, while Docker is an all-in-1 tool for container management and creation, Podman is far more specific for its applications on the aspects of containerization.
+Requiring root access prevents lots if security-conscious companies from widespread adoption of Docker.
 
 
 
