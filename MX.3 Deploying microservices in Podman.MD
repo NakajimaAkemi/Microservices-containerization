@@ -58,6 +58,18 @@ Thanks to the ```OCI``` format, Podman support the same syntax and can build ima
 
 
 ### podman-compose
+While initially it was not the case, now Podman supports the docker-compose.yaml file, by processing them into Podman CLI commands
+
+Podman Compose is better integrated with Podman (as it was designed from the ground up to work with Podman) and makes better use of rootless containers and pods. However, Docker Compose is the more featureful option, being the reference implementation of Compose. As such, the answer to which you should use is "it depends."
+
+Podman Compose is the more native and lightweight solution. Podman Compose executes the Podman command directly, rather than communicating with Podman's API socket. This eliminates the need to run the Podman service to provide the API, saving resources. Because it uses Podman's regular command line and fork-exec model, it is easier to trace and manage on the system. For example, Podman Compose can easily be managed by a systemd unit file.
+
+Docker Compose has more features. It is compatible with Docker and Podman and, therefore, more versatile. Further, it has more users than Podman Compose, is more widely tested, and likely more stable.
+
+Given that there are valid reasons to use both, Podman is committed to supporting both Docker Compose and Podman Compose, including both major versions of Docker Compose.
+
+The Podman team is not focused on Compose YAML.
+
 Docker Compose is a tool that simplifies the management of multi-container Docker applications through a YAML configuration file.
 This file defines the services (containers) that make up your application, including their configurations such as images to use, ports to expose, network settings, and volume mounts.
 You can start all services with a single terminal command, making it easier to replicate and manage complex applications across different environments.
@@ -68,36 +80,7 @@ You can start all services with a single terminal command, making it easier to r
 
 
 
-## _
-leveraing SELinux.
-Integrated with systemd
-Default approcah on Fedora and RHEL.
 
-Not everybody has the luxury to build all thier own containers from scratch, because it would be an added cost stemming from the maintenance needs, such as patching a security issue.
-Base OS also?
-Another issue it other tools that run along side the container technology.
-
-
-You can also use Podman to run secure, rootless containers. By joining a user namespace and setting root access inside, you can enable Podman to mount certain filesystems and set up the container with no escalation of privileges.
-
-**Dockerfile**
-
-
-```dockerfile
-FROM eclipse-temurin:21-jdk as builder
-WORKDIR extracted
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} application.jar
-RUN java -Djarmode=layertools -jar application.jar extract
-EXPOSE 8080
-```
-
---Advantages and used cases--
-
-
---Podman Desktop--
-
---Deployment in Podman--
 
 
 
