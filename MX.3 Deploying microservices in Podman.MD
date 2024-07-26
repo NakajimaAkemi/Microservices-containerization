@@ -24,6 +24,7 @@ Every container process is managed with the current user's permissions, reducing
 
 ## Concept of Pods
 
+Podman introduces the concept of “pods,” which are groups of one or more containers that share the same network namespace, simulating a single host. This concept is borrowed from Kubernetes and allows for easier management of related containers.
 ## Why should we care about Podman?  
 
 Podman is fundamentally design with security in mind, paving the way for running containers in high-security enviroments. A daemon running as root generally does not meet these requirements and has prevented lots of security-conscious companies from widespread adoption of Docker. Podman containers have always been rootless, while Docker is an all-in-1 tool for container management and creation, and including the fact that the architecture is daemon-less, the surface of attack is highly reduced.
