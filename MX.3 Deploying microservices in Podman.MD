@@ -111,11 +111,7 @@ Some developers combine Podman and Docker, using Docker during the development s
 Podman is best suited for developers running containers without Kubernetes or Red Hat OpenShift Container Platform. For Kubernetes container orchestration, developers can use the open source, community-driven container engine CRI-O.
 
 
-## Docker compatability
-Thanks to the OCI format, Podman is compatible with Docker, meaning that Podman can pull/push images to/from Docker's registries, also the switch of the workflow from Docker to Podman and viceversa easier.
 
-Podman is a powerful alternative to Docker, but the 2 can also work together. Users can easily switch between them by aliasing Docker to Podman (alias docker=podman) and vice versa. Additionally, an rpm called podman-docker can drop a “docker” into the system application path, which calls Podman for those environments where the “docker” command is needed, easing the transition from Docker. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
-Some developers combine Podman and Docker, using Docker during the development stage and transferring their program to Podman in runtime environments.
 
 Podman is
 often summarized with the simple line alias Docker = Podman because Podman does almost everything that Docker can do with the same command line as Docker. But as
@@ -125,26 +121,14 @@ not critical to understanding Podman, but it is helpful.
 
 ## Podman commands
 
---  System md --
-
-
--- Security politics -- 
-SELinux configuration user name spaces and volumes
-AppArmor
 
 
 
+## Docker compatability
+Thanks to the OCI format, Podman is compatible with Docker, meaning that Podman can pull/push images to/from Docker's registries, also the switch of the workflow from Docker to Podman and viceversa easier.
 
--- CI/CD integration --
-
--- logging and monitoring -- 
-
-
--- secrets management --
-
-
-
-
+Podman is a powerful alternative to Docker, but the 2 can also work together. Users can easily switch between them by aliasing Docker to Podman (alias docker=podman) and vice versa. Additionally, an rpm called podman-docker can drop a “docker” into the system application path, which calls Podman for those environments where the “docker” command is needed, easing the transition from Docker. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
+Some developers combine Podman and Docker, using Docker during the development stage and transferring their program to Podman in runtime environments.
 
 
 
