@@ -75,6 +75,12 @@ Podman containers have always been rootless, while Docker is an all-in-1 tool fo
 </p>
 
 _(while searching for images for docker I found this - in case it can be useful)_
+
+## Rootless containers
+This is probably the most significant feature of Podman, the ability to run containers in rootless mode.
+In many situations you don't want to give full root acess to your users, but users and developers still need to run containers and build images. Requiring root access prevents lots if security-conscious companies from widespread adoption of Docker.
+
+
 ## Why Podman?
 Podman changed the container landscape by offering the same high-performance capabilities as leading container engines, but with the flexibility, accessibility, and security features that many development teams are seeking. Podman can help you:
 
