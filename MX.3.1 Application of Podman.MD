@@ -59,3 +59,24 @@ Podman and systemd allow you to manage
 the entire life cycle of the application on nodes without human intervention
 
 # User namespace separati
+
+
+
+
+--  System md --
+
+
+-- Security politics -- 
+SELinux configuration user name spaces and volumes
+AppArmor
+
+
+
+
+-- CI/CD integration --
+
+-- logging and monitoring -- 
+
+
+-- secrets management --
+
