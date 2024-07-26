@@ -53,8 +53,12 @@ One of Podman's greatest advantages is its CLI compatibility with Docker. In fac
 ```
 $ alias docker=podman
 ```
+
+You can run familiar commands, such as pull, push, build, commit, tag, and more with Podman.
+
 Additionally, an rpm called podman-docker can drop a “docker” into the system application path, which calls Podman for those environments where the “docker” command is needed, easing the transition from Docker. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
 
+You can also use Podman to run secure, rootless containers. By joining a user namespace and setting root access inside, you can enable Podman to mount certain filesystems and set up the container with no escalation of privileges.
 
 **Dockerfile**
 - With **FROM** we specify the base image for the Docker image - e.g.: ```FROM openjdk:11-jre-slim```.
