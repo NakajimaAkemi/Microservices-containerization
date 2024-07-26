@@ -60,9 +60,10 @@ Thanks to the ```OCI``` format, Podman support the same syntax and can build ima
 
 
 ### podman-compose
-While initially it was not the case, now Podman supports the docker-compose.yaml file, by processing them into Podman CLI commands
+Podman supports the docker-compose.yaml file, by processing them into Podman CLI commands with ```podman-compose```, while Podman Compose is better integrated with Podman (as it was designed from the ground up to work with Podman) and makes better use of rootless containers and pods. However, Docker Compose is the more featureful option, being the reference implementation of Compose. 
 
-Podman Compose is better integrated with Podman (as it was designed from the ground up to work with Podman) and makes better use of rootless containers and pods. However, Docker Compose is the more featureful option, being the reference implementation of Compose. As such, the answer to which you should use is "it depends."
+
+As such, the answer to which you should use is "it depends."
 
 Podman Compose is the more native and lightweight solution. Podman Compose executes the Podman command directly, rather than communicating with Podman's API socket. This eliminates the need to run the Podman service to provide the API, saving resources. Because it uses Podman's regular command line and fork-exec model, it is easier to trace and manage on the system. For example, Podman Compose can easily be managed by a systemd unit file.
 
