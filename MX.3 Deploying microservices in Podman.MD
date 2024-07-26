@@ -1,69 +1,11 @@
 # Podman Overview
-Podman (short for pod manages) is an open-source container management tool developed by Red Hat, designed to deploy and manage containerized applications. Provides a familiar command line experience compatible with the docker cli, grat for running/building/sharing containers outside of OpenShift, Can be Integrated in infrasturucture where docker daemon/cli are used today.
-Podman has no client-server architecture, so more agile in many use cases.
-Podman in many cases works just like Docker, but it solves some problems of Docker, most significatly Podman offers enhanced security and the ability to run commands with non-root privileges.
-Podman's commands are run from the  command-line interface, which are similar to Docker
-
-The Podman project describes Podman as “a daemonless container engine for
-developing, managing, and running OCI Containers on your Linux System. Containers can either be run as root or in rootless mode”
-
-Podman runs images with the newer OCI format, described in section 1.1.2, as well
-as the legacy Docker (v2 and v1) format images. Podman runs any image available at
-container registries, like docker.io and quay.io, as well as the hundreds of other container registries. Podman pulls these images to a Linux host and launches them in the
-same way as Docker and Kubernetes. Podman supports all OCI runtimes, including
-runc, crun, kata, and gvisord (appendix B), just like Docker.
-
-
-A container image consists of three components:
- A directory tree containing all the software required to run your application
- A JSON file that describes the contents of the rootfs
- Another JSON file called a manifest list that links multiple images together to
-support different architectures
-The directory tree is called a rootfs (root filesystem). The software is laid out like it was
-the root (/) of a Linux system.
- The executable to be run within the rootfs, the working directory, the environment variables to be used, the maintainer of the executable, and other labels to help
-identify the content of the image are defined in the first JSON file. You can see this
-JSON file using the podman inspect command:
-$ podman inspect docker:/ /registry.access.redhat.com/ubi8
-
-Podman Offers features that advance the security
-
-
-
--- Containers aren’t
-stopped on software
-upgrade.
-Podman is not required to remain running when containers are running. Since the Docker daemon is
-monitoring containers, by default, when it stops, all
-containers stop.
-
-
-
-Podman allows you to configure registries for shortname expansion. Docker is hardcoded to docker.io
-when you specify a short name.
-
-
-
---Advantages and used cases--
-
-
---Podman Desktop--
-
---Deployment in Podman--
-## Why Podman?  
-Podman is fundamentally design with security in mind, leveraing SELinux.
-It has a smaller attack surface being just a running engine.
-Rootless support built in
-Integrated with systemd
-Default approcah on Fedora and RHEL.
-
-## Why should i care?
-Not everybody has the luxury to build all thier own containers from scratch, because it would be an added cost stemming from the maintenance needs, such as patching a security issue.
-Base OS also?
-Another issue it other tools that run along side the container technology.
+Podman (short for pod manages) is an open-source container management tool developed by Red Hat, designed to deploy and manage containerized applications. Podman in many cases works just like Docker, but it solves some problems of Docker, most significatly Podman offers enhanced security and the ability to run commands with non-root privileges. Podman Offers features that advance the security
 
 
 ## Podman's architecture
+
+Podman's commands are run from the  command-line interface, which are similar to Docker
+
 --Differences between Podman and Docker--
 
 Unlike Docker, Podman does not need a daemon running in the background, every command in Podman is executed as a process separated from the user. Every container process is managed with the current user's permissions, reducing the necessity of higher clearance, also a daemon may result in a single point of failure.
@@ -79,16 +21,44 @@ _(while searching for images for docker I found this - in case it can be useful)
 Docker is built as a REST API server, basically a client-server architecture including multiple daemons, and there is a lot of complexity going on involving running containers, and a failure of a daemon implies the shut down of the containers, and its difficult to diagnose what happened.
 
 Podman is fundamentally different from Docker by being daemonless.
+Provides a familiar command line experience compatible with the docker cli, grat for running/building/sharing containers outside of OpenShift, Can be Integrated in infrasturucture where docker daemon/cli are used today.
+Podman has no client-server architecture, so more agile in many use cases.
 
 <p align="center">
   <img src="images/daemonless.JPG" alt="Esempio di immagine" />
 </p>
+The Podman project describes Podman as “a daemonless container engine for
+developing, managing, and running OCI Containers on your Linux System. Containers can either be run as root or in rootless mode”
+
+-- Containers aren’t
+stopped on software
+upgrade.
+Podman is not required to remain running when containers are running. Since the Docker daemon is
+monitoring containers, by default, when it stops, all
+containers stop.
+
+
+
+Podman allows you to configure registries for shortname expansion. Docker is hardcoded to docker.io
+when you specify a short name.
+
 
 
 ## Rootless containers
 This is probably the most significant feature of Podman, the ability to run containers in rootless mode.
 In many situations you don't want to give full root acess to your users, but users and developers still need to run containers and build images. Requiring root access prevents lots if security-conscious companies from widespread adoption of Docker.
 
+## Why Podman?  
+Podman is fundamentally design with security in mind, leveraing SELinux.
+It has a smaller attack surface being just a running engine.
+Rootless support built in
+Integrated with systemd
+Default approcah on Fedora and RHEL.
+
+## Why should i care?
+Not everybody has the luxury to build all thier own containers from scratch, because it would be an added cost stemming from the maintenance needs, such as patching a security issue.
+Base OS also?
+Another issue it other tools that run along side the container technology.
 
 ## Why Podman?
 Podman changed the container landscape by offering the same high-performance capabilities as leading container engines, but with the flexibility, accessibility, and security features that many development teams are seeking. Podman can help you:
@@ -120,7 +90,17 @@ not critical to understanding Podman, but it is helpful.
 
 
 ## Podman commands
-
+A container image consists of three components:
+ A directory tree containing all the software required to run your application
+ A JSON file that describes the contents of the rootfs
+ Another JSON file called a manifest list that links multiple images together to
+support different architectures
+The directory tree is called a rootfs (root filesystem). The software is laid out like it was
+the root (/) of a Linux system.
+ The executable to be run within the rootfs, the working directory, the environment variables to be used, the maintainer of the executable, and other labels to help
+identify the content of the image are defined in the first JSON file. You can see this
+JSON file using the podman inspect command:
+$ podman inspect docker:/ /registry.access.redhat.com/ubi8
 
 
 
@@ -131,7 +111,12 @@ Podman is a powerful alternative to Docker, but the 2 can also work together. Us
 Some developers combine Podman and Docker, using Docker during the development stage and transferring their program to Podman in runtime environments.
 
 
+--Advantages and used cases--
 
+
+--Podman Desktop--
+
+--Deployment in Podman--
 
 
 
