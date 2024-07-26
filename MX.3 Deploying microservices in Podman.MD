@@ -45,27 +45,17 @@ Podman is fundamentally design with security in mind, paving the way for running
 ## User-namespace support
 
 ## Podman commands and Docker compatability
-Podman's commands are run from the  command-line interface, which are similar to Docker.
-
-Because Podman does almost everything that Docker can do with the same command line as Docker, users can easily switch between them by aliasing Docker to Podman (alias docker=podman) and vice versa. 
-
-One of Podman's greatest advantages is its CLI compatibility with Docker. In fact, when building Podman, Docker users can adapt without any significant changes. For example, you can use the ```alias``` command to create a docker alias for Podman:
+One of Podman's greatest advantages is its CLI compatibility with Docker, because Podman does almost everything that Docker can do with the same command line as Docker. In fact, when building Podman, Docker users can adapt without any significant changes. For example, you can use the ```alias``` command to create a docker alias for Podman:
 ```
 $ alias docker=podman
 ```
+You can run other commands, such as ```pull```, ```push```, ```build```, ```commit```, ```tag```, and more with Podman.
 
-You can run familiar commands, such as pull, push, build, commit, tag, and more with Podman.
-
-Additionally, an rpm called podman-docker can drop a “docker” into the system application path, which calls Podman for those environments where the “docker” command is needed, easing the transition from Docker. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
-
-You can also use Podman to run secure, rootless containers. By joining a user namespace and setting root access inside, you can enable Podman to mount certain filesystems and set up the container with no escalation of privileges.
+Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
 
 **Dockerfile**
-- With **FROM** we specify the base image for the Docker image - e.g.: ```FROM openjdk:11-jre-slim```.
-- With **WORKDIR** we set the working directory inside the container and all subsequent commands will be run in this directory - e.g.: ```WORKDIR /app```.
-- With **COPY** we copy the file(s) from the host machine into the container’s working directory. - e.g.```COPY --chown=user:group host_file.xyz /path/container_file.xyz```.
-- With **ADD** we copy file(s) from the host machine to the container (it can manage remote URLs and directly extract compressed files) [ADD is a COPY with additional functionalities] - e.g. ```ADD file.xyz /file.xyz```.
-- With **RUN** we can run some commands, e.g. for clear up and/or install something inside the container - e.g. ```RUN java -Djarmode=layertools -jar app.jar extract```.
+Thanks to OCI, Podman support the same syntax and can build images from the dockerfile.
+
 ```dockerfile
 FROM eclipse-temurin:21-jdk as builder
 WORKDIR extracted
@@ -77,6 +67,10 @@ EXPOSE 8080
 
 
 Provides a familiar command line experience compatible with the docker cli, grat for running/building/sharing containers outside of OpenShift, Can be Integrated in infrasturucture where docker daemon/cli are used today.
+
+You can also use Podman to run secure, rootless containers. By joining a user namespace and setting root access inside, you can enable Podman to mount certain filesystems and set up the container with no escalation of privileges.
+
+
 ### running existing images 
 Thanks to the OCI format, Podman is compatible with Docker, meaning that Podman can pull/push images to/from Docker's registries, also the switch of the workflow from Docker to Podman and viceversa easier. Podman is a powerful alternative to Docker, but the 2 can also work together,supporting most Docker commands and Dockerfile syntax. This compatibility makes transitioning from Docker to Podman smoother for developers.
 
