@@ -24,7 +24,15 @@ Every container process is managed with the current user's permissions, reducing
 
 ## Concept of Pods
 
-Podman introduces the concept of “pods,” which are groups of one or more containers that share the same network namespace, simulating a single host. This concept is borrowed from Kubernetes and allows for easier management of related containers.
+Podman introduces the concept of “pods,” which are groups of one or more containers that share the same network namespace and storage resources simulating a single host. This concept is borrowed from Kubernetes and allows for easier management of related containers.
+
+One of the design goals of containers is to separate services into single containers: microservices. Then you combine containers together to build larger services. Pods allow you to group multiple services
+together to form a larger service managed as a single entity. One of the goals of Podman is allowing you to experiment with pods
+
+<p align="center">
+  <img src="images/pods.JPG" alt="Esempio di immagine" />
+</p>
+
 
 ## Why should we care about Podman?  
 
@@ -32,6 +40,7 @@ Podman is fundamentally design with security in mind, paving the way for running
 
 
 
+## Systemd Integration
 
 
 
