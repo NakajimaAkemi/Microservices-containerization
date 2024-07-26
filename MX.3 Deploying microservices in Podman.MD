@@ -76,6 +76,15 @@ Podman containers have always been rootless, while Docker is an all-in-1 tool fo
 
 _(while searching for images for docker I found this - in case it can be useful)_
 
+Docker is built as a REST API server, basically a client-server architecture including multiple daemons, and there is a lot of complexity going on involving running containers, and a failure of a daemon implies the shut down of the containers, and its difficult to diagnose what happened.
+
+Podman is fundamentally different from Docker by being daemonless.
+
+<p align="center">
+  <img src="images/daemonless.png" alt="Esempio di immagine" />
+</p>
+
+
 ## Rootless containers
 This is probably the most significant feature of Podman, the ability to run containers in rootless mode.
 In many situations you don't want to give full root acess to your users, but users and developers still need to run containers and build images. Requiring root access prevents lots if security-conscious companies from widespread adoption of Docker.
