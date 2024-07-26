@@ -52,6 +52,9 @@ Podman's commands are run from the  command-line interface, which are similar to
 
 
 ## Docker compatability
+
+Podman is designed to be a drop-in replacement for Docker, supporting most Docker commands and Dockerfile syntax. This compatibility makes transitioning from Docker to Podman smoother for developers.
+
 Thanks to the OCI format, Podman is compatible with Docker, meaning that Podman can pull/push images to/from Docker's registries, also the switch of the workflow from Docker to Podman and viceversa easier.
 
 Podman is a powerful alternative to Docker, but the 2 can also work together. Users can easily switch between them by aliasing Docker to Podman (alias docker=podman) and vice versa. Additionally, an rpm called podman-docker can drop a “docker” into the system application path, which calls Podman for those environments where the “docker” command is needed, easing the transition from Docker. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
@@ -66,6 +69,7 @@ often summarized with the simple line alias Docker = Podman because Podman does 
 you will learn in this book, Podman can do so much more. Understanding Docker is
 not critical to understanding Podman, but it is helpful.
 
+## _
 leveraing SELinux.
 Integrated with systemd
 Default approcah on Fedora and RHEL.
