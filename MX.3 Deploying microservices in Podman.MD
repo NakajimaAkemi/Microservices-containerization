@@ -16,9 +16,6 @@ Podman's architecture is more robust and reliable than Docker's because it erase
 One benefit of the fork-exec model, it integrates well into the Linux kernel's audit system. This way, the system logs exactly which user executed which containers. 
 
 
-
-
-
 ## Rootless containers
 
 Probably the most significant feature of Podman is the ability to run containers in rootless mode. In many situations you don't want to give full root access to your users, but users and developers still need to run containers and build images. 
@@ -28,30 +25,10 @@ Every container process is managed with the current user's permissions, reducing
 ## Concept of Pods
 
 ## Why should we care about Podman?  
-Podman is fundamentally design with security in mind, leveraing SELinux.
-It has a smaller attack surface being just a running engine.
-Rootless support built in
-Integrated with systemd
-Default approcah on Fedora and RHEL.
 
-Not everybody has the luxury to build all thier own containers from scratch, because it would be an added cost stemming from the maintenance needs, such as patching a security issue.
-Base OS also?
-Another issue it other tools that run along side the container technology.
-
-Podman changed the container landscape by offering the same high-performance capabilities as leading container engines, but with the flexibility, accessibility, and security features that many development teams are seeking. Podman can help you:
-
- - Manage container images and the full container lifecycle, including running, networking, checkpointing, and removing containers.
- - Run and isolate resources for rootless containers and pods.
- - Support OCI and Docker images as well as a Docker-compatible CLI.
- - Create a daemonless environment to improve security and reduce idle resource consumption. 
- - Deploy a REST API to support Podman’s advanced functionality.
- - Implement checkpoint/restore functionality for Linux containers with Checkpoint/Restore in Userspace (CRIU). CRIU can freeze a running container and save its memory contents and state to disk so that containerized workloads can be restarted faster.
- - Automatically update containers. Podman detects if an updated container fails to start and automatically rolls back to the last working version. This provides new levels of reliability for applications. 
+Podman is fundamentally design with security in mind, paving the way for running containers in high-security enviroments. A daemon running as root generally does not meet these requirements and has prevented lots of security-conscious companies from widespread adoption of Docker. Podman containers have always been rootless, while Docker is an all-in-1 tool for container management and creation, and including the fact that the architecture is daemon-less, the surface of attack is highly reduced.
 
 
-Podman really paved the way for running containers in high-security environments, including research labs, banks, and insurance companies. A daemon running as root generally does not meet these requirements.
-Podman containers have always been rootless, while Docker is an all-in-1 tool for container management and creation, Podman is far more specific for its applications on the aspects of containerization.
-Requiring root access prevents lots if security-conscious companies from widespread adoption of Docker.
 
 
 
@@ -88,6 +65,14 @@ Podman is
 often summarized with the simple line alias Docker = Podman because Podman does almost everything that Docker can do with the same command line as Docker. But as
 you will learn in this book, Podman can do so much more. Understanding Docker is
 not critical to understanding Podman, but it is helpful.
+
+leveraing SELinux.
+Integrated with systemd
+Default approcah on Fedora and RHEL.
+
+Not everybody has the luxury to build all thier own containers from scratch, because it would be an added cost stemming from the maintenance needs, such as patching a security issue.
+Base OS also?
+Another issue it other tools that run along side the container technology.
 
 --Advantages and used cases--
 
