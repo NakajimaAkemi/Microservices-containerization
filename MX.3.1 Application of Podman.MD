@@ -14,7 +14,7 @@ Buildah is all about building OCI compatible images, we can use the Docker forma
 
 
 <p align="center">
-  <img src="images/docker-vs-podman.png" alt="Esempio di immagine" />
+  <img src="images/podman-vs-docker.png" alt="Esempio di immagine" />
 </p>
 
 
