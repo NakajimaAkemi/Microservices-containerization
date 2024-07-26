@@ -42,6 +42,8 @@ Podman is fundamentally design with security in mind, paving the way for running
 
 ## Systemd Integration
 
+## Play kube
+
 ## User-namespace support
 ## Podman and Docker compatability 
 Podman is a powerful alternative to Docker, but the 2 can also work together,supporting most Docker commands and Dockerfile syntax. This compatibility makes transitioning from Docker to Podman smoother for developers. Some developers combine Podman and Docker, using Docker during the development stage and transferring their program to Podman in runtime environments. 
