@@ -57,3 +57,6 @@ networks:
     driver: bridge
 
 ```
+
+
+## Communication inside the Pod
