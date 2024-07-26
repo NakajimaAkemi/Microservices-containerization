@@ -2,6 +2,9 @@
 
 ##  Podman's Toolbox
 
+Buildah is another container engine,
+although it is only used for building container images.
+
 Podman is a modular container engine, so it must work alongside tools like Buildah and Skopeo to build and move its containers. With Buildah, you can build containers either from scratch or by using an image as a starting point. Skopeo moves container images between different types of storage systems, allowing you to copy images between registries like docker.io, quay.io, and your internal registry or between different types of storage on your local system. This modular approach to containerization results in a flexible, lightweight environment by reducing overhead and isolating the features you need. Working with containers makes it possible to use smaller, more modular tools that can focus on a single purpose and be updated as often as needed.
 
 Think of Podman, Buildah, and Skopeo as a set of specialized Swiss Army knives. Combined, they can satisfy almost all container use cases. Podman is the biggest of these knives.
@@ -52,6 +55,7 @@ Aside from the security advantages they be run by different users.
 # Pods
 
 # Systemd
-
+Podman and systemd allow you to manage
+the entire life cycle of the application on nodes without human intervention
 
 # User namespace separati
