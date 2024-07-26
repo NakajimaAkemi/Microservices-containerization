@@ -64,14 +64,13 @@ Podman supports the docker-compose.yml file, by processing them into Podman CLI 
 
 
 ## Applications of Podman in SpringBoot Project
-In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](https://github.com/PacktPublishing/Microservices-with-Spring-Boot-and-Spring-Cloud-Third-Edition/tree/main/Chapter06) focussing on the containerization part.\
-We will analyze deeply Dockerfile, Docker-compose and Application (yaml) to comprehend how they work.
+In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](https://github.com/PacktPublishing/Microservices-with-Spring-Boot-and-Spring-Cloud-Third-Edition/tree/main/Chapter06).\
 
-It is important to notice that in the microservices folder there are 4 services. Let's analyze each Dockerfile, then we can watch the Docker Compose whose use this files.
+
 ### Rootless containers
 
 ### Pods setup
-
+It is important to notice that in the microservices folder there are 4 services. Let's analyze each Dockerfile, then we can watch the Docker Compose whose use this files.
 
 
 
