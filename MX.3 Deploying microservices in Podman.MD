@@ -9,12 +9,14 @@ Podman (short for pod manages) is an open-source container management tool devel
 Podman is fundamentally different from Docker by being daemonless, Podman uses a more traditional fork-exec model to run containers, every command in Podman is executed as a process separated from the user. 
 Podman's architecture is more robust and reliable than Docker's because it erases a single point of failure that is the daemon, if a daemon goes down, no container is reachable anymore.
 
-One benefit of the fork-exec model, it integrates well into the Linux kernel's audit system. This way, the system logs exactly which user executed which containers. 
-
-
 <p align="center">
   <img src="images/daemonless.JPG" alt="Esempio di immagine" />
 </p>
+
+One benefit of the fork-exec model, it integrates well into the Linux kernel's audit system. This way, the system logs exactly which user executed which containers. 
+
+
+
 
 
 ## Rootless containers
