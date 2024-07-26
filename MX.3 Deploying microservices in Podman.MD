@@ -1,6 +1,49 @@
 # Podman Overview
 Podman (short for pod manages) is an open-source container management tool developed by Red Hat, designed to deploy and manage containerized applications. Provides a familiar command line experience compatible with the docker cli, grat for running/building/sharing containers outside of OpenShift, Can be Integrated in infrasturucture where docker daemon/cli are used today.
 Podman has no client-server architecture, so more agile in many use cases.
+Podman in many cases works just like Docker, but it solves some problems of Docker, most significatly Podman offers enhanced security and the ability to run commands with non-root privileges.
+Podman's commands are run from the  command-line interface, which are similar to Docker
+
+The Podman project describes Podman as “a daemonless container engine for
+developing, managing, and running OCI Containers on your Linux System. Containers can either be run as root or in rootless mode”
+
+Podman runs images with the newer OCI format, described in section 1.1.2, as well
+as the legacy Docker (v2 and v1) format images. Podman runs any image available at
+container registries, like docker.io and quay.io, as well as the hundreds of other container registries. Podman pulls these images to a Linux host and launches them in the
+same way as Docker and Kubernetes. Podman supports all OCI runtimes, including
+runc, crun, kata, and gvisord (appendix B), just like Docker.
+
+
+A container image consists of three components:
+ A directory tree containing all the software required to run your application
+ A JSON file that describes the contents of the rootfs
+ Another JSON file called a manifest list that links multiple images together to
+support different architectures
+The directory tree is called a rootfs (root filesystem). The software is laid out like it was
+the root (/) of a Linux system.
+ The executable to be run within the rootfs, the working directory, the environment variables to be used, the maintainer of the executable, and other labels to help
+identify the content of the image are defined in the first JSON file. You can see this
+JSON file using the podman inspect command:
+$ podman inspect docker:/ /registry.access.redhat.com/ubi8
+
+Podman Offers features that advance the security
+
+
+
+-- Containers aren’t
+stopped on software
+upgrade.
+Podman is not required to remain running when containers are running. Since the Docker daemon is
+monitoring containers, by default, when it stops, all
+containers stop.
+
+
+
+Podman allows you to configure registries for shortname expansion. Docker is hardcoded to docker.io
+when you specify a short name.
+
+
+
 --Advantages and used cases--
 
 
@@ -59,7 +102,10 @@ Thanks to the OCI format, Podman is compatible with Docker, meaning that Podman 
 Podman is a powerful alternative to Docker, but the 2 can also work together. Users can easily switch between them by aliasing Docker to Podman (alias docker=podman) and vice versa. Additionally, an rpm called podman-docker can drop a “docker” into the system application path, which calls Podman for those environments where the “docker” command is needed, easing the transition from Docker. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
 Some developers combine Podman and Docker, using Docker during the development stage and transferring their program to Podman in runtime environments.
 
-
+Podman is
+often summarized with the simple line alias Docker = Podman because Podman does almost everything that Docker can do with the same command line as Docker. But as
+you will learn in this book, Podman can do so much more. Understanding Docker is
+not critical to understanding Podman, but it is helpful.
 
 
 
