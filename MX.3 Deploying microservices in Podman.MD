@@ -44,34 +44,14 @@ Podman is fundamentally design with security in mind, paving the way for running
 
 ## User-namespace support
 
-## Podman commands and Docker compatability
+## Podman commands and 
 One of Podman's greatest advantages is its CLI compatibility with Docker, because Podman does almost everything that Docker can do with the same command line as Docker. In fact, when building Podman, Docker users can adapt without any significant changes. For example, you can use the ```alias``` command to create a docker alias for Podman:
 ```
 $ alias docker=podman
 ```
-You can run other commands, such as ```pull```, ```push```, ```build```, ```commit```, ```tag```, and more with Podman.
+You can run other commands, such as ```pull```, ```push```, ```build```, ```commit```, ```tag```, and more with Podman. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
 
-Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
-
-**Dockerfile**
-Thanks to OCI, Podman support the same syntax and can build images from the dockerfile.
-
-```dockerfile
-FROM eclipse-temurin:21-jdk as builder
-WORKDIR extracted
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} application.jar
-RUN java -Djarmode=layertools -jar application.jar extract
-EXPOSE 8080
-```
-
-
-Provides a familiar command line experience compatible with the docker cli, grat for running/building/sharing containers outside of OpenShift, Can be Integrated in infrasturucture where docker daemon/cli are used today.
-
-You can also use Podman to run secure, rootless containers. By joining a user namespace and setting root access inside, you can enable Podman to mount certain filesystems and set up the container with no escalation of privileges.
-
-
-### running existing images 
+### Podman and Docker compatability 
 Thanks to the OCI format, Podman is compatible with Docker, meaning that Podman can pull/push images to/from Docker's registries, also the switch of the workflow from Docker to Podman and viceversa easier. Podman is a powerful alternative to Docker, but the 2 can also work together,supporting most Docker commands and Dockerfile syntax. This compatibility makes transitioning from Docker to Podman smoother for developers.
 
 Some developers combine Podman and Docker, using Docker during the development stage and transferring their program to Podman in runtime environments.
@@ -85,6 +65,22 @@ Default approcah on Fedora and RHEL.
 Not everybody has the luxury to build all thier own containers from scratch, because it would be an added cost stemming from the maintenance needs, such as patching a security issue.
 Base OS also?
 Another issue it other tools that run along side the container technology.
+
+
+You can also use Podman to run secure, rootless containers. By joining a user namespace and setting root access inside, you can enable Podman to mount certain filesystems and set up the container with no escalation of privileges.
+
+**Dockerfile**
+
+Thanks to OCI, Podman support the same syntax and can build images from the dockerfile.
+
+```dockerfile
+FROM eclipse-temurin:21-jdk as builder
+WORKDIR extracted
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} application.jar
+RUN java -Djarmode=layertools -jar application.jar extract
+EXPOSE 8080
+```
 
 --Advantages and used cases--
 
