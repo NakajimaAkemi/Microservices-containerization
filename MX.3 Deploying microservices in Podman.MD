@@ -81,7 +81,7 @@ Docker is built as a REST API server, basically a client-server architecture inc
 Podman is fundamentally different from Docker by being daemonless.
 
 <p align="center">
-  <img src="images/daemonless.png" alt="Esempio di immagine" />
+  <img src="images/daemonless.JPG" alt="Esempio di immagine" />
 </p>
 
 
