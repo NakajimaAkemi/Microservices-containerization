@@ -25,6 +25,7 @@ Every container process is managed with the current user's permissions, reducing
 ## Concept of Pods
 
 Podman introduces the concept of “pods,” which are groups of one or more containers that share the same network namespace, simulating a single host. This concept is borrowed from Kubernetes and allows for easier management of related containers.
+
 ## Why should we care about Podman?  
 
 Podman is fundamentally design with security in mind, paving the way for running containers in high-security enviroments. A daemon running as root generally does not meet these requirements and has prevented lots of security-conscious companies from widespread adoption of Docker. Podman containers have always been rootless, while Docker is an all-in-1 tool for container management and creation, and including the fact that the architecture is daemon-less, the surface of attack is highly reduced.
@@ -46,6 +47,22 @@ the root (/) of a Linux system.
 identify the content of the image are defined in the first JSON file. You can see this
 JSON file using the podman inspect command:
 $ podman inspect docker:/ /registry.access.redhat.com/ubi8
+
+
+**Dockerfile**
+- With **FROM** we specify the base image for the Docker image - e.g.: ```FROM openjdk:11-jre-slim```.
+- With **WORKDIR** we set the working directory inside the container and all subsequent commands will be run in this directory - e.g.: ```WORKDIR /app```.
+- With **COPY** we copy the file(s) from the host machine into the container’s working directory. - e.g.```COPY --chown=user:group host_file.xyz /path/container_file.xyz```.
+- With **ADD** we copy file(s) from the host machine to the container (it can manage remote URLs and directly extract compressed files) [ADD is a COPY with additional functionalities] - e.g. ```ADD file.xyz /file.xyz```.
+- With **RUN** we can run some commands, e.g. for clear up and/or install something inside the container - e.g. ```RUN java -Djarmode=layertools -jar app.jar extract```.
+```dockerfile
+FROM eclipse-temurin:21-jdk as builder
+WORKDIR extracted
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} application.jar
+RUN java -Djarmode=layertools -jar application.jar extract
+EXPOSE 8080
+```
 
 
 Provides a familiar command line experience compatible with the docker cli, grat for running/building/sharing containers outside of OpenShift, Can be Integrated in infrasturucture where docker daemon/cli are used today.
