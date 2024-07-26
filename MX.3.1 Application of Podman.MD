@@ -2,6 +2,9 @@
 
 ##  Podman's Toolbox
 
+Docker is an all-in-1 tool for container creation and management, whereas Podman and its associated tools like Buildah and Skopeo are more specialized for specific aspects of containerization. This makes it possible to customize your environments with only the tools you need.
+
+
 Buildah is another container engine,
 although it is only used for building container images.
 
