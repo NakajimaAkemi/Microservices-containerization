@@ -47,7 +47,12 @@ Podman is fundamentally design with security in mind, paving the way for running
 ## Podman commands and Docker compatability
 Podman's commands are run from the  command-line interface, which are similar to Docker.
 
-Because Podman does almost everything that Docker can do with the same command line as Docker, users can easily switch between them by aliasing Docker to Podman (alias docker=podman) and vice versa. Additionally, an rpm called podman-docker can drop a “docker” into the system application path, which calls Podman for those environments where the “docker” command is needed, easing the transition from Docker. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
+Because Podman does almost everything that Docker can do with the same command line as Docker, users can easily switch between them by aliasing Docker to Podman (alias docker=podman) and vice versa. 
+```
+$ alias docker=podman
+
+```
+Additionally, an rpm called podman-docker can drop a “docker” into the system application path, which calls Podman for those environments where the “docker” command is needed, easing the transition from Docker. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
 
 
 **Dockerfile**
