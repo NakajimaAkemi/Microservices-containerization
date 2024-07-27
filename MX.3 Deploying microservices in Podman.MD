@@ -3,6 +3,7 @@ Podman (short for pod manages) is an open-source container management tool devel
 
 ## Basic informations
  - cgroup (control group)
+
 is a Linux kernel feature that allows the system to allocate, monitor, and limit resources (such as CPU, memory, and I/O) for a group of processes. It provides a way to manage and isolate the resource usage of applications and services, improving system performance and stability. Cgroups are essential for implementing containerization and resource management in Linux-based environments.
  - fork/exec
  - PID
