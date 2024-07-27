@@ -1,8 +1,8 @@
 # Podman Overview
 Podman (short for pod manages) is an open-source container management tool developed by Red Hat, designed to deploy and manage containerized applications. Podman in many cases works just like Docker, but it offers enhanced security and the ability to run commands with non-root privileges.
 
-## Basic information
- - cgroup
+## Basic informations
+ - _cgroup_
  - fork/exec
  - PID
  - namespace
