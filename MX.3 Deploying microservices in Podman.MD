@@ -63,7 +63,21 @@ You can run other commands, such as ```pull```, ```push```, ```build```, ```comm
 
 #### Podman exclusive commands
 
+podman pod: Manages pods, which are groups of one or more containers sharing the same network namespace.
+podman pod create
+podman pod start
+podman pod stop
+podman pod rm
 
+podman generate systemd: Generates systemd unit files to manage containers or pods with systemd.
+podman generate systemd
+
+podman play kube: Deploys containers based on Kubernetes YAML files.
+podman play kube
+podman kube: Subcommand group for handling Kubernetes YAML file operations.
+
+podman kube play
+podman kube generate
 
 ### dockerfile
 Thanks to the ```OCI``` format, Podman support the same syntax and can build images from the dockerfile, meaning that Podman can ```pull/push``` images to/from Docker's registries, also the switch of the workflow from Docker to Podman and viceversa easier. 
