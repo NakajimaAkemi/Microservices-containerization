@@ -58,17 +58,6 @@ Buildah is all about building OCI compatible images, we can use the Docker forma
 </p>
 
 
--- buildah and skopeo -- 
-
-
-
-## Rootless containers
-Why rootless containers? These containers can be created and run by users without admin rights.
-Aside from the security advantages they be run by different users.
-
-
-## Rootless Containers
-
 
 
 
@@ -78,42 +67,4 @@ Aside from the security advantages they be run by different users.
 
 
 ## Skopeo
-
-
-
-## SELinux and AppArmor
-
-
-
-
-## Logging and Monitoring
-
-
-# Pods
-
-# Systemd
-Podman and systemd allow you to manage
-the entire life cycle of the application on nodes without human intervention
-
-# User namespace separati
-
-
-
-
---  System md --
-
-
--- Security politics -- 
-SELinux configuration user name spaces and volumes
-AppArmor
-
-
-
-
--- CI/CD integration --
-
--- logging and monitoring -- 
-
-
--- secrets management --
 
