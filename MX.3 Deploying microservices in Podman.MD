@@ -89,9 +89,9 @@ podman pod: Manages pods, which are groups of one or more containers sharing the
   - ```stop``` to **stop** and remove the service.
   - ```rm``` to **stop** and remove the service.
 
-  For ```podman kube```, we can have:
-  - ```play``` to **build** or rebuild services;
-  - ```generate``` to **start** the service (defined in the yaml file);
+  For ```podman <subcommand> kube```, we can have:
+  - ```generate``` creates a **YAML** description of a Podman container or pod to run in Kubernetes;
+  - ```play``` subcommand that allows Podman to **run** pods based on a Kubernetes YAML file;
 
 podman generate systemd: Generates systemd unit files to manage containers or pods with systemd.
 podman generate systemd
