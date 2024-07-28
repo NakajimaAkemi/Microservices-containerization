@@ -47,6 +47,10 @@ together to form a larger service managed as a single entity. One of the goals o
 Podman Compose executes the Podman command directly, rather than communicating with Podman's API socket. This eliminates the need to run the Podman service to provide the API, saving resources. Because it uses Podman's regular command line and fork-exec model, it is easier to trace and manage on the system. For example, Podman Compose can easily be managed by a systemd unit file.
 
 ## Play kube
+Init containers
+Users of podman play kube told us they want to build images as part of the play process. Because Kubernetes does not have a similar concept, we were at first hesitant to implement the idea. The more play kube gets used, the more it gets compared to Docker compose. That was the tipping point. Our users were right.
+
+The new podman play kube feature looks for a directory with the same name as the image used in the YAML file. If that directory exists and there is a Containerfile or Dockerfile present in that directory, Podman builds the container image.
 
 ## User-namespace support
 
@@ -66,42 +70,30 @@ $ alias docker=podman
 You can run other commands, such as ```pull```, ```push```, ```build```, ```commit```, ```tag```, and more with Podman. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
 
 #### Podman exclusive commands
-Podman other than having the same commands as Docker, it has also exclusive commands.
+Podman other than having the same commands as Docker, it has also exclusive commands, which are ```kube```,
+```systemd``` and ```pod```.
 
-  We can distinguish in two main categories: ```docker-compose``` and ```docker``` commands.\
-  _(Some of the most important and used commands are reported here; many of these are very similar to commands that are used in a normal linux shell, or still very intuitive.)_\
-podman pod: Manages pods, which are groups of one or more containers sharing the same network namespace.
+```podman pod```: Manages pods, which are groups of one or more containers sharing the same network namespace.
   For ```podman pod```, we can have:
-  - ```create``` to **build** or rebuild services;
-  - ```start``` to **start** the service (defined in the yaml file);
-  - ```stop``` to **stop** and remove the service.
-  - ```rm``` to **stop** and remove the service.
+  - ```create``` to **build** a pod;
+  - ```start``` to **start** the pod;
+  - ```stop``` to **stop** the pod;
+  - ```rm``` to **remove** the pod;
 
   For ```podman generate systemd```, we can have:
   - ```create``` to **build** or rebuild services;
   - ```start``` to **start** the service (defined in the yaml file);
   - ```stop``` to **stop** and remove the service.
   - ```rm``` to **stop** and remove the service.
-
-  For ```podman play kube```, we can have:
-  - ```create``` to **build** or rebuild services;
-  - ```start``` to **start** the service (defined in the yaml file);
-  - ```stop``` to **stop** and remove the service.
-  - ```rm``` to **stop** and remove the service.
+ Generates systemd unit files to manage containers or pods with systemd
 
   For ```podman <subcommand> kube```, we can have:
   - ```generate``` creates a **YAML** description of a Podman container or pod to run in Kubernetes;
   - ```play``` subcommand that allows Podman to **run** pods based on a Kubernetes YAML file;
-
-podman generate systemd: Generates systemd unit files to manage containers or pods with systemd.
-podman generate systemd
-
+Subcommand group for handling Kubernetes YAML file operation
 podman play kube: Deploys containers based on Kubernetes YAML files.
-podman play kube
-podman kube: Subcommand group for handling Kubernetes YAML file operations.
 
-podman kube play
-podman kube generate
+<yaml file-name>
 
 ### dockerfile
 Thanks to the ```OCI``` format, Podman support the same syntax and can build images from the dockerfile, meaning that Podman can ```pull/push``` images to/from Docker's registries, also the switch of the workflow from Docker to Podman and viceversa easier. 
