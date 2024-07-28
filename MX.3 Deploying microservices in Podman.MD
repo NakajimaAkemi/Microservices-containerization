@@ -112,6 +112,12 @@ In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](ht
 
 
 ### Rootless containers
+For demonstration purposes, we will define a new user with no root privileges
+```bash
+adduser brad
+su brad
+```
+
 
 ### Pods setup
 It is important to notice that in the microservices folder there are 4 services. Let's analyze each Dockerfile, then we can watch the Docker Compose whose use this files.
