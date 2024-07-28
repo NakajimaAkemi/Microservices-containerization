@@ -46,6 +46,10 @@ together to form a larger service managed as a single entity. One of the goals o
 ## Systemd Integration
 Podman Compose executes the Podman command directly, rather than communicating with Podman's API socket. This eliminates the need to run the Podman service to provide the API, saving resources. Because it uses Podman's regular command line and fork-exec model, it is easier to trace and manage on the system. For example, Podman Compose can easily be managed by a systemd unit file.
 
+Podman and systemd allow you to manage
+the entire life cycle of the application on nodes without human intervention
+
+
 ## Play kube
 Init containers
 Users of podman play kube told us they want to build images as part of the play process. Because Kubernetes does not have a similar concept, we were at first hesitant to implement the idea. The more play kube gets used, the more it gets compared to Docker compose. That was the tipping point. Our users were right.
