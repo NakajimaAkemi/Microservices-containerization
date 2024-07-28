@@ -121,6 +121,11 @@ In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](ht
 It is important to notice that in the microservices folder there are 4 services. Let's analyze each Dockerfile, then we can watch the Docker Compose whose use this files.
 
 
+### Systemd 
+
+
+### Kube play
+
 
 ## Sources
 - https://www.redhat.com/en/topics/containers/what-is-podman
