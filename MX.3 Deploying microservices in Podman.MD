@@ -115,8 +115,35 @@ For purely demonstration purposes, we will define a new user with no root privil
 ```bash
 adduser brad
 su brad
-sudo sysctl user.max_user_namespaces=28633
-echo "brad:100000:65536" | sudo tee -a /etc/subuid /etc/subgid
+sudo mkdir -p /run/user/$(id -u brad)
+sudo chown -R $(id -u brad):$(id -g brad) /run/user/$(id -u brad)
+su - brad
+export XDG_RUNTIME_DIR=/run/user/$(id -u)
+echo 'export XDG_RUNTIME_DIR=/run/user/$(id -u)' >> ~/.bashrc
+source ~/.bashrc
+
+echo "brad:100000:65536" | sudo tee -a /etc/subuid
+echo "brad:100000:65536" | sudo tee -a /etc/subgid
+#make sure it does not overlap
+cat /etc/subuid
+cat /etc/subgid
+
+# configuration of conf file for namespace in runtime
+mkdir -p ~/.config/containers
+cat <<EOF > ~/.config/containers/containers.conf
+[engine]
+runtime = "crun"
+[containers]
+userns="keep-id"
+EOF
+
+#make sure it has the privileges
+chown brad:brad ~/.config/containers/containers.conf
+
+#test
+podman run --rm hello-world
+
+
 ```
 Now we will need the UID of our non-root user brad.
 ```
