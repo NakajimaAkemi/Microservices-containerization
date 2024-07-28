@@ -66,12 +66,32 @@ $ alias docker=podman
 You can run other commands, such as ```pull```, ```push```, ```build```, ```commit```, ```tag```, and more with Podman. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
 
 #### Podman exclusive commands
+Podman other than having the same commands as Docker, it has also exclusive commands.
 
+  We can distinguish in two main categories: ```docker-compose``` and ```docker``` commands.\
+  _(Some of the most important and used commands are reported here; many of these are very similar to commands that are used in a normal linux shell, or still very intuitive.)_\
 podman pod: Manages pods, which are groups of one or more containers sharing the same network namespace.
-podman pod create
-podman pod start
-podman pod stop
-podman pod rm
+  For ```podman pod```, we can have:
+  - ```create``` to **build** or rebuild services;
+  - ```start``` to **start** the service (defined in the yaml file);
+  - ```stop``` to **stop** and remove the service.
+  - ```rm``` to **stop** and remove the service.
+
+  For ```podman generate systemd```, we can have:
+  - ```create``` to **build** or rebuild services;
+  - ```start``` to **start** the service (defined in the yaml file);
+  - ```stop``` to **stop** and remove the service.
+  - ```rm``` to **stop** and remove the service.
+
+  For ```podman play kube```, we can have:
+  - ```create``` to **build** or rebuild services;
+  - ```start``` to **start** the service (defined in the yaml file);
+  - ```stop``` to **stop** and remove the service.
+  - ```rm``` to **stop** and remove the service.
+
+  For ```podman kube```, we can have:
+  - ```play``` to **build** or rebuild services;
+  - ```generate``` to **start** the service (defined in the yaml file);
 
 podman generate systemd: Generates systemd unit files to manage containers or pods with systemd.
 podman generate systemd
