@@ -107,9 +107,8 @@ Thanks to the ```OCI``` format, Podman support the same syntax and can build ima
 Podman supports the ```docker-compose.yml``` file, by processing them into Podman CLI commands with ```podman-compose```, while Podman Compose is better integrated with Podman (as it was designed from the ground up to work with Podman) and makes better use of rootless containers and pods. However, Docker Compose is much more supported, tested and more likely to be stable, while the Podman team is more focused ```podman generate kube``` and ```podman play kube```, which allow Kubernetes (An orchestation software) YAML to be used directly with Podman similar to Compose.
 
 
-## Applications of Podman in SpringBoot Project
-In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](https://github.com/PacktPublishing/Microservices-with-Spring-Boot-and-Spring-Cloud-Third-Edition/tree/main/Chapter06).\
-
+## Podman in action
+In this paragraph we will show basic functions of Podman.
 
 ### Rootless containers
 For purely demonstration purposes, we will define a new user with no root privileges, verify and configure the user namespace.
@@ -137,6 +136,8 @@ podman --version
 
 
 ### Pods setup
+In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](https://github.com/PacktPublishing/Microservices-with-Spring-Boot-and-Spring-Cloud-Third-Edition/tree/main/Chapter06).\
+
 It is important to notice that in the microservices folder there are 4 services. Let's analyze each Dockerfile, then we can watch the Docker Compose whose use this files.
 
 
