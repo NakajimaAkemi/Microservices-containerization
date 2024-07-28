@@ -36,12 +36,12 @@ Probably the most significant feature of Podman is the ability to run containers
 
 Podman introduces the concept of “pods,” which are groups of one or more containers that share the same network namespace and storage resources simulating a single host. This concept is borrowed from Kubernetes and allows for easier management of related containers.
 
-One of the design goals of containers is to separate services into single containers: microservices. Then you combine containers together to build larger services. Pods allow you to group multiple services
-together to form a larger service managed as a single entity. One of the goals of Podman is allowing you to experiment with pods
-
 <p align="center">
   <img src="images/pods.JPG" alt="Esempio di immagine" />
 </p>
+
+One of the design goals of containers is to separate services into single containers: microservices. Then you combine containers together to build larger services. Pods allow you to group multiple services
+together to form a larger service managed as a single entity. One of the goals of Podman is allowing you to experiment with pods
 
 ## Systemd Integration
 Podman Compose executes the Podman command directly, rather than communicating with Podman's API socket. This eliminates the need to run the Podman service to provide the API, saving resources. Because it uses Podman's regular command line and fork-exec model, it is easier to trace and manage on the system. For example, Podman Compose can easily be managed by a systemd unit file.
