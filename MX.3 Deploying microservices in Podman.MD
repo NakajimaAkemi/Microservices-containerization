@@ -112,7 +112,7 @@ In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](ht
 
 
 ### Rootless containers
-For purely demonstration purposes, we will define a new user with no root privileges, verify configure the user namespace.
+For purely demonstration purposes, we will define a new user with no root privileges, verify and configure the user namespace.
 ```bash
 adduser brad
 su brad
@@ -129,8 +129,11 @@ Once we have our UID we will need to setup the runtime directory for brad in ord
 sudo mkdir -p /run/user/1001
 sudo chown -R 1001:1001 /run/user/1001
 ```
-Now 
-
+Now we switch to the user brad and verify if it can use the Podman commands.
+```
+su brad
+podman --version
+```
 
 
 ### Pods setup
