@@ -7,7 +7,7 @@ Podman (short for pod manages) is an open-source container management tool devel
  - **PID (Process Identifier)**: is a unique numerical identifier assigned by the operating system to each process running on a system. It is used to manage and reference processes, enabling tasks such as process control, monitoring, and communication. PIDs help the operating system distinguish between different running processes.
  - **namespace**: is a feature in Linux that isolates and virtualizes system resources for a set of processes. It creates an environment where a process or a group of processes sees a distinct set of resources, such as file systems, network interfaces, process IDs, and user IDs. This isolation is key to containerization, allowing multiple containers to run on the same host without interfering with each other.
 
-- **Userspace**
+- **Userspace**: Userspace refers to the area of system memory where user-mode applications and processes run, as opposed to kernel space where the core of the operating system executes. It provides an isolated environment where applications operate with restricted access to hardware and system resources, ensuring system stability and security by preventing direct interaction with the kernel.
 
 - **Orchestration**: Container orchestration is the automated management of containerized applications, handling deployment, scaling, networking, and availability across a cluster of machines. Tools like ```Kubernetes``` and ```Docker Swarm``` facilitate this process.
 
