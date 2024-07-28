@@ -112,7 +112,7 @@ In this paragraph we will show basic functions of Podman.
 
 ### Rootless containers
 For purely demonstration purposes, we will define a new user with no root privileges, verify and configure the user namespace.
-```bash
+```shell
 adduser brad
 su brad
 sudo mkdir -p /run/user/$(id -u brad)
