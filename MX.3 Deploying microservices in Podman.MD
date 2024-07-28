@@ -112,11 +112,25 @@ In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](ht
 
 
 ### Rootless containers
-For demonstration purposes, we will define a new user with no root privileges
+For purely demonstration purposes, we will define a new user with no root privileges, verify configure the user namespace.
 ```bash
 adduser brad
 su brad
+sudo sysctl user.max_user_namespaces=28633
+echo "brad:100000:65536" | sudo tee -a /etc/subuid /etc/subgid
 ```
+Now we will need the UID of our non-root user brad.
+```
+su brad
+id
+```
+Once we have our UID we will need to setup the runtime directory for brad in order to be able for it to run Podman, in our case the UID is ```1001```.
+```
+sudo mkdir -p /run/user/1001
+sudo chown -R 1001:1001 /run/user/1001
+```
+Now 
+
 
 
 ### Pods setup
@@ -131,3 +145,4 @@ It is important to notice that in the microservices folder there are 4 services.
 
 ## Sources
 - https://www.redhat.com/en/topics/containers/what-is-podman
+- https://github.com/containers/podman/blob/main/docs/tutorials/rootless_tutorial.md
