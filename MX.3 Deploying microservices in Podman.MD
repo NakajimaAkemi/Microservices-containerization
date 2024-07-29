@@ -120,6 +120,10 @@ In this paragraph we will show basic functions of Podman, here's how install Pod
 
 Here we will show how to setup the rootless containers, but first of all we assume that we already have a non-root user, in case named brad and able to use podman. In order to use networking other than the host networking, Podman uses the slirp4netns package, it provides user-mode networking for unprivileged network namespaces and must be installed on the machine in order for Podman to run in a rootless environment.
 
+> In rootless Podman, you cannot create full, separate networking for containers because
+rootless processes are not allowed to create network devices and modify the firewall rules.
+Rootless Podman uses slirp4netns to configure the host network and simulate a VPN for the container. 
+
 > Note that the kernel still will not allow a non-privileged process to bind to ports less than 1024. 
 
 First of we install the `slirp4netns` package
