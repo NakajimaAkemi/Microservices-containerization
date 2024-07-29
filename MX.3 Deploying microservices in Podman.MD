@@ -142,6 +142,12 @@ After our fist verification, we add the configurations for our user brad, keep n
  cat /etc/subuid
  cat /etc/subgid
 ```
+We can check the our rootless configuration is set up properly by running tge `podmman unshare` command inside the modified user namespace:
+```
+podman unshare cat /proc/self/uid_map
+         0       1001     1
+         1       100000   65536
+```
 After our configuration we can run our image with the user brad by exposing port 8080.
 ```
 podman run -d -p 8080:8080 your-image
@@ -152,13 +158,12 @@ Output:
 CONTAINER ID  IMAGE                     COMMAND               CREATED        STATUS            PORTS                   NAMES
 f3b9c6d5eabc  localhost/hello-world-image:latest  python3 server.py  5 minutes ago  Up 5 minutes ago  0.0.0.0:8080->8080/tcp  nostalgic_morse
 ```
+We check with the command below that the process of our container is owned by brad, basically we are able to run our application container with root-less privileges.
+```
+ps aux | grep nostalgic_morse
+brad       12662  0.0  0.0   4024  2048 pts/0    S+   09:55   0:00 grep --color=auto musing_bhabba
+```
 
-We can check the our rootless configuration is set up properly by running tge `podmman unshare` command inside the modified user namespace:
-```
-podman unshare cat /proc/self/uid_map
-         0       1001     1
-         1       100000   65536
-```
 
 ### Systemd
 
