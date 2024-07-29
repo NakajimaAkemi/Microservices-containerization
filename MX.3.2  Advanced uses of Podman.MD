@@ -1,6 +1,95 @@
 # Overview
-In this section we will do advanced applications of Podman, such as Pods networking.
+In this section we will do advanced applications of Podman, such as Pods networking, Rootless containers and so on.
 
+
+
+## Rootless containers and user name-space isolation
+
+Here we will show how to setup the rootless containers, but first of all we assume that we already have a non-root user, in case named brad and able to use podman. In order to use networking other than the host networking, Podman uses the slirp4netns package, it provides user-mode networking for unprivileged network namespaces and must be installed on the machine in order for Podman to run in a rootless environment.
+
+> In rootless Podman, you cannot create full, separate networking for containers because
+rootless processes are not allowed to create network devices and modify the firewall rules.
+Rootless Podman uses slirp4netns to configure the host network and simulate a VPN for the container. 
+
+> Note that the kernel still will not allow a non-privileged process to bind to ports less than 1024. 
+
+First of we install the `slirp4netns` package
+```shell
+  apt-get install slirp4netns
+```
+After that we increase the number of user namespaces in the kernel.
+```shell
+ sudo sysctl user.max_user_namespaces=28633
+ echo "user.max_user_namespaces=28633" | sudo tee -a /etc/sysctl.conf
+ sudo sysctl -p
+```
+
+
+How podman does create the username space?
+Most current Linux distributions include a version of shadow-utils that uses the /etc/subuid and /etc/subgid files to determine what UIDs and GIDs are available for a user in a user namespace.
+```
+cat /etc/subuid
+bilel:100000:65536
+brad:165536:65536
+jon:231072:65536
+```
+```
+cat /etc/subgid
+bilel:100000:65536
+brad:165536:65536
+jon:231072:65536
+```
+The useradd program automatically allocates 65536 UIDs for each user added to the system. If you have existing users on a system, you would need to allocate the UIDs yourself manually. The format of these files is `username:STARTUID:TOTALUIDS`.
+The manual allocation goes like this:
+```
+ echo "brad:165536:65536" | sudo tee -a /etc/subuid
+ echo "brad:165536:65536" | sudo tee -a /etc/subgid
+```
+> Root privileges are required to add or update entries within these files.
+
+> If you set multiple rootless container users, use unique ranges for each user
+
+> It is recommended to use 65536 UIDs and GIDs for maximum compatibility with existing container images, but the number can be reduced
+
+
+We can check the our rootless configuration is set up properly by running the `podmman unshare` command inside the modified user namespace, the output shows the mapping of UIDs between host and container namespace:
+```
+podman unshare cat /proc/self/uid_map
+         0       1001          1
+         1     165536      65536
+```
+
+After our configuration we can run our image with the user brad by exposing port 8080.
+```
+podman run -d -p 8080:8080 your-image
+podman ps
+```
+Output:
+```
+CONTAINER ID  IMAGE                     COMMAND               CREATED        STATUS            PORTS                   NAMES
+f3b9c6d5eabc  localhost/hello-world-image:latest  python3 server.py  5 minutes ago  Up 5 minutes ago  0.0.0.0:8080->8080/tcp  nostalgic_morse
+```
+We check with the command below that the process of our container is owned by brad, basically we are able to run our application container with root-less privileges.
+```
+ps aux | grep nostalgic_morse
+brad       12662  0.0  0.0   4024  2048 pts/0    S+   09:55   0:00 grep --color=auto musing_bhabba
+```
+The command `podman top` allows us to examine the usernames of processes running insisde a container and identify their real UID on the host.
+```
+podman top nostalgic_morse
+USER        PID         PPID        %CPU        ELAPSED            TTY         TIME        COMMAND
+brad        1           0           0.022       5h6m57.584585461s  ?           4s          python3 server.py
+```
+
+
+#### Other name space modes
+In the `podman run` command we can specify the argument `-userns=<key>` where `<key>` can be:
+ - `""` (unset): we map the User account to root user (UID=0) inside the container;
+ - `keep-id`: we keep the user's UID within the container:
+ - `auto`: the host user UID is not mapped into the container, an unique UID will be selected from the unused one;
+ - `nomap`: the host user UID is not mapped into the container, the first UID from /etc/subuid range is mapped as the root user inside the container;
+
+The `auto` and `nomap` options by not mapping the user's UID into the container, the files in the home's directory of the user are protected can't be accessed within the container, also it prevents to have containers that share `UIDs`.
 
 ## Pods networking
 Podman uses bridges networks in order to let containers to communicate with eachother, when a pod is created, Podman automatically creates automatically a bridge network.
