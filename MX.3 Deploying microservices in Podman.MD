@@ -155,28 +155,13 @@ The manual allocation goes like this:
  echo "brad:165536:65536" | sudo tee -a /etc/subgid
 ```
 > Root privileges are required to add or update entries within these files.
+> Keep note that the range may vary and the most important thing is to have a sufficient interval for our container.
+> Don’t include the rootless user’s UID and GID in these ranges
+> If you set multiple rootless container users, use unique ranges for each user
+> It is recommended to use 65536 UIDs and GIDs for maximum compatibility with existing container images, but the number can be reduced
 
 
 
-Using an existing user name and group name (for example, brad), set the range of accessible user and group IDs that can be used for their containers. Here are a couple of warnings:
-
- - Don’t include the rootless user’s UID and GID in these ranges
- - If you set multiple rootless container users, use unique ranges for each user
-It is recommended to use 65536 UIDs and GIDs for maximum compatibility with existing container images, but the number can be reduced
- - Never use UIDs or GIDs under 1000 or reuse UIDs or GIDs from existing user accounts (which, by default, start at 1000)
-
-We add the configurations for UID and GID that will be mapped in the container in the files `/etc/subuid` e `/etc/subgid`. But first we take a look on the files and make sure that the ranges are not overlapping.
-```
- cat /etc/subuid
- cat /etc/subgid
-```
-After our fist verification, we add the configurations for our user brad, keep note that the numbers may vary and the most important thing is to have a sufficient interval for our container.
-```
- echo "brad:165536:65536" | sudo tee -a /etc/subuid
- echo "brad:165536:65536" | sudo tee -a /etc/subgid
- cat /etc/subuid
- cat /etc/subgid
-```
 We can check the our rootless configuration is set up properly by running tge `podmman unshare` command inside the modified user namespace:
 ```
 podman unshare cat /proc/self/uid_map
@@ -198,6 +183,17 @@ We check with the command below that the process of our container is owned by br
 ps aux | grep nostalgic_morse
 brad       12662  0.0  0.0   4024  2048 pts/0    S+   09:55   0:00 grep --color=auto musing_bhabba
 ```
+
+
+
+##
+
+
+
+
+
+
+
 
 The command `podman top` allows us to examine the usernames of processes running insisde a container and identify their real UID on the host.
 
