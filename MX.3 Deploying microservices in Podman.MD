@@ -190,6 +190,15 @@ USER        PID         PPID        %CPU        ELAPSED            TTY         T
 brad        1           0           0.022       5h6m57.584585461s  ?           4s          python3 server.py
 ```
 
+#### Volumes inside the container
+Rootless Podman is not, and will never be, root; it's not a setuid binary, and gains no privileges when it runs. Instead, Podman makes use of a user namespace to shift the UIDs and GIDs of a block of users it is given access to on the host (via the newuidmap and newgidmap executables) and your own user within the containers that Podman creates.
+
+If your container runs with the root user, then root in the container is actually your user on the host. UID/GID 1 is the first UID/GID specified in your user's mapping in /etc/subuid and /etc/subgid, etc. If you mount a directory from the host into a container as a rootless user, and create a file in that directory as root in the container, you'll see it's actually owned by your user on the host.
+
+
+
+
+
 ##
 
 
