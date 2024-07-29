@@ -25,12 +25,14 @@ Podman's architecture is more robust and reliable than Docker's because it erase
 One benefit of the fork-exec model, it integrates well into the Linux kernel's audit system. This way, the system logs exactly which user executed which containers. 
 
 
-## Rootless containers
+## Rootless containers and User-namespace support
 
 Probably the most significant feature of Podman is the ability to run containers in rootless mode. In many situations you don't want to give full root access to your users, but users and developers still need to run containers and build images. Every container process is managed with the current user's permissions, reducing the necessity of higher clearance.
 <p align="center">
   <img src="images/rootless.png" alt="Esempio di immagine" />
 </p>
+
+Also the support of the user namespace is an important functionality that allows us to execute containers in rootless mode, and allows us to isolate the container from the host and other processes in execution. 
 
 ## Concept of Pods
 
@@ -56,7 +58,6 @@ Users of podman play kube told us they want to build images as part of the play 
 
 The new podman play kube feature looks for a directory with the same name as the image used in the YAML file. If that directory exists and there is a Containerfile or Dockerfile present in that directory, Podman builds the container image.
 
-## User-namespace support
 
 ## Why should we care about Podman?  
 
@@ -107,59 +108,20 @@ Thanks to the ```OCI``` format, Podman support the same syntax and can build ima
 Podman supports the ```docker-compose.yml``` file, by processing them into Podman CLI commands with ```podman-compose```, while Podman Compose is better integrated with Podman (as it was designed from the ground up to work with Podman) and makes better use of rootless containers and pods. However, Docker Compose is much more supported, tested and more likely to be stable, while the Podman team is more focused ```podman generate kube``` and ```podman play kube```, which allow Kubernetes (An orchestation software) YAML to be used directly with Podman similar to Compose.
 
 
-## Podman in action
+## Podman in depth
 In this paragraph we will show basic functions of Podman.
 
 ### Rootless containers
-For purely demonstration purposes, we will define a new user with no root privileges, verify and configure the user namespace.
-```shell
-adduser brad
-su brad
-sudo mkdir -p /run/user/$(id -u brad)
-sudo chown -R $(id -u brad):$(id -g brad) /run/user/$(id -u brad)
-su - brad
-export XDG_RUNTIME_DIR=/run/user/$(id -u)
-echo 'export XDG_RUNTIME_DIR=/run/user/$(id -u)' >> ~/.bashrc
-source ~/.bashrc
-
-echo "brad:100000:65536" | sudo tee -a /etc/subuid
-echo "brad:100000:65536" | sudo tee -a /etc/subgid
-#make sure it does not overlap
-cat /etc/subuid
-cat /etc/subgid
-
-# configuration of conf file for namespace in runtime
-mkdir -p ~/.config/containers
-cat <<EOF > ~/.config/containers/containers.conf
-[engine]
-runtime = "crun"
-[containers]
-userns="keep-id"
-EOF
-
-#make sure it has the privileges
-chown brad:brad ~/.config/containers/containers.conf
-
-#test
-podman run --rm hello-world
+First of we install the slirp4netns package, we increase the number of user namespaces in the kernel
+`shell
+# apt-get install slirp4netns
+# echo "user.max_user_namespaces=28633" > /etc/sysctl.d/userns.conf
+# sysctl -p /etc/sysctl.d/userns.conf
+`
 
 
-```
-Now we will need the UID of our non-root user brad.
-```
-su brad
-id
-```
-Once we have our UID we will need to setup the runtime directory for brad in order to be able for it to run Podman, in our case the UID is ```1001```.
-```
-sudo mkdir -p /run/user/1001
-sudo chown -R 1001:1001 /run/user/1001
-```
-Now we switch to the user brad and verify if it can use the Podman commands.
-```
-su brad
-podman --version
-```
+
+### Systemd
 
 
 ### Pods setup
