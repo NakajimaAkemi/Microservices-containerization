@@ -193,11 +193,12 @@ brad        1           0           0.022       5h6m57.584585461s  ?           4
 
 #### Other name space modes
 In the `podman run` command we can specify the argument `-userns=<key>` where `<key>` can be:
- - `""` (unset): we map the User account to root user in the container
- - `keep-id`: we map the user account to the same UID within the container
- - `auto`: the host user UID is not mapped into the container, an unique UID will be selected from the unused one
- - `nomap`: the host user UID is not mapped into the container, the first UID from /etc/subuid range is mapped as the root user inside the container.
+ - `""` (unset): we map the User account to root user (UID=0) inside the container;
+ - `keep-id`: we keep the user's UID within the container:
+ - `auto`: the host user UID is not mapped into the container, an unique UID will be selected from the unused one;
+ - `nomap`: the host user UID is not mapped into the container, the first UID from /etc/subuid range is mapped as the root user inside the container;
 
+The `auto` and `nomap` options by not mapping the user's UID into the container, the files in the home's directory of the user are protected can't be accessed within the container, also it prevents to have containers that share `UIDs`.
 
 ### Systemd
 
