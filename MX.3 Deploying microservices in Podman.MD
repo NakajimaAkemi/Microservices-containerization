@@ -183,39 +183,15 @@ We check with the command below that the process of our container is owned by br
 ps aux | grep nostalgic_morse
 brad       12662  0.0  0.0   4024  2048 pts/0    S+   09:55   0:00 grep --color=auto musing_bhabba
 ```
-
-
+The command `podman top` allows us to examine the usernames of processes running insisde a container and identify their real UID on the host.
+```
+podman top nostalgic_morse
+USER        PID         PPID        %CPU        ELAPSED            TTY         TIME        COMMAND
+brad        1           0           0.022       5h6m57.584585461s  ?           4s          python3 server.py
+```
 
 ##
 
-
-
-
-
-
-
-
-The command `podman top` allows us to examine the usernames of processes running insisde a container and identify their real UID on the host.
-
-$ sudo podman top --latest user huser
-Notice podman top reports that the user process is running as root inside the container but as UID 100000 on the host (HUSER). 
-sudo podman run --uidmap 0:200000:5000 -d fedora sleep 1000
-$ sudo podman top --latest user huser
-USER   HUSER
-root   200000
-
-
-
-
-Podman executes these files to set up the user namespace. You can see the mappings by examining /proc/self/uid_map and /proc/self/gid_map from inside of the rootless container.
-
-$ podman run alpine cat /proc/self/uid_map /proc/self/gid_map
-     	0   	3267      	1
-     	1 	100000  	65536
-     	0   	3267      	1
-     	1 	100000  	65536
-
-As seen above, Podman defaults to mapping root in the container to your current UID (3267) and then maps ranges of allocated UIDs/GIDs in /etc/subuid and /etc/subgid starting at 1. Meaning in my example, UID=1 in the container is UID 100000, UID=2 is UID 100001, all the way up to 65536, which is 165535.
 
 
 
