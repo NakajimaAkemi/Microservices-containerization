@@ -113,12 +113,16 @@ Podman supports the ```docker-compose.yml``` file, by processing them into Podma
 
 
 ## Podman in depth
-In this paragraph we will show basic functions of Podman.
+In this paragraph we will show basic functions of Podman, here's how install Podman on your machine:
+
 
 ### Rootless containers and user name-space isolation
-Here we will show how to setup the rootless containers, but first of all we assume that we already have a non-root user, in case named brad and able to use podman. 
 
-First of we install the `slirp4netns` package, it provides user-mode networking for unprivileged network namespaces and must be installed on the machine in order for Podman to run in a rootless environment.
+Here we will show how to setup the rootless containers, but first of all we assume that we already have a non-root user, in case named brad and able to use podman. In order to use networking other than the host networking, Podman uses the slirp4netns package, it provides user-mode networking for unprivileged network namespaces and must be installed on the machine in order for Podman to run in a rootless environment.
+
+> Note that the kernel still will not allow a non-privileged process to bind to ports less than 1024. 
+
+First of we install the `slirp4netns` package
 ```shell
   apt-get install slirp4netns
 ```
@@ -211,7 +215,7 @@ Podman uses containers/storage to pull the container image, and containers/stora
 The kernel only allows user namespace root to mount certain types of filesystems; at this time it allows mounting of procfs, sysfs, tmpfs, fusefs, and bind mounts 
 
 
-In order to use networking other than the host networking, Podman uses the slirp4netns program to set up User mode networking for unprivileged network namespace. Slirp4netns allows Podman to expose ports within the container to the host. Note that the kernel still will not allow a non-privileged process to bind to ports less than 1024. Podman-1.1 or later is required for binding to ports.
+
 
 ### Systemd
 
