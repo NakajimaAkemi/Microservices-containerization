@@ -69,6 +69,30 @@ userns="keep-id"
 EOF
 
 
+#make sure it has the privileges
+chown brad:brad ~/.config/containers/containers.conf
+
+#test
+podman run --rm hello-world
+
+
+```
+Now we will need the UID of our non-root user brad.
+```
+su brad
+id
+```
+Once we have our UID we will need to setup the runtime directory for brad in order to be able for it to run Podman, in our case the UID is ```1001```.
+```
+sudo mkdir -p /run/user/1001
+sudo chown -R 1001:1001 /run/user/1001
+```
+Now we switch to the user brad and verify if it can use the Podman commands.
+```
+su brad
+podman --version
+```
+
 
 
 
