@@ -144,6 +144,13 @@ CONTAINER ID  IMAGE                     COMMAND               CREATED        STA
 f3b9c6d5eabc  localhost/hello-world-image:latest  python3 server.py  5 minutes ago  Up 5 minutes ago  0.0.0.0:8080->8080/tcp  nostalgic_morse
 ```
 
+We can check the our rootless configuration is set up properly by running tge `podmman unshare` command inside the modified user namespace:
+```
+podman unshare cat /proc/self/uid_map
+         0       1001     1
+         1       100000   65536
+     65537       165536   65536
+```
 
 ### Systemd
 
