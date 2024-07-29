@@ -113,11 +113,11 @@ In this paragraph we will show basic functions of Podman.
 
 ### Rootless containers
 First of we install the slirp4netns package, we increase the number of user namespaces in the kernel
-`shell
+```shell
 # apt-get install slirp4netns
 # echo "user.max_user_namespaces=28633" > /etc/sysctl.d/userns.conf
 # sysctl -p /etc/sysctl.d/userns.conf
-`
+```
 
 
 
