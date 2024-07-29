@@ -34,6 +34,41 @@ Probably the most significant feature of Podman is the ability to run containers
 
 Also the support of the user namespace is an important functionality that allows us to execute containers in rootless mode, and allows us to isolate the container from the host and other processes in execution. 
 
+
+
+## Username space separation 
+Username space allows us to define  a user identifier UID and a group identifier GID mapping to run containers, meaning that the we can run uid 0 inside the container and 100000 outside the container. If your container process escapes the container, the kernel will treat them as UID 100000, also any file object that isn't mapped to the user namespace will be trated as owned by nobody and the container process will nt be allowed access unless the object is accessible by other
+
+
+
+If you have a file owned by "real" root with permissions 660, and the container processes in the user namespace attempt to read it, they will be prevented from accessing it and will see the file as owned by nobody.
+
+The --uidmap setting above tells Podman to map a range of 5000 UIDs inside the container, starting with UID 100000 outside the container (so the range is 100000-104999) to a range starting at UID 0 inside the container (so the range is 0-4999). Inside the container, if my process is running as UID 1, it is 100001 on the host
+
+Since the real UID=0 is not mapped into the container, any file owned by root will be treated as owned by nobody. 
+
+The command `podman top` allows us to examine the usernames of processes running insisde a container and identify their real UID on the host.
+
+$ sudo podman top --latest user huser
+Notice podman top reports that the user process is running as root inside the container but as UID 100000 on the host (HUSER). 
+sudo podman run --uidmap 0:200000:5000 -d fedora sleep 1000
+$ sudo podman top --latest user huser
+USER   HUSER
+root   200000
+
+Notice that podman top reports the second container is running as root inside the container but as UID=200000 on the host.
+
+Also look at the ps command—it shows both sleep processes running: one as 100000 and the other as 200000.
+
+This means running the containers inside separate user namespaces gives you traditional UID separation between processes, which has been the standard security tool of Linux/Unix from the beginning.
+
+
+
+
+
+
+
+
 ## Concept of Pods
 
 Podman introduces the concept of “pods,” which are groups of one or more containers that share the same network namespace and storage resources simulating a single host. This concept is borrowed from Kubernetes and allows for easier management of related containers.
