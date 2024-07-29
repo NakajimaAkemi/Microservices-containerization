@@ -148,11 +148,15 @@ bilel:100000:65536
 brad:165536:65536
 jon:231072:65536
 ```
-The useradd program automatically allocates 65536 UIDs for each user added to the system. If you have existing users on a system, you would need to allocate the UIDs yourself. The format of these files is username:STARTUID:TOTALUIDS.
+The useradd program automatically allocates 65536 UIDs for each user added to the system. If you have existing users on a system, you would need to allocate the UIDs yourself manually. The format of these files is `username:STARTUID:TOTALUIDS`.
+The manual allocation goes like this:
+```
+ echo "brad:165536:65536" | sudo tee -a /etc/subuid
+ echo "brad:165536:65536" | sudo tee -a /etc/subgid
+```
+> Root privileges are required to add or update entries within these files.
 
-Rootless Podman requires the user running it to have a range of UIDs listed in the files /etc/subuid and /etc/subgid. The shadow-utils or newuid package provides these files on different distributions and they must be installed on the system. Root privileges are required to add or update entries within these files. 
 
-Now we must configure subuid and subgid values manually for any existing user you want to be able to use rootless podman.
 
 Using an existing user name and group name (for example, brad), set the range of accessible user and group IDs that can be used for their containers. Here are a couple of warnings:
 
