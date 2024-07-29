@@ -133,6 +133,23 @@ After that we increase the number of user namespaces in the kernel.
  sudo sysctl -p
 ```
 
+
+How podman does create the username space?
+Most current Linux distributions include a version of shadow-utils that uses the /etc/subuid and /etc/subgid files to determine what UIDs and GIDs are available for a user in a user namespace.
+```
+cat /etc/subuid
+bilel:100000:65536
+brad:165536:65536
+jon:231072:65536
+```
+```
+cat /etc/subgid
+bilel:100000:65536
+brad:165536:65536
+jon:231072:65536
+```
+The useradd program automatically allocates 65536 UIDs for each user added to the system. If you have existing users on a system, you would need to allocate the UIDs yourself. The format of these files is username:STARTUID:TOTALUIDS.
+
 Rootless Podman requires the user running it to have a range of UIDs listed in the files /etc/subuid and /etc/subgid. The shadow-utils or newuid package provides these files on different distributions and they must be installed on the system. Root privileges are required to add or update entries within these files. 
 
 Now we must configure subuid and subgid values manually for any existing user you want to be able to use rootless podman.
@@ -187,14 +204,7 @@ $ sudo podman top --latest user huser
 USER   HUSER
 root   200000
 
-How podman does create the username space?
-Most current Linux distributions include a version of shadow-utils that uses the /etc/subuid and /etc/subgid files to determine what UIDs and GIDs are available for a user in a user namespace.
-$ cat /etc/subuid
-dwalsh:100000:65536
-test:165536:65536
 
-
-The useradd program automatically allocates 65536 UIDs for each user added to the system. If you have existing users on a system, you would need to allocate the UIDs yourself. The format of these files is username:STARTUID:TOTALUIDS.
 
 
 Podman executes these files to set up the user namespace. You can see the mappings by examining /proc/self/uid_map and /proc/self/gid_map from inside of the rootless container.
