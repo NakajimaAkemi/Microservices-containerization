@@ -155,19 +155,19 @@ The manual allocation goes like this:
  echo "brad:165536:65536" | sudo tee -a /etc/subgid
 ```
 > Root privileges are required to add or update entries within these files.
-> Keep note that the range may vary and the most important thing is to have a sufficient interval for our container.
-> Don’t include the rootless user’s UID and GID in these ranges
+
 > If you set multiple rootless container users, use unique ranges for each user
+
 > It is recommended to use 65536 UIDs and GIDs for maximum compatibility with existing container images, but the number can be reduced
 
 
-
-We can check the our rootless configuration is set up properly by running tge `podmman unshare` command inside the modified user namespace:
+We can check the our rootless configuration is set up properly by running the `podmman unshare` command inside the modified user namespace, the output shows the mapping of UIDs between host and container namespace:
 ```
 podman unshare cat /proc/self/uid_map
-         0       1001     1
-         1       100000   65536
+         0       1001          1
+         1     165536      65536
 ```
+
 After our configuration we can run our image with the user brad by exposing port 8080.
 ```
 podman run -d -p 8080:8080 your-image
