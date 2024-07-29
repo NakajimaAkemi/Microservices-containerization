@@ -25,19 +25,19 @@ Podman's architecture is more robust and reliable than Docker's because it erase
 One benefit of the fork-exec model, it integrates well into the Linux kernel's audit system. This way, the system logs exactly which user executed which containers. 
 
 
-## Rootless containers and User-namespace support
+## Rootless containers and user name-space separation
 
 Probably the most significant feature of Podman is the ability to run containers in rootless mode. In many situations you don't want to give full root access to your users, but users and developers still need to run containers and build images. Every container process is managed with the current user's permissions, reducing the necessity of higher clearance.
 <p align="center">
   <img src="images/rootless.png" alt="Esempio di immagine" />
 </p>
 
-Also the support of the user namespace is an important functionality that allows us to execute containers in rootless mode, and allows us to isolate the container from the host and other processes in execution. 
+Also the support of the user namespace is an important functionality that allows us to execute containers in rootless mode, and allows us to isolate the container from the host and other processes in execution. Basically the user name-space allows us to define a `UID (user identifier)` and a `GID (group identifier)` mapping to run containers. Basically while inside the container our UID may be 0, outside it's considered 100000, also any file object that isn't mapped to the user namespace will be trated as owned by nobody and the container process will nt be allowed access unless the object is accessible by others. Even if the process manages to escape the container, the kernel will treat it as UID =100000. 
+
 
 
 
 ## Username space separation 
-Username space allows us to define  a user identifier UID and a group identifier GID mapping to run containers, meaning that the we can run uid 0 inside the container and 100000 outside the container. If your container process escapes the container, the kernel will treat them as UID 100000, also any file object that isn't mapped to the user namespace will be trated as owned by nobody and the container process will nt be allowed access unless the object is accessible by other
 
 
 
@@ -64,10 +64,45 @@ This means running the containers inside separate user namespaces gives you trad
 
 
 
+You can use Podman commands to launch different containers with different user namespaces giving you better separation between containers.
+
+Podman also takes advantage of user namespaces to be able to run in rootless mode. Basically, when a non-privileged user runs Podman, the tool sets up and joins a user namespace. After Podman becomes root inside of the user namespace, Podman is allowed to mount certain filesystems and set up the container. Note there is no privilege escalation here other then additional UIDs available to the user, explained below
+
+How podman does create the username space?
+Most current Linux distributions include a version of shadow-utils that uses the /etc/subuid and /etc/subgid files to determine what UIDs and GIDs are available for a user in a user namespace.
+$ cat /etc/subuid
+dwalsh:100000:65536
+test:165536:65536
 
 
+The useradd program automatically allocates 65536 UIDs for each user added to the system. If you have existing users on a system, you would need to allocate the UIDs yourself. The format of these files is username:STARTUID:TOTALUIDS.
 
 
+Podman executes these files to set up the user namespace. You can see the mappings by examining /proc/self/uid_map and /proc/self/gid_map from inside of the rootless container.
+
+$ podman run alpine cat /proc/self/uid_map /proc/self/gid_map
+     	0   	3267      	1
+     	1 	100000  	65536
+     	0   	3267      	1
+     	1 	100000  	65536
+
+As seen above, Podman defaults to mapping root in the container to your current UID (3267) and then maps ranges of allocated UIDs/GIDs in /etc/subuid and /etc/subgid starting at 1. Meaning in my example, UID=1 in the container is UID 100000, UID=2 is UID 100001, all the way up to 65536, which is 165535.
+
+
+The Buildah command has a cool feature, buildah unshare. This puts you in the same user namespace that Podman runs in, but without entering the container's filesystem, so you can list the contents of your home directory.
+
+$ ls -ild /home/dwalsh
+8193 drwx--x--x. 290 dwalsh dwalsh 20480 Jan 29 07:58 /home/dwalsh
+$ buildah unshare ls -ld /home/dwalsh
+drwx--x--x. 290 root root 20480 Jan 29 07:58 /home/dwalsh
+
+Una volta fatto il setup del namespace
+Podman uses containers/storage to pull the container image, and containers/storage is smart enough to map all files owned by root in the image to the root of the user namespace, and any other files owned by different UIDs to their user namespace UIDs. By default, this content gets written to ~/.local/share/containers/storage. Container storage works in rootless mode with either the vfs mode or with Overlay. Note: Overlay is supported only if the fuse-overlayfs executable is installed.
+
+The kernel only allows user namespace root to mount certain types of filesystems; at this time it allows mounting of procfs, sysfs, tmpfs, fusefs, and bind mounts 
+
+
+In order to use networking other than the host networking, Podman uses the slirp4netns program to set up User mode networking for unprivileged network namespace. Slirp4netns allows Podman to expose ports within the container to the host. Note that the kernel still will not allow a non-privileged process to bind to ports less than 1024. Podman-1.1 or later is required for binding to ports.
 
 ## Concept of Pods
 
