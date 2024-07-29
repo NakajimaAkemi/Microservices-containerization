@@ -114,13 +114,19 @@ In this paragraph we will show basic functions of Podman.
 ### Rootless containers
 Here we will show how to setup the rootless containers, but first of all we assume that we already have a non-root user, in case named brad and able to use podman. 
 
-First of we install the `slirp4netns` package, we increase the number of user namespaces in the kernel.
+First of we install the `slirp4netns` package, it provides user-mode networking for unprivileged network namespaces and must be installed on the machine in order for Podman to run in a rootless environment.
 ```shell
- apt-get install slirp4netns
+  apt-get install slirp4netns
+```
+After that we increase the number of user namespaces in the kernel.
+```shell
  sudo sysctl user.max_user_namespaces=28633
  echo "user.max_user_namespaces=28633" | sudo tee -a /etc/sysctl.conf
  sudo sysctl -p
 ```
+
+Rootless Podman requires the user running it to have a range of UIDs listed in the files /etc/subuid and /etc/subgid. The shadow-utils or newuid package provides these files on different distributions and they must be installed on the system. Root privileges are required to add or update entries within these files. 
+
 Now we must configure subuid and subgid values manually for any existing user you want to be able to use rootless podman.
 
 Using an existing user name and group name (for example, brad), set the range of accessible user and group IDs that can be used for their containers. Here are a couple of warnings:
