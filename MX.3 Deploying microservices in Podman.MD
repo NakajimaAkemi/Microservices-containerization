@@ -34,7 +34,9 @@ Probably the most significant feature of Podman is the ability to run containers
 
 Also the support of the user namespace is an important functionality that allows us to execute containers in rootless mode, and allows us to isolate the container from the host and other processes in execution. Basically the user name-space allows us to define a `UID (user identifier)` and a `GID (group identifier)` mapping to run containers. 
 
+```
 Example: While inside the container our UID may be 0 running as root inside, outside on the host it's considered with an unprivileged UID like 100000, also any file object that isn't mapped to the user namespace will be trated as owned by nobody and the container process will not be allowed access unless the object is accessible by others. Even if the process manages to escape the container, the kernel will treat it as UID=100000. 
+```
 
 
 ## Concept of Pods
