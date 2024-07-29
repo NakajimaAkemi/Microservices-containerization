@@ -32,7 +32,9 @@ Probably the most significant feature of Podman is the ability to run containers
   <img src="images/rootless.png" alt="Esempio di immagine" />
 </p>
 
-Also the support of the user namespace is an important functionality that allows us to execute containers in rootless mode, and allows us to isolate the container from the host and other processes in execution. Basically the user name-space allows us to define a `UID (user identifier)` and a `GID (group identifier)` mapping to run containers. Basically while inside the container our UID may be 0, outside it's considered 100000, also any file object that isn't mapped to the user namespace will be trated as owned by nobody and the container process will nt be allowed access unless the object is accessible by others. Even if the process manages to escape the container, the kernel will treat it as UID =100000. 
+Also the support of the user namespace is an important functionality that allows us to execute containers in rootless mode, and allows us to isolate the container from the host and other processes in execution. Basically the user name-space allows us to define a `UID (user identifier)` and a `GID (group identifier)` mapping to run containers. 
+
+EX. While inside the container our UID may be 0, outside it's considered 100000, also any file object that isn't mapped to the user namespace will be trated as owned by nobody and the container process will nt be allowed access unless the object is accessible by others. Even if the process manages to escape the container, the kernel will treat it as UID=100000. 
 
 
 
@@ -47,14 +49,7 @@ The --uidmap setting above tells Podman to map a range of 5000 UIDs inside the c
 
 Since the real UID=0 is not mapped into the container, any file owned by root will be treated as owned by nobody. 
 
-The command `podman top` allows us to examine the usernames of processes running insisde a container and identify their real UID on the host.
 
-$ sudo podman top --latest user huser
-Notice podman top reports that the user process is running as root inside the container but as UID 100000 on the host (HUSER). 
-sudo podman run --uidmap 0:200000:5000 -d fedora sleep 1000
-$ sudo podman top --latest user huser
-USER   HUSER
-root   200000
 
 Notice that podman top reports the second container is running as root inside the container but as UID=200000 on the host.
 
@@ -89,12 +84,7 @@ $ podman run alpine cat /proc/self/uid_map /proc/self/gid_map
 As seen above, Podman defaults to mapping root in the container to your current UID (3267) and then maps ranges of allocated UIDs/GIDs in /etc/subuid and /etc/subgid starting at 1. Meaning in my example, UID=1 in the container is UID 100000, UID=2 is UID 100001, all the way up to 65536, which is 165535.
 
 
-The Buildah command has a cool feature, buildah unshare. This puts you in the same user namespace that Podman runs in, but without entering the container's filesystem, so you can list the contents of your home directory.
 
-$ ls -ild /home/dwalsh
-8193 drwx--x--x. 290 dwalsh dwalsh 20480 Jan 29 07:58 /home/dwalsh
-$ buildah unshare ls -ld /home/dwalsh
-drwx--x--x. 290 root root 20480 Jan 29 07:58 /home/dwalsh
 
 Una volta fatto il setup del namespace
 Podman uses containers/storage to pull the container image, and containers/storage is smart enough to map all files owned by root in the image to the root of the user namespace, and any other files owned by different UIDs to their user namespace UIDs. By default, this content gets written to ~/.local/share/containers/storage. Container storage works in rootless mode with either the vfs mode or with Overlay. Note: Overlay is supported only if the fuse-overlayfs executable is installed.
@@ -181,7 +171,7 @@ Podman supports the ```docker-compose.yml``` file, by processing them into Podma
 ## Podman in depth
 In this paragraph we will show basic functions of Podman.
 
-### Rootless containers
+### Rootless containers and user name-space isolation
 Here we will show how to setup the rootless containers, but first of all we assume that we already have a non-root user, in case named brad and able to use podman. 
 
 First of we install the `slirp4netns` package, it provides user-mode networking for unprivileged network namespaces and must be installed on the machine in order for Podman to run in a rootless environment.
@@ -239,6 +229,16 @@ We check with the command below that the process of our container is owned by br
 ps aux | grep nostalgic_morse
 brad       12662  0.0  0.0   4024  2048 pts/0    S+   09:55   0:00 grep --color=auto musing_bhabba
 ```
+
+The command `podman top` allows us to examine the usernames of processes running insisde a container and identify their real UID on the host.
+
+$ sudo podman top --latest user huser
+Notice podman top reports that the user process is running as root inside the container but as UID 100000 on the host (HUSER). 
+sudo podman run --uidmap 0:200000:5000 -d fedora sleep 1000
+$ sudo podman top --latest user huser
+USER   HUSER
+root   200000
+
 
 
 ### Systemd
