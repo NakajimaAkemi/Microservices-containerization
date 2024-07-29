@@ -121,6 +121,15 @@ First of we install the `slirp4netns` package, we increase the number of user na
  echo "user.max_user_namespaces=28633" | sudo tee -a /etc/sysctl.conf
  sudo sysctl -p
 ```
+Now we must configure subuid and subgid values manually for any existing user you want to be able to use rootless podman.
+
+Using an existing user name and group name (for example, brad), set the range of accessible user and group IDs that can be used for their containers. Here are a couple of warnings:
+
+ - Don’t include the rootless user’s UID and GID in these ranges
+ - If you set multiple rootless container users, use unique ranges for each user
+It is recommended to use 65536 UIDs and GIDs for maximum compatibility with existing container images, but the number can be reduced
+ - Never use UIDs or GIDs under 1000 or reuse UIDs or GIDs from existing user accounts (which, by default, start at 1000)
+
 We add the configurations for UID and GID that will be mapped in the container in the files `/etc/subuid` e `/etc/subgid`. But first we take a look on the files and make sure that the ranges are not overlapping.
 ```
  cat /etc/subuid
@@ -149,7 +158,6 @@ We can check the our rootless configuration is set up properly by running tge `p
 podman unshare cat /proc/self/uid_map
          0       1001     1
          1       100000   65536
-     65537       165536   65536
 ```
 
 ### Systemd
