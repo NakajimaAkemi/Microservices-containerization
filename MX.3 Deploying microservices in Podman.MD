@@ -112,11 +112,26 @@ Podman supports the ```docker-compose.yml``` file, by processing them into Podma
 In this paragraph we will show basic functions of Podman.
 
 ### Rootless containers
-First of we install the slirp4netns package, we increase the number of user namespaces in the kernel
+Here we will show how to setup the rootless containers, but first of all we assume that we already have a non-root user, in case named brad and able to use podman. 
+
+First of we install the `slirp4netns` package, we increase the number of user namespaces in the kernel.
 ```shell
-# apt-get install slirp4netns
-# echo "user.max_user_namespaces=28633" > /etc/sysctl.d/userns.conf
-# sysctl -p /etc/sysctl.d/userns.conf
+ apt-get install slirp4netns
+ sudo sysctl user.max_user_namespaces=28633
+ echo "user.max_user_namespaces=28633" | sudo tee -a /etc/sysctl.conf
+ sudo sysctl -p
+```
+We add the configurations for UID and GID that will be mapped in the container in the files `/etc/subuid` e `/etc/subgid`. But first we take a look on the files and make sure that the ranges are not overlapping.
+```
+ cat /etc/subuid
+ cat /etc/subgid
+```
+After our fist verification, we add the configurations for our user brad, keep note that the numbers may vary and the most important thing is to have a sufficient interval for our container.
+```
+ echo "brad:165536:65536" | sudo tee -a /etc/subuid
+ echo "brad:165536:65536" | sudo tee -a /etc/subgid
+ cat /etc/subuid
+ cat /etc/subgid
 ```
 
 
