@@ -1,5 +1,13 @@
 # Podman in action
 
+
+The Buildah command has a cool feature, buildah unshare. This puts you in the same user namespace that Podman runs in, but without entering the container's filesystem, so you can list the contents of your home directory.
+
+$ ls -ild /home/dwalsh
+8193 drwx--x--x. 290 dwalsh dwalsh 20480 Jan 29 07:58 /home/dwalsh
+$ buildah unshare ls -ld /home/dwalsh
+drwx--x--x. 290 root root 20480 Jan 29 07:58 /home/dwalsh
+
 ## _
 leveraing SELinux.
 Integrated with systemd
