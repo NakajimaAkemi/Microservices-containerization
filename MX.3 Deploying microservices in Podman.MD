@@ -190,26 +190,13 @@ USER        PID         PPID        %CPU        ELAPSED            TTY         T
 brad        1           0           0.022       5h6m57.584585461s  ?           4s          python3 server.py
 ```
 
-#### Volumes inside the container
-Rootless Podman is not, and will never be, root; it's not a setuid binary, and gains no privileges when it runs. Instead, Podman makes use of a user namespace to shift the UIDs and GIDs of a block of users it is given access to on the host (via the newuidmap and newgidmap executables) and your own user within the containers that Podman creates.
 
-If your container runs with the root user, then root in the container is actually your user on the host. UID/GID 1 is the first UID/GID specified in your user's mapping in /etc/subuid and /etc/subgid, etc. If you mount a directory from the host into a container as a rootless user, and create a file in that directory as root in the container, you'll see it's actually owned by your user on the host.
-
-
-
-
-
-##
-
-
-
-
-Una volta fatto il setup del namespace
-Podman uses containers/storage to pull the container image, and containers/storage is smart enough to map all files owned by root in the image to the root of the user namespace, and any other files owned by different UIDs to their user namespace UIDs. By default, this content gets written to ~/.local/share/containers/storage. Container storage works in rootless mode with either the vfs mode or with Overlay. Note: Overlay is supported only if the fuse-overlayfs executable is installed.
-
-The kernel only allows user namespace root to mount certain types of filesystems; at this time it allows mounting of procfs, sysfs, tmpfs, fusefs, and bind mounts 
-
-
+#### Other name space modes
+In the `podman run` command we can specify the argument `-userns=<key>` where `<key>` can be:
+ - `""` (unset): we map the User account to root user in the container
+ - `keep-id`: we map the user account to the same UID within the container
+ - `auto`: the host user UID is not mapped into the container, an unique UID will be selected from the unused one
+ - `nomap`: the host user UID is not mapped into the container, the first UID from /etc/subuid range is mapped as the root user inside the container.
 
 
 ### Systemd
