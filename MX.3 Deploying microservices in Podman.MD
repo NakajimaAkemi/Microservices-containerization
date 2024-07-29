@@ -133,7 +133,16 @@ After our fist verification, we add the configurations for our user brad, keep n
  cat /etc/subuid
  cat /etc/subgid
 ```
-
+After our configuration we can run our image with the user brad by exposing port 8080.
+```
+podman run -d -p 8080:8080 your-image
+podman ps
+```
+Output:
+```
+CONTAINER ID  IMAGE                     COMMAND               CREATED        STATUS            PORTS                   NAMES
+f3b9c6d5eabc  localhost/hello-world-image:latest  python3 server.py  5 minutes ago  Up 5 minutes ago  0.0.0.0:8080->8080/tcp  nostalgic_morse
+```
 
 
 ### Systemd
