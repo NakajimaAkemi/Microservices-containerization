@@ -121,17 +121,24 @@ podman top -l user huser
 The --user option is still very necessary and adds a lot of security even when using rootless Podman, and users should still use it to be as secure as possible.
 
 #### userns option
+> *Beware!* The -- userns option is incompatible with --gidmap, --uidmap, --subuidname and --subgidname.
+
 In the `podman run` command we can specify the argument `-userns=<key>` where `<key>` can be:
  - *`""` (unset)*: we map the User UID to root user (UID=0) inside the container;
- - *`keep-id`*: we keep the user's UID within the container;
+ - *`keep-id`*: we keep the host user's UID within the container, this way if it's not root even inside the container we won't have root privileges;
  - *`auto`*: the host user UID is not mapped into the container, an unique UID will be selected from the unused one;
 automatically create a unique user namespace.
+
+The --userns=auto flag requires that the user name containers be specified in the /etc/subuid and /etc/subgid files, with an unused range of subordinate user IDs that Podman containers are allowed to allocate
+Key: auto    
+Host user: $UID  
+Container user: nil (Host User UID is not mapped into the container. Unique UID is selected from the unused UIDs for the root user inside of the container.)
+
  - *`nomap`*: the host user UID is not mapped into the container, the first UID from /etc/subuid range is mapped as the root user inside the container;
 nomap: creates a user namespace where the current rootless user’s UID:GID are not mapped into the container. This option is not allowed for containers created by the root user.
-
-
-Cerchiamo di capire userns,
-keep-id mappa lo uid e gid allo stesso valore dell'host, in questo modo se non sono root, non avrà permessi di root.keep id ha anche un opzione che definisce il range
+Key: nomap        
+Host user:  $UID
+Container user: nil (Host User UID is not mapped into the container. First UID in /etc/subuid range is mapped as the root user inside the container.)
 
 *Example:*
 ```
@@ -139,42 +146,12 @@ podman run --userns keep-id -d fedora sleep 100
 ps -ef | grep sleep
 dwalsh 198080 198069 1 10:57 ? 00:00:00 sleep 100
 ```
-
-
-
-
-
-The --userns=auto flag requires that the user name containers be specified in the /etc/subuid and /etc/subgid files, with an unused range of subordinate user IDs that Podman containers are allowed to allocate
-
-
-
-
-
-Key: auto    
-Host user: $UID  
-Container user: nil (Host User UID is not mapped into the container. Unique UID is selected from the unused UIDs for the root user inside of the container.)
-
-podman run -d --rm --userns=auto ubi9 sleep 100
-Error: creating container storage: could not find enough available IDs
-This is because Podman, in auto mode, is looking for 1024 or more UIDs that are not currently used within the user's user namespace. Because containers were already run on this system, and Podman defaults to using 65,000 UIDs, all of the UIDs are used. I can destroy all of my containers that use the entire UID mappings to show this mode:
-
-
-
-
-Key: nomap        
-Host user:  $UID
-Container user: nil (Host User UID is not mapped into the container. First UID in /etc/subuid range is mapped as the root user inside the container.)
-
-
-
-
 The `auto` and `nomap` options by not mapping the user's UID into the container, the files in the home's directory of the user are protected can't be accessed within the container, also it prevents to have containers that share `UIDs`.
 
 
 
-> This option is incompatible with --gidmap, --uidmap, --subuidname and --subgidname.
 
-
+> *Note*: Podman, in auto mode, is looking for 1024 or more UIDs that are not currently used within the user's user namespace. Because containers were already run on the system, and Podman defaults to using 65,000 UIDs, all of the UIDs are used. We need to destroy all of other containers that use the entire UID mappings.
 
 
 ### mounts and volumes management
