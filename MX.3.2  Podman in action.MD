@@ -6,22 +6,6 @@ In this section we will do advanced applications of Podman, such as Pods network
 ## Rootless containers and user name-space isolation
 Here we will show how to setup the rootless containers, but first of all we assume that we already have a non-root user, in case named brad and able to use podman. 
 
-cat /proc/self/uid_map
-         0          0 4294967295
-
-# podman  run --uidmap=0:100000:70000 --gidmap=0:200000:70000 fedora-minimal cat /proc/self/uid_map
-         0          100000      70000
-The uid_map table has three columns, the first one is the initial ID for the range in the new namespace, the second one is the initial ID in the parent namespace, and the third is the size of the mapping. In this case, we have specified only one mapping where the UIDs [0-69999] in the container are mapped to the host UIDs [100000-169999]. Similarly for the GIDs, we can look up the gid_map file
-
-
-
-# grep gscrivano /etc/subuid
-gscrivano:110000:65536
-# grep gscrivano /etc/subgid
-gscrivano:110000:65536
-
-Use of subuid and subgid
-
 
 In order to use networking other than the host networking, Podman uses the slirp4netns package, it provides user-mode networking for unprivileged network namespaces and must be installed on the machine in order for Podman to run in a rootless environment.
 
@@ -116,6 +100,24 @@ Podman can specify the mappings defined in /etc/subuid and /etc/subgid with the 
          0     165536     65536
 ```
 The output indicates in order the initial ID inside the container, the ID outside the container and the lenght of the range of UIDs. This may seem redudant and in most cases it is, but this allows to have a finer control over the mapping of IDs and avoid problems based on separation of containers.
+
+
+cat /proc/self/uid_map
+         0          0 4294967295
+
+ podman  run --uidmap=0:100000:70000 --gidmap=0:200000:70000 fedora-minimal cat /proc/self/uid_map
+         0          100000      70000
+The uid_map table has three columns, the first one is the initial ID for the range in the new namespace, the second one is the initial ID in the parent namespace, and the third is the size of the mapping. In this case, we have specified only one mapping where the UIDs [0-69999] in the container are mapped to the host UIDs [100000-169999]. Similarly for the GIDs, we can look up the gid_map file
+
+
+
+grep gscrivano /etc/subuid
+gscrivano:110000:65536
+# grep gscrivano /etc/subgid
+gscrivano:110000:65536
+
+Use of subuid and subgid
+
 
 ## Pods networking
 Podman uses bridges networks in order to let containers to communicate with eachother, when a pod is created, Podman automatically creates automatically a bridge network.
