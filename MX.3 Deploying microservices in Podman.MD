@@ -55,6 +55,12 @@ Podman supports systemd integration, which is tipically used to manage local ser
 There are two common use cases for combining systemd and containers:
  - Running systemd inside a container
  - Using systemd to run containerized applications
+
+Podman automatically sets up several mounts in the container, and systemd is good to go. While it's a comparatively small Podman feature, it was a huge leap for running containerized workloads when it was introduced.
+
+Historically, other container tools have not supported systemd. Users faced the challenge of writing custom init scripts, which are prone to errors and a support burden for software vendors. With Podman, all these issues go away. Users can use systemd to install and run their applications in containers, just like anywhere else, and software vendors will not face the challenges of dealing with custom init scripts written by their users.
+
+
 Podman Compose executes the Podman command directly, rather than communicating with Podman's API socket. This eliminates the need to run the Podman service to provide the API, saving resources. Because it uses Podman's regular command line and fork-exec model, it is easier to trace and manage on the system. For example, Podman Compose can easily be managed by a systemd unit file.
 
 Podman and systemd allow you to manage
