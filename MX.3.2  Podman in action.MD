@@ -85,13 +85,48 @@ brad        1           0           0.022       5h6m57.584585461s  ?           4
 
 
 #### Other name space modes
+
+
+Cerchiamo di capire userns,
+keep-id mappa lo uid e gid allo stesso valore dell'host, in questo modo se non sono root, non avrà permessi di root.
+esempio:
+podman run --userns keep-id -d fedora sleep 100
+ps -ef | grep sleep
+dwalsh 198080 198069 1 10:57 ? 00:00:00 sleep 100
+
+keep id ha anche un opzione che definisce il range
+
+
+
 In the `podman run` command we can specify the argument `-userns=<key>` where `<key>` can be:
  - `""` (unset): we map the User account to root user (UID=0) inside the container;
  - `keep-id`: we keep the user's UID within the container:
  - `auto`: the host user UID is not mapped into the container, an unique UID will be selected from the unused one;
+automatically create a unique user namespace.
+
+The --userns=auto flag requires that the user name containers be specified in the /etc/subuid and /etc/subgid files, with an unused range of subordinate user IDs that Podman containers are allowed to allocate
+
+
+
  - `nomap`: the host user UID is not mapped into the container, the first UID from /etc/subuid range is mapped as the root user inside the container;
+nomap: creates a user namespace where the current rootless user’s UID:GID are not mapped into the container. This option is not allowed for containers created by the root user.
+
+Key: auto    
+Host user: $UID  
+Container user: nil (Host User UID is not mapped into the container. Unique UID is selected from the unused UIDs for the root user inside of the container.)
+Key: nomap        
+Host user:  $UID
+Container user: nil (Host User UID is not mapped into the container. First UID in /etc/subuid range is mapped as the root user inside the container.)
+
+
+
 
 The `auto` and `nomap` options by not mapping the user's UID into the container, the files in the home's directory of the user are protected can't be accessed within the container, also it prevents to have containers that share `UIDs`.
+
+This option is incompatible with --gidmap, --uidmap, --subuidname and --subgidname.
+
+
+
 
 ### specifying the mapping.
 Podman can specify the mappings defined in /etc/subuid and /etc/subgid with the –subuidname and –subgidname options.This may seem redudant and in most cases it is, but this allows to have a finer control over the mapping of IDs and avoid problems based on separation of containers. 
@@ -124,6 +159,11 @@ $ podman run --user 1000 -d fedora sleep 10
 $ podman top -l user huser
 USER HUSER
 1000 100999
+
+
+The --user option is still very necessary and adds a lot of security even when using rootless Podman, and users should still use it to be as secure as possible.
+
+
 
 
 grep gscrivano /etc/subuid
