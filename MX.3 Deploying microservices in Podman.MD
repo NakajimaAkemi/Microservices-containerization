@@ -6,8 +6,6 @@ Podman (short for pod manages) is an open-source container management tool devel
  - **PID (Process Identifier)**: is a unique numerical identifier assigned by the operating system to each process running on a system.
  - **namespace**: is a feature in Linux that isolates and virtualizes system resources for a set of processes. It creates an environment where a process or a group of processes sees a distinct set of resources, such as file systems, network interfaces, process IDs, and user IDs. 
 
-- **Userspace**: Userspace refers to the area of system memory where user-mode applications and processes run, as opposed to kernel space where the core of the operating system executes. It provides an isolated environment where applications operate with restricted access to hardware and system resources, ensuring system stability and security by preventing direct interaction with the kernel.
-
 - **Orchestration**: Container orchestration is the automated management of containerized applications, handling deployment, scaling, networking, and availability across a cluster of machines. Tools like ```Kubernetes``` and ```Docker Swarm``` facilitate this process.
 
 ## Podman's architecture
@@ -31,10 +29,11 @@ Probably the most significant feature of Podman is the ability to run containers
   <img src="images/rootless.png" alt="Esempio di immagine" />
 </p>
 
-Also the support of the user namespace is an important functionality that allows us to execute containers in rootless mode, and allows us to isolate the container from the host and other processes in execution. Basically the user name-space allows us to define a `UID (user identifier)` and a `GID (group identifier)` mapping to run containers. 
+Also the support of the user namespace is an important functionality that allows us to execute containers in rootless mode, and allows us to isolate the container from the host and other processes in execution.
+Basically the user name-space allows us to define ranges of `UIDs (user identifiers)` and a `GIDs (group identifiers)` mapping from the host to completely different values in the container process. It allows processes to have privileges inside of the container, but no privileges if they escape the container.
+
 
 >Example: While inside the container our UID may be 0 running as root inside, outside on the host it's considered with an unprivileged UID like 100000, also any file object that isn't mapped to the user namespace will be trated as owned by nobody and the container process will not be allowed access unless the object is accessible by others. Even if the process manages to escape the container, the kernel will treat it as UID=100000. 
-
 
 
 ## Concept of Pods
