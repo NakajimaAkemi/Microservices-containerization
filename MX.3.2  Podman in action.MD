@@ -120,7 +120,13 @@ podman top -l user huser
 
 The --user option is still very necessary and adds a lot of security even when using rootless Podman, and users should still use it to be as secure as possible.
 
-#### user flag
+#### userns option
+In the `podman run` command we can specify the argument `-userns=<key>` where `<key>` can be:
+ - `*""*` (unset): we map the User UID to root user (UID=0) inside the container;
+ - `*keep-id*`: we keep the user's UID within the container;
+ - `*auto*`: the host user UID is not mapped into the container, an unique UID will be selected from the unused one;
+automatically create a unique user namespace.
+
 Cerchiamo di capire userns,
 keep-id mappa lo uid e gid allo stesso valore dell'host, in questo modo se non sono root, non avrà permessi di root.
 esempio:
@@ -132,17 +138,13 @@ keep id ha anche un opzione che definisce il range
 
 
 
-In the `podman run` command we can specify the argument `-userns=<key>` where `<key>` can be:
- - `""` (unset): we map the User account to root user (UID=0) inside the container;
- - `keep-id`: we keep the user's UID within the container:
- - `auto`: the host user UID is not mapped into the container, an unique UID will be selected from the unused one;
-automatically create a unique user namespace.
+
 
 The --userns=auto flag requires that the user name containers be specified in the /etc/subuid and /etc/subgid files, with an unused range of subordinate user IDs that Podman containers are allowed to allocate
 
 
 
- - `nomap`: the host user UID is not mapped into the container, the first UID from /etc/subuid range is mapped as the root user inside the container;
+ - `*nomap*`: the host user UID is not mapped into the container, the first UID from /etc/subuid range is mapped as the root user inside the container;
 nomap: creates a user namespace where the current rootless user’s UID:GID are not mapped into the container. This option is not allowed for containers created by the root user.
 
 Key: auto    
@@ -165,14 +167,9 @@ Container user: nil (Host User UID is not mapped into the container. First UID i
 
 The `auto` and `nomap` options by not mapping the user's UID into the container, the files in the home's directory of the user are protected can't be accessed within the container, also it prevents to have containers that share `UIDs`.
 
-This option is incompatible with --gidmap, --uidmap, --subuidname and --subgidname.
 
 
-
-
-
-
-
+> This option is incompatible with --gidmap, --uidmap, --subuidname and --subgidname.
 
 
 
