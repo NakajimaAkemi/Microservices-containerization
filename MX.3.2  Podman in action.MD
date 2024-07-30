@@ -235,7 +235,8 @@ networks:
 ## Podman kube
 YAML file example
 
-```apiVersion: apps/v1
+```yaml
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo-app-deployment
