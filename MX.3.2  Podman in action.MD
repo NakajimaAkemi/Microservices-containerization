@@ -165,13 +165,7 @@ The --user option is still very necessary and adds a lot of security even when u
 
 
 
-
-grep gscrivano /etc/subuid
-gscrivano:110000:65536
-# grep gscrivano /etc/subgid
-gscrivano:110000:65536
-
-Use of subuid and subgid
+### mounts and volumes management
 
 
 ## Pods networking
