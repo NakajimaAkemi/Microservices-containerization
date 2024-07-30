@@ -142,10 +142,6 @@ The `auto` and `nomap` options by not mapping the user's UID into the container,
 
 > *Note*: Podman, in auto mode, is looking for 1024 or more UIDs that are not currently used within the user's user namespace. Because containers were already run on the system, and Podman defaults to using 65,000 UIDs, all of the UIDs are used. We need to destroy all of other containers that use the entire UID mappings.
 
-
-### mounts and volumes management
-
-
 ## Pods networking
 Podman uses bridges networks in order to let containers to communicate with eachother, when a pod is created, Podman automatically creates automatically a bridge network.
 For the communication between pods, we need to configure a network in order to allow them to communicate.
