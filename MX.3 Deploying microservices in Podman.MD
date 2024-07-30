@@ -6,6 +6,8 @@ Podman (short for pod manages) is an open-source container management tool devel
  - **PID (Process Identifier)**: is a unique numerical identifier assigned by the operating system to each process running on a system.
  - **namespace**: is a feature in Linux that isolates and virtualizes system resources for a set of processes. It creates an environment where a process or a group of processes sees a distinct set of resources, such as file systems, network interfaces, process IDs, and user IDs. 
 
+- **systemd**:**systemd** is a system and service manager for Linux operating systems. It is responsible for initializing the system (booting it up) and managing system processes and services once the system is running;
+
 - **Orchestration**: Container orchestration is the automated management of containerized applications, handling deployment, scaling, networking, and availability across a cluster of machines. Tools like ```Kubernetes``` and ```Docker Swarm``` facilitate this process.
 
 ## Podman's architecture
@@ -48,6 +50,11 @@ One of the design goals of containers is to separate services into single contai
 together to form a larger service managed as a single entity. One of the goals of Podman is allowing you to experiment with pods
 
 ## Systemd Integration
+
+Podman supports systemd integration, which is tipically used to manage local services such as web servers, container engines, network daemons etc..
+There are two common use cases for combining systemd and containers:
+ - Running systemd inside a container
+ - Using systemd to run containerized applications
 Podman Compose executes the Podman command directly, rather than communicating with Podman's API socket. This eliminates the need to run the Podman service to provide the API, saving resources. Because it uses Podman's regular command line and fork-exec model, it is easier to trace and manage on the system. For example, Podman Compose can easily be managed by a systemd unit file.
 
 Podman and systemd allow you to manage
