@@ -4,8 +4,26 @@ In this section we will do advanced applications of Podman, such as Pods network
 
 
 ## Rootless containers and user name-space isolation
+Here we will show how to setup the rootless containers, but first of all we assume that we already have a non-root user, in case named brad and able to use podman. 
 
-Here we will show how to setup the rootless containers, but first of all we assume that we already have a non-root user, in case named brad and able to use podman. In order to use networking other than the host networking, Podman uses the slirp4netns package, it provides user-mode networking for unprivileged network namespaces and must be installed on the machine in order for Podman to run in a rootless environment.
+cat /proc/self/uid_map
+         0          0 4294967295
+
+# podman  run --uidmap=0:100000:70000 --gidmap=0:200000:70000 fedora-minimal cat /proc/self/uid_map
+         0          100000      70000
+The uid_map table has three columns, the first one is the initial ID for the range in the new namespace, the second one is the initial ID in the parent namespace, and the third is the size of the mapping. In this case, we have specified only one mapping where the UIDs [0-69999] in the container are mapped to the host UIDs [100000-169999]. Similarly for the GIDs, we can look up the gid_map file
+
+
+
+# grep gscrivano /etc/subuid
+gscrivano:110000:65536
+# grep gscrivano /etc/subgid
+gscrivano:110000:65536
+
+Use of subuid and subgid
+
+
+In order to use networking other than the host networking, Podman uses the slirp4netns package, it provides user-mode networking for unprivileged network namespaces and must be installed on the machine in order for Podman to run in a rootless environment.
 
 > In rootless Podman, you cannot create full, separate networking for containers because
 rootless processes are not allowed to create network devices and modify the firewall rules.
@@ -24,9 +42,9 @@ After that we increase the number of user namespaces in the kernel.
  sudo sysctl -p
 ```
 
+Most current Linux distributions include a version of shadow-utils that uses the /etc/subuid and /etc/subgid files to determine what UIDs and GIDs are available for a user in a user namespace, on my system I have allocated 65536 UIDs/GIDs starting at 165536 for the user “brad”.
 
-How podman does create the username space?
-Most current Linux distributions include a version of shadow-utils that uses the /etc/subuid and /etc/subgid files to determine what UIDs and GIDs are available for a user in a user namespace.
+
 ```
 cat /etc/subuid
 bilel:100000:65536
@@ -90,6 +108,14 @@ In the `podman run` command we can specify the argument `-userns=<key>` where `<
  - `nomap`: the host user UID is not mapped into the container, the first UID from /etc/subuid range is mapped as the root user inside the container;
 
 The `auto` and `nomap` options by not mapping the user's UID into the container, the files in the home's directory of the user are protected can't be accessed within the container, also it prevents to have containers that share `UIDs`.
+
+### specifying the mapping.
+Podman can specify the mappings defined in /etc/subuid and /etc/subgid with the –subuidname and –subgidname options. Let's use the mapping of brad: 
+```
+# podman  run --subuidname=brad --subgidname=brad -d -p 8080:8080 your-image cat /proc/self/uid_map
+         0     165536     65536
+```
+The output indicates in order the initial ID inside the container, the ID outside the container and the lenght of the range of UIDs. This may seem redudant and in most cases it is, but this allows to have a finer control over the mapping of IDs and avoid problems based on separation of containers.
 
 ## Pods networking
 Podman uses bridges networks in order to let containers to communicate with eachother, when a pod is created, Podman automatically creates automatically a bridge network.
