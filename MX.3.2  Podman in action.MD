@@ -103,11 +103,11 @@ The output indicates the uid_map table has three columns, the first one is the `
 #### user option
 The `--user` option allows us to manyally set the UID of the user inside the container, this way we can prevent it to have the root privileges inside the container (which has UID=0).
 ```
-$ podman run --user 1000 -d fedora sleep 10
+podman run --user 1000 -d fedora sleep 10
 976d7f3f034d38657cfba60aef406e7f65eae9eef735619ca7c13f8a946a0122
 
 The command podman top, allows us to see the UIDs of the user inside and the host user.
-$ podman top -l user huser
+podman top -l user huser
 USER HUSER
 1000 100999
 ```
@@ -121,24 +121,13 @@ podman top -l user huser
 The --user option is still very necessary and adds a lot of security even when using rootless Podman, and users should still use it to be as secure as possible.
 
 #### userns option
-> *Beware!* The -- userns option is incompatible with --gidmap, --uidmap, --subuidname and --subgidname.
+> *Beware!* The --userns option is incompatible with --gidmap, --uidmap, --subuidname and --subgidname.
 
 In the `podman run` command we can specify the argument `-userns=<key>` where `<key>` can be:
  - *`""` (unset)*: we map the User UID to root user (UID=0) inside the container;
  - *`keep-id`*: we keep the host user's UID within the container, this way if it's not root even inside the container we won't have root privileges;
- - *`auto`*: the host user UID is not mapped into the container, an unique UID will be selected from the unused one;
-automatically create a unique user namespace.
-
-The --userns=auto flag requires that the user name containers be specified in the /etc/subuid and /etc/subgid files, with an unused range of subordinate user IDs that Podman containers are allowed to allocate
-Key: auto    
-Host user: $UID  
-Container user: nil (Host User UID is not mapped into the container. Unique UID is selected from the unused UIDs for the root user inside of the container.)
-
+ - *`auto`*: the host user UID is not mapped into the container, an unique UID will be selected from the unused one automatically creating a unique user namespace;
  - *`nomap`*: the host user UID is not mapped into the container, the first UID from /etc/subuid range is mapped as the root user inside the container;
-nomap: creates a user namespace where the current rootless user’s UID:GID are not mapped into the container. This option is not allowed for containers created by the root user.
-Key: nomap        
-Host user:  $UID
-Container user: nil (Host User UID is not mapped into the container. First UID in /etc/subuid range is mapped as the root user inside the container.)
 
 *Example:*
 ```
