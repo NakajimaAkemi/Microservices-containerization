@@ -114,6 +114,14 @@ nomap: creates a user namespace where the current rootless user’s UID:GID are 
 Key: auto    
 Host user: $UID  
 Container user: nil (Host User UID is not mapped into the container. Unique UID is selected from the unused UIDs for the root user inside of the container.)
+
+podman run -d --rm --userns=auto ubi9 sleep 100
+Error: creating container storage: could not find enough available IDs
+This is because Podman, in auto mode, is looking for 1024 or more UIDs that are not currently used within the user's user namespace. Because containers were already run on this system, and Podman defaults to using 65,000 UIDs, all of the UIDs are used. I can destroy all of my containers that use the entire UID mappings to show this mode:
+
+
+
+
 Key: nomap        
 Host user:  $UID
 Container user: nil (Host User UID is not mapped into the container. First UID in /etc/subuid range is mapped as the root user inside the container.)
