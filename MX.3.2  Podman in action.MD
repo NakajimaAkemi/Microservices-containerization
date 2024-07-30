@@ -84,9 +84,29 @@ brad        1           0           0.022       5h6m57.584585461s  ?           4
 ```
 
 
-#### Other name space modes
+### Additional options
+Even in rootless container, the root of the container has namespace capabilities, meaning that is has a power of root over the user namespace.
+#### user option
+The `--user` option allows us to manyally set the UID of the user inside the container, this way we can prevent it to have the root privileges inside the container (which has UID=0).
+```
+$ podman run --user 1000 -d fedora sleep 10
+976d7f3f034d38657cfba60aef406e7f65eae9eef735619ca7c13f8a946a0122
 
+The command podman top, allows us to see the UIDs of the user inside and the host user.
+$ podman top -l user huser
+USER HUSER
+1000 100999
+```
+Without the --user flag we would have an output similar to the following:
+```
+podman top -l user huser
+ USER HUSER
+ root 3267
+```
 
+The --user option is still very necessary and adds a lot of security even when using rootless Podman, and users should still use it to be as secure as possible.
+
+#### user flag
 Cerchiamo di capire userns,
 keep-id mappa lo uid e gid allo stesso valore dell'host, in questo modo se non sono root, non avrà permessi di root.
 esempio:
@@ -149,27 +169,7 @@ podman  run --uidmap=0:100000:70000 --gidmap=0:200000:70000 your-image cat /proc
 The output indicates the uid_map table has three columns, the first one is the initial ID for the range in the new namespace, the second one is the initial ID in the parent namespace, and the third is the size of the mapping.  Similarly for the GIDs, we can look up the gid_map file
 
 
-### Flag user
-Ci permette di settare staticamente lo uid dello user del container, in modo tale che non sia root se lo specifico diverso da 0.
 
-The command podman top, allows us to see the UIDs of the user inside and the host user.
-podman top -l user huser
- USER HUSER
- root 3267
-
-Even in rootless container, the root of the container has namespace capabilities, meaning that is has a power of root over the user namespace.
-podman top -l capeff
-
-
-$ podman run --user 1000 -d fedora sleep 10
-976d7f3f034d38657cfba60aef406e7f65eae9eef735619ca7c13f8a946a0122
-
-$ podman top -l user huser
-USER HUSER
-1000 100999
-
-
-The --user option is still very necessary and adds a lot of security even when using rootless Podman, and users should still use it to be as secure as possible.
 
 
 
