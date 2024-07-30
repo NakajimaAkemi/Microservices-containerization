@@ -126,15 +126,19 @@ In the `podman run` command we can specify the argument `-userns=<key>` where `<
  - *`keep-id`*: we keep the user's UID within the container;
  - *`auto`*: the host user UID is not mapped into the container, an unique UID will be selected from the unused one;
 automatically create a unique user namespace.
+ - *`nomap`*: the host user UID is not mapped into the container, the first UID from /etc/subuid range is mapped as the root user inside the container;
+nomap: creates a user namespace where the current rootless user’s UID:GID are not mapped into the container. This option is not allowed for containers created by the root user.
+
 
 Cerchiamo di capire userns,
-keep-id mappa lo uid e gid allo stesso valore dell'host, in questo modo se non sono root, non avrà permessi di root.
-esempio:
+keep-id mappa lo uid e gid allo stesso valore dell'host, in questo modo se non sono root, non avrà permessi di root.keep id ha anche un opzione che definisce il range
+
+*Example:*
+```
 podman run --userns keep-id -d fedora sleep 100
 ps -ef | grep sleep
 dwalsh 198080 198069 1 10:57 ? 00:00:00 sleep 100
-
-keep id ha anche un opzione che definisce il range
+```
 
 
 
@@ -144,8 +148,7 @@ The --userns=auto flag requires that the user name containers be specified in th
 
 
 
- - *`nomap`*: the host user UID is not mapped into the container, the first UID from /etc/subuid range is mapped as the root user inside the container;
-nomap: creates a user namespace where the current rootless user’s UID:GID are not mapped into the container. This option is not allowed for containers created by the root user.
+
 
 Key: auto    
 Host user: $UID  
