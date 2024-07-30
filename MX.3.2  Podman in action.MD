@@ -86,6 +86,20 @@ brad        1           0           0.022       5h6m57.584585461s  ?           4
 
 ### Additional options
 Even in rootless container, the root of the container has namespace capabilities, meaning that is has a power of root over the user namespace.
+
+#### specifying the mapping.
+Podman can specify the mappings defined in /etc/subuid and /etc/subgid with the –subuidname and –subgidname options. This may seem redudant and in most cases it is, but this allows to have a finer control over the mapping of IDs and avoid problems based on separation of containers. 
+
+Let's use the mapping of brad: 
+```
+podman  run --subuidname=brad --subgidname=brad -d -p 8080:8080 your-image cat /proc/self/uid_map
+         0     165536     65536
+podman  run --uidmap=0:100000:70000 --gidmap=0:200000:70000 your-image cat /proc/self/uid_map
+         0          100000      70000
+```
+The output indicates the uid_map table has three columns, the first one is the `initial ID for the range in the new namespace`, the second one is the `initial ID in the parent namespace`, and the third is the `size of the mapping`. Similarly for the GIDs, we can look up the gid_map file.
+
+
 #### user option
 The `--user` option allows us to manyally set the UID of the user inside the container, this way we can prevent it to have the root privileges inside the container (which has UID=0).
 ```
@@ -156,17 +170,7 @@ This option is incompatible with --gidmap, --uidmap, --subuidname and --subgidna
 
 
 
-### specifying the mapping.
-Podman can specify the mappings defined in /etc/subuid and /etc/subgid with the –subuidname and –subgidname options.This may seem redudant and in most cases it is, but this allows to have a finer control over the mapping of IDs and avoid problems based on separation of containers. 
 
-Let's use the mapping of brad: 
-```
-podman  run --subuidname=brad --subgidname=brad -d -p 8080:8080 your-image cat /proc/self/uid_map
-         0     165536     65536
-podman  run --uidmap=0:100000:70000 --gidmap=0:200000:70000 your-image cat /proc/self/uid_map
-         0          100000      70000
-```
-The output indicates the uid_map table has three columns, the first one is the initial ID for the range in the new namespace, the second one is the initial ID in the parent namespace, and the third is the size of the mapping.  Similarly for the GIDs, we can look up the gid_map file
 
 
 
