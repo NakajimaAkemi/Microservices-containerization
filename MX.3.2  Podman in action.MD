@@ -94,21 +94,36 @@ In the `podman run` command we can specify the argument `-userns=<key>` where `<
 The `auto` and `nomap` options by not mapping the user's UID into the container, the files in the home's directory of the user are protected can't be accessed within the container, also it prevents to have containers that share `UIDs`.
 
 ### specifying the mapping.
-Podman can specify the mappings defined in /etc/subuid and /etc/subgid with the –subuidname and –subgidname options. Let's use the mapping of brad: 
+Podman can specify the mappings defined in /etc/subuid and /etc/subgid with the –subuidname and –subgidname options.This may seem redudant and in most cases it is, but this allows to have a finer control over the mapping of IDs and avoid problems based on separation of containers. 
+
+Let's use the mapping of brad: 
 ```
-# podman  run --subuidname=brad --subgidname=brad -d -p 8080:8080 your-image cat /proc/self/uid_map
+podman  run --subuidname=brad --subgidname=brad -d -p 8080:8080 your-image cat /proc/self/uid_map
          0     165536     65536
-```
-The output indicates in order the initial ID inside the container, the ID outside the container and the lenght of the range of UIDs. This may seem redudant and in most cases it is, but this allows to have a finer control over the mapping of IDs and avoid problems based on separation of containers.
-
-
-cat /proc/self/uid_map
-         0          0 4294967295
-
- podman  run --uidmap=0:100000:70000 --gidmap=0:200000:70000 fedora-minimal cat /proc/self/uid_map
+podman  run --uidmap=0:100000:70000 --gidmap=0:200000:70000 your-image cat /proc/self/uid_map
          0          100000      70000
-The uid_map table has three columns, the first one is the initial ID for the range in the new namespace, the second one is the initial ID in the parent namespace, and the third is the size of the mapping. In this case, we have specified only one mapping where the UIDs [0-69999] in the container are mapped to the host UIDs [100000-169999]. Similarly for the GIDs, we can look up the gid_map file
+```
+The output indicates the uid_map table has three columns, the first one is the initial ID for the range in the new namespace, the second one is the initial ID in the parent namespace, and the third is the size of the mapping.  Similarly for the GIDs, we can look up the gid_map file
 
+
+### Flag user
+Ci permette di settare staticamente lo uid dello user del container, in modo tale che non sia root se lo specifico diverso da 0.
+
+The command podman top, allows us to see the UIDs of the user inside and the host user.
+podman top -l user huser
+ USER HUSER
+ root 3267
+
+Even in rootless container, the root of the container has namespace capabilities, meaning that is has a power of root over the user namespace.
+podman top -l capeff
+
+
+$ podman run --user 1000 -d fedora sleep 10
+976d7f3f034d38657cfba60aef406e7f65eae9eef735619ca7c13f8a946a0122
+
+$ podman top -l user huser
+USER HUSER
+1000 100999
 
 
 grep gscrivano /etc/subuid
