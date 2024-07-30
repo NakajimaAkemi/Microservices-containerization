@@ -233,7 +233,43 @@ networks:
 ```
 
 ## Podman kube
+YAML file example
 
+```apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo-app-deployment
+  labels:
+    app: demo-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: demo-app
+  template:
+    metadata:
+      labels:
+        app: demo-app
+    spec:
+      containers:
+        - name: demo-app
+          image: demo-app:latest
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: demo-app-service
+spec:
+  selector:
+    app: demo-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
+```
 ## Communication inside the Pod
 
 ## SELinux and Apparmor
