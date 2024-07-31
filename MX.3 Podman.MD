@@ -56,15 +56,66 @@ There are two common use cases for combining systemd and containers:
  - Running systemd inside a container
  - Using systemd to run containerized applications
 
+
+With systemd unit files, you can: 
+ - set uo a container or pod to start as systemd service
+ - define the order in which containerized service runs and check for dependencies (another service is running, a file is available or resource is mounted)
+ - control the state of the systemd system using systemctl command
+
 Podman automatically sets up several mounts in the container, and systemd is good to go. While it's a comparatively small Podman feature, it was a huge leap for running containerized workloads when it was introduced.
 
 Historically, other container tools have not supported systemd. Users faced the challenge of writing custom init scripts, which are prone to errors and a support burden for software vendors. With Podman, all these issues go away. Users can use systemd to install and run their applications in containers, just like anywhere else, and software vendors will not face the challenges of dealing with custom init scripts written by their users.
+
+Systemd was responsible for a complete system initialization. Due to Red Hat integrating containers with systemd, you can manage OCI and Docker-formatted containers built by Podman in the same way as other services and features are managed in a Linux system. You can use the systemd initialization service to work with pods and containers.
 
 
 Podman Compose executes the Podman command directly, rather than communicating with Podman's API socket. This eliminates the need to run the Podman service to provide the API, saving resources. Because it uses Podman's regular command line and fork-exec model, it is easier to trace and manage on the system. For example, Podman Compose can easily be managed by a systemd unit file.
 
 Podman and systemd allow you to manage
 the entire life cycle of the application on nodes without human intervention
+
+### setup with Quadlets
+
+With quadlets we define how to run a container in a format that is very similar to regualer systemd unit files. The container descriptions focus on the relevant container details and hide technical details of running containers under systemd. Create the <CTRNAME>.container unit file in one of the following directories:
+ - /usr/share/containers/systemd/ or /etc/containers/systemd/ for root users
+ - $HOME/.config/containers/systemd/, $XDG_CONFIG_HOME/containers/systemd/, /etc/containers/systemd/users/$(UID), or /etc/containers/systemd/users/ for rootless
+
+We need to install the contaier-tools module
+```apt-get install container-tools```
+
+We create the unit file mysleep.container
+```
+cat $HOME/.config/containers/systemd/mysleep.container
+[Unit]
+Description=The sleep container
+After=local-fs.target
+
+[Container]
+Image=registry.access.redhat.com/ubi8-minimal:latest
+Exec=sleep 1000
+
+[Install]
+Start by default on boot
+WantedBy=multi-user.target default.target
+```
+The container section we specifiy:
+ - image we want to run
+ - Exec the command we want to run inside the container
+
+We create mysleep.service based on mysleep.container
+systemctl --user daemon-reload
+
+Check the status of mysleep.service
+systemctl --user status mysleep.service
+
+Verification
+systemctl --user status mysleep.service
+
+
+podman ps -a
+
+Note:
+ - the container has a systemd-  prefix this helps to distinguish  common containers from those running in systemd.
 
 
 ## Play kube
