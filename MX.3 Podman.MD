@@ -75,7 +75,7 @@ Podman and systemd allow you to manage
 the entire life cycle of the application on nodes without human intervention
 
 ### setup with Quadlets
-
+> Podman generate systemd  is deprecated
 With quadlets we define how to run a container in a format that is very similar to regualer systemd unit files. The container descriptions focus on the relevant container details and hide technical details of running containers under systemd. Create the <CTRNAME>.container unit file in one of the following directories:
  - /usr/share/containers/systemd/ or /etc/containers/systemd/ for root users
  - $HOME/.config/containers/systemd/, $XDG_CONFIG_HOME/containers/systemd/, /etc/containers/systemd/users/$(UID), or /etc/containers/systemd/users/ for rootless
