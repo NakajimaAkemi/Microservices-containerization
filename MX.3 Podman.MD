@@ -41,7 +41,7 @@ Basically the user name-space allows us to define ranges of `UIDs (user identifi
 
 ## Pods
 
-Podman introduces the concept of “pods,” which are groups of one or more containers that share the same network namespace and storage resources simulating a single host. This concept is borrowed from Kubernetes and allows for easier management of related containers. Pods allow you to group multiple services
+Podman introduces the concept of pods, which are groups of one or more containers that share the same network namespace and storage resources simulating a single host. This concept is borrowed from Kubernetes and allows for easier management of related containers. Pods allow you to group multiple services
 together to form a larger service managed as a single entity.
 
 <p align="center">
