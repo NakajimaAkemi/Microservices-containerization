@@ -46,8 +46,10 @@ Podman introduces the concept of “pods,” which are groups of one or more con
   <img src="images/pods.JPG" alt="Esempio di immagine" />
 </p>
 
-_Figure: shows multiple users running Podman independent of each other, without
-any root access._
+
+_Figure: shows multiple users running Podman independent of each other, without any root access._
+
+
 One of the design goals of containers is to separate services into single containers: microservices. Then you combine containers together to build larger services. Pods allow you to group multiple services
 together to form a larger service managed as a single entity. One of the goals of Podman is allowing you to experiment with pods
 
