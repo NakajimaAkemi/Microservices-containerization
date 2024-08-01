@@ -39,43 +39,30 @@ Basically the user name-space allows us to define ranges of `UIDs (user identifi
 >Example: While inside the container our UID may be 0 running as root inside, outside on the host it's considered with an unprivileged UID like 100000, also any file object that isn't mapped to the user namespace will be trated as owned by nobody and the container process will not be allowed access unless the object is accessible by others. Even if the process manages to escape the container, the kernel will treat it as UID=100000. 
 
 
-## Concept of Pods
+## Pods
 
 Podman introduces the concept of “pods,” which are groups of one or more containers that share the same network namespace and storage resources simulating a single host. This concept is borrowed from Kubernetes and allows for easier management of related containers.
+
+One of the design goals of containers is to separate services into single containers: microservices. Then you combine containers together to build larger services. Pods allow you to group multiple services
+together to form a larger service managed as a single entity. One of the goals of Podman is allowing you to experiment with pods
 
 <p align="center">
   <img src="images/pods.JPG" alt="Esempio di immagine" />
 </p>
 
-Consider running containers in a pod to:
+Every Podman pod includes an `infra container`. This container holds the namespaces associated with the pod and allows Podman to connect other containers to the pod. It allows you to start and stop containers within the pod and the pod will stay running.
 
-Expose your frontend application to the public network.
-Protect your database container in a private network.
+Reasons why pods should be considered:
+ - Expose your frontend application to the public network.Protect your database container in a private network. (I use pods to group and isolate related containers, e.g. an app and its database in a pod so they can easily be started and stopped together and communicate over localhost while remaining isolated from other containers.)
+ - Group of Containers: Like in Kubernetes, a pod in Podman is a group of one or more containers that share the same network and storage namespace. This allows the containers within a pod to communicate with each other using localhost, share IP addresses, and share storage volumes. Network sharing: Containers in a Podman pod share the same network namespace, which means they can interact with each other without needing special network configurations. They also share the same hostname, which makes inter-container communication straightforward. Convenient Management: Pods in Podman provide a convenient way to manage multiple containers as a single unit. For example, starting, stopping, or removing a pod will affect all containers within that pod, which is useful for operational efficiency.
 
-
-I use pods to group and isolate related containers, e.g. an app and its database in a pod so they can easily be started and stopped together and communicate over localhost while remaining isolated from other containers.
-
-
-One of the design goals of containers is to separate services into single containers: microservices. Then you combine containers together to build larger services. Pods allow you to group multiple services
-together to form a larger service managed as a single entity. One of the goals of Podman is allowing you to experiment with pods
-
-Group of Containers: Like in Kubernetes, a pod in Podman is a group of one or more containers that share the same network and storage namespace. This allows the containers within a pod to communicate with each other using localhost, share IP addresses, and share storage volumes.
+ - Pods abstraction :They allow users to group containers together under a single management unit, simplifying operations like starting, stopping, or restarting all containers within the pod simultaneously.
 
 
-Pods abstraction :They allow users to group containers together under a single management unit, simplifying operations like starting, stopping, or restarting all containers within the pod simultaneously.
+ - Microservices and Component Grouping: If you have multiple containers that need to work together as part of a microservices architecture (like a web server and a database), placing them in the same pod allows them to communicate easily and share resources like storage.
 
-Network sharing: Containers in a Podman pod share the same network namespace, which means they can interact with each other without needing special network configurations. They also share the same hostname, which makes inter-container communication straightforward.
-
-Convenient Management: Pods in Podman provide a convenient way to manage multiple containers as a single unit. For example, starting, stopping, or removing a pod will affect all containers within that pod, which is useful for operational efficiency.
-
-Microservices and Component Grouping: If you have multiple containers that need to work together as part of a microservices architecture (like a web server and a database), placing them in the same pod allows them to communicate easily and share resources like storage.
-
-
-Resource Sharing: Similar to Kubernetes, containers in a Podman pod can share volumes, making it easy to share data between them.
-
-
-### does it kubernetes?
-Podman is designed to be compatible with Kubernetes, meaning you can create and manage pods locally using Podman and then easily transition to running them in a Kubernetes environment. This is useful for development and testing before deploying to a production Kubernetes cluster.
+ - Resource Sharing: Similar to Kubernetes, containers in a Podman pod can share volumes, making it easy to share data between them.
+ - Podman is designed to be compatible with Kubernetes, meaning you can create and manage pods locally using Podman and then easily transition to running them in a Kubernetes environment. This is useful for development and testing before deploying to a production Kubernetes cluster.
 
 
 
@@ -141,21 +128,36 @@ Thanks to the ```OCI``` format, Podman support the same syntax and can build ima
 Podman supports the ```docker-compose.yml``` file, by processing them into Podman CLI commands with ```podman-compose```, while Podman Compose is better integrated with Podman (as it was designed from the ground up to work with Podman) and makes better use of rootless containers and pods. However, Docker Compose is much more supported, tested and more likely to be stable, while the Podman team is more focused ```podman generate kube``` and ```podman play kube```, which allow Kubernetes (An orchestation software) YAML to be used directly with Podman similar to Compose.
 
 
-## Podman in depth
+## Podman in action
 In this paragraph we will show basic functions of Podman, here's how install Podman on your machine:
 
 
 
-### Systemd
-
-
 ### Pods setup
+#### Pod creation
+First of all we create our own pod with the following command and check the existense of our pod:
+```
+podman pod create --name mypod
+podman pod ps
+```
+As we can see from the output, there is a container inside the pod, and that's the default infra container.
+
+#### Running a container inside the pod
+We can a container inside the pod we just created.
+```
+podman run -dt --name myubi --pod mypod registry.access.redhat.com/ubi8/ubi /bin/bash
+```
+This time if we run the `podman pod ps` command we can see that the number of pods increased to 2 containers. And if we run:
+```
+podman ps -a --pod
+```
+We can list all pods and the images associated with them.
+###
 In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](https://github.com/PacktPublishing/Microservices-with-Spring-Boot-and-Spring-Cloud-Third-Edition/tree/main/Chapter06).\
 
 It is important to notice that in the microservices folder there are 4 services. Let's analyze each Dockerfile, then we can watch the Docker Compose whose use this files.
 
 
-### Systemd 
 
 
 ### Kube play
