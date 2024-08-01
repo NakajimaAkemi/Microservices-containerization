@@ -30,6 +30,7 @@ Probably the most significant feature of Podman is the ability to run containers
 <p align="center">
   <img src="images/rootless.png" alt="Esempio di immagine" />
 </p>
+_Figure: shows multiple users running Podman independent of each other, without any root access._
 
 Also the support of the user namespace is an important functionality that allows us to execute containers in rootless mode, and allows us to isolate the container from the host and other processes in execution.
 Basically the user name-space allows us to define ranges of `UIDs (user identifiers)` and a `GIDs (group identifiers)` mapping from the host to completely different values in the container process. It allows processes to have privileges inside of the container, but no privileges if they escape the container.
@@ -45,9 +46,6 @@ Podman introduces the concept of “pods,” which are groups of one or more con
 <p align="center">
   <img src="images/pods.JPG" alt="Esempio di immagine" />
 </p>
-
-
-_Figure: shows multiple users running Podman independent of each other, without any root access._
 
 
 One of the design goals of containers is to separate services into single containers: microservices. Then you combine containers together to build larger services. Pods allow you to group multiple services
