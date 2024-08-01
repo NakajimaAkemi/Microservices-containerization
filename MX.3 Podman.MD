@@ -157,8 +157,17 @@ In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](ht
 
 It is important to notice that in the microservices folder there are 4 services. Let's analyze each Dockerfile, then we can watch the Docker Compose whose use this files.
 
+#### Pod's informations
 
+We can get information about the processes that are running inside the pod with 
+```
+podman pod top mypod
+```
 
+Or we can inspect the pod, showing information that describes the pod
+```
+podman pod inspect mypod
+```
 
 ### Kube play
 
