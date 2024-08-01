@@ -160,7 +160,7 @@ Or we can inspect the pod, showing information that describes the pod
 ```
 podman pod inspect mypod
 ```
-
+### Example of pods with Spring boot application
 ### Kube play
 
 
