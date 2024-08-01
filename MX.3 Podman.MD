@@ -51,11 +51,11 @@ together to form a larger service managed as a single entity.
 Every Podman pod includes an `infra container`. This container holds the namespaces associated with the pod and allows Podman to connect other containers to the pod. It allows you to start and stop containers within the pod and the pod will stay running.
 
 *Why should pods be considered?*
- - *Further Backend isolation*: Expose your frontend application to the public network and protect your database container in a private network, they will communicate over localhost while remaining isolated from other containers.
- - *Network sharing*: Containers in a Podman pod share the same network namespace, which means they can interact with each other without needing special network configurations.
- - Convenient Management: We can manage multiple containers as a single unit such as starting, stopping, or removing, affecting all containers within that pod.
- - *Resource Sharing*: Containers in a Podman pod can share volumes.
- - *Compatability with Kubernetes*: you can create and manage pods locally using Podman and then easily transition to running them in a Kubernetes environment;
+ - **Further Backend isolation**: Expose your frontend application to the public network and protect your database container in a private network, they will communicate over localhost while remaining isolated from other containers.
+ - **Network sharing**: Containers in a Podman pod share the same network namespace, which means they can interact with each other without needing special network configurations.
+ - **Convenient Management**: We can manage multiple containers as a single unit such as starting, stopping, or removing, affecting all containers within that pod.
+ - **Resource Sharing**: Containers in a Podman pod can share volumes.
+ - **Compatability with Kubernetes**: you can create and manage pods locally using Podman and then easily transition to running them in a Kubernetes environment;
 
 
 
@@ -145,7 +145,7 @@ podman ps -a --pod
 ```
 We can list all pods and the images associated with them.
 ###
-In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](https://github.com/PacktPublishing/Microservices-with-Spring-Boot-and-Spring-Cloud-Third-Edition/tree/main/Chapter06).\
+
 
 It is important to notice that in the microservices folder there are 4 services. Let's analyze each Dockerfile, then we can watch the Docker Compose whose use this files.
 
@@ -164,6 +164,10 @@ podman pod inspect mypod
 ### Kube play
 
 
+
+
+###
+In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](https://github.com/PacktPublishing/Microservices-with-Spring-Boot-and-Spring-Cloud-Third-Edition/tree/main/Chapter06).\
 ## Sources
 - https://www.redhat.com/en/topics/containers/what-is-podman
 - https://github.com/containers/podman/blob/main/docs/tutorials/rootless_tutorial.md
