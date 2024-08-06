@@ -1,12 +1,8 @@
 # Podman Overview
 Podman (short for pod manages) is an open-source container management tool developed by Red Hat, designed to deploy and manage containerized applications. Podman in many cases works just like Docker, but it offers enhanced security and the ability to run commands with non-root privileges.
 
-## Basic informations
+## Basic terms informations 
  - **fork/exec**: is a two-step process used in Unix-like operating systems for creating and running new processes. 
- - **PID (Process Identifier)**: is a unique numerical identifier assigned by the operating system to each process running on a system.
- - **namespace**: is a feature in Linux that isolates and virtualizes system resources for a set of processes. It creates an environment where a process or a group of processes sees a distinct set of resources, such as file systems, network interfaces, process IDs, and user IDs. 
-
-- **systemd**:**systemd** is a system and service manager for Linux operating systems. It is responsible for initializing the system (booting it up) and managing system processes and services once the system is running;
 
 - **Orchestration**: Container orchestration is the automated management of containerized applications, handling deployment, scaling, networking, and availability across a cluster of machines. Tools like ```Kubernetes``` and ```Docker Swarm``` facilitate this process.
 
