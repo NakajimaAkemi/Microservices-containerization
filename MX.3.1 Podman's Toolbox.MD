@@ -26,6 +26,22 @@ Buildah is all about building OCI compatible images, we can use the Docker forma
 
 
 ## Buildah
+Buildah is a utility for creating Open Container Initiative (OCI) compatible container images. Buildah provides a wider range of customization options than the more generic podman build command.
+If you create container images by using Buildah, you don't need a running daemon for the utility to function. Buildah also doesn't cache builds by default. In addition, the utility can push container images to container registries, so it's suited for use with deployment scripts and automated build pipelines.
+
+
+
+
+The primary difference between Buildah and Podman is in the way that the run command is handled. Because Buildah's purpose is to build images, the run command behaves the same as a RUN statement within a Containerfile, which is a configuration file that contains the required settings to automate the creation of a container image.
+
+This difference makes it easy to separate image builds from production level container infrastructure, running in Podman, and to easily process existing Containerfile build instructions.
+
+
+
+
+
+
+
 
 
 
