@@ -21,7 +21,13 @@ Basically the user name-space allows us to define ranges of `UIDs (user identifi
 
 >Example: While inside the container our UID may be 0 running as root inside, outside on the host it's considered with an unprivileged UID like 100000, also any file object that isn't mapped to the user namespace will be trated as owned by nobody and the container process will not be allowed access unless the object is accessible by others. Even if the process manages to escape the container, the kernel will treat it as UID=100000. 
 
-
+## Exclusive commands
+  For ```podman generate systemd```, we can have:
+  - ```create``` to **build** or rebuild services;
+  - ```start``` to **start** the service (defined in the yaml file);
+  - ```stop``` to **stop** and remove the service.
+  - ```rm``` to **stop** and remove the service.
+ Generates systemd unit files to manage containers or pods with systemd
 
 
 
