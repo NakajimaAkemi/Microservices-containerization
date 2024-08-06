@@ -7,6 +7,24 @@
 - **systemd**:**systemd** is a system and service manager for Linux operating systems. It is responsible for initializing the system (booting it up) and managing system processes and services once the system is running;
 
 
+## Rootless containers and user name-space separation
+
+Probably the most significant feature of Podman is the ability to run containers in rootless mode. In many situations you don't want to give full root access to your users, but users and developers still need to run containers and build images. Every container process is managed with the current user's permissions, reducing the necessity of higher clearance.
+<p align="center">
+  <img src="images/rootless.png" alt="Esempio di immagine" />
+</p>
+**Figure**: shows multiple users running Podman independent of each other, without any root access.
+
+Also the support of the user namespace is an important functionality that allows us to execute containers in rootless mode, and allows us to isolate the container from the host and other processes in execution.
+Basically the user name-space allows us to define ranges of `UIDs (user identifiers)` and a `GIDs (group identifiers)` mapping from the host to completely different values in the container process. It allows processes to have privileges inside of the container, but no privileges if they escape the container.
+
+
+>Example: While inside the container our UID may be 0 running as root inside, outside on the host it's considered with an unprivileged UID like 100000, also any file object that isn't mapped to the user namespace will be trated as owned by nobody and the container process will not be allowed access unless the object is accessible by others. Even if the process manages to escape the container, the kernel will treat it as UID=100000. 
+
+
+
+
+
 ## Podman lab
 Use case
 You have been asked to deploy a container running a web based application onto a server in your 
