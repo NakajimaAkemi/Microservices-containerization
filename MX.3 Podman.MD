@@ -78,12 +78,6 @@ Podman other than having the same commands as Docker, it has also exclusive comm
   - ```stop``` to **stop** the pod;
   - ```rm``` to **remove** the pod;
 
-  For ```podman generate systemd```, we can have:
-  - ```create``` to **build** or rebuild services;
-  - ```start``` to **start** the service (defined in the yaml file);
-  - ```stop``` to **stop** and remove the service.
-  - ```rm``` to **stop** and remove the service.
- Generates systemd unit files to manage containers or pods with systemd
 
   For ```podman <subcommand> kube```, we can have:
   - ```generate``` creates a **YAML** description of a Podman container or pod to run in Kubernetes;
