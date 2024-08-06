@@ -39,12 +39,6 @@ Every Podman pod includes an `infra container`. This container holds the namespa
  - **Compatability with Kubernetes**: you can create and manage pods locally using Podman and then easily transition to running them in a Kubernetes environment;
 
 
-
-## Systemd Integration
-
-**Currently on hold due to heterogeneity of the versions**
-
-
 ## Play kube
 Init containers
 Users of podman play kube told us they want to build images as part of the play process. Because Kubernetes does not have a similar concept, we were at first hesitant to implement the idea. The more play kube gets used, the more it gets compared to Docker compose. That was the tipping point. Our users were right.
