@@ -92,6 +92,7 @@ Podman supports the ```docker-compose.yml``` file, by processing them into Podma
 ## Podman in action
 In this paragraph we will show basic functions of Podman, here's how install Podman on your machine:
 
+### Podman installation
 
 
 ### Pods setup
