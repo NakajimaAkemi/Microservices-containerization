@@ -196,4 +196,39 @@ Note:
  - the container has a systemd-  prefix this helps to distinguish  common containers from those running in systemd.
 
 
+##
+# Podman in action
 
+
+The Buildah command has a cool feature, buildah unshare. This puts you in the same user namespace that Podman runs in, but without entering the container's filesystem, so you can list the contents of your home directory.
+
+$ ls -ild /home/dwalsh
+8193 drwx--x--x. 290 dwalsh dwalsh 20480 Jan 29 07:58 /home/dwalsh
+$ buildah unshare ls -ld /home/dwalsh
+drwx--x--x. 290 root root 20480 Jan 29 07:58 /home/dwalsh
+
+## _
+leveraing SELinux.
+Integrated with systemd
+Default approcah on Fedora and RHEL.
+
+Not everybody has the luxury to build all thier own containers from scratch, because it would be an added cost stemming from the maintenance needs, such as patching a security issue.
+Base OS also?
+Another issue it other tools that run along side the container technology.
+
+
+You can also use Podman to run secure, rootless containers. By joining a user namespace and setting root access inside, you can enable Podman to mount certain filesystems and set up the container with no escalation of privileges.
+
+**Dockerfile**
+
+
+```dockerfile
+FROM eclipse-temurin:21-jdk as builder
+WORKDIR extracted
+ARG JAR_FILE=target/*.jar
+COPY ${JAR_FILE} application.jar
+RUN java -Djarmode=layertools -jar application.jar extract
+EXPOSE 8080
+```
+
+--Advantages and used cases--
