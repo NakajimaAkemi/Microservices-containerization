@@ -1,3 +1,12 @@
+## Cut content
+
+## Basic info
+ - **PID (Process Identifier)**: is a unique numerical identifier assigned by the operating system to each process running on a system.
+ - **namespace**: is a feature in Linux that isolates and virtualizes system resources for a set of processes. It creates an environment where a process or a group of processes sees a distinct set of resources, such as file systems, network interfaces, process IDs, and user IDs. 
+
+- **systemd**:**systemd** is a system and service manager for Linux operating systems. It is responsible for initializing the system (booting it up) and managing system processes and services once the system is running;
+
+
 ## Podman lab
 Use case
 You have been asked to deploy a container running a web based application onto a server in your 
