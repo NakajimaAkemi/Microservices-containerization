@@ -95,7 +95,7 @@ The Open Container Initiative has developed two main specifications to standardi
 - **Distribution Specification**: it was introduced to standardize the API to distribute container images; the specification is designed generically enough to be leveraged as a distribution mechanism for any type of content.
 
 
-#### Container distribution
+### Container distribution
 Once an image is created, we can save the image in a public or private repository, called registry.
 These registries can allow other users to pull images and use them. Be aware to use only images from trusted
 authors or official distributors.
