@@ -94,11 +94,12 @@ The Open Container Initiative has developed two main specifications to standardi
 - **Runtime specification**: a document that describes how to run a "filesystem bundle" that is unpacked on disk.
 - **Distribution Specification**: it was introduced to standardize the API to distribute container images; the specification is designed generically enough to be leveraged as a distribution mechanism for any type of content.
 
-
-### Container distribution
+#### Container repository
 Once an image is created, we can save the image in a public or private repository, called registry.
-These registries can allow other users to pull images and use them. Be aware to use only images from trusted
-authors or official distributors.
+
+## Container distribution
+As mentioned before container are tipically saved in repositories called registries, the can allow other users to pull images and use them. 
+> Be aware to use only images from trusted authors or official distributors.
 
 ### Plugins
 - **Isolation customization**: in the context of container orchestration systems like Kubernetes, isolation customization refers to the ability to adjust how pods (containers) are isolated from each other and the underlying infrastructure; this can involve setting up network policies, security contexts, and resource quotas to ensure that containers operate securely and efficiently.
