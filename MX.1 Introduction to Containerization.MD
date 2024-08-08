@@ -117,7 +117,7 @@ The major container registries are:
  - **Github Container Registry**: Integrated with Github platform and user base, allows also Github's commands. 
  - **Google Container Registry**: Ideal for those that want to stick to the Google Products, not as much for those who don't want to get locked into it.
 
-
+> [!NOTE]
 > Be aware to use only images from trusted authors or official distributors.
 
 ## Container Plugins
