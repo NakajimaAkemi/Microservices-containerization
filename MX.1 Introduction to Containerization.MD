@@ -98,7 +98,18 @@ The Open Container Initiative has developed two main specifications to standardi
 Once an image is created, we can save the image in a public or private repository, called registry.
 
 ## Container distribution
-As mentioned before container are tipically saved in repositories called registries, the can allow other users to pull images and use them. 
+As mentioned before, containers are typically stored in repositories called registries. These registries serve as a place for developers to store and share container images by uploading (pushing) them to the registry and downloading (pulling) them onto other systems. This process saves developers valuable time in the creation and delivery of cloud-native applications by acting as an intermediary for sharing container images between different environments.
+
+Once you pull the image, the application within it can be run on that system.
+
+There are 2 types of container registries: public and private. 
+
+Public registries are commonly used by individuals or small teams that want to get up and running with their registry as quickly as possible. However, as their organizations grow, this can bring more complex security issues like patching, privacy, and access control that can arise. 
+
+Private registries provide a way to incorporate security and privacy into enterprise container image storage, either hosted remotely or on-premises. These private registries often come with advanced security features and technical support
+
+
+
 > Be aware to use only images from trusted authors or official distributors.
 
 ### Plugins
