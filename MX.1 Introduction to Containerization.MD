@@ -105,7 +105,13 @@ There are two types of container registries:
 
 - **Private**: More secure, designed to ensure privacy for enterprise container images. These registries usually include additional security measures and can be hosted either remotely or on-premise.
 
-
+The major container registries are:
+ - **Docker Hub** : the most popular registry at the moment, used by both small and big vendors.
+ - **Amazon Elastic Container Registry (ECR)** : ideal for those that already use the AWS platform to host applications.
+ - **Azure Container Registry**: Offers geo-replication ensuring that everyone has the same access to images and at comparable speeds in different locations. 
+ - **Red Hat Quay** : Offers private registries only, suitable for enterprise-level customers, offers geo-location services like Azure and more.
+ - **Github Container Registry**: Integrated with Github platform and user base, allows also Github's commands. 
+ - **Google Container Registry**: Ideal for those that want to stick to the Google Products, not as much for those who don't want to get locked into it.
 
 
 > Be aware to use only images from trusted authors or official distributors.
@@ -122,6 +128,7 @@ There are two types of container registries:
 - https://www.geeksforgeeks.org/what-is-docker-image/
 - https://www.redhat.com/it/topics/cloud-native-apps/what-is-a-container-registry
 - https://docs.docker.com
+- https://octopus.com/blog/top-8-container-registries
 
 
 
