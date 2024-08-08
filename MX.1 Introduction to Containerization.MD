@@ -105,6 +105,18 @@ There are two types of container registries:
 
 - **Private**: More secure, designed to ensure privacy for enterprise container images. These registries usually include additional security measures and can be hosted either remotely or on-premise.
 
+### Notable container registries
+<img src="images/1.png" alt="1" width="80">
+<img src="images/2.png" alt="2" width="80">
+<img src="images/3.png" alt="3" width="80">
+<img src="images/4.png" alt="4" width="80">
+<img src="images/5.png" alt="5" width="80">
+<img src="images/6.png" alt="6" width="80">
+<img src="images/7.png" alt="7" width="80">
+<img src="images/8.png" alt="8" width="80">
+<img src="images/9.png" alt="9" width="80">
+
+
 The major container registries are:
  - **Docker Hub** : the most popular registry at the moment, used by both small and big vendors.
  - **Amazon Elastic Container Registry (ECR)** : ideal for those that already use the AWS platform to host applications.
