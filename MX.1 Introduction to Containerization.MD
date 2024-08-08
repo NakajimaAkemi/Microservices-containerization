@@ -116,8 +116,8 @@ The registries can be categorized by:
    - **Public**: Accessible to anyone in the Internet, typically used for sharing applications that developers want to make available to the public.
    - **Private**: Accessible only by selected users and include additional security measures, designed to ensure privacy for enterprise container images. 
  - Licence type:
-  - **Open Source**: Like Docker's registry tool, they provide more flexibility and customization options.
-  - **Proprietary**: The code is not public, meaning that it can't be customized.
+   - **Open Source**: Like Docker's registry tool, they provide more flexibility and customization options.
+   - **Proprietary**: The code is not public, meaning that it can't be customized.
 
 
 
