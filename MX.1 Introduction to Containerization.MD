@@ -100,9 +100,9 @@ Once an image is created, we can save the image in a public or private repositor
 ## Container distribution
 As mentioned before, containers are typically stored in repositories called registries. These registries serve as a place for developers to store and share container images by uploading (pushing) them to the registry and downloading (pulling) them onto other systems. This process saves developers valuable time in the creation and delivery of cloud-native applications by acting as an intermediary for sharing container images between different environments.
 
-Once you pull the image, the application within it can be run on that system.
-
-There are 2 types of container registries: public and private. 
+There are 2 types of container registries: 
+ - **public** 
+ - **private** 
 
 Public registries are commonly used by individuals or small teams that want to get up and running with their registry as quickly as possible. However, as their organizations grow, this can bring more complex security issues like patching, privacy, and access control that can arise. 
 
@@ -122,6 +122,8 @@ Private registries provide a way to incorporate security and privacy into enterp
 ## Sources and additional readings:
 - https://www.oracle.com/it/cloud/cloud-native/container-registry/what-is-docker/
 - https://www.geeksforgeeks.org/what-is-docker-image/
+- https://www.redhat.com/it/topics/cloud-native-apps/what-is-a-container-registry
+- https://docs.docker.com
 
 
 
