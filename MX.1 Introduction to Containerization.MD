@@ -112,9 +112,12 @@ The registries can be categorized by:
  - How they are hosted
    - **Remote**: Hosted on a cloud platform or external service provider.
    - **Self-hosted**: Deployed on-premise within an organization's own infrastructure.
- - Accessability:
+ - Accessibility:
    - **Public**: Accessible to anyone in the Internet, typically used for sharing applications that developers want to make available to the public.
    - **Private**: Accessible only by selected users and include additional security measures, designed to ensure privacy for enterprise container images. 
+ - Licence type:
+  - **Open Source**: Like Docker's registry tool, they provide more flexibility and customization options.
+  - **Proprietary**: The code is not public, meaning that it can't be customized.
 
 
 
@@ -147,6 +150,7 @@ The major container registries are:
 - https://docs.docker.com
 - https://octopus.com/blog/top-8-container-registries
 - https://bluelight.co/blog/how-to-choose-a-container-registry#what-is-a-container-registry
+- https://sysdig.com/learn-cloud-native/what-is-a-container-registry/
 
 
 
