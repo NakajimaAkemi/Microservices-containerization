@@ -114,7 +114,7 @@ The registries can be categorized by:
    - **Self-hosted**: Deployed on-premise within an organization's own infrastructure.
  - Accessability:
    - **Public**: Accessible to anyone in the Internet, typically used for sharing applications that developers want to make available to the public.
-   - **Private**: Accessible only by selected users and more secure, designed to ensure privacy for enterprise container images. These registries usually include additional security measures and can be hosted either remotely or on-premise.
+   - **Private**: Accessible only by selected users and include additional security measures, designed to ensure privacy for enterprise container images. 
 
 
 
