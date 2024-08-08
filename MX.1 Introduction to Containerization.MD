@@ -106,11 +106,17 @@ As mentioned before, containers are typically stored in repositories called **re
 </p>
 
 
+### Types of registries
 
-There are two types of container registries:
-- **Public**: Accessible to anyone in the Internet, typically used for sharing applications that developers want to make available to the public.
+The registries can be categorized by:
+ - How they are hosted
+   - **Remote**: Hosted on a cloud platform or external service provider.
+   - **Self-hosted**: Deployed on-premise within an organization's own infrastructure.
+ - Accessability:
+   - **Public**: Accessible to anyone in the Internet, typically used for sharing applications that developers want to make available to the public.
+   - **Private**: Accessible only by selected users and more secure, designed to ensure privacy for enterprise container images. These registries usually include additional security measures and can be hosted either remotely or on-premise.
 
-- **Private**: Accessible only by selected users and more secure, designed to ensure privacy for enterprise container images. These registries usually include additional security measures and can be hosted either remotely or on-premise.
+
 
 ### Notable container registries
 <img src="images/1.png" alt="1" width="80"> <img src="images/2.png" alt="2" width="80"> <img src="images/3.png" alt="3" width="80"> <img src="images/4.png" alt="4" width="80"> <img src="images/5.png" alt="5" width="80"> <img src="images/6.png" alt="6" width="80"> <img src="images/7.png" alt="7" width="80"> <img src="images/8.png" alt="8" width="80"> <img src="images/9.png" alt="9" width="80">
