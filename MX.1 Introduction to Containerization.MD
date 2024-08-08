@@ -71,6 +71,7 @@ Once used a container can be turned into an image, turning the container layer i
 - **Dockerfile**: defines the environment and settings for your application's Docker image - script (instructions) to build a Docker image.
 - **Image**: a read-only template with instructions for creating a Docker container - it is built from a Dockerfile.
 - **Container**: a running instance of a Docker image - each container is isolated and can be started, stopped, moved, and deleted.
+
 <p align="center">
   <img src="images/DockerProcess.jpg" alt="Esempio di immagine"/>
 </p>
@@ -99,9 +100,11 @@ Once an image is created, we can save the image in a public or private repositor
 
 ## Container distribution
 As mentioned before, containers are typically stored in repositories called registries. These registries serve as a place for developers to store and share container images by uploading (pushing) them to the registry and downloading (pulling) them onto other systems. This process saves developers valuable time in the creation and delivery of cloud-native applications by acting as an intermediary for sharing container images between different environments.
-<div style="text-align: center;">
-<img  src="images/immagine_2024-08-08_160637736.png">
-</div>
+
+
+<p align="center">
+    <img  src="images/immagine_2024-08-08_160637736.png">
+</p>
 
 
 
