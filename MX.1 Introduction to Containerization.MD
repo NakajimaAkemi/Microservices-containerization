@@ -129,7 +129,7 @@ The major container registries are:
 - https://www.redhat.com/it/topics/cloud-native-apps/what-is-a-container-registry
 - https://docs.docker.com
 - https://octopus.com/blog/top-8-container-registries
-
+- https://bluelight.co/blog/how-to-choose-a-container-registry#what-is-a-container-registry
 
 
 
