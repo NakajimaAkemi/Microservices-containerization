@@ -99,6 +99,9 @@ The Open Container Initiative has developed two main specifications to standardi
 Once an image is created, we can save the image in a public or private repository, called registry.
 
 ## Container distribution
+## How are images downloaded?
+
+## Registries
 As mentioned before, containers are typically stored in repositories called **registries**. These registries serve as a place for developers to store and share container images by `uploading (pushing)` them to the registry and `downloading (pulling)` them onto other systems. This process saves developers valuable time in the creation and delivery of cloud-native applications by acting as an intermediary for sharing container images between different environments.
 
 <p align="center">
@@ -126,12 +129,23 @@ The registries can be categorized by:
 
 
 The major container registries are:
- - **Docker Hub** : the most popular registry at the moment, used by both small and big vendors.
- - **Amazon Elastic Container Registry (ECR)** : ideal for those that already use the AWS platform to host applications.
- - **Azure Container Registry**: Offers geo-replication ensuring that everyone has the same access to images and at comparable speeds in different locations. 
+ - **Docker Hub** : The most popular registry at the moment, used by both small and big vendors.
+
+ - **Amazon Elastic Container Registry (ECR)** : Ideal for those that already use the AWS platform to host applications. Provides the user accessibility configuration, vulnerability image scanning and more.
+
+ - **Azure Container Registry**: Offers geo-replication ensuring that everyone has the same access to images and at comparable speeds in different locations. It is based on the Docker Registry and allows the contente trust in order to "sign" to guarantee the integrity of the image.
+
+ - **Harbor Container Registry**: Container registry that needs to be installed, developed by VMWare.
+
  - **Red Hat Quay** : Offers private registries only, suitable for enterprise-level customers, offers geo-location services like Azure and more.
+
  - **Github Container Registry**: Integrated with Github platform and user base, allows also Github's commands. 
- - **Google Container Registry**: Ideal for those that want to stick to the Google Products, not as much for those who don't want to get locked into it.
+
+ - **Google Artifact Registry**
+
+ - **Gitlab Container Registy**: Can be self-hosted or cloud based through Gitlab.com.
+
+ - **Sonatype**: A self-hosted registry like Harbor.
 
 > [!NOTE]
 > Be aware to use only images from trusted authors or official distributors.
