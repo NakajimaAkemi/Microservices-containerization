@@ -100,6 +100,9 @@ Once an image is created, we can save the image in a public or private repositor
 ## Container distribution
 As mentioned before, containers are typically stored in repositories called registries. These registries serve as a place for developers to store and share container images by uploading (pushing) them to the registry and downloading (pulling) them onto other systems. This process saves developers valuable time in the creation and delivery of cloud-native applications by acting as an intermediary for sharing container images between different environments.
 
+<img src="images/immagine_2024-08-08_160637736.png">
+
+
 There are two types of container registries:
 - **Public**: Accessible to anyone, typically used for sharing open-source container images.
 
