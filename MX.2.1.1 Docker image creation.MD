@@ -2,11 +2,6 @@
 
 This guide explains how to create Docker images for a simple Python application, a Java application, and a basic image that includes the `ls` command.
 
-## Prerequisites
-
-- Docker installed on your machine.
-- Basic understanding of Docker.
-
 ## 1. Creating a Docker Image for a Simple Python Application
 
 ### Step 1: Write the Python Application
