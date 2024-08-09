@@ -1,22 +1,3 @@
-## Docker Secrets
-
-
-## Creation of a microservices ecosystem with docker/compose
-# example of compose
-
-## How volumes function?
-
-## How does the networking work?
-
-
-## Are replicas supported? How
-
-
-
-Here's a version formatted for a Git repository:
-
----
-
 # Docker Image Creation Guide
 
 This guide explains how to create Docker images for a simple Python application, a Java application, and a basic image that includes the `ls` command.
