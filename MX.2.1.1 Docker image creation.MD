@@ -127,3 +127,9 @@ docker run ls-command
 ```
 
 **Expected Output**: A detailed list of the root directory contents.
+
+
+
+## Sources
+- https://medium.com/@anshita.bhasin/a-step-by-step-guide-to-create-dockerfile-9e3744d38d11
+- https://docs.docker.com
