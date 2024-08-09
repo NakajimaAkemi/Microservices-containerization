@@ -1,12 +1,6 @@
 ## Docker Secrets
 
 
-
-## Docker registries
-How do they function?
-Are there other registries beside docker hub?
-How to download an image?
-
 ## Image creation (Python/Java application or a simple ls command)
 
 
