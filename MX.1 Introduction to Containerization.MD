@@ -101,6 +101,8 @@ Once an image is created, we can save the image in a public or private repositor
 ## Container distribution
 ### How are images downloaded?
 
+Aside from container registries, containers can be downloaded and distributed using several methods. One common approach is to export container images as `.tar` files using `docker save`, then import them with `docker load`. These files can be shared via web servers, cloud storage, or file servers. Peer-to-peer networks like BitTorrent or IPFS also enable decentralized distribution. Additionally, organizations might use private repositories (e.g., Artifactory) for secure image distribution. These methods are often used when internet access is limited or security policies prevent using public registries.
+
 ### Registries
 As mentioned before, containers are typically stored in repositories called **registries**. These registries serve as a place for developers to store and share container images by `uploading (pushing)` them to the registry and `downloading (pulling)` them onto other systems. This process saves developers valuable time in the creation and delivery of cloud-native applications by acting as an intermediary for sharing container images between different environments.
 
