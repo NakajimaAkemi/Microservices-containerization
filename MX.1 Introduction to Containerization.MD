@@ -68,6 +68,13 @@ A container is created by the execution of an image, it implements an incrementa
 Once used a container can be turned into an image, turning the container layer in read only an image layer.
 
 ### Image formats
+Among the container formats, the ones still in use are:
+
+1. **OCI (Open Container Initiative)**: The most widely adopted standard, used by platforms like Docker and Kubernetes.
+2. **Docker Image Format**: Still commonly used, especially for compatibility with existing tools and environments.
+3. **Singularity Image Format (SIF)**: Actively used in high-performance computing (HPC) and scientific communities.
+4. **LXD Image Format**: Used for system containers with LXD, particularly in environments requiring lightweight virtualization.
+
 #### What is Open Container Initiative (OCI)?
 The OCI is a vendor-neutral initiative established by Docker, CoreOS and other leaders in the container industry with the objective of creating an industry standard around container technology to ensure that different tools and platforms can work together seamlessly.\
 The aim is to ensure standardization and interoperability among various tools and platforms within the container ecosystem, facilitating seamless collaboration and development across different projects and organizations.
