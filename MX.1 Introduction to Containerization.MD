@@ -63,29 +63,11 @@ _**Jenkins** serves as a DevOps tool that automates the process of integrating c
 
 
 ## Container's lifecycle
-#### Image
+### Image
 A container is created by the execution of an image, it implements an incremental file system (overlay), with layer on top of others, each command represents a layer and are read only. Each layer depends pn the layers underneat. When running, a container will have a writable layer on top called "container" layer.
 Once used a container can be turned into an image, turning the container layer in read only an image layer.
 
-#### Container (e.g. with Docker)
-- **Dockerfile**: defines the environment and settings for your application's Docker image - script (instructions) to build a Docker image.
-- **Image**: a read-only template with instructions for creating a Docker container - it is built from a Dockerfile.
-- **Container**: a running instance of a Docker image - each container is isolated and can be started, stopped, moved, and deleted.
-
-<p align="center">
-  <img src="images/DockerProcess.jpg" alt="Esempio di immagine"/>
-</p>
-
-#### Lifecycle states (e.g. with Docker)
-- **Created**: The container has been created but not started (creating a new container from the image) - ```docker start <container_id>```.
-- **Running**: The container is currently executing on the host operating system but is isolated from it, it has its own filesystem and networking.
-- **Paused**: The container’s processes are temporarily suspended.
-- **Stopped**/**Restarting**: The container has been stopped and can be restarted - ```docker stop <container_id>``` and ```docker restart <container_id>```.
-- **Deletion**: Once the container is stopped, it can be deleted (removes the filesystem that was created when the container was instantiated from the image) - ```docker rm <container_id>```.
-<p align="center">
-  <img src="images/ContainerLifeCycle-JahiaAcademy.jpeg" alt="Esempio di immagine"/>
-</p>
-
+### Image formats
 #### What is Open Container Initiative (OCI)?
 The OCI is a vendor-neutral initiative established by Docker, CoreOS and other leaders in the container industry with the objective of creating an industry standard around container technology to ensure that different tools and platforms can work together seamlessly.\
 The aim is to ensure standardization and interoperability among various tools and platforms within the container ecosystem, facilitating seamless collaboration and development across different projects and organizations.
@@ -95,7 +77,28 @@ The Open Container Initiative has developed two main specifications to standardi
 - **Runtime specification**: a document that describes how to run a "filesystem bundle" that is unpacked on disk.
 - **Distribution Specification**: it was introduced to standardize the API to distribute container images; the specification is designed generically enough to be leveraged as a distribution mechanism for any type of content.
 
-#### Container repository
+### Container (e.g. with Docker)
+- **Dockerfile**: defines the environment and settings for your application's Docker image - script (instructions) to build a Docker image.
+- **Image**: a read-only template with instructions for creating a Docker container - it is built from a Dockerfile.
+- **Container**: a running instance of a Docker image - each container is isolated and can be started, stopped, moved, and deleted.
+
+<p align="center">
+  <img src="images/DockerProcess.jpg" alt="Esempio di immagine"/>
+</p>
+
+### Lifecycle states (e.g. with Docker)
+- **Created**: The container has been created but not started (creating a new container from the image) - ```docker start <container_id>```.
+- **Running**: The container is currently executing on the host operating system but is isolated from it, it has its own filesystem and networking.
+- **Paused**: The container’s processes are temporarily suspended.
+- **Stopped**/**Restarting**: The container has been stopped and can be restarted - ```docker stop <container_id>``` and ```docker restart <container_id>```.
+- **Deletion**: Once the container is stopped, it can be deleted (removes the filesystem that was created when the container was instantiated from the image) - ```docker rm <container_id>```.
+<p align="center">
+  <img src="images/ContainerLifeCycle-JahiaAcademy.jpeg" alt="Esempio di immagine"/>
+</p>
+
+
+
+### Container repository
 Once an image is created, we can save the image in a public or private repository, called registry.
 
 ## Container distribution
