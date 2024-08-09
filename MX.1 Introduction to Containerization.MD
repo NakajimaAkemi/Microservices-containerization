@@ -177,6 +177,7 @@ The major container registries are:
 - https://octopus.com/blog/top-8-container-registries
 - https://bluelight.co/blog/how-to-choose-a-container-registry#what-is-a-container-registry
 - https://sysdig.com/learn-cloud-native/what-is-a-container-registry/
+- https://www.linkedin.com/advice/1/what-common-container-image-formats-standards-how
 
 
 
