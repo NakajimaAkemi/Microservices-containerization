@@ -14,3 +14,14 @@ Contributors : Bilel Arfaoui and Francesco Sartor
   <img src="images/podman-logo.png.webp" alt="Esempio di immagine" />
   <img src="images/docker.png" alt="Esempio di immagine" />
 </div>
+
+
+
+# TODO
+
+## Creation of a microservices ecosystem with docker/compose
+## Example of compose
+## How volumes function?
+## How does the networking work?
+## Are replicas supported? How
+## Docker Secrets
