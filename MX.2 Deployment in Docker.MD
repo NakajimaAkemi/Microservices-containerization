@@ -68,4 +68,16 @@ ____
 ____
 
 ## Dockerfile OCI syntax
-In this paragraph we will introduce the basics around the develpoment of a containerfile.
+In this paragraph we will introduce the basics around the develpoment of a containerfile. First we will show an example of how a `dockerfile` looks like.
+```dockerfile
+   FROM no:14-alpine3.16
+   WORKDIR /app
+   COPY ..
+   RUN npm install
+   CMD ["npm",start]
+```
+
+
+
+### Syntax basics
+
