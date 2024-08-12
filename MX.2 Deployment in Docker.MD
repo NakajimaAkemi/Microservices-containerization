@@ -81,3 +81,121 @@ In this paragraph we will introduce the basics around the develpoment of a conta
 
 ### Syntax basics
 
+# Introduction to Dockerfile Syntax
+
+A `Dockerfile` is a simple text file that contains a series of instructions on how to build a Docker image. Each instruction in a Dockerfile adds a layer to the image, creating a lightweight and reusable environment for running applications.
+
+This guide will introduce you to the most essential Dockerfile commands to get started.
+
+---
+
+## Essential Dockerfile Commands
+
+### 1. `FROM`
+
+The `FROM` instruction specifies the base image from which your image will be built. It’s usually the first line in any Dockerfile.
+
+```dockerfile
+FROM ubuntu:20.04
+```
+
+This command sets the base image to Ubuntu 20.04.
+
+### 2. `COPY`
+
+The `COPY` instruction copies files or directories from your local machine into the Docker image.
+
+```dockerfile
+COPY . /app
+```
+
+This command copies everything from the current directory on your local machine to the `/app` directory in the Docker image.
+
+### 3. `RUN`
+
+The `RUN` instruction executes commands inside the image during the build process, typically used for installing software or setting up your environment.
+
+```dockerfile
+RUN apt-get update && apt-get install -y python3
+```
+
+This command updates the package list and installs Python 3 inside the image.
+
+### 4. `WORKDIR`
+
+The `WORKDIR` instruction sets the working directory inside the image. All subsequent instructions will be run from this directory.
+
+```dockerfile
+WORKDIR /app
+```
+
+This sets the working directory to `/app`.
+
+### 5. `CMD`
+
+The `CMD` instruction specifies the command that will run when the container starts. It’s the default action when you create a container from the image.
+
+```dockerfile
+CMD ["python3", "app.py"]
+```
+
+This command runs `app.py` using Python 3 when the container starts.
+
+### 6. `EXPOSE`
+
+The `EXPOSE` instruction tells Docker which port your application will use so that it can be accessed from outside the container.
+
+```dockerfile
+EXPOSE 8080
+```
+
+This exposes port 8080 for access.
+
+### 7. `ENV`
+
+The `ENV` instruction sets environment variables in the container. These variables can be used by applications or scripts running inside the container.
+
+```dockerfile
+ENV ENVIRONMENT=production
+```
+
+This sets the `ENVIRONMENT` variable to `production`.
+
+---
+
+## Example Dockerfile
+
+Here’s a basic example of a Dockerfile for a Python application:
+
+```dockerfile
+# Use Python 3 as the base image
+FROM python:3.9
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Make port 80 available to the world outside this container
+EXPOSE 80
+
+# Run app.py when the container launches
+CMD ["python", "app.py"]
+```
+
+### What this Dockerfile does:
+
+1. **Sets a base image** (`FROM python:3.9`).
+2. **Sets a working directory** (`WORKDIR /app`).
+3. **Copies application files** into the container (`COPY . /app`).
+4. **Installs dependencies** listed in `requirements.txt` (`RUN pip install`).
+5. **Exposes a port** (`EXPOSE 80`).
+6. **Specifies a startup command** to run the application (`CMD ["python", "app.py"]`).
+
+---
+
+This basic guide covers the essential commands you'll need to create a Dockerfile and build Docker images. As you gain more experience, you can explore additional commands and options to customize your Docker environment.
