@@ -65,10 +65,12 @@ ____
 #### Differences between Docker and Docker Desktop
 **Docker** is an open-source platform used for developing, shipping, and running applications inside containers.\
 **Docker desktop** instead is an all-in-one easy-to-install application designed to simplify the use of Docker (whose has also a Graphical User Interface). It is a commercial application (some features may require a payment).
+____
+### Introduction to Dockerfile Syntax
+As seen before a  `Dockerfile` is a simple text file that contains a series of instructions on how to build a Docker image. Each instruction in a Dockerfile adds a layer to the image, creating a lightweight and reusable environment for running applications. In this paragraph we will introduce the essential and most important commands.
 
+First we will show an example of how a `dockerfile` looks like:
 
-## Dockerfile OCI syntax
-In this paragraph we will introduce the basics around the develpoment of a containerfile. First we will show an example of how a `dockerfile` looks like.
 ```dockerfile
    FROM no:14-alpine3.16
    WORKDIR /app
@@ -78,20 +80,7 @@ In this paragraph we will introduce the basics around the develpoment of a conta
 ```
 
 
-
-### Syntax basics
-
-# Introduction to Dockerfile Syntax
-
-A `Dockerfile` is a simple text file that contains a series of instructions on how to build a Docker image. Each instruction in a Dockerfile adds a layer to the image, creating a lightweight and reusable environment for running applications.
-
-This guide will introduce you to the most essential Dockerfile commands to get started.
-
----
-
-## Essential Dockerfile Commands
-
-### 1. `FROM`
+#### 1. `FROM`
 
 The `FROM` instruction specifies the base image from which your image will be built. It’s usually the first line in any Dockerfile.
 
@@ -101,7 +90,7 @@ FROM ubuntu:20.04
 
 This command sets the base image to Ubuntu 20.04.
 
-### 2. `COPY`
+#### 2. `COPY`
 
 The `COPY` instruction copies files or directories from your local machine into the Docker image.
 
@@ -111,7 +100,7 @@ COPY . /app
 
 This command copies everything from the current directory on your local machine to the `/app` directory in the Docker image.
 
-### 3. `RUN`
+#### 3. `RUN`
 
 The `RUN` instruction executes commands inside the image during the build process, typically used for installing software or setting up your environment.
 
@@ -121,7 +110,7 @@ RUN apt-get update && apt-get install -y python3
 
 This command updates the package list and installs Python 3 inside the image.
 
-### 4. `WORKDIR`
+#### 4. `WORKDIR`
 
 The `WORKDIR` instruction sets the working directory inside the image. All subsequent instructions will be run from this directory.
 
@@ -131,7 +120,7 @@ WORKDIR /app
 
 This sets the working directory to `/app`.
 
-### 5. `CMD`
+#### 5. `CMD`
 
 The `CMD` instruction specifies the command that will run when the container starts. It’s the default action when you create a container from the image.
 
@@ -141,7 +130,7 @@ CMD ["python3", "app.py"]
 
 This command runs `app.py` using Python 3 when the container starts.
 
-### 6. `EXPOSE`
+#### 6. `EXPOSE`
 
 The `EXPOSE` instruction tells Docker which port your application will use so that it can be accessed from outside the container.
 
@@ -151,7 +140,7 @@ EXPOSE 8080
 
 This exposes port 8080 for access.
 
-### 7. `ENV`
+#### 7. `ENV`
 
 The `ENV` instruction sets environment variables in the container. These variables can be used by applications or scripts running inside the container.
 
