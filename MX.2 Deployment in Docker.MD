@@ -145,7 +145,7 @@ EXPOSE 8080
 ```
 
 This exposes port 8080 for access.
-
+____
 #### 7. `ENV`
 
 The `ENV` instruction sets environment variables in the container. These variables can be used by applications or scripts running inside the container.
@@ -156,7 +156,7 @@ ENV ENVIRONMENT=production
 
 This sets the `ENVIRONMENT` variable to `production`.
 
----
+____
 
 ## Example Dockerfile
 
