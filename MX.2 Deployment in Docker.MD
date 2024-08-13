@@ -122,7 +122,8 @@ This sets the working directory to `/app`.
 ____
 #### 5. `CMD`
 
-The `CMD` instruction specifies the command that will run when the container starts, tipically it's written following the format `CMD ["executable","param1","param2"]` also referenced as **exec form**.
+The `CMD` instruction specifies the command that will run when the container starts, tipically it's written following the format 
+`CMD ["executable","param1","param2"]` also referenced as **exec form**.
 
 ```dockerfile
 CMD ["python3", "app.py"]
