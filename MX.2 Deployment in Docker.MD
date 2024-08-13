@@ -69,7 +69,6 @@ ____
 ### Introduction to Dockerfile Syntax
 As seen before a  `Dockerfile` is a simple text file that contains a series of instructions on how to build a Docker image. Each instruction in a Dockerfile adds a layer to the image, creating a lightweight and reusable environment for running applications. In this paragraph we will introduce the essential and most important commands.
 
-____
 #### 1. `FROM`
 
 The `FROM` instruction specifies the base image from which your image will be built. It’s usually the first line in any Dockerfile.
