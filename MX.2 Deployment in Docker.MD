@@ -79,7 +79,7 @@ First we will show an example of how a `dockerfile` looks like:
    CMD ["npm",start]
 ```
 
-
+____
 #### 1. `FROM`
 
 The `FROM` instruction specifies the base image from which your image will be built. It’s usually the first line in any Dockerfile.
@@ -89,7 +89,7 @@ FROM ubuntu:20.04
 ```
 
 This command sets the base image to Ubuntu 20.04.
-
+____
 #### 2. `COPY`
 
 The `COPY` instruction copies files or directories from your local machine into the Docker image.
@@ -99,7 +99,7 @@ COPY . /app
 ```
 
 This command copies everything from the current directory on your local machine to the `/app` directory in the Docker image.
-
+____
 #### 3. `RUN`
 
 The `RUN` instruction executes commands inside the image during the build process, typically used for installing software or setting up your environment.
@@ -109,7 +109,7 @@ RUN apt-get update && apt-get install -y python3
 ```
 
 This command updates the package list and installs Python 3 inside the image.
-
+____
 #### 4. `WORKDIR`
 
 The `WORKDIR` instruction sets the working directory inside the image. All subsequent instructions will be run from this directory.
@@ -119,7 +119,7 @@ WORKDIR /app
 ```
 
 This sets the working directory to `/app`.
-
+____
 #### 5. `CMD`
 
 The `CMD` instruction specifies the command that will run when the container starts, tipically it's written following the format `CMD ["executable","param1","param2"]` also referenced as **exec form**.
@@ -135,6 +135,8 @@ This command runs `app.py` using Python 3 when the container starts.
 
 > [!IMPORTANT]
 > There can only be one CMD instruction in a Dockerfile. If you list more than one `CMD`, only the last one takes effect.
+
+____
 
 #### 6. `EXPOSE`
 
