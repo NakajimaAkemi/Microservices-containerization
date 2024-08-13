@@ -130,14 +130,10 @@ Or we can inspect the pod, showing information that describes the pod
 ```
 podman pod inspect mypod
 ```
-### Example of pods with Spring boot application
 ### Kube play
 
 
 
-
-###
-In this paragraph we analyze the Chapter 6 of the [Magnus Larsson repository](https://github.com/PacktPublishing/Microservices-with-Spring-Boot-and-Spring-Cloud-Third-Edition/tree/main/Chapter06).\
 ## Sources
 - https://www.redhat.com/en/topics/containers/what-is-podman
 - https://github.com/containers/podman/blob/main/docs/tutorials/rootless_tutorial.md
