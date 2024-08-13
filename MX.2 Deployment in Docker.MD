@@ -122,7 +122,7 @@ This sets the working directory to `/app`.
 
 #### 5. `CMD`
 
-The `CMD` instruction specifies the command that will run when the container starts.
+The `CMD` instruction specifies the command that will run when the container starts, tipically it's written following the format `CMD ["executable","param1","param2"]` also referenced as **exec form**.
 
 ```dockerfile
 CMD ["python3", "app.py"]
@@ -133,7 +133,7 @@ This command runs `app.py` using Python 3 when the container starts.
 > [!NOTE]
 > The key difference between `CMD` and `RUN` is the moment the command is executed, the former is executed on build time and the former is execute during the container startup.
 
-> [!BEWARE]
+> [!IMPORTANT]
 > There can only be one CMD instruction in a Dockerfile. If you list more than one `CMD`, only the last one takes effect.
 
 #### 6. `EXPOSE`
