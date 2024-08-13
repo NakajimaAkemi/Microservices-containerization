@@ -184,7 +184,3 @@ CMD ["python", "app.py"]
 4. **Installs dependencies** listed in `requirements.txt` (`RUN pip install`).
 5. **Exposes a port** (`EXPOSE 80`).
 6. **Specifies a startup command** to run the application (`CMD ["python", "app.py"]`).
-
----
-
-This basic guide covers the essential commands you'll need to create a Dockerfile and build Docker images. As you gain more experience, you can explore additional commands and options to customize your Docker environment.
