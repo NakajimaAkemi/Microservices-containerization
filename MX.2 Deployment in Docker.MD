@@ -133,6 +133,9 @@ This command runs `app.py` using Python 3 when the container starts.
 > [!NOTE]
 > The key difference between `CMD` and `RUN` is the moment the command is executed, the former is executed on build time and the former is execute during the container startup.
 
+> [!BEWARE]
+> There can only be one CMD instruction in a Dockerfile. If you list more than one `CMD`, only the last one takes effect.
+
 #### 6. `EXPOSE`
 
 The `EXPOSE` instruction tells Docker which port your application will use so that it can be accessed from outside the container.
@@ -187,3 +190,8 @@ CMD ["python", "app.py"]
 4. **Installs dependencies** listed in `requirements.txt` (`RUN pip install`).
 5. **Exposes a port** (`EXPOSE 8080`).
 6. **Specifies a startup command** to run the application (`CMD ["python", "app.py"]`).
+
+
+
+## Sources and additional readings
+ - https://docs.docker.com/reference/dockerfile/
