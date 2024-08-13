@@ -69,16 +69,6 @@ ____
 ### Introduction to Dockerfile Syntax
 As seen before a  `Dockerfile` is a simple text file that contains a series of instructions on how to build a Docker image. Each instruction in a Dockerfile adds a layer to the image, creating a lightweight and reusable environment for running applications. In this paragraph we will introduce the essential and most important commands.
 
-First we will show an example of how a `dockerfile` looks like:
-
-```dockerfile
-   FROM no:14-alpine3.16
-   WORKDIR /app
-   COPY ..
-   RUN npm install
-   CMD ["npm",start]
-```
-
 ____
 #### 1. `FROM`
 
