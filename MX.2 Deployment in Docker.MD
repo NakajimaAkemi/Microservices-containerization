@@ -89,6 +89,9 @@ FROM ubuntu:20.04
 ```
 
 This command sets the base image to Ubuntu 20.04.
+
+> [!IMPORTANT]
+> Choosing the base image of our container is an important step, find the one that provides what you need and obviously stick to trusted and officila distibutors.
 ____
 #### 2. `COPY`
 
