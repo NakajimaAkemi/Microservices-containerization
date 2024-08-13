@@ -122,13 +122,16 @@ This sets the working directory to `/app`.
 
 #### 5. `CMD`
 
-The `CMD` instruction specifies the command that will run when the container starts. It’s the default action when you create a container from the image.
+The `CMD` instruction specifies the command that will run when the container starts.
 
 ```dockerfile
 CMD ["python3", "app.py"]
 ```
 
 This command runs `app.py` using Python 3 when the container starts.
+
+> [!NOTE]
+> The key difference between `CMD` and `RUN` is the moment the command is executed, the former is executed on build time and the former is execute during the container startup.
 
 #### 6. `EXPOSE`
 
@@ -169,8 +172,8 @@ COPY . /app
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
+# Make port 8080 available to the world outside this container
+EXPOSE 8080
 
 # Run app.py when the container launches
 CMD ["python", "app.py"]
@@ -182,5 +185,5 @@ CMD ["python", "app.py"]
 2. **Sets a working directory** (`WORKDIR /app`).
 3. **Copies application files** into the container (`COPY . /app`).
 4. **Installs dependencies** listed in `requirements.txt` (`RUN pip install`).
-5. **Exposes a port** (`EXPOSE 80`).
+5. **Exposes a port** (`EXPOSE 8080`).
 6. **Specifies a startup command** to run the application (`CMD ["python", "app.py"]`).
