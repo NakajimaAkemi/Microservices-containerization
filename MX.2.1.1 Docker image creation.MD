@@ -1,6 +1,6 @@
 # Docker Image Creation Guide
 
-This guide explains how to create Docker images for a simple Python application, a Java application, and a basic image that includes the `ls` command.
+In this markdown we will show various examples of the creation of simple Docker images, a simple Python application, a Java application, and a basic image that includes the `ls` command.
 
 ## 1. Creating a Docker Image for a Simple Python Application
 
