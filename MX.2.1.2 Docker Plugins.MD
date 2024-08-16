@@ -1,6 +1,8 @@
 # Docker Plugins
 
 
+## Replicas (maybe better in compose)
+
 ## Networks
 
 
