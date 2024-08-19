@@ -186,7 +186,7 @@ CMD ["python", "app.py"]
 5. **Exposes a port** (`EXPOSE 8080`).
 6. **Specifies a startup command** to run the application (`CMD ["python", "app.py"]`).
 
-
+## How to download an image
 
 ## Sources and additional readings
  - https://docs.docker.com/reference/dockerfile/
