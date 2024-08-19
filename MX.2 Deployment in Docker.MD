@@ -186,7 +186,88 @@ CMD ["python", "app.py"]
 5. **Exposes a port** (`EXPOSE 8080`).
 6. **Specifies a startup command** to run the application (`CMD ["python", "app.py"]`).
 
-## How to download an image
+
+# Guide to Downloading a Container Image Using Docker Commands
+
+## 1. Install Docker (if not already installed)
+
+### For Linux
+- Update your package database and install Docker:
+  ```bash
+  sudo apt-get update
+  sudo apt-get install docker-ce docker-ce-cli containerd.io
+  ```
+- Start Docker:
+  ```bash
+  sudo systemctl start docker
+  ```
+
+### For macOS
+- Download and install Docker Desktop from [Docker's official website](https://www.docker.com/products/docker-desktop).
+- After installation, start Docker Desktop.
+
+### For Windows
+- Download and install Docker Desktop from [Docker's official website](https://www.docker.com/products/docker-desktop).
+- Start Docker Desktop after installation.
+
+## 2. Search for the Docker Image
+If you're unsure about the exact image name, you can search for it on Docker Hub using:
+```bash
+docker search <image-name>
+```
+Example:
+```bash
+docker search ubuntu
+```
+
+## 3. Download (Pull) the Docker Image
+Use the `docker pull` command to download the image. The general syntax is:
+```bash
+docker pull <image-name>:<tag>
+```
+- **image-name**: Name of the image (e.g., `ubuntu`).
+- **tag**: Specific version or variant (e.g., `latest`, `20.04`).
+
+Example:
+```bash
+docker pull ubuntu:latest
+```
+
+If you don't specify a tag, Docker will download the `latest` tag by default:
+```bash
+docker pull ubuntu
+```
+
+## 4. Verify the Downloaded Image
+After pulling the image, you can verify that it was downloaded successfully by listing all local Docker images:
+```bash
+docker images
+```
+
+This command will display the list of images on your system along with their tags, image IDs, and sizes.
+
+## 5. Run the Downloaded Image (Optional)
+If you want to run a container from the downloaded image, use:
+```bash
+docker run -it <image-name>:<tag>
+```
+Example:
+```bash
+docker run -it ubuntu:latest
+```
+
+This will start a container and open an interactive terminal session within it.
+
+## Summary of Commands
+```bash
+docker search <image-name>
+docker pull <image-name>:<tag>
+docker images
+docker run -it <image-name>:<tag>
+```
+
+Now you have successfully downloaded and, if desired, run a container image using Docker commands.
+```
 
 ## Sources and additional readings
  - https://docs.docker.com/reference/dockerfile/
