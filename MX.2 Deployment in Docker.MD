@@ -267,7 +267,7 @@ docker run -it <image-name>:<tag>
 ```
 
 Now you have successfully downloaded and, if desired, run a container image using Docker commands.
-```
+
 
 ## Sources and additional readings
  - https://docs.docker.com/reference/dockerfile/
