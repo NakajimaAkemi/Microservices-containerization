@@ -1,4 +1,3 @@
-```markdown
 # Introduzione a Docker Swarm e Replicas
 
 Docker Swarm è la soluzione di orchestrazione nativa di Docker che permette di gestire e scalare container su un cluster di nodi. Questo tutorial ti guiderà attraverso i concetti fondamentali di Docker Swarm e l'uso delle **replicas** per scalare i servizi. Inoltre, includeremo esempi pratici di utilizzo delle replicas, sia con Docker che con Docker Compose.
@@ -146,4 +145,4 @@ networks:
 ## Conclusione
 
 Docker Swarm è una potente soluzione di orchestrazione che permette di gestire applicazioni containerizzate su larga scala. L'uso delle **replicas** è fondamentale per garantire la disponibilità e la scalabilità dei servizi. Attraverso gli esempi forniti, abbiamo visto come creare e gestire replicas sia direttamente con Docker Swarm che utilizzando Docker Compose in modalità Swarm, offrendo flessibilità e controllo sull'infrastruttura containerizzata.
-```
+
