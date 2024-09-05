@@ -47,7 +47,7 @@ Example:
 docker run -it ubuntu:latest
 ```
 This will start a container and open an interactive terminal session within it.
-__
+___
 
 
 Now you have successfully downloaded and, if desired, run a container image using Docker commands.
