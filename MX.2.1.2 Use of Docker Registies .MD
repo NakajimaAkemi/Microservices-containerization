@@ -46,16 +46,9 @@ Example:
 ```bash
 docker run -it ubuntu:latest
 ```
-
 This will start a container and open an interactive terminal session within it.
+__
 
-## Summary of Commands
-```bash
-docker search <image-name>
-docker pull <image-name>:<tag>
-docker images
-docker run -it <image-name>:<tag>
-```
 
 Now you have successfully downloaded and, if desired, run a container image using Docker commands.
 
