@@ -1,4 +1,5 @@
-# Guide to Downloading a Container Image Using Docker Commands
+# Downloading a Container Image using Docker
+In this section we will show a simple guide on how to Download and execute a Container image from the Docker registry.
 
 ## 1. Search for the Docker Image
 If you're unsure about the exact image name, you can search for it on Docker Hub using:
