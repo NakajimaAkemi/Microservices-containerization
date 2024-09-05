@@ -57,8 +57,7 @@ Now you have successfully downloaded and, if desired, run a container image usin
 This guide will walk you through the steps to build a Docker image and upload it to a Docker registry using Docker commands.
 
 ## Prerequisites
-
-As prerequisite we need to have an Account on a **Docker registry service**, **AWS ECR**, **Google Container Registry** or other. In this case we will show how it works with **Docker hub**.
+As prerequisite we need to have a *DockerHub Account* in order to pull image with Docker CLI. In the following step we will use DockerHub registry as example, but other registry services can be used such as  **AWS ECR**, **Google Container Registry** and more.
 
 ## Steps
 
