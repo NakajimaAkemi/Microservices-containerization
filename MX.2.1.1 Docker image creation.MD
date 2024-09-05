@@ -11,8 +11,6 @@ FROM ubuntu:20.04
 
 This command sets the base image to Ubuntu 20.04.
 
-> [!IMPORTANT]
-> Choosing the base image of our container is an important step, find the one that provides what you need and obviously stick to trusted and official distibutors.
 ____
 ### 2. `COPY`
 
@@ -54,9 +52,6 @@ CMD ["python3", "app.py"]
 ```
 
 This command runs `app.py` using Python 3 when the container starts.
-
-> [!NOTE]
-> The key difference between `CMD` and `RUN` is the moment the command is executed, the former is executed on build time and the former is execute during the container startup.
 
 > [!IMPORTANT]
 > There can only be one CMD instruction in a Dockerfile. If you list more than one `CMD`, only the last one takes effect.
@@ -118,9 +113,11 @@ CMD ["python", "app.py"]
 5. **Exposes a port** (`EXPOSE 8080`).
 6. **Specifies a startup command** to run the application (`CMD ["python", "app.py"]`).
 
+> [!IMPORTANT]
+> Choosing the base image of our container is an important step, find the one that provides what you need and obviously stick to trusted and official distibutors.
 
-
-
+> [!NOTE]
+> The key difference between `CMD` and `RUN` is the moment the command is executed, the former is executed on build time and the former is execute during the container startup.
 
 
 
