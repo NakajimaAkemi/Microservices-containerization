@@ -1,7 +1,7 @@
 # Docker Introduction to Dockerfile syntax
 As seen before a  `Dockerfile` is a simple text file that contains a series of instructions on how to build a Docker image. Each instruction in a Dockerfile adds a layer to the image, creating a lightweight and reusable environment for running applications. In this paragraph we will introduce the essential and most important commands.
 
-#### 1. `FROM`
+### 1. `FROM`
 
 The `FROM` instruction specifies the base image from which your image will be built. It’s usually the first line in any Dockerfile.
 
@@ -14,7 +14,7 @@ This command sets the base image to Ubuntu 20.04.
 > [!IMPORTANT]
 > Choosing the base image of our container is an important step, find the one that provides what you need and obviously stick to trusted and official distibutors.
 ____
-#### 2. `COPY`
+### 2. `COPY`
 
 The `COPY` instruction copies files or directories from your local machine into the Docker image.
 
@@ -24,7 +24,7 @@ COPY . /app
 
 This command copies everything from the current directory on your local machine to the `/app` directory in the Docker image.
 ____
-#### 3. `RUN`
+### 3. `RUN`
 
 The `RUN` instruction executes commands inside the image during the build process, typically used for installing software or setting up your environment.
 
@@ -34,7 +34,7 @@ RUN apt-get update && apt-get install -y python3
 
 This command updates the package list and installs Python 3 inside the image.
 ____
-#### 4. `WORKDIR`
+### 4. `WORKDIR`
 
 The `WORKDIR` instruction sets the working directory inside the image. All subsequent instructions will be run from this directory.
 
@@ -44,7 +44,7 @@ WORKDIR /app
 
 This sets the working directory to `/app`.
 ____
-#### 5. `CMD`
+### 5. `CMD`
 
 The `CMD` instruction specifies the command that will run when the container starts, tipically it's written following the format 
 `CMD ["executable","param1","param2"]` also referenced as **exec form**.
@@ -63,7 +63,7 @@ This command runs `app.py` using Python 3 when the container starts.
 
 ____
 
-#### 6. `EXPOSE`
+### 6. `EXPOSE`
 
 The `EXPOSE` instruction tells Docker which port your application will use so that it can be accessed from outside the container.
 
@@ -73,7 +73,7 @@ EXPOSE 8080
 
 This exposes port 8080 for access.
 ____
-#### 7. `ENV`
+### 7. `ENV`
 
 The `ENV` instruction sets environment variables in the container. These variables can be used by applications or scripts running inside the container.
 
