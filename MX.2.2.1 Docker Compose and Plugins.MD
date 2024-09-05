@@ -5,7 +5,7 @@
 - **Secrets**: Secrets are used to store sensitive information such as passwords, OAuth tokens, and ssh keys; they are designed to be tightly controlled and secure, ensuring that secrets are not exposed outside where they are intended to be used.
 - **Networks**: networking is a passage through which all the isolated container communicate - there are mainly five network drivers in Docker (such as bridge, host, none, overlay, and macvlan); in Docker, networking is indeed a crucial component that allows isolated containers to communicate with each other.
 
-## Replicas (maybe better in compose)
+## Replicas better in Swarm
 
 ## Networks
 
