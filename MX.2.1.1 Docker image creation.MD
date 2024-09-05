@@ -372,19 +372,6 @@ You should get a response like this:
 }
 ```
 
-### Summary of Commands
-
-```bash
-# Build the Docker image
-docker build -t flask-echo-server .
-
-# Run the Docker container
-docker run -p 5000:5000 flask-echo-server
-
-# Test the server
-curl -X POST http://localhost:5000/echo -H "Content-Type: application/json" -d '{"message": "Hello, Echo Server!"}'
-```
-
 ## Sources
 - https://medium.com/@anshita.bhasin/a-step-by-step-guide-to-create-dockerfile-9e3744d38d11
 - https://docs.docker.com
