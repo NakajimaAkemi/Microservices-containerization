@@ -58,7 +58,7 @@ This guide will walk you through the steps to build a Docker image and upload it
 
 ## Prerequisites
 
-- **Docker Account**: Create an account on a Docker registry service (e.g., [Docker Hub](https://hub.docker.com/), AWS ECR, Google Container Registry).
+As prerequisite we need to have an Account on a **Docker registry service**, **AWS ECR**, **Google Container Registry** or other. In this case we will show how it works with **Docker hub**.
 
 ## Steps
 
