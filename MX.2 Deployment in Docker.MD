@@ -52,8 +52,6 @@ _It is usually located in the resources package._
   - ```down``` to **stop** and remove the service.
   
   In the simple ```docker``` world we can manage:
-  - the **volumes**: with ```volume create``` we can create a volume, and with ```volume rm``` you can remove it.
-  - the **network**: as the same as volumes, we can create a new network with ```network create``` and remove it with ```network rm```
   - the **images**: ```build -t <image-name>``` to create a new image, with ```pull <image-name>``` instead we can download an image from a Docker registry, such as the [Docker Hub]( https://hub.docker.com/ ) (e.g. ```docker pull ubuntu:20.04```).
   - the **container itself**:
     - ```run <image-name>``` run a container from an image, obviously.
