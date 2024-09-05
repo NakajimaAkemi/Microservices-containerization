@@ -254,6 +254,136 @@ docker run ls-command
 **Expected Output**: A detailed list of the root directory contents.
 
 
+## 4. Creating a Docker Image for a Flask Echo Server 
+
+We will create and containerize a simple Echo server using Flask, which echoes back any data sent to it.
+
+### 1. Set Up the Flask Echo Server
+
+First, let's create a Flask app that acts as an Echo server.
+
+#### Create a Project Directory
+
+```bash
+mkdir flask-echo-server
+cd flask-echo-server
+```
+
+#### Create a Python File
+
+Create a Python file named `app.py` with the following content:
+
+```python
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# Route to echo the received data
+@app.route('/echo', methods=['POST'])
+def echo():
+    data = request.json
+    return jsonify({"echoed_data": data})
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
+```
+
+This simple Flask application defines a POST endpoint (`/echo`). It expects JSON data, and then echoes back the same data.
+
+### 2. Create a `requirements.txt` File
+
+In the same directory, create a `requirements.txt` file to list the dependencies for the project. For this project, we'll need Flask.
+
+```bash
+Flask==2.0.3
+```
+
+### 3. Create a Dockerfile
+
+Now, we will create a `Dockerfile` to containerize the Flask app. In the same directory, create a file named `Dockerfile` with the following content:
+
+```Dockerfile
+# Use the official Python image
+FROM python:3.9-slim
+
+# Set the working directory inside the container
+WORKDIR /app
+
+# Copy the current directory contents into the container
+COPY . .
+
+# Install the required packages
+RUN pip install -r requirements.txt
+
+# Expose port 5000 for the Flask app
+EXPOSE 5000
+
+# Define the command to run the application
+CMD ["python", "app.py"]
+```
+
+This Dockerfile does the following:
+1. Uses a lightweight Python image.
+2. Sets the working directory.
+3. Copies the current directory contents into the container.
+4. Installs dependencies from `requirements.txt`.
+5. Exposes port 5000 for Flask.
+6. Runs the `app.py` when the container starts.
+
+### 4. Build the Docker Image
+
+Now that you have your Python app and Dockerfile ready, you can build the Docker image.
+
+Run the following command in your terminal:
+
+```bash
+docker build -t flask-echo-server .
+```
+
+This will create a Docker image named `flask-echo-server` based on the `Dockerfile`.
+
+### 5. Run the Docker Container
+
+Once the image is built, you can run the container:
+
+```bash
+docker run -p 5000:5000 flask-echo-server
+```
+
+This command maps port 5000 on your host to port 5000 in the container, allowing you to access the Flask app.
+
+### 6. Test the Echo Server
+
+Now, you can test the Echo server using a tool like `curl` or Postman.
+
+#### Using `curl`:
+
+```bash
+curl -X POST http://localhost:5000/echo -H "Content-Type: application/json" -d '{"message": "Hello, Echo Server!"}'
+```
+
+You should get a response like this:
+
+```json
+{
+  "echoed_data": {
+    "message": "Hello, Echo Server!"
+  }
+}
+```
+
+### Summary of Commands
+
+```bash
+# Build the Docker image
+docker build -t flask-echo-server .
+
+# Run the Docker container
+docker run -p 5000:5000 flask-echo-server
+
+# Test the server
+curl -X POST http://localhost:5000/echo -H "Content-Type: application/json" -d '{"message": "Hello, Echo Server!"}'
+```
 
 ## Sources
 - https://medium.com/@anshita.bhasin/a-step-by-step-guide-to-create-dockerfile-9e3744d38d11
