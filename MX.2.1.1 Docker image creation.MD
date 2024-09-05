@@ -1,5 +1,135 @@
-# Docker Image Creation Guide
+# Docker Introduction to Dockerfile syntax and Image Creation Guide
+As seen before a  `Dockerfile` is a simple text file that contains a series of instructions on how to build a Docker image. Each instruction in a Dockerfile adds a layer to the image, creating a lightweight and reusable environment for running applications. In this paragraph we will introduce the essential and most important commands.
 
+#### 1. `FROM`
+
+The `FROM` instruction specifies the base image from which your image will be built. It’s usually the first line in any Dockerfile.
+
+```dockerfile
+FROM ubuntu:20.04
+```
+
+This command sets the base image to Ubuntu 20.04.
+
+> [!IMPORTANT]
+> Choosing the base image of our container is an important step, find the one that provides what you need and obviously stick to trusted and official distibutors.
+____
+#### 2. `COPY`
+
+The `COPY` instruction copies files or directories from your local machine into the Docker image.
+
+```dockerfile
+COPY . /app
+```
+
+This command copies everything from the current directory on your local machine to the `/app` directory in the Docker image.
+____
+#### 3. `RUN`
+
+The `RUN` instruction executes commands inside the image during the build process, typically used for installing software or setting up your environment.
+
+```dockerfile
+RUN apt-get update && apt-get install -y python3
+```
+
+This command updates the package list and installs Python 3 inside the image.
+____
+#### 4. `WORKDIR`
+
+The `WORKDIR` instruction sets the working directory inside the image. All subsequent instructions will be run from this directory.
+
+```dockerfile
+WORKDIR /app
+```
+
+This sets the working directory to `/app`.
+____
+#### 5. `CMD`
+
+The `CMD` instruction specifies the command that will run when the container starts, tipically it's written following the format 
+`CMD ["executable","param1","param2"]` also referenced as **exec form**.
+
+```dockerfile
+CMD ["python3", "app.py"]
+```
+
+This command runs `app.py` using Python 3 when the container starts.
+
+> [!NOTE]
+> The key difference between `CMD` and `RUN` is the moment the command is executed, the former is executed on build time and the former is execute during the container startup.
+
+> [!IMPORTANT]
+> There can only be one CMD instruction in a Dockerfile. If you list more than one `CMD`, only the last one takes effect.
+
+____
+
+#### 6. `EXPOSE`
+
+The `EXPOSE` instruction tells Docker which port your application will use so that it can be accessed from outside the container.
+
+```dockerfile
+EXPOSE 8080
+```
+
+This exposes port 8080 for access.
+____
+#### 7. `ENV`
+
+The `ENV` instruction sets environment variables in the container. These variables can be used by applications or scripts running inside the container.
+
+```dockerfile
+ENV ENVIRONMENT=production
+```
+
+This sets the `ENVIRONMENT` variable to `production`.
+
+____
+
+## Example Dockerfile
+
+Here’s a basic example of a Dockerfile for a Python application:
+
+```dockerfile
+# Use Python 3 as the base image
+FROM python:3.9
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Make port 8080 available to the world outside this container
+EXPOSE 8080
+
+# Run app.py when the container launches
+CMD ["python", "app.py"]
+```
+
+### What this Dockerfile does:
+
+1. **Sets a base image** (`FROM python:3.9`).
+2. **Sets a working directory** (`WORKDIR /app`).
+3. **Copies application files** into the container (`COPY . /app`).
+4. **Installs dependencies** listed in `requirements.txt` (`RUN pip install`).
+5. **Exposes a port** (`EXPOSE 8080`).
+6. **Specifies a startup command** to run the application (`CMD ["python", "app.py"]`).
+
+
+
+
+
+
+
+
+
+
+
+
+# Simple examples of Docker images
 In this markdown we will show various examples of the creation of simple Docker images, a simple Python application, a Java application, and a basic image that includes the `ls` command.
 
 ## 1. Creating a Docker Image for a Simple Python Application
