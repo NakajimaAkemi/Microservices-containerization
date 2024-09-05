@@ -79,40 +79,6 @@ ENV ENVIRONMENT=production
 This sets the `ENVIRONMENT` variable to `production`.
 
 
-
-## Example Dockerfile
-
-Here’s a basic example of a Dockerfile for a Python application:
-
-```dockerfile
-# Use Python 3 as the base image
-FROM python:3.9
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the current directory contents into the container at /app
-COPY . /app
-
-# Install any needed packages specified in requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Make port 8080 available to the world outside this container
-EXPOSE 8080
-
-# Run app.py when the container launches
-CMD ["python", "app.py"]
-```
-
-### What this Dockerfile does:
-
-1. **Sets a base image** (`FROM python:3.9`).
-2. **Sets a working directory** (`WORKDIR /app`).
-3. **Copies application files** into the container (`COPY . /app`).
-4. **Installs dependencies** listed in `requirements.txt` (`RUN pip install`).
-5. **Exposes a port** (`EXPOSE 8080`).
-6. **Specifies a startup command** to run the application (`CMD ["python", "app.py"]`).
-
 > [!IMPORTANT]
 > Choosing the base image of our container is an important step, find the one that provides what you need and obviously stick to trusted and official distibutors.
 
