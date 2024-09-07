@@ -8,6 +8,38 @@ Key benefits of Docker Compose:
 - Easily configurable networking
 - Simplifies container management
 
+___
+Docker Compose è uno strumento potente che permette di definire e gestire applicazioni Docker multi-container. È particolarmente utile quando si lavora con un ecosistema di microservizi, poiché consente di orchestrare e coordinare più container Docker in modo semplice e coeso.
+
+## Principi Fondamentali di Docker Compose
+
+### Cos'è Docker Compose?
+
+Docker Compose è uno strumento che consente di definire e gestire ambienti multi-container Docker attraverso un semplice file YAML (`docker-compose.yml`). Con Compose, è possibile configurare i servizi, le reti e i volumi necessari per eseguire un'applicazione multi-container in un ambiente isolato.
+
+### Vantaggi di Docker Compose
+
+- **Gestione Semplice**: Docker Compose consente di avviare, fermare e gestire più container con un singolo comando.
+- **Infrastruttura come Codice**: Tutta la configurazione viene definita in un file YAML, permettendo un versionamento e una gestione del codice consistenti.
+- **Isolamento Ambientale**: Facilita la creazione di ambienti isolati per sviluppo, test e produzione, garantendo che ogni container abbia accesso solo alle risorse necessarie.
+- **Scalabilità**: Docker Compose consente di scalare rapidamente i servizi, avviando più istanze dello stesso container.
+
+
+___
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 A basic structure of `docker-compose.yml`:
 
 ```yaml
@@ -327,20 +359,7 @@ La comprensione e l'utilizzo corretto di Volumes, Networks e Replicas in Docker 
 
 # Introduzione a Docker Compose e ai Microservizi
 
-Docker Compose è uno strumento potente che permette di definire e gestire applicazioni Docker multi-container. È particolarmente utile quando si lavora con un ecosistema di microservizi, poiché consente di orchestrare e coordinare più container Docker in modo semplice e coeso.
 
-## Principi Fondamentali di Docker Compose
-
-### Cos'è Docker Compose?
-
-Docker Compose è uno strumento che consente di definire e gestire ambienti multi-container Docker attraverso un semplice file YAML (`docker-compose.yml`). Con Compose, è possibile configurare i servizi, le reti e i volumi necessari per eseguire un'applicazione multi-container in un ambiente isolato.
-
-### Vantaggi di Docker Compose
-
-- **Gestione Semplice**: Docker Compose consente di avviare, fermare e gestire più container con un singolo comando.
-- **Infrastruttura come Codice**: Tutta la configurazione viene definita in un file YAML, permettendo un versionamento e una gestione del codice consistenti.
-- **Isolamento Ambientale**: Facilita la creazione di ambienti isolati per sviluppo, test e produzione, garantendo che ogni container abbia accesso solo alle risorse necessarie.
-- **Scalabilità**: Docker Compose consente di scalare rapidamente i servizi, avviando più istanze dello stesso container.
 
 ### File `docker-compose.yml`
 
