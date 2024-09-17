@@ -325,6 +325,11 @@ Now, you can test the Echo server using a tool like `curl` or Postman.
 curl -X POST http://localhost:5000/echo -H "Content-Type: application/json" -d '{"message": "Hello, Echo Server!"}'
 ```
 
+For `Windows` command prompt we need to put escape character `\` around the strings
+```bash
+curl -X POST http://localhost:5000/echo -H "Content-Type: application/json" -d "{\"message\": \"Hello, Echo Server!\"}"
+```bash
+
 You should get a response like this:
 
 ```json
