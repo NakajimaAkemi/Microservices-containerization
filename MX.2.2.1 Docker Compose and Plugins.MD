@@ -1,16 +1,9 @@
 # Docker Compose Overview
-Docker Compose is a powerful tool that allows to define and manage multi-container Docker applications. It comes in play when we're working with microservice ecosystems, allowing us to launch and coordinate multiple containers at once in a simple way. Configure the networking, Infrastructure as a code, Isolation management and Scalability demands (copies)
-
+Docker Compose is a powerful tool that allows us to define and manage multi-container Docker applications. It is particularly useful when working with microservice ecosystems, as it enables the easy launch and coordination of multiple containers simultaneously. With Compose, we can configure networking, define infrastructure as code, and meet scalability requirements.
 
 
 ___
-
-
-
-Docker Compose è uno strumento che consente di definire e gestire ambienti multi-container Docker attraverso un semplice file YAML (`docker-compose.yml`). Con Compose, è possibile configurare i servizi, le reti e i volumi necessari per eseguire un'applicazione multi-container in un ambiente isolato.
-
-With a `docker-compose.yml` file, you can define how to configure, launch, and manage multiple containers simultaneously.
-
+As said before, compose allows us to define and manage a multi-container Docker app, and it is performed trough a simple YAML file (`docker-compose.yml`).
 
 A basic structure of `docker-compose.yml`:
 
