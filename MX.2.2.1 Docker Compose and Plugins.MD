@@ -24,18 +24,18 @@ services:
 - **version**: Specifies the Compose version to use.
 - **services**: Defines the container of the application, each service represents a container.
 - **image**: Specifies the image to use for the service.
-- **build**: Alternativa a `image`, permette di costruire un'immagine da un Dockerfile specificato.
+- **build**: Alternative to `image`, allows to build an image from a specific container.
 - **ports**: Maps the host's ports.
 - **volumes**: Allows to share data between container and host or just between containers.
 - **networks**: Defines the networks which the containers will utilize to communicate.
 
 ### Lifecycle di Docker Compose
-
-- **`docker-compose up`**: Avvia tutti i container definiti nel file `docker-compose.yml`.
-- **`docker-compose down`**: Ferma e rimuove tutti i container, le reti e i volumi definiti nel file.
-- **`docker-compose build`**: Costruisce le immagini Docker specificate nei servizi.
-- **`docker-compose logs`**: Visualizza i log di tutti i container in esecuzione.
-- **`docker-compose scale`**: Scala uno o più servizi, aumentando o diminuendo il numero di container in esecuzione.
+Docker Compose works with `docker-compose <command>` commands, allowing us to manage the ecosystem's lifecycle with the following commands:
+- **`up`**: Start all services defined in the`docker-compose.yml` file.
+- **`down`**: Stops and removes all containers, networks, volumes defined in the compose file.
+- **`build`**: Builds the the Docker images specified in services.
+- **`logs`**: Views the logs of all containers in execution.
+- **`scale`**: Scales up or down the number of containers.
 
 
 
