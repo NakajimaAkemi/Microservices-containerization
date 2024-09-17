@@ -328,6 +328,9 @@ curl -X POST http://localhost:5000/echo -H "Content-Type: application/json" -d '
 For `Windows` command prompt we need to put escape character `\` around the strings
 ```bash
 curl -X POST http://localhost:5000/echo -H "Content-Type: application/json" -d "{\"message\": \"Hello, Echo Server!\"}"
+```
+
+
 ```bash
 
 You should get a response like this:
