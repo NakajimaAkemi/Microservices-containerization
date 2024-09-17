@@ -258,7 +258,7 @@ This simple Flask application defines a POST endpoint (`/echo`). It expects JSON
 In the same directory, create a `requirements.txt` file to list the dependencies for the project. For this project, we'll need Flask.
 
 ```bash
-Flask==2.0.3
+Flask
 ```
 
 ### 3. Create a Dockerfile
