@@ -331,8 +331,6 @@ curl -X POST http://localhost:5000/echo -H "Content-Type: application/json" -d "
 ```
 
 
-```bash
-
 You should get a response like this:
 
 ```json
