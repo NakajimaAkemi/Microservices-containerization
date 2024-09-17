@@ -19,15 +19,15 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: example
 ```
-### Elementi Chiave di un File Compose
+### Key elements of the Compose file
 
-- **version**: Specifica la versione di Compose da usare.
-- **services**: Definisce i container che compongono l'applicazione. Ogni servizio rappresenta un container.
-- **image**: Specifica l'immagine Docker da utilizzare per il servizio.
+- **version**: Specifies the Compose version to use.
+- **services**: Defines the container of the application, each service represents a container.
+- **image**: Specifies the image to use for the service.
 - **build**: Alternativa a `image`, permette di costruire un'immagine da un Dockerfile specificato.
-- **ports**: Mappa le porte del container alle porte dell'host.
-- **volumes**: Permette di condividere dati tra l'host e il container o tra container.
-- **networks**: Definisce le reti Docker che i container utilizzeranno per comunicare tra loro.
+- **ports**: Maps the host's ports.
+- **volumes**: Allows to share data between container and host or just between containers.
+- **networks**: Defines the networks which the containers will utilize to communicate.
 
 ### Lifecycle di Docker Compose
 
