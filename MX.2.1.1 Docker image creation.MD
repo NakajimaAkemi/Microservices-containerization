@@ -93,7 +93,10 @@ This sets the `ENVIRONMENT` variable to `production`.
 
 
 # Simple examples of Docker images
-In this markdown we will show various examples of the creation of simple Docker images, a simple Python application, a Java application, and a basic image that includes the `ls` command.
+In this markdown we will show various examples of the creation of simple Docker images, a simple Python application, a Java application, and a basic image that includes the `ls` command. As last example we will try to deploy a simple Flask echo server.
+
+All examples can also be found in [here](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir)
+
 
 ## 1. Creating a Docker Image for a Simple Python Application
 
