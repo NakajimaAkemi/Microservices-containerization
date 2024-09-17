@@ -3,7 +3,7 @@ Docker Compose is a powerful tool that allows us to define and manage multi-cont
 
 
 ___
-As said before, compose allows us to define and manage a multi-container Docker app, and it is performed trough a simple YAML file (`docker-compose.yml`).
+All the operations of Compose are performed trough by writing and configuring a simple YAML file (`docker-compose.yml`).
 
 A basic structure of `docker-compose.yml`:
 
