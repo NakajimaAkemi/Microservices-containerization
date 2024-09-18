@@ -175,7 +175,7 @@ As we can see, we don't have the name, but only the path. It means that Docker C
 
 
 
-### Bind Mounts
+#### Bind Mounts
 
  Easy to backup and restore. Volumes are more performant in linux than bind volumes
 
@@ -208,7 +208,25 @@ services:
       - ./local-directory:/app
 ```
 
+### Secrets
+Secrets are used to store sensitive information(e.g., API keys, passwords), they are designed to be tightly controlled, secure and only accessible to containers that you specify.
 
+As and example we will 
+**Example:**
+
+```yaml
+version: '3.1'
+services:
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+    secrets:
+      - mysql_root_password
+secrets:
+  mysql_root_password:
+    file: ./mysql_root_password.txt
+```
 
 
 
@@ -254,7 +272,7 @@ networks:
 
 
 
-- **Secrets**: Secrets are used to store sensitive information such as passwords, OAuth tokens, and ssh keys; they are designed to be tightly controlled and secure, ensuring that secrets are not exposed outside where they are intended to be used.
+
 - **Networks**: networking is a passage through which all the isolated container communicate - there are mainly five network drivers in Docker (such as bridge, host, none, overlay, and macvlan); in Docker, networking is indeed a crucial component that allows isolated containers to communicate with each other.
 
 
@@ -329,27 +347,10 @@ docker network rm my_network
 
 
 
-### Secrets
-Secrets are used to securely pass sensitive data (e.g., API keys, passwords) to Docker containers. They are encrypted and only accessible to containers that you specify.
-
-**Example:**
-
-```yaml
-version: '3.1'
-services:
-  db:
-    image: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
-    secrets:
-      - mysql_root_password
-secrets:
-  mysql_root_password:
-    file: ./mysql_root_password.txt
-```
 
 
----
+
+
 
 
 
