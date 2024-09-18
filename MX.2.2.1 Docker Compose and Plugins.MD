@@ -132,7 +132,7 @@ First things first, we need to create a Volume trough our docker CLI :
 ```bash
 docker volume create my_volume
 ```
-### Volume removal
+#### Volume removal
 ```bash
 docker volume rm my_volume
 ```
@@ -143,7 +143,7 @@ docker volume inspect my_volume
 ```
 #### Including the volume in the compose file
 As we created our volume we can mount it to our container image.
-```yaml
+```yml
 version: '3'
 services:
   flask:
@@ -157,26 +157,6 @@ volumes:
   flask_data:
 ```
 
-
-
-#### Named Volumes
-Named Volumes are created and managed by Docker, allowing you to persist data across container restarts and removals.
-Defined in the Docker-compose file or created by using command line with: `docker volume create`.\
-Named volumes are not tied to a specific container instance and can be reused! **Perfects for scenarios where data persistence is required**.
-```yml
-services:
-  mongodb:
-    image: mongo:latest
-    restart: always
-    ports:
-      - '27017:27017'
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: secret
-      MONGO_INITDB_DATABASE: projects
-    volumes:
-      - mongo-data:/data/db
-```
 As we can see in the example, the volume is set with [...] **:** [...].\
 The first part is the name of the volume (in out case `mongo-data`), the second one is the path in the container.
 
@@ -186,12 +166,10 @@ These volumes are ephemeral and are removed when the container is removed.
 ```yml
 services:
   web:
-    build: ./web
+    build: ./app
     volumes:
       - /app/temp
     environment:
-      - FLASK_ENV=development
-  [...]
 ```
 As we can see, we don't have the name, but only the path. It means that Docker Compose will create an anonymous volume without a specific name.
 
