@@ -2,7 +2,7 @@
 Docker Compose is a powerful tool that allows us to define and manage multi-container Docker applications. It is particularly useful when working with microservice ecosystems, as it enables the easy launch and coordination of multiple containers simultaneously. With Compose, we can configure networking, define infrastructure as code, and meet scalability requirements.
 
 
-## Compose file
+## Compose file and life cycle management
 The Compose file is the heart of Docker Compose, it consists of a YAML file (`docker-compose.yml`) that allows to define an application ecosystem including services, networking, disk space and more.
 
 ### Key syntax elements of the Compose file
@@ -74,22 +74,15 @@ docker-compose up
 ```
 To test everything we can `curl` or use a browser to `http://localhost:5000` to get the "Hello from Flask in Docker!" message. 
 
-### Lifecycle di Docker Compose
 
-  We can distinguish in two main categories: ```docker-compose``` and ```docker``` commands.\
-
-  For ```docker-compose```, we can have:
-  - ```build``` to **build** or rebuild services;
-  - ```up``` to **start** the service (defined in the yaml file);
-  - ```down``` to **stop** and remove the service.
-
-
-Docker Compose works with `docker-compose <command>` commands, allowing us to manage the ecosystem's lifecycle with the following commands:
+## Lifecycle di Docker Compose
+Now that we know how to setup a simple ecosystem with compose, we will show how to really manage it with CLI commands. Docker Compose works with `docker-compose <command>` commands, allowing us to manage the ecosystem's lifecycle with the following commands:
 - **`up`**: Start all services defined in the`docker-compose.yml` file.
 - **`down`**: Stops and removes all containers, networks, volumes defined in the compose file.
 - **`build`**: Builds the the Docker images specified in services.
 - **`logs`**: Views the logs of all containers in execution.
 - **`scale`**: Scales up or down the number of containers.
+
 
 
 ## Docker Compose Features
