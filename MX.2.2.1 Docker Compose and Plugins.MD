@@ -5,19 +5,14 @@ Docker Compose is a powerful tool that allows us to define and manage multi-cont
 ## Compose file
 The Compose file is the heart of Docker Compose, it consists of a YAML file (`docker-compose.yml`) that allows to define an application ecosystem including services, networking, disk space and more.
 
-A basic structure of `docker-compose.yml` that defines an ecosystem composed of a Flask application and a mysql database.
-
+The following (https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/simple-compose) example shows the basic structure of `docker-compose.yml` that defines an ecosystem composed of a single Flask application mapped to the port `5000`.
 ```yaml
 version: '3'
 services:
-  web:
-    image: flask-app
+  flask:
+    build: ./app
     ports:
-      - "80:80"
-  db:
-    image: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: example
+      - "5000:5000"
 ```
 ### Key elements of the Compose file
 
