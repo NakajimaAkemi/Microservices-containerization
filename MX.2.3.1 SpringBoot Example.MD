@@ -51,8 +51,11 @@ services:
       retries: 60
 ```
 
-**Application (YML)**\
-In a Java Spring Boot applications this file is used to configure **various profiles** and settings for the application.\
+**Application (application.yml)**\
+It is a YAML-based configuration file used in Spring Boot to externalize application settings - hierarchically properties, for a more readable configuration.\This file is used to configure **various profiles** and settings for the application.\
+Spring Boot automatically loads these properties at runtime - flexible and centralized management. 
+_It is usually located in the resources package._
+
 It is a central place to configure the application.
 - **server.port**: sets the port on which the Spring Boot application will listen, obviously.
 - **spring.rabbitmq**: is the section where all the features of RabbitMQ message broker connection is set, for exaple:
