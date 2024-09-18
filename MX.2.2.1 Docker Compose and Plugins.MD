@@ -156,9 +156,8 @@ services:
 volumes:
   flask_data:
 ```
-
 As we can see in the example, the volume is set with [...] **:** [...].\
-The first part is the name of the volume (in out case `mongo-data`), the second one is the path in the container.
+The first part is the name of the volume (in out case `flask_data`), the second one is the path in the container.
 
 #### Anonymous Volumes
 Anonymous volumes are temporary volumes created by Docker when a container starts. They are typically used for temporary data, and they don't have a specific name, just because they are temporary.\
@@ -172,25 +171,6 @@ services:
     environment:
 ```
 As we can see, we don't have the name, but only the path. It means that Docker Compose will create an anonymous volume without a specific name.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -232,11 +212,14 @@ services:
 
 
 
+
+
+### Networks
+
 ___________________________________
 
   - the **network**: as the same as volumes, we can create a new network with ```network create``` and remove it with ```network rm```
 
-#### 1.2.3 Networks
 Networks allow containers to communicate with each other securely. Docker Compose automatically creates a default network, but you can define custom networks.
 
 **Example:**
