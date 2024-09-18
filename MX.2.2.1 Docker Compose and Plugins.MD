@@ -24,13 +24,22 @@ services:
 - **version**: Specifies the Compose version to use.
 - **services**: Defines the container of the application, each service represents a container.
 - **image**: Specifies the image to use for the service.
-- **build**: Alternative to `image`, allows to build an image from a specific container.
+- **build**: Alternative to `image`, allows to build an image from a specific dockerfile.
 - **ports**: Maps the host's ports.
 - **volumes**: Allows to share data between container and host or just between containers.
 - **networks**: Defines the networks which the containers will utilize to communicate.
 
 ### Lifecycle di Docker Compose
-Docker Compose works with `docker-compose <command>` commands, allowing us to manage the ecosystem's lifecycle with the following commands:
+
+  We can distinguish in two main categories: ```docker-compose``` and ```docker``` commands.\
+
+  For ```docker-compose```, we can have:
+  - ```build``` to **build** or rebuild services;
+  - ```up``` to **start** the service (defined in the yaml file);
+  - ```down``` to **stop** and remove the service.
+
+
+Docker Compose works with `docker-compose <command>` commands _(Some of the most important and used commands are reported here; many of these are very similar to commands that are used in a normal linux shell, or still very intuitive.)_\ , allowing us to manage the ecosystem's lifecycle with the following commands:
 - **`up`**: Start all services defined in the`docker-compose.yml` file.
 - **`down`**: Stops and removes all containers, networks, volumes defined in the compose file.
 - **`build`**: Builds the the Docker images specified in services.
