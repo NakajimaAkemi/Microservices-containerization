@@ -67,6 +67,13 @@ RUN pip install -r requirements.txt
 COPY . .
 CMD ["python", "app.py"]
 ```
+
+Now with everything set up, we will start the ecosystem with the `docker-compose` command (we will talk about it shortly) in the context of the project directory.
+```bash
+docker-compose up
+```
+To test everything we can `curl` or use a browser to `http://localhost:5000` to get the "Hello from Flask in Docker!" message. 
+
 ### Lifecycle di Docker Compose
 
   We can distinguish in two main categories: ```docker-compose``` and ```docker``` commands.\
