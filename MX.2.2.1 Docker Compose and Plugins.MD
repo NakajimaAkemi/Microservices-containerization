@@ -17,7 +17,7 @@ The `docker-compose.yaml` file follows a hierarchical structure by the use of id
     - **networks**: Defines the networks which the containers will utilize to communicate.
 
 ### Basic example of `docker-compose.yaml`
-Now we will ease into writing the `compose file` starting from a simple [example](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/simple-compose), we will try to deploy a simple Flask application mapped to the port 5000.
+Now we will ease into writing the compose file starting from a simple [example](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/simple-compose), we will try to deploy a simple Flask application mapped to the port 5000.
 
 Our little project is structure as the following:
 ```
