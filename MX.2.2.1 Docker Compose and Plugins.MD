@@ -5,6 +5,17 @@ Docker Compose is a powerful tool that allows us to define and manage multi-cont
 ## Compose file
 The Compose file is the heart of Docker Compose, it consists of a YAML file (`docker-compose.yml`) that allows to define an application ecosystem including services, networking, disk space and more.
 
+### Key syntax elements of the Compose file
+The `docker-compose.yaml` file follows a hierarchical structure by the use of identations.
+- **version**: Specifies the Compose version to use.
+- **services**: Defines the containers of the application, each service represents a container.
+  - **<name>**: Define the name of the single service.
+  - **image**: Specifies the image to use for the service.
+  - **build**: Alternative to `image`, allows to build an image from a specific dockerfile.
+  - **ports**: Maps the host's ports.
+  - **volumes**: Allows to share data between container and host or just between containers.
+  - **networks**: Defines the networks which the containers will utilize to communicate.
+
 The following [example](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/simple-compose) shows the basic structure of `docker-compose.yml` that defines an ecosystem composed of a single Flask application mapped to the port `5000`.
 ```yaml
 version: '3'
@@ -14,15 +25,7 @@ services:
     ports:
       - "5000:5000"
 ```
-### Key elements of the Compose file
 
-- **version**: Specifies the Compose version to use.
-- **services**: Defines the container of the application, each service represents a container.
-- **image**: Specifies the image to use for the service.
-- **build**: Alternative to `image`, allows to build an image from a specific dockerfile.
-- **ports**: Maps the host's ports.
-- **volumes**: Allows to share data between container and host or just between containers.
-- **networks**: Defines the networks which the containers will utilize to communicate.
 
 ### Lifecycle di Docker Compose
 
