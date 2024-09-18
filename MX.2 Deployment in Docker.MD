@@ -37,21 +37,10 @@ This file defines the services (containers) that make up your application, inclu
 You can start all services with a single terminal command, making it easier to replicate and manage complex applications across different environments.
 
 
-- **application.yml**\
-It is a YAML-based configuration file used in Spring Boot to externalize application settings - hierarchically properties, for a more readable configuration.\
-Spring Boot automatically loads these properties at runtime - flexible and centralized management. 
-_It is usually located in the resources package._
 
 
 - _**terminal commands** (bash)_\
-  We can distinguish in two main categories: ```docker-compose``` and ```docker``` commands.\
-  _(Some of the most important and used commands are reported here; many of these are very similar to commands that are used in a normal linux shell, or still very intuitive.)_\
-  For ```docker-compose```, we can have:
-  - ```build``` to **build** or rebuild services;
-  - ```up``` to **start** the service (defined in the yaml file);
-  - ```down``` to **stop** and remove the service.
-  
-  In the simple ```docker``` world we can manage:
+With the command ```docker``` world we can manage:
   - the **images**: ```build -t <image-name>``` to create a new image, with ```pull <image-name>``` instead we can download an image from a Docker registry, such as the [Docker Hub]( https://hub.docker.com/ ) (e.g. ```docker pull ubuntu:20.04```).
   - the **container itself**:
     - ```run <image-name>``` run a container from an image, obviously.
