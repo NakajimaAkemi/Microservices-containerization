@@ -103,6 +103,7 @@ services:
       replicas: 3
 ```
 [!NOTE]
+
 Since the service we're replicating is mapping ports, we will specify only port number and not the range, otherwise it will show an error.
 
 As standard procedure we will start up the ecosystem.
