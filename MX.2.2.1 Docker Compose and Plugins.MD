@@ -16,7 +16,7 @@ The `docker-compose.yaml` file follows a hierarchical structure by the use of id
     - **volumes**: Allows to share data between container and host or just between containers.
     - **networks**: Defines the networks which the containers will utilize to communicate.
 
-### Basic example of `docker-compose.yaml`
+### Basic example of `docker-compose.yml`
 Now we will ease into writing the compose file starting from a simple [example](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/simple-compose), we will try to deploy a simple Flask application mapped to the port 5000.
 
 `Project structure`
@@ -29,7 +29,7 @@ simple-compose/
 └── docker-compose.yml
 ```
 
-`docker-compose.yml`
+`docker-compose.yml`:
 ```yaml
 version: '3'
 services:
@@ -39,7 +39,34 @@ services:
       - "5000:5000"
 ```
 
+`app/app.py`:
+```python
+from flask import Flask
 
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    return "Hello from Flask in Docker!"
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
+```
+
+`app/app.py`:
+```text
+flask
+```
+
+`app/Dockerfile`:
+```Dockerfile
+FROM python:3.9-slim
+WORKDIR /app
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+COPY . .
+CMD ["python", "app.py"]
+```
 ### Lifecycle di Docker Compose
 
   We can distinguish in two main categories: ```docker-compose``` and ```docker``` commands.\
