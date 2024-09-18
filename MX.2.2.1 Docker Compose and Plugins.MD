@@ -9,7 +9,7 @@ The Compose file is the heart of Docker Compose, it consists of a YAML file (`do
 The `docker-compose.yaml` file follows a hierarchical structure by the use of identations.
 - **version**: Specifies the Compose version to use.
 - **services**: Defines the containers of the application, each service represents a container.
-  - **<service-name>**: Name of the single service.
+  - **/<service-name>**: Name of the single service.
     - **image**: Specifies the image to use for the service.
     - **build**: Alternative to `image`, allows to build an image from a specific dockerfile.
     - **ports**: Maps the host's ports.
