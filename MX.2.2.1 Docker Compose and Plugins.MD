@@ -39,7 +39,7 @@ services:
   - ```down``` to **stop** and remove the service.
 
 
-Docker Compose works with `docker-compose <command>` commands _(Some of the most important and used commands are reported here; many of these are very similar to commands that are used in a normal linux shell, or still very intuitive.)_\ , allowing us to manage the ecosystem's lifecycle with the following commands:
+Docker Compose works with `docker-compose <command>` commands, allowing us to manage the ecosystem's lifecycle with the following commands:
 - **`up`**: Start all services defined in the`docker-compose.yml` file.
 - **`down`**: Stops and removes all containers, networks, volumes defined in the compose file.
 - **`build`**: Builds the the Docker images specified in services.
