@@ -9,7 +9,7 @@ The Compose file is the heart of Docker Compose, it consists of a YAML file (`do
 The `docker-compose.yaml` file follows a hierarchical structure by the use of identations.
 - **version**: Specifies the Compose version to use.
 - **services**: Defines the containers of the application, each service represents a container.
-  - **service**: Name of the single service.
+  - **<service-name>**: Name of the single service.
     - **image**: Specifies the image to use for the service.
     - **build**: Alternative to `image`, allows to build an image from a specific dockerfile.
     - **ports**: Maps the host's ports.
@@ -83,7 +83,7 @@ Now that we know how to setup a simple ecosystem with compose, we will show how 
 - **`logs`**: Views the logs of all containers in execution.
 - **`scale`**: Scales up or down the number of containers.
 
-
+With this, we are able to setup and manage a simple multi-container ecosystem with the compose file and the `docker-compose` commands.
 
 ## Docker Compose Features
 - **Isolation customization**: in the context of container orchestration systems like Kubernetes, isolation customization refers to the ability to adjust how pods (containers) are isolated from each other and the underlying infrastructure; this can involve setting up network policies, security contexts, and resource quotas to ensure that containers operate securely and efficiently.
