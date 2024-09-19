@@ -215,6 +215,7 @@ They are designed to be tightly controlled, secure and only accessible (read-onl
 ### API-key example
 This time we will set up a simple ecosystem of Flask server that access an API-key that is safely stored.
 In this example we will show just the juicy parts the rest can be found [here](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/secret-compose).
+
 `Project structure`
 ```
 secret-compose/
