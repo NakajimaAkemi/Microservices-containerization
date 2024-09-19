@@ -213,44 +213,82 @@ Secrets are any piece of sensitive data information(e.g., API keys, passwords), 
 
 They are designed to be tightly controlled, secure and only accessible (read-only) to services only when expicitly granted access within the `secrets` field. 
 
-In our project we will create a file called "flask_secret".
+This time we will set up a simple ecosystem of Flask server backed by a PostgreSQL, starting with the setup of the secret for the database password.
+
+In our project we will setup a secret for the  a file called "flask_secret".
 ```bash
-echo "super_secret_key" > flask_secret
+echo "mypostgrespassword" | docker secret create db_password -
 ```
 Then add the secret to the compose file.
 As and example we will 
 ```yaml
-version: '3'
+version: '3.9'
 services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_DB: mydatabase
+    secrets:
+      - db_password  # Il database userà il secret per la password
+    environment:
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password  # Usa il secret montato come file per la password
+
   flask:
     build: ./app
     ports:
       - "5000:5000"
+    depends_on:
+      - db
     secrets:
-      - flask_secret
+      - db_password
+    environment:
+      - DATABASE_URL=postgresql://postgres@db/mydatabase
+      - DB_PASSWORD_FILE=/run/secrets/db_password  # Flask leggerà la password da questo file
 
 secrets:
-  flask_secret:
-    file: ./flask_secret
+  db_password:
+    external: true  # Secret creato precedentemente
+
 ```
 
 This one is a really stupid example:
 ```Python
-import os
 from flask import Flask
+import psycopg2
+import os
 
 app = Flask(__name__)
 
-# Legge il secret dal file montato
-with open("/run/secrets/flask_secret") as f:
-    secret_key = f.read().strip()
+def get_db_password():
+    # Legge la password del DB dal file secret
+    secret_path = '/run/secrets/db_password'
+    if os.path.exists(secret_path):
+        with open(secret_path, 'r') as secret_file:
+            return secret_file.read().strip()
+    return None
 
 @app.route('/')
-def hello():
-    return f"Flask secret is: {secret_key}"
+def index():
+    db_password = get_db_password()
+    if db_password:
+        try:
+            # Connessione a PostgreSQL usando la password dal secret
+            conn = psycopg2.connect(
+                dbname="mydatabase",
+                user="postgres",
+                password=db_password,
+                host="db"
+            )
+            return "Connected to the database!"
+        except Exception as e:
+            return f"Error connecting to the database: {str(e)}"
+    else:
+        return "No database password found!"
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
+
 ```
 
 
