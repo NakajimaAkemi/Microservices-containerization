@@ -121,8 +121,11 @@ We can verify their reachability with a browser or the `curl` command:
  - http://localhost:32769
  - http://localhost:32770
 
-## Volumes
-Docker volumes are a mechanism for Docker containers that allow us to mantain to maintain persistent data survining beyond the container lifecycle, facilitating sharing data between containers, backup and restore. There are different types of volumes: named, anonymous and bind. In this paragraph we want to analyze the characteristics of each type providing some examples.
+## Volumes and Bind Mounts
+In this section we introduce `Volumes` and `Bind Mounts` as fundamental items for Docker containers that allow us to mantain to maintain persistent data survining beyond the container lifecycle, facilitating sharing data between containers, backup and restore
+
+### Volumes
+Docker volumes . There are different types of volumes: named, anonymous and bind. In this paragraph we want to analyze the characteristics of each type providing some examples.
 
 _Is also important to say that if a service doesn't specify a volumes section, it means that the service won't have any volumes mounted. Essentially, **no data will be persisted outside the container** for that service._
 
