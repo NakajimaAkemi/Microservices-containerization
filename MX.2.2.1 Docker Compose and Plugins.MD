@@ -85,8 +85,6 @@ Now that we know how to setup a simple ecosystem with compose, we will show how 
     - **`logs`**: Views the logs of all containers in execution.
     - **`scale`**: Scales up or down the number of containers.
 
-With this, we are able to setup and manage a simple multi-container ecosystem with the compose file and the `docker-compose` commands.
-
 In the following sections we will introduce and explain various features of Docker compose, these features will allow us to set up and customize a multi-container ecosytem adapt to our necessities and use cases.
 
 ## Replicas
