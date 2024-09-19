@@ -123,7 +123,9 @@ We can verify their reachability with a browser or the `curl` command:
 
 ## Volumes and Bind Mounts
 In this section we introduce `Volumes` and `Bind Mounts` as fundamental items for Docker containers that allow us to mantain to maintain persistent data survining beyond the container lifecycle, facilitating sharing data between containers, backup and restore
-
+<p align="center">
+  <img src="images/volumes.png" alt="Esempio di immagine" />
+</p>
 ### Volumes
 Volumes are directly managed by Docker and can survive beyond the container's lifecycle, usefull if we want persistence of our data.
 
