@@ -125,90 +125,63 @@ We can verify their reachability with a browser or the `curl` command:
 In this section we introduce `Volumes` and `Bind Mounts` as fundamental items for Docker containers that allow us to mantain to maintain persistent data survining beyond the container lifecycle, facilitating sharing data between containers, backup and restore
 
 ### Volumes
-Docker volumes . There are different types of volumes: named, anonymous and bind. In this paragraph we want to analyze the characteristics of each type providing some examples.
+Volumes are directly managed by Docker and can survive beyond the container's lifecycle, usefull if we want persistence of our data.
+
+There are different types of volumes: named, anonymous and bind.
 
 _Is also important to say that if a service doesn't specify a volumes section, it means that the service won't have any volumes mounted. Essentially, **no data will be persisted outside the container** for that service._
 
-#### Volume creation
-First things first, we need to create a Volume trough our docker CLI :
-```bash
-docker volume create my_volume
-```
-#### Volume removal
-```bash
-docker volume rm my_volume
-```
-#### Inspecting a Volume
-We can inspect a volume if we want to
-```bash
-docker volume inspect my_volume
-```
+
 #### Including the volume in the compose file
 As we created our volume we can mount it to our container image.
 ```yml
-version: '3'
+version: '3.9'
+
 services:
-  flask:
-    build: ./app
-    ports:
-      - "5000:5000"
+  web:
+    image: nginx
     volumes:
-      - flask_data:/app/data
+      - my_data:/var/www/html  # Associa un volume a una directory nel container
 
 volumes:
-  flask_data:
+  my_data:  # Definizione del volume
+
 ```
 As we can see in the example, the volume is set with [...] **:** [...].\
 The first part is the name of the volume (in out case `flask_data`), the second one is the path in the container.
 
-#### Anonymous Volumes
-Anonymous volumes are temporary volumes created by Docker when a container starts. They are typically used for temporary data, and they don't have a specific name, just because they are temporary.\
+### Anonymous Volumes
+Anonymous volumes are temporary volumes created by Docker when a container starts. They are typically used for temporary data, and they don't have a specific name, just because they are temporary.
 These volumes are ephemeral and are removed when the container is removed.
 ```yml
+version: '3.9'
+
 services:
   web:
-    build: ./app
+    image: nginx
     volumes:
-      - /app/temp
-    environment:
+      - /var/www/html  # Volume anonimo
 ```
 As we can see, we don't have the name, but only the path. It means that Docker Compose will create an anonymous volume without a specific name.
 
 
+### Bind Mounts
 
-
-#### Bind Mounts
-
- Easy to backup and restore. Volumes are more performant in linux than bind volumes
-
-
-Bind mounts allow you to mount a directory or file from the host machine into the container. Bind Mounts allow you to map a host file or directory to a container file or directory. This is particularly useful during development when you want changes made on the host to be immediately reflected in the container.\
+Bind mounts allow you to mount a directory or file from the host machine into the container. Bind Mounts allow you to map a host file or directory to a container file or directory (bind mounts depend on the host's absolute path). This is particularly useful during development when you want changes made on the host to be immediately reflected in the container.\
 In a nutshell: _we want to use the bind mounts when we need direct access to the host’s filesystem for development, testing, or sharing configuration files._
 ```yml
-services:
-  config:
-  build: config-server-end
-  mem_limit: 512m
-  environment:
-    - SPRING_PROFILES_ACTIVE=docker,native
-    [...]
-  volumes:
-    - ./config-repo:/config-repo
-```
-This means that a directory from the host machine (`./config-repo`) is mounted into the container at `/config-repo`.
+version: '3.9'
 
+services:
+  web:
+    image: nginx
+    volumes:
+      - ./html:/var/www/html  # Associa una directory locale a una directory nel container
+
+```
 Bind mounts link a directory on your local machine to a container. Unlike volumes, bind mounts directly reflect changes made on the host filesystem.
 
-**Example:**
 
-```yaml
-version: '3'
-services:
-  app:
-    image: my-app
-    volumes:
-      - ./local-directory:/app
-```
 
 ## Secrets
 Secrets are any piece of sensitive data information(e.g., API keys, passwords), that shouldn't be transmitted over the network or stored unencrypted. 
