@@ -258,7 +258,7 @@ curl http://localhost:5000
 As in Docker-compose the secrets are in the form of files in the file system, why not use an enviroment variable or even a volume? Well the answer is simple, enviroment variables cause a risk of expose due to being accessible to all processes or even printed in log files (a simple `docker inspect` can expose the sensitive data). For volume first of all they are within the host file system allowing them to persist during the lifecycle while secrets are in-memory with read-only access.
 
 #### Testing with Docker inspect
-Let's define an ecosystem with a Flask server and a PostgreSQL database that needs authentication in order to enter. We just the docker-compose.yaml file were the magic happens, the whole project can be found [here](). 
+Let's define an ecosystem with a Flask server and a PostgreSQL database that needs authentication in order to enter. We just the docker-compose.yaml file were the magic happens, the whole project can be found [here](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/secret-compose). 
 ```YAML
 version: '3'
 
