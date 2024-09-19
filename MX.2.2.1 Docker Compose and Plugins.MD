@@ -87,10 +87,9 @@ Now that we know how to setup a simple ecosystem with compose, we will show how 
 
 With this, we are able to setup and manage a simple multi-container ecosystem with the compose file and the `docker-compose` commands.
 
-## Docker Compose Features
-In this section we will introduce and explain various features of Docker compose, these features will allow us to set up and customize a multi-container ecosytem adapt to our necessities and use cases.
+In the following sections we will introduce and explain various features of Docker compose, these features will allow us to set up and customize a multi-container ecosytem adapt to our necessities and use cases.
 
-### Replicas
+## Replicas
 A **Replica** in Docker refers to the ability to istantiate more replicas of the same container, this allows us to scale horizontally improving the scalability, reliability and load balancing. 
 We will create an [updated version](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/replica-compose) of our first example by adding `deploy` field to the compose file and defining the number of replicas.
 
@@ -124,7 +123,7 @@ We can verify their reachability with a browser or the `curl` command:
  - http://localhost:32769
  - http://localhost:32770
 
-### Volumes
+## Volumes
 Docker volumes are a mechanism for Docker containers that allow us to mantain to maintain persistent data survining beyond the container lifecycle, facilitating sharing data between containers, backup and restore. There are different types of volumes: named, anonymous and bind. In this paragraph we want to analyze the characteristics of each type providing some examples.
 
 _Is also important to say that if a service doesn't specify a volumes section, it means that the service won't have any volumes mounted. Essentially, **no data will be persisted outside the container** for that service._
@@ -210,7 +209,7 @@ services:
       - ./local-directory:/app
 ```
 
-### Secrets
+## Secrets
 Secrets are any piece of sensitive data information(e.g., API keys, passwords), that shouldn't be transmitted over the network or stored unencrypted. It is an alternative to enviroment variables as they are open to the risk of exposure due to being accessible to all processes or even printed in log files (a simple `docker inspect` can expose the sensitive data). 
 
 They are designed to be tightly controlled, secure and only accessible (read-only) to services only when expicitly granted access within the `secrets` field. Secrets may be created by CLI with `docker secret create` or even a simple file.
@@ -295,7 +294,7 @@ docker-compose up
 curl http://localhost:5000
 ```
 
-### Networks
+## Networks
 
 ___________________________________
 
