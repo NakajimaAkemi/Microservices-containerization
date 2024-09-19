@@ -258,50 +258,56 @@ curl http://localhost:5000
 As in Docker-compose the secrets are in the form of files in the file system, why not use an enviroment variable or even a volume? Well the answer is simple, enviroment variables cause a risk of expose due to being accessible to all processes or even printed in log files (a simple `docker inspect` can expose the sensitive data). For volume first of all they are within the host file system allowing them to persist during the lifecycle while secrets are in-memory with read-only access.
 
 #### Testing with Docker inspect
-Let's define an ecosystem with a Flask server and a PostgreSQL database that needs authentication in order to enter.
-```
+Let's define an ecosystem with a Flask server and a PostgreSQL database that needs authentication in order to enter. We just the docker-compose.yaml file were the magic happens, the whole project can be found [here](). 
+```YAML
+version: '3'
+
 services:
-   db:
-     image: mysql:latest
-     volumes:
-       - db_data:/var/lib/mysql
-     environment:
-       MYSQL_ROOT_PASSWORD_FILE: /run/secrets/db_root_password
-       MYSQL_DATABASE: wordpress
-       MYSQL_USER: wordpress
-       MYSQL_PASSWORD_FILE: /run/secrets/db_password
-     secrets:
-       - db_root_password
-       - db_password
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: mydatabase
+      POSTGRES_USER_FILE: /run/secrets/db_user
+      POSTGRES_PASSWORD_FILE: /run/secrets/db_password
+    secrets:
+      - db_user
+      - db_password
+    volumes:
+      - pg_data:/var/lib/postgresql/data
 
-   wordpress:
-     depends_on:
-       - db
-     image: wordpress:latest
-     ports:
-       - "8000:80"
-     environment:
-       WORDPRESS_DB_HOST: db:3306
-       WORDPRESS_DB_USER: wordpress
-       WORDPRESS_DB_PASSWORD_FILE: /run/secrets/db_password
-     secrets:
-       - db_password
-
+  flask_app:
+    build:
+      context: ./app
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+    secrets:
+      - db_user
+      - db_password
+    environment:
+      FLASK_ENV: development
 
 secrets:
-   db_password:
-     file: db_password.txt
-   db_root_password:
-     file: db_root_password.txt
+  db_user:
+    file: db_user.txt
+  db_password:
+    file: db_password.txt
 
 volumes:
-    db_data:
+  pg_data:
 ```
-
+As we can see we put our credentials in txt files and loaded them as secrets, assigned them to the PostgreSQL service and passed them as ENV variables. But won't that expose them with a simple inspect command? Let's see, first of all we will find the service with a simple `docker ps` and then we inspect.
 ```bash
 docker inspect <container-id>
 ```
-
+The sadly for our attacker the output ENV variables will be
+```json
+"Env": [
+    "POSTGRES_USER_FILE=/run/secrets/db_password",
+    "POSTGRES_PASSWORD_FILE=/run/secrets/db_user"
+]
+```
 
 
 
