@@ -210,6 +210,7 @@ services:
 
 ### Secrets
 Secrets are any piece of sensitive data information(e.g., API keys, passwords), that shouldn't be transmitted over the network or stored unencrypted. It is an alternative to enviroment variables as they are open to the risk of exposure due to being accessible to all processes or even printed in log files (a simple `docker inspect` can expose the sensitive data). 
+
 They are designed to be tightly controlled, secure and only accessible (read-only) to services only when expicitly granted access within the `secrets` field. 
 
 In our project we will create a file called "flask_secret".
