@@ -90,7 +90,7 @@ In this section we will introduce and explain various features of Docker compose
 
 ### Replicas
 A **Replica** in Docker refers to the ability to istantiate more replicas of the same container, this allows us to scale horizontally improving the scalability, reliability and load balancing. 
-We will create an [update version](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/replica-compose) of our first example by adding `deploy` field to the compose file and defining the number of replicas.
+We will create an [updated version](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/replica-compose) of our first example by adding `deploy` field to the compose file and defining the number of replicas.
 
 ```yaml
 version: '3'
@@ -211,25 +211,45 @@ services:
 ### Secrets
 Secrets are used to store sensitive information(e.g., API keys, passwords), they are designed to be tightly controlled, secure and only accessible to containers that you specify.
 
+In our project we will create a file called "flask_secret".
+```bash
+echo "super_secret_key" > flask_secret
+```
+Then add the secret to the compose file.
 As and example we will 
-**Example:**
-
 ```yaml
-version: '3.1'
+version: '3'
 services:
-  db:
-    image: mysql
-    environment:
-      MYSQL_ROOT_PASSWORD_FILE: /run/secrets/mysql_root_password
+  flask:
+    build: ./app
+    ports:
+      - "5000:5000"
     secrets:
-      - mysql_root_password
+      - flask_secret
+
 secrets:
-  mysql_root_password:
-    file: ./mysql_root_password.txt
+  flask_secret:
+    file: ./flask_secret
 ```
 
+This one is a really stupid example:
+```Python
+import os
+from flask import Flask
 
+app = Flask(__name__)
 
+# Legge il secret dal file montato
+with open("/run/secrets/flask_secret") as f:
+    secret_key = f.read().strip()
+
+@app.route('/')
+def hello():
+    return f"Flask secret is: {secret_key}"
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=5000)
+```
 
 
 ### Networks
