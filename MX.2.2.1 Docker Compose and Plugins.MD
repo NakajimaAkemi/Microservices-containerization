@@ -208,9 +208,8 @@ services:
 ```
 
 ## Secrets
-Secrets are any piece of sensitive data information(e.g., API keys, passwords), that shouldn't be transmitted over the network or stored unencrypted. It is an alternative to enviroment variables as they are open to the risk of exposure due to being accessible to all processes or even printed in log files (a simple `docker inspect` can expose the sensitive data). 
-
-They are designed to be tightly controlled, secure and only accessible (read-only) to services only when expicitly granted access in compose file. 
+Secrets are any piece of sensitive data information(e.g., API keys, passwords), that shouldn't be transmitted over the network or stored unencrypted. 
+They are designed to be tightly controlled, secure and only accessible (read-only) to services under `/run/secrets/` only when expicitly granted access in compose file. 
 
 ### API-key example
 This time we will set up a simple ecosystem of Flask server that access an API-key that is safely stored.
@@ -257,9 +256,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    secret_file_path = '/run/secrets/api_key'  # Percorso del file montato come volume
-
-    # Verifica se il percorso esiste ed è un file
+    secret_file_path = '/run/secrets/api_key'
     if os.path.exists(secret_file_path) and os.path.isfile(secret_file_path):
         with open(secret_file_path, 'r') as secret_file:
             api_key = secret_file.read().strip()
@@ -279,8 +276,8 @@ And now we verify everything.
 curl http://localhost:5000
 ```
 
-
-
+### Why should we bother with secrets?
+As in Docker-compose the secrets are in the form of files in the file system, why not use an enviroment variable or even a volume? Well the answer is simple, enviroment variables cause a risk of expose due to being accessible to all processes or even printed in log files (a simple `docker inspect` can expose the sensitive data). For volume first of all they are within the host file system allowing them to persist during the lifecycle while secrets are in-memory with read-only access.
 
 
 
