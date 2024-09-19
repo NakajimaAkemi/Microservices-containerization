@@ -210,7 +210,7 @@ services:
 ## Secrets
 Secrets are any piece of sensitive data information(e.g., API keys, passwords), that shouldn't be transmitted over the network or stored unencrypted. It is an alternative to enviroment variables as they are open to the risk of exposure due to being accessible to all processes or even printed in log files (a simple `docker inspect` can expose the sensitive data). 
 
-They are designed to be tightly controlled, secure and only accessible (read-only) to services only when expicitly granted access within the `secrets` field. 
+They are designed to be tightly controlled, secure and only accessible (read-only) to services only when expicitly granted access in compose file. 
 
 ### API-key example
 This time we will set up a simple ecosystem of Flask server that access an API-key that is safely stored.
@@ -231,7 +231,8 @@ We put our secret API-key in the text file `api_key.txt`
 ```bash
 echo "my-super-secret-api-key" > api_key.txt
 ```
-Then we add the secret to the `docker-compose.yaml` file.
+Now we reach the crucial part, in the `docker-compose.yaml` file, we define the `secrets` in a dedicated section and link the sensitive data using the `file` field. Next, we assign the specific secret to our service by adding a `secrets` section within the `service` definition, where we reference the names of the secrets we want to use.
+
 ```yaml
 version: '3'
 
@@ -277,6 +278,27 @@ And now we verify everything.
 ```bash
 curl http://localhost:5000
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Networks
 
