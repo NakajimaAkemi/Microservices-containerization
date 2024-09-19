@@ -213,56 +213,43 @@ services:
 ### Secrets
 Secrets are any piece of sensitive data information(e.g., API keys, passwords), that shouldn't be transmitted over the network or stored unencrypted. It is an alternative to enviroment variables as they are open to the risk of exposure due to being accessible to all processes or even printed in log files (a simple `docker inspect` can expose the sensitive data). 
 
-They are designed to be tightly controlled, secure and only accessible (read-only) to services only when expicitly granted access within the `secrets` field. 
+They are designed to be tightly controlled, secure and only accessible (read-only) to services only when expicitly granted access within the `secrets` field. Secrets may be created by CLI with `docker secret create` or even a simple file.
 
-This time we will set up a simple ecosystem of Flask server backed by a PostgreSQL, starting with the setup of the secret for the database password.
+
+#### API-key example
+This time we will set up a simple ecosystem of Flask server that access an API-key that is safely stored, we can define a secret with `docker secret create` command.
 ```bash
-echo "mypostgrespassword" | docker secret create db_password -
+echo "my-super-secret-api-key" | docker secret create flask_api_key
 ```
 Then add the secret to the compose file.
 As and example we will 
 ```yaml
-version: '3.9'
-services:
-  db:
-    image: postgres:13
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_DB: mydatabase
-    secrets:
-      - db_password  # Il database userà il secret per la password
-    environment:
-      POSTGRES_PASSWORD_FILE: /run/secrets/db_password  # Usa il secret montato come file per la password
+version: '3'
 
-  flask:
+services:
+  web:
+    image: flask_app
     build: ./app
     ports:
       - "5000:5000"
-    depends_on:
-      - db
     secrets:
-      - db_password
-    environment:
-      - DATABASE_URL=postgresql://postgres@db/mydatabase
-      - DB_PASSWORD_FILE=/run/secrets/db_password  # Flask leggerà la password da questo file
+      - flask_api_key  # Montiamo il secret nel container
 
 secrets:
-  db_password:
-    external: true  # Secret creato precedentemente
-
+  flask_api_key:
+    external: true  # Il secret è stato creato esternamente con 'docker secret create'
 ```
 
 This one is a really stupid example:
 ```Python
-from flask import Flask
-import psycopg2
+from flask import Flask, jsonify
 import os
 
 app = Flask(__name__)
 
-def get_db_password():
-    # Legge la password del DB dal file secret
-    secret_path = '/run/secrets/db_password'
+# Funzione per leggere il secret montato come file
+def get_api_key():
+    secret_path = '/run/secrets/flask_api_key'
     if os.path.exists(secret_path):
         with open(secret_path, 'r') as secret_file:
             return secret_file.read().strip()
@@ -270,27 +257,43 @@ def get_db_password():
 
 @app.route('/')
 def index():
-    db_password = get_db_password()
-    if db_password:
-        try:
-            # Connessione a PostgreSQL usando la password dal secret
-            conn = psycopg2.connect(
-                dbname="mydatabase",
-                user="postgres",
-                password=db_password,
-                host="db"
-            )
-            return "Connected to the database!"
-        except Exception as e:
-            return f"Error connecting to the database: {str(e)}"
+    api_key = get_api_key()
+    if api_key:
+        return jsonify({"message": "API Key loaded successfully"})
     else:
-        return "No database password found!"
+        return jsonify({"error": "API Key not found"}), 500
 
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port=5000)
-
 ```
+app/Dockerfile
+```Dockerfile
+# Usa un'immagine Python leggera
+FROM python:3.9-slim
 
+# Imposta la directory di lavoro
+WORKDIR /app
+
+# Copia il file requirements e installa le dipendenze
+COPY requirements.txt requirements.txt
+RUN pip install -r requirements.txt
+
+# Copia il resto dell'applicazione
+COPY . .
+
+# Comando per avviare l'app Flask
+CMD ["python", "app.py"]
+```
+app/requirements.txt
+```text
+Flask
+```
+```
+docker-compose up
+```
+```
+curl http://localhost:5000
+```
 
 ### Networks
 
