@@ -9,3 +9,5 @@ Project structure
 ├── db_password.txt            # Secret file for DB password
 └── db_user.txt                # Secret file for DB user
 ```
+
+This example uses SQLalchemy to authenticate in the db.
