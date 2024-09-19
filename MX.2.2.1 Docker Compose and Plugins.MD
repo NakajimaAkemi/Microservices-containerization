@@ -79,11 +79,11 @@ To test everything we can `curl` or use a browser to `http://localhost:5000` to 
 
 ## Lifecycle di Docker Compose
 Now that we know how to setup a simple ecosystem with compose, we will show how to really manage it with CLI commands. Docker Compose allows us to manage the ecosystem's lifecycle with `docker-compose <command>`:
-  - **`up`**: Start all services defined in the`docker-compose.yml` file.
-  - **`down`**: Stops and removes all containers, networks, volumes defined in the compose file.
-  - **`build`**: Builds the the Docker images specified in services.
-  - **`logs`**: Views the logs of all containers in execution.
-  - **`scale`**: Scales up or down the number of containers.
+    - **`up`**: Start all services defined in the`docker-compose.yml` file.
+    - **`down`**: Stops and removes all containers, networks, volumes defined in the compose file.
+    - **`build`**: Builds the the Docker images specified in services.
+    - **`logs`**: Views the logs of all containers in execution.
+    - **`scale`**: Scales up or down the number of containers.
 
 With this, we are able to setup and manage a simple multi-container ecosystem with the compose file and the `docker-compose` commands.
 
