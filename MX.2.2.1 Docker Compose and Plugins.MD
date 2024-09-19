@@ -211,96 +211,63 @@ services:
 Secrets are any piece of sensitive data information(e.g., API keys, passwords), that shouldn't be transmitted over the network or stored unencrypted. It is an alternative to enviroment variables as they are open to the risk of exposure due to being accessible to all processes or even printed in log files (a simple `docker inspect` can expose the sensitive data). 
 
 They are designed to be tightly controlled, secure and only accessible (read-only) to services only when expicitly granted access within the `secrets` field. 
-### Secret management
-Secrets can be managed torugh CLI with `docker secret <command>`:
-  - `create <secret-name> <file-name>`: Creates a secret with the contents of the selected file.
-  - `ls`: Shows a list of secrets
-  - `inspect <secret-name>`: Shows details of the secret (without showing the actual sensitive data).
-  - `rm <secret-name>`: Deletes the selected secret
-
-Alternatively secret can also be created trough `echo`:
-```bash
-echo "my-secret-api-key" | docker secret create api_key
-```
-
-Or even directly define within the compose file as we will show after.
 
 ### API-key example
-This time we will set up a simple ecosystem of Flask server that access an API-key that is safely stored, we can define a secret with `docker secret create` command.
+Alternatively secret can also be created trough `echo`:
 ```bash
-echo "my-super-secret-api-key" | docker secret create flask_api_key
+echo "my-super-secret-api-key" > api_key.txt
 ```
+This time we will set up a simple ecosystem of Flask server that access an API-key that is safely stored.
 Then add the secret to the compose file.
-As and example we will 
 ```yaml
-version: '3'
+version: '3.9'
 
 services:
   web:
-    image: flask_app
-    build: ./app
+    build: .
     ports:
       - "5000:5000"
     secrets:
-      - flask_api_key  # Montiamo il secret nel container
-
+      - api_key  
 secrets:
-  flask_api_key:
-    external: true  # Il secret è stato creato esternamente con 'docker secret create'
+  api_key:
+    file: ./api_key.txt 
 ```
 
 This one is a really stupid example:
 ```Python
-from flask import Flask, jsonify
-import os
+from flask import Flask
 
 app = Flask(__name__)
 
-# Funzione per leggere il secret montato come file
-def get_api_key():
-    secret_path = '/run/secrets/flask_api_key'
-    if os.path.exists(secret_path):
-        with open(secret_path, 'r') as secret_file:
-            return secret_file.read().strip()
-    return None
-
 @app.route('/')
 def index():
-    api_key = get_api_key()
-    if api_key:
-        return jsonify({"message": "API Key loaded successfully"})
-    else:
-        return jsonify({"error": "API Key not found"}), 500
+    # Leggi la chiave API dal file montato tramite secrets
+    with open('/run/secrets/api_key', 'r') as secret_file:
+        api_key = secret_file.read().strip()
+    return f"The API Key is: {api_key}"
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 ```
 app/Dockerfile
 ```Dockerfile
-# Usa un'immagine Python leggera
 FROM python:3.9-slim
-
-# Imposta la directory di lavoro
 WORKDIR /app
-
-# Copia il file requirements e installa le dipendenze
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-
-# Copia il resto dell'applicazione
-COPY . .
-
-# Comando per avviare l'app Flask
+COPY app.py /app
+RUN pip install flask
 CMD ["python", "app.py"]
 ```
 app/requirements.txt
 ```text
 Flask
 ```
-```
+```bash
+docker-compose build
+
 docker-compose up
 ```
-```
+```bash
 curl http://localhost:5000
 ```
 
