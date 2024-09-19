@@ -213,11 +213,17 @@ Secrets are any piece of sensitive data information(e.g., API keys, passwords), 
 They are designed to be tightly controlled, secure and only accessible (read-only) to services only when expicitly granted access within the `secrets` field. 
 ### Secret management
 Secrets can be managed torugh CLI with `docker secret <command>`:
-  - `create <secret-name>`: Creates a secret.
+  - `create <secret-name> <file-name>`: Creates a secret with the contents of the selected file.
   - `ls`: Shows a list of secrets
   - `inspect <secret-name>`: Shows details of the secret (without showing the actual sensitive data).
   - `rm <secret-name>`: Deletes the selected secret
 
+Alternatively secret can also be created trough `echo`:
+```bash
+echo "my-secret-api-key" | docker secret create api_key
+```
+
+Or even directly define within the compose file as we will show after.
 
 ### API-key example
 This time we will set up a simple ecosystem of Flask server that access an API-key that is safely stored, we can define a secret with `docker secret create` command.
