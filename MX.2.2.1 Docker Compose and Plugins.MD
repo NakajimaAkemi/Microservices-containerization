@@ -214,8 +214,6 @@ Secrets are any piece of sensitive data information(e.g., API keys, passwords), 
 They are designed to be tightly controlled, secure and only accessible (read-only) to services only when expicitly granted access within the `secrets` field. 
 
 This time we will set up a simple ecosystem of Flask server backed by a PostgreSQL, starting with the setup of the secret for the database password.
-
-In our project we will setup a secret for the  a file called "flask_secret".
 ```bash
 echo "mypostgrespassword" | docker secret create db_password -
 ```
