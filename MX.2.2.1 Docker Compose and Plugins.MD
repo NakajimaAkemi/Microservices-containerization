@@ -213,60 +213,66 @@ Secrets are any piece of sensitive data information(e.g., API keys, passwords), 
 They are designed to be tightly controlled, secure and only accessible (read-only) to services only when expicitly granted access within the `secrets` field. 
 
 ### API-key example
-Alternatively secret can also be created trough `echo`:
+This time we will set up a simple ecosystem of Flask server that access an API-key that is safely stored.
+In this example we will show just the juicy parts the rest can be found [here](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/secret-compose).
+`Project structure`
+```
+secret-compose/
+│
+├── app/
+│   ├── app.py
+│   └── requirements.txt
+│   └── Dockerfile
+│   └── api_key.txt
+└── docker-compose.yml
+```
+We put our secret API-key in the text file `api_key.txt`
 ```bash
 echo "my-super-secret-api-key" > api_key.txt
 ```
-This time we will set up a simple ecosystem of Flask server that access an API-key that is safely stored.
-Then add the secret to the compose file.
+Then we add the secret to the `docker-compose.yaml` file.
 ```yaml
-version: '3.9'
+version: '3'
 
 services:
   web:
-    build: .
+    build: ./app
     ports:
       - "5000:5000"
     secrets:
-      - api_key  
+      - api_key 
+
 secrets:
   api_key:
-    file: ./api_key.txt 
+    file: ./api_key.txt
 ```
-
-This one is a really stupid example:
+Our Flask application will fetch the API key from the secrets.
 ```Python
 from flask import Flask
+import os
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    # Leggi la chiave API dal file montato tramite secrets
-    with open('/run/secrets/api_key', 'r') as secret_file:
-        api_key = secret_file.read().strip()
-    return f"The API Key is: {api_key}"
+    secret_file_path = '/run/secrets/api_key'  # Percorso del file montato come volume
+
+    # Verifica se il percorso esiste ed è un file
+    if os.path.exists(secret_file_path) and os.path.isfile(secret_file_path):
+        with open(secret_file_path, 'r') as secret_file:
+            api_key = secret_file.read().strip()
+        return f"Found the API key!"
+    else:
+        return "Secret file not found."
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
 ```
-app/Dockerfile
-```Dockerfile
-FROM python:3.9-slim
-WORKDIR /app
-COPY app.py /app
-RUN pip install flask
-CMD ["python", "app.py"]
-```
-app/requirements.txt
-```text
-Flask
-```
+We start up the compose file.
 ```bash
-docker-compose build
-
 docker-compose up
 ```
+And now we verify everything.
 ```bash
 curl http://localhost:5000
 ```
