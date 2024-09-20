@@ -138,8 +138,6 @@ In this section we introduce `Volumes` and `Bind Mounts` as fundamental items fo
 ### Volumes
 Volumes are directly managed by Docker and can survive beyond the container's lifecycle, usefull if we want persistence of our data.
 
-There are different types of volumes: named, anonymous and bind.
-
 _Is also important to say that if a service doesn't specify a volumes section, it means that the service won't have any volumes mounted. Essentially, **no data will be persisted outside the container** for that service._
 
 
@@ -191,6 +189,18 @@ services:
 
 ```
 Bind mounts link a directory on your local machine to a container. Unlike volumes, bind mounts directly reflect changes made on the host filesystem.
+
+| Feature                | Anonymous Volume                               | Named Volume                                  | Bind Mount                                   |
+|------------------------|------------------------------------------------|-----------------------------------------------|----------------------------------------------|
+| **Definition**          | Automatically created by Docker without a name | Defined and named manually by the user        | Links a host system directory/file to a container path |
+| **Persistence**         | Temporary, data removed when the container is deleted | Persistent, exists independently of the container | Depends on the host filesystem               |
+| **Location on Host**    | Managed automatically by Docker                | Managed by Docker, location decided by Docker | Specific path on the host filesystem         |
+| **Access**              | Not directly accessible from the host           | Can be accessed using Docker commands         | Directly accessible from the host            |
+| **Typical Usage**       | Temporary or transient data                     | Persistent data, databases, config files      | During development to sync local files with containers |
+| **Example in `docker-compose.yml`** | `- /container/path`                | `- my_volume:/container/path`                 | `- ./local/path:/container/path`             |
+| **Automatic Creation**  | Yes                                             | No, must be explicitly declared               | No, a host path must be specified            |
+| **Inspection Command**  | `docker volume ls`                              | `docker volume ls`                            | Not applicable                               |
+| **Security**            | Secure, no direct host access                   | Secure, no direct host access                 | Less secure, full access from the host       |
 
 
 
