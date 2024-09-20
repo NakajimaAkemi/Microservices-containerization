@@ -139,15 +139,14 @@ In this section we introduce `Volumes` and `Bind Mounts` as fundamental items fo
 ### Differences
 Docker provides the following persistence mechanisms:
 Bind mounts link a directory on your local machine to a container. Unlike volumes, bind mounts directly reflect changes made on the host filesystem.
- - Volumes
+ - `Volumes` are directly managed by Docker and can survive beyond the container's lifecycle, usefull if we want persistence of our data.
 
- - Anonymous volumes are temporary volumes created by Docker when a container starts. They are typically used for temporary data, and they don't have a specific name, just because they are temporary.
+ - `Anonymous volumes` are temporary volumes created by Docker when a container starts. They are typically used for temporary data, and they don't have a specific name, just because they are temporary.
 These volumes are ephemeral and are removed when the container is removed.
 
- - Bind mounts allow you to mount a directory or file from the host machine into the container. Bind Mounts allow you to map a host file or directory to a container file or directory (bind mounts depend on the host's absolute path). This is particularly useful during development when you want changes made on the host to be immediately reflected in the container.\
+ - `Bind mounts` allow you to mount a directory or file from the host machine into the container. Bind Mounts allow you to map a host file or directory to a container file or directory (bind mounts depend on the host's absolute path). 
 
 
-Nota: mettere una nota per impostare le difference tra bind mount e anonymous volume.
 
 Each mechanism of persistence has merits and application, here's a global overview of the differences:
 
@@ -160,13 +159,11 @@ Each mechanism of persistence has merits and application, here's a global overvi
 | **Security**            | Secure, Docker-managed                        | Secure, Docker-managed                        | Full host access                             |
 
 
-### Volume definition
-Volumes are directly managed by Docker and can survive beyond the container's lifecycle, usefull if we want persistence of our data.
 
 _Is also important to say that if a service doesn't specify a volumes section, it means that the service won't have any volumes mounted. Essentially, **no data will be persisted outside the container** for that service._
 
+### Volume definition
 
-#### Including the volume in the compose file
 As we created our volume we can mount it to our container image.
 ```yml
 version: '3.9'
@@ -184,7 +181,13 @@ volumes:
 As we can see in the example, the volume is set with [...] **:** [...].\
 The first part is the name of the volume (in out case `flask_data`), the second one is the path in the container.
 
+
+
 ### Anonymous Volume definition
+
+Nota: mettere una nota per impostare le difference tra bind mount e anonymous volume.
+
+
 ```yml
 version: '3.9'
 
@@ -198,6 +201,7 @@ As we can see, we don't have the name, but only the path. It means that Docker C
 
 
 ### Bind Mount definition
+This is particularly useful during development when you want changes made on the host to be immediately reflected in the container.
 In a nutshell: _we want to use the bind mounts when we need direct access to the host’s filesystem for development, testing, or sharing configuration files._
 ```yml
 version: '3.9'
