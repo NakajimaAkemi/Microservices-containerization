@@ -89,7 +89,15 @@ In the following sections we will introduce and explain various features of Dock
 
 ## Replicas
 A **Replica** in Docker refers to the ability to istantiate more replicas of the same container, this allows us to scale horizontally improving the scalability, reliability and load balancing. 
-We will create an [updated version](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/replica-compose) of our first example by adding `deploy` field to the compose file and defining the number of replicas.
+To allow our service to replicate itself, we need first add a `deploy` field in the specific `service`, this field allows us to manage the container's behaviour across platforms, and its composed of:
+ - `mode`: This indicate how to run the service `global` means one container per host or `replicated` to run on the same host machine.
+ - `replicas`: Number of containers we want.
+
+> [!NOTE]
+> If not specified the `mode` field is defaulted to the `replicated` value
+
+
+We will create an [updated version](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/replica-compose) of our first example by adding  to the compose file and defining the number of replicas.
 
 ```yaml
 version: '3'
@@ -99,6 +107,7 @@ services:
     ports:
       - "5000"
     deploy:
+      mode: replicated
       replicas: 3
 ```
 > [!NOTE]
