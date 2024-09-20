@@ -136,6 +136,7 @@ In this section we introduce `Volumes` and `Bind Mounts` as fundamental items fo
   <img src="images/volumes.JPG" alt="Esempio di immagine" />
 </p>
 ### Differences
+
 Bind mounts link a directory on your local machine to a container. Unlike volumes, bind mounts directly reflect changes made on the host filesystem.
 
 Anonymous volumes are temporary volumes created by Docker when a container starts. They are typically used for temporary data, and they don't have a specific name, just because they are temporary.
