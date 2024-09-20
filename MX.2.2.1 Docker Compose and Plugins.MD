@@ -189,6 +189,27 @@ Bind mounts link a directory on your local machine to a container. Unlike volume
 Secrets are any piece of sensitive data information(e.g., API keys, passwords), that shouldn't be transmitted over the network or stored unencrypted. 
 They are designed to be tightly controlled, secure and only accessible (read-only) to services under `/run/secrets/` only when expicitly granted access in compose file. 
 
+The top-level secrets declaration defines or references sensitive data that is granted to the services in your Compose application. The source of the secret is either file or environment.
+
+ - file: The secret is created with the contents of the file at the specified path.
+ - environment: The secret is created with the value of an environment variable
+
+
+#### Top level declaration
+```yaml
+secrets:
+  server-certificate:
+    file: ./server.cert
+```
+
+#### 
+```yaml
+services:
+  frontend:
+    image: example/webapp
+    secrets:
+      - server-certificate
+```
 ### API-key example
 This time we will set up a simple ecosystem of Flask server that access an API-key that is safely stored.
 In this example we will show just the juicy parts the rest can be found [here](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/secret-compose).
