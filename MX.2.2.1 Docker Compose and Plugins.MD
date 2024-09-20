@@ -146,7 +146,7 @@ Bind mounts link a directory on your local machine to a container. Unlike volume
  - `Bind mounts`: allow you to mount a directory or file from the host machine into the container (bind mounts depend on the host's absolute path). 
 
 
-_(**Each mechanism of persistence has merits and application, here's a global overview of the differences**:)_
+_**Each mechanism of persistence has merits and application, here's a global overview of the differences**:_
 
 | Feature                | Anonymous Volume                               | Named Volume                                  | Bind Mount                                   |
 |------------------------|------------------------------------------------|-----------------------------------------------|----------------------------------------------|
