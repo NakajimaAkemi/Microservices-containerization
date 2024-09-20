@@ -135,6 +135,7 @@ In this section we introduce `Volumes` and `Bind Mounts` as fundamental items fo
 <p align="center">
   <img src="images/volumes.JPG" alt="Esempio di immagine" />
 </p>
+
 ### Differences
 
 Bind mounts link a directory on your local machine to a container. Unlike volumes, bind mounts directly reflect changes made on the host filesystem.
