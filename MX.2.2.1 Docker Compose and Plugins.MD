@@ -90,8 +90,8 @@ In the following sections we will introduce and explain various features of Dock
 ## Replicas
 A **Replica** in Docker refers to the ability to istantiate more replicas of the same container, this allows us to scale horizontally improving the scalability, reliability and load balancing. 
 To allow our service to replicate itself, we need first add a `deploy` field in the specific `service`, this field allows us to manage the container's behaviour across platforms, and its composed of:
- - `mode`: This indicate how to run the service `global` means one container per host or `replicated` to run on the same host machine.
- - `replicas`: Number of containers we want.
+ - `mode`: This indicate how to run the service **global** means one container per host or **replicated** to run on the same host machine.
+ - `replicas`: If we assigned the **replicated** value on `mode` we need also to specify the number of containers we want.
 
 > [!NOTE]
 > If not specified the `mode` field is defaulted to the `replicated` value
