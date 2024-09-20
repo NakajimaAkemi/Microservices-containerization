@@ -135,7 +135,29 @@ In this section we introduce `Volumes` and `Bind Mounts` as fundamental items fo
 <p align="center">
   <img src="images/volumes.JPG" alt="Esempio di immagine" />
 </p>
-### Volumes
+### Differences
+Bind mounts link a directory on your local machine to a container. Unlike volumes, bind mounts directly reflect changes made on the host filesystem.
+
+Anonymous volumes are temporary volumes created by Docker when a container starts. They are typically used for temporary data, and they don't have a specific name, just because they are temporary.
+These volumes are ephemeral and are removed when the container is removed.
+
+Bind mounts allow you to mount a directory or file from the host machine into the container. Bind Mounts allow you to map a host file or directory to a container file or directory (bind mounts depend on the host's absolute path). This is particularly useful during development when you want changes made on the host to be immediately reflected in the container.\
+In a nutshell: _we want to use the bind mounts when we need direct access to the host’s filesystem for development, testing, or sharing configuration files._
+
+Nota: mettere una nota per impostare le difference tra bind mount e anonymous volume.
+
+
+Here's a global overview of the differences between the persistence mechanisms.
+| Feature                | Anonymous Volume                               | Named Volume                                  | Bind Mount                                   |
+|------------------------|------------------------------------------------|-----------------------------------------------|----------------------------------------------|
+| **Definition**          | Automatically created by Docker without a name | Defined and named manually by the user        | Links a host directory/file to a container path |
+| **Persistence**         | Temporary, removed with the container          | Persistent, exists independently of the container | Depends on the host filesystem               |
+| **Access from Host**    | Not directly accessible                        | Accessible via Docker commands                | Direct access from the host                  |
+| **Typical Usage**       | Temporary or transient data                    | Persistent data (e.g., databases)             | Sync files during development                |
+| **Security**            | Secure, Docker-managed                        | Secure, Docker-managed                        | Full host access                             |
+
+
+### Volume definition
 Volumes are directly managed by Docker and can survive beyond the container's lifecycle, usefull if we want persistence of our data.
 
 _Is also important to say that if a service doesn't specify a volumes section, it means that the service won't have any volumes mounted. Essentially, **no data will be persisted outside the container** for that service._
@@ -159,9 +181,7 @@ volumes:
 As we can see in the example, the volume is set with [...] **:** [...].\
 The first part is the name of the volume (in out case `flask_data`), the second one is the path in the container.
 
-### Anonymous Volumes
-Anonymous volumes are temporary volumes created by Docker when a container starts. They are typically used for temporary data, and they don't have a specific name, just because they are temporary.
-These volumes are ephemeral and are removed when the container is removed.
+### Anonymous Volume definition
 ```yml
 version: '3.9'
 
@@ -174,10 +194,7 @@ services:
 As we can see, we don't have the name, but only the path. It means that Docker Compose will create an anonymous volume without a specific name.
 
 
-### Bind Mounts
-
-Bind mounts allow you to mount a directory or file from the host machine into the container. Bind Mounts allow you to map a host file or directory to a container file or directory (bind mounts depend on the host's absolute path). This is particularly useful during development when you want changes made on the host to be immediately reflected in the container.\
-In a nutshell: _we want to use the bind mounts when we need direct access to the host’s filesystem for development, testing, or sharing configuration files._
+### Bind Mount definition
 ```yml
 version: '3.9'
 
@@ -188,19 +205,6 @@ services:
       - ./html:/var/www/html  # Associa una directory locale a una directory nel container
 
 ```
-Bind mounts link a directory on your local machine to a container. Unlike volumes, bind mounts directly reflect changes made on the host filesystem.
-
-| Feature                | Anonymous Volume                               | Named Volume                                  | Bind Mount                                   |
-|------------------------|------------------------------------------------|-----------------------------------------------|----------------------------------------------|
-| **Definition**          | Automatically created by Docker without a name | Defined and named manually by the user        | Links a host system directory/file to a container path |
-| **Persistence**         | Temporary, data removed when the container is deleted | Persistent, exists independently of the container | Depends on the host filesystem               |
-| **Location on Host**    | Managed automatically by Docker                | Managed by Docker, location decided by Docker | Specific path on the host filesystem         |
-| **Access**              | Not directly accessible from the host           | Can be accessed using Docker commands         | Directly accessible from the host            |
-| **Typical Usage**       | Temporary or transient data                     | Persistent data, databases, config files      | During development to sync local files with containers |
-| **Example in `docker-compose.yml`** | `- /container/path`                | `- my_volume:/container/path`                 | `- ./local/path:/container/path`             |
-| **Automatic Creation**  | Yes                                             | No, must be explicitly declared               | No, a host path must be specified            |
-| **Inspection Command**  | `docker volume ls`                              | `docker volume ls`                            | Not applicable                               |
-| **Security**            | Secure, no direct host access                   | Secure, no direct host access                 | Less secure, full access from the host       |
 
 
 
