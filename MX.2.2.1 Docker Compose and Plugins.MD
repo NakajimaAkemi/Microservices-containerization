@@ -186,23 +186,24 @@ Bind mounts link a directory on your local machine to a container. Unlike volume
 
 
 ## Secrets
-Secrets are any piece of sensitive data information(e.g., API keys, passwords), that shouldn't be transmitted over the network or stored unencrypted. 
-They are designed to be tightly controlled, secure and only accessible (read-only) to services under `/run/secrets/` only when expicitly granted access in compose file. 
-
-The top-level secrets declaration defines or references sensitive data that is granted to the services in your Compose application. The source of the secret is either file or environment.
-
- - file: The secret is created with the contents of the file at the specified path.
- - environment: The secret is created with the value of an environment variable
+Secrets are any piece of sensitive data information(e.g., API keys, passwords...), that we want to securely handle and not be accessible to unauthorized processes and entities. 
 
 
 #### Top level declaration
+Secrets need to have a top-level secrets declaration that defines or references sensitive data. The source of the secret is either file or environment.
+
+ -`file`: The secret is created with the contents of the file at the specified path.
+ -  `environment`: The secret is created with the value of an environment variable
+
 ```yaml
 secrets:
   server-certificate:
     file: ./server.cert
 ```
 
-#### 
+#### Secret assignment to a specific service
+Secrets are designed to be tightly controlled, secure and only accessible (read-only) to services under `/run/secrets/` only when expicitly granted access in compose file. 
+
 ```yaml
 services:
   frontend:
@@ -210,7 +211,7 @@ services:
     secrets:
       - server-certificate
 ```
-### API-key example
+### Practical example with API-key
 This time we will set up a simple ecosystem of Flask server that access an API-key that is safely stored.
 In this example we will show just the juicy parts the rest can be found [here](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/secret-compose).
 
@@ -322,7 +323,7 @@ As we can see we put our credentials in txt files and loaded them as secrets, as
 ```bash
 docker inspect <container-id>
 ```
-The sadly for our attacker the output ENV variables will be
+The sadly for our attacker the output value ENV variables will be the generic path.
 ```json
 "Env": [
     "POSTGRES_USER_FILE=/run/secrets/db_password",
