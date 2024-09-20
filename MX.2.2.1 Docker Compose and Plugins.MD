@@ -136,7 +136,6 @@ In this section we introduce `Volumes` and `Bind Mounts` as fundamental items fo
   <img src="images/volumes.JPG" alt="Esempio di immagine" />
 </p>
 
-### Differences
 Docker provides the following persistence mechanisms:
 Bind mounts link a directory on your local machine to a container. Unlike volumes, bind mounts directly reflect changes made on the host filesystem.
  - `Volumes`: are directly managed by Docker and can survive beyond the container's lifecycle, usefull if we want persistence of our data.
