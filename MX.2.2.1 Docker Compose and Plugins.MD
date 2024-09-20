@@ -192,7 +192,7 @@ Secrets are any piece of sensitive data information(e.g., API keys, passwords...
 #### Top level declaration
 Secrets need to have a top-level secrets declaration that defines or references sensitive data. The source of the secret is either file or environment.
 
- -`file`: The secret is created with the contents of the file at the specified path.
+ - `file`: The secret is created with the contents of the file at the specified path.
  -  `environment`: The secret is created with the value of an environment variable
 
 ```yaml
