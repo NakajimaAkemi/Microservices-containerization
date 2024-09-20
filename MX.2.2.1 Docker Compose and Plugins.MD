@@ -139,16 +139,14 @@ In this section we introduce `Volumes` and `Bind Mounts` as fundamental items fo
 ### Differences
 Docker provides the following persistence mechanisms:
 Bind mounts link a directory on your local machine to a container. Unlike volumes, bind mounts directly reflect changes made on the host filesystem.
- - `Volumes` are directly managed by Docker and can survive beyond the container's lifecycle, usefull if we want persistence of our data.
+ - `Volumes`: are directly managed by Docker and can survive beyond the container's lifecycle, usefull if we want persistence of our data.
 
- - `Anonymous volumes` are temporary volumes created by Docker when a container starts. They are typically used for temporary data, and they don't have a specific name, just because they are temporary.
-These volumes are ephemeral and are removed when the container is removed.
+ - `Anonymous volumes`: are temporary volumes created by Docker when a container starts. They are typically used for temporary data, they re ephemeral and removed when the container is removed.
 
- - `Bind mounts` allow you to mount a directory or file from the host machine into the container. Bind Mounts allow you to map a host file or directory to a container file or directory (bind mounts depend on the host's absolute path). 
-
+ - `Bind mounts`: allow you to mount a directory or file from the host machine into the container (bind mounts depend on the host's absolute path). 
 
 
-Each mechanism of persistence has merits and application, here's a global overview of the differences:
+_(**Each mechanism of persistence has merits and application, here's a global overview of the differences**:)_
 
 | Feature                | Anonymous Volume                               | Named Volume                                  | Bind Mount                                   |
 |------------------------|------------------------------------------------|-----------------------------------------------|----------------------------------------------|
