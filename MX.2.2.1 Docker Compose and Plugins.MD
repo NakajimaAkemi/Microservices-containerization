@@ -137,19 +137,20 @@ In this section we introduce `Volumes` and `Bind Mounts` as fundamental items fo
 </p>
 
 ### Differences
-
+Docker provides the following persistence mechanisms:
 Bind mounts link a directory on your local machine to a container. Unlike volumes, bind mounts directly reflect changes made on the host filesystem.
+ - Volumes
 
-Anonymous volumes are temporary volumes created by Docker when a container starts. They are typically used for temporary data, and they don't have a specific name, just because they are temporary.
+ - Anonymous volumes are temporary volumes created by Docker when a container starts. They are typically used for temporary data, and they don't have a specific name, just because they are temporary.
 These volumes are ephemeral and are removed when the container is removed.
 
-Bind mounts allow you to mount a directory or file from the host machine into the container. Bind Mounts allow you to map a host file or directory to a container file or directory (bind mounts depend on the host's absolute path). This is particularly useful during development when you want changes made on the host to be immediately reflected in the container.\
-In a nutshell: _we want to use the bind mounts when we need direct access to the host’s filesystem for development, testing, or sharing configuration files._
+ - Bind mounts allow you to mount a directory or file from the host machine into the container. Bind Mounts allow you to map a host file or directory to a container file or directory (bind mounts depend on the host's absolute path). This is particularly useful during development when you want changes made on the host to be immediately reflected in the container.\
+
 
 Nota: mettere una nota per impostare le difference tra bind mount e anonymous volume.
 
+Each mechanism of persistence has merits and application, here's a global overview of the differences:
 
-Here's a global overview of the differences between the persistence mechanisms.
 | Feature                | Anonymous Volume                               | Named Volume                                  | Bind Mount                                   |
 |------------------------|------------------------------------------------|-----------------------------------------------|----------------------------------------------|
 | **Definition**          | Automatically created by Docker without a name | Defined and named manually by the user        | Links a host directory/file to a container path |
@@ -197,6 +198,7 @@ As we can see, we don't have the name, but only the path. It means that Docker C
 
 
 ### Bind Mount definition
+In a nutshell: _we want to use the bind mounts when we need direct access to the host’s filesystem for development, testing, or sharing configuration files._
 ```yml
 version: '3.9'
 
