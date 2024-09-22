@@ -159,7 +159,7 @@ _**Each mechanism of persistence has merits and application, here's a global ove
 _Is also important to say that if a service doesn't specify a volumes section, it means that the service won't have any volumes mounted. Essentially, **no data will be persisted outside the container** for that service._
 
 ### Volume definition
-In this case we will reference to the [volume example's](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/volume-compose)(basically an echo server that logs the messages in a txt fil) compose file.
+In this case we will reference to the [volume example's](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/volume-compose) (basically an echo server that logs the messages in a txt file) compose file.
 
 The fist thing we need to do is to define the `volume` top-level element and then declare the volumes we need, after that we will assign to the specific `service` entries in order to "mount" them to the container images.
 ```yaml
