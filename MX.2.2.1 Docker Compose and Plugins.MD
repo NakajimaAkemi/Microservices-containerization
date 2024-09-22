@@ -159,24 +159,31 @@ _**Each mechanism of persistence has merits and application, here's a global ove
 _Is also important to say that if a service doesn't specify a volumes section, it means that the service won't have any volumes mounted. Essentially, **no data will be persisted outside the container** for that service._
 
 ### Volume definition
+In this case we will reference to the [volume example's](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/volume-compose) compose file.
 
-As we created our volume we can mount it to our container image.
-```yml
-version: '3.9'
+The fist thing we need to do is to define the `volume` top-level element and then declare the volumes we need, after that we will assign to the specific `service` entries in order to "mount" them to the container images.
+```yqml
+version: '3'
 
 services:
   web:
-    image: nginx
+    build: ./app
+    ports:
+      - "5000:5000"
     volumes:
-      - my_data:/var/www/html  # Associa un volume a una directory nel container
+      - logs:/data  # Volume assignment on the path /data
 
 volumes:
-  my_data:  # Definizione del volume
-
+  logs:  # Volume definition
 ```
 As we can see in the example, the volume is set with [...] **:** [...].\
-The first part is the name of the volume (in out case `flask_data`), the second one is the path in the container.
+The first part is the name of the volume (in out case `logs`), the second one is the path in the container.
+After doing so we can access to the volume by refercing it trough the path we set up, in the example's case it is `/data`.
 
+As we said before, the volumes can survive the containers' lifecycle and we verify that with a simple command.
+```bash
+docker volume ls
+```
 
 
 ### Anonymous Volume definition
