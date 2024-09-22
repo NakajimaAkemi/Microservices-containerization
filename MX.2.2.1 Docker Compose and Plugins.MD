@@ -159,7 +159,7 @@ _**Each mechanism of persistence has merits and application, here's a global ove
 _Is also important to say that if a service doesn't specify a volumes section, it means that the service won't have any volumes mounted. Essentially, **no data will be persisted outside the container** for that service._
 
 ### Volume definition
-In this case we will reference to the [volume example's](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/volume-compose) compose file.
+In this case we will reference to the [volume example's](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/volume-compose)(basically an echo server that logs the messages in a txt fil) compose file.
 
 The fist thing we need to do is to define the `volume` top-level element and then declare the volumes we need, after that we will assign to the specific `service` entries in order to "mount" them to the container images.
 ```yaml
@@ -181,7 +181,23 @@ _As we can see in the example, the volume is set with [...] **:** [...]._
 The first part is the name of the volume (in out case `logs`), the second one is the path in the container.
 After doing so we can access to the volume by refercing it trough the path we set up, in the example's case it is `/data`.
 
+#### Mounting existing volume
+Just in case we want to mount an already existing volume we need to add the `external` option in the `volumes` declaration. Let's edit the previious example and with this we will fetch already existing "logs" volume. 
 
+```yaml
+version: '3'
+services:
+  web:
+    build: ./app
+    ports:
+      - "5000:5000"
+    volumes:
+      - logs:/data  # Volume assignment on the path /data
+
+volumes:
+  logs:  # Volume definition
+      external: true # <---- HERE1
+```
 
 ### Anonymous Volume definition
 
