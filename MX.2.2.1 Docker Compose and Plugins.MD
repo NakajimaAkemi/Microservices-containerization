@@ -83,7 +83,6 @@ Now that we know how to setup a simple ecosystem with compose, we will show how 
   - **`down`**: Stops and removes all containers, networks, volumes defined in the compose file.
   - **`build`**: Builds the the Docker images specified in services.
   - **`logs`**: Views the logs of all containers in execution.
-  - **`scale`**: Scales up or down the number of containers.
 
 In the following sections we will introduce and explain various features of Docker compose, these features will allow us to set up and customize a multi-container ecosytem adapt to our necessities and use cases.
 
@@ -91,7 +90,7 @@ In the following sections we will introduce and explain various features of Dock
 A **Replica** in Docker refers to the ability to istantiate more replicas of the same container, this allows us to scale horizontally improving the scalability, reliability and load balancing. 
 To allow our service to replicate itself, we need first add a `deploy` field in the specific `service`, this field allows us to manage the container's behaviour across platforms, and its composed of:
  - `mode`: This indicate how to run the service **global** means one container per host or **replicated** to run on the same host machine.
- - `replicas`: If we assigned the **replicated** value on `mode` we need also to specify the number of containers we want.
+   - `replicas`: If we assigned the **replicated** value on `mode` we need also to specify the number of containers we want.
 
 > [!NOTE]
 > If not specified the `mode` field is defaulted to the `replicated` value
