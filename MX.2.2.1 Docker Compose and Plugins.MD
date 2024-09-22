@@ -158,6 +158,38 @@ _**Each mechanism of persistence has merits and application, here's a global ove
 
 _Is also important to say that if a service doesn't specify a volumes section, it means that the service won't have any volumes mounted. Essentially, **no data will be persisted outside the container** for that service._
 
+
+
+
+### Docker Volume Management: Key Commands
+Thw following are the key commands for the management of Volume's lifecycle
+- **Create a Volume**  
+  ```bash
+  docker volume create <volume_name>
+  ```
+
+- **List Volumes**  
+  ```bash
+  docker volume ls
+  ```
+
+- **Inspect a Volume**  
+  ```bash
+  docker volume inspect <volume_name>
+  ```
+
+- **Remove a Volume**  
+  ```bash
+  docker volume rm <volume_name>
+  ```
+
+- **Remove Unused Volumes**  
+  ```bash
+  docker volume prune
+  ``` 
+
+
+
 ### Volume definition
 In this case we will reference to the [volume example's](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/volume-compose) (basically an echo server that logs the messages in a txt file) compose file.
 
@@ -412,10 +444,12 @@ The sadly for our attacker the output value ENV variables will be the generic pa
 
 
 ## Networks
+ Un aspetto dell'engine Docker che lo rende potente, è la possibilità di creare e gestire reti di 
+container e servizi Docker. Le reti permettono l'interconnessione dei container Docker con altri 
+container non necessariamente appartenenti allo stesso host e altri dispositivi.
+ Il sistema di networking Docker è definito in base alla scelta del driver
 
-___________________________________
 
-  - the **network**: as the same as volumes, we can create a new network with ```network create``` and remove it with ```network rm```
 
 Networks allow containers to communicate with each other securely. Docker Compose automatically creates a default network, but you can define custom networks.
 
@@ -490,6 +524,9 @@ Una **Network** Docker è un'entità virtuale che permette ai container di comun
 ### Creazione e Gestione delle Networks
 
 #### Creare una Network
+
+
+  - the **network**: as the same as volumes, we can create a new network with ```network create``` and remove it with ```network rm```
 
 Per creare una network:
 
