@@ -696,9 +696,6 @@ Docker networks in Compose allow services to communicate in a controlled environ
 - Use external networks if needed.
 
 With these attributes and commands, Docker Compose gives you flexibility in structuring and managing your containerized applications' networks.
-```
-
-This segment provides an introduction to Docker networks, the relevant attributes for `docker-compose.yml`, commands for managing networks, and simple examples to demonstrate usage. It’s structured to be part of a guide and formatted for easy reading in Git.
 
 
 
