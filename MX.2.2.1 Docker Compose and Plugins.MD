@@ -268,6 +268,16 @@ _The [bind-compose](https://github.com/NakajimaAkemi/Microservices-containerizat
 Secrets are any piece of sensitive data information(e.g., API keys, passwords...), that we want to securely handle and not be accessible to unauthorized processes and entities. 
 
 
+#### Key commands
+We can manage a Docker's secret lifecycle trough the key `docker secrets <command>`:
+- `create <secret_name> <file>`: creates a secret with the specified name, using the content from the file.
+
+- `ls`: lists all existing secrets.
+
+- `inspect <secret_name>`: displays detailed information about the specified secret.
+
+- `rm <secret_name>` : removes the specified secret.
+
 #### Top level declaration
 Secrets need to have a top-level secrets declaration that defines or references sensitive data. The source of the secret is either file or environment.
 
