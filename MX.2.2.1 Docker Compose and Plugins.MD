@@ -196,7 +196,7 @@ services:
 
 volumes:
   logs:  # Volume definition
-      external: true # <---- HERE1
+      external: true # <---- HERE!
 ```
 
 ### Anonymous Volume definition
