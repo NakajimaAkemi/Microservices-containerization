@@ -176,14 +176,11 @@ services:
 volumes:
   logs:  # Volume definition
 ```
-As we can see in the example, the volume is set with [...] **:** [...].\
+_As we can see in the example, the volume is set with [...] **:** [...]._
+
 The first part is the name of the volume (in out case `logs`), the second one is the path in the container.
 After doing so we can access to the volume by refercing it trough the path we set up, in the example's case it is `/data`.
 
-As we said before, the volumes can survive the containers' lifecycle and we verify that with a simple command.
-```bash
-docker volume ls
-```
 
 
 ### Anonymous Volume definition
