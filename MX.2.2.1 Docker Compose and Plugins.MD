@@ -162,7 +162,7 @@ _Is also important to say that if a service doesn't specify a volumes section, i
 In this case we will reference to the [volume example's](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/volume-compose) compose file.
 
 The fist thing we need to do is to define the `volume` top-level element and then declare the volumes we need, after that we will assign to the specific `service` entries in order to "mount" them to the container images.
-```yqml
+```yaml
 version: '3'
 
 services:
