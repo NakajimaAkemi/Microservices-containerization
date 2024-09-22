@@ -161,36 +161,17 @@ _Is also important to say that if a service doesn't specify a volumes section, i
 
 
 
-### Docker Volume Management: Key Commands
-Thw following are the key commands for the management of Volume's lifecycle
-- **Create a Volume**  
-  ```bash
-  docker volume create <volume_name>
-  ```
-
-- **List Volumes**  
-  ```bash
-  docker volume ls
-  ```
-
-- **Inspect a Volume**  
-  ```bash
-  docker volume inspect <volume_name>
-  ```
-
-- **Remove a Volume**  
-  ```bash
-  docker volume rm <volume_name>
-  ```
-
-- **Remove Unused Volumes**  
-  ```bash
-  docker volume prune
-  ``` 
 
 
 
-### Volume definition
+
+### Volume definition and management
+As volumes are a particular feature we can define them in compose file and manage their lifecycle through the ```docker volume <command>``` CLI commands: 
+- ```create <volume_name>```: creates a volume  
+- ```ls```: lists Volumes
+- ```inspect <volume_name>``` : inspect a Volume 
+- ```rm <volume_name>```: removes a Volume
+
 In this case we will reference to the [volume example's](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/volume-compose) (basically an echo server that logs the messages in a txt file) compose file.
 
 The fist thing we need to do is to define the `volume` top-level element and then declare the volumes we need, after that we will assign to the specific `service` entries in order to "mount" them to the container images.
