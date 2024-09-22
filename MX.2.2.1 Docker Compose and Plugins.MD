@@ -551,11 +551,154 @@ docker network rm my_network
 
 
 
+## Networks in Docker Compose
 
+Docker networks allow containers to communicate with each other, whether they’re on the same host or spread across multiple hosts. When using Docker Compose, networks are automatically created for your services, but you can also define custom networks to have more control over connectivity.
 
+Docker Compose automatically creates a default network for your services if none is specified, but by defining networks explicitly, you can:
+- Isolate groups of services.
+- Control which services can communicate with each other.
+- Configure advanced network options like driver types and external networks.
 
+### Top-Level Network Attributes
 
+When defining networks in `docker-compose.yml`, the following attributes can be specified:
 
+- **`driver`**  
+  Specifies the network driver (default is `bridge` for single-host networking).
+  
+- **`driver_opts`**  
+  Allows you to specify custom options for the chosen driver.
+
+- **`attachable`**  
+  Allows containers to be manually attached to this network.
+
+- **`ipam`**  
+  IP Address Management: lets you define custom IP address ranges, subnets, and gateways.
+
+- **`external`**  
+  Indicates if the network is external (i.e., already created outside of Compose).
+
+### Commands for Docker Networks
+
+Here are the basic Docker network commands:
+
+- **Create a network**  
+  ```bash
+  docker network create <network_name>
+  ```
+
+- **List networks**  
+  ```bash
+  docker network ls
+  ```
+
+- **Inspect a network**  
+  ```bash
+  docker network inspect <network_name>
+  ```
+
+- **Remove a network**  
+  ```bash
+  docker network rm <network_name>
+  ```
+
+### Using Networks in Docker Compose
+
+Networks can be explicitly defined in `docker-compose.yml`. By default, Compose creates a single network that connects all the services. To control network behavior, you can define multiple networks and specify which services are connected to each.
+
+#### Example 1: Basic Custom Network
+
+```yaml
+version: '3.9'
+
+services:
+  app:
+    image: my-app
+    networks:
+      - my_custom_network
+
+  db:
+    image: postgres
+    networks:
+      - my_custom_network
+
+networks:
+  my_custom_network:
+    driver: bridge
+```
+
+In this example:
+- Both the `app` and `db` services are connected to a custom network called `my_custom_network`.
+- The network uses the `bridge` driver, which is the default for single-host setups.
+
+#### Example 2: Multiple Networks for Isolation
+
+```yaml
+version: '3.9'
+
+services:
+  frontend:
+    image: nginx
+    networks:
+      - front_net
+
+  backend:
+    image: my-backend
+    networks:
+      - front_net
+      - back_net
+
+  database:
+    image: postgres
+    networks:
+      - back_net
+
+networks:
+  front_net:
+    driver: bridge
+  back_net:
+    driver: bridge
+```
+
+In this example:
+- The `frontend` and `backend` services share the `front_net`, allowing them to communicate.
+- The `backend` and `database` services share the `back_net`, isolating database traffic from the frontend.
+
+### External Networks
+
+You can connect your services to an existing Docker network using the `external` attribute.
+
+#### Example 3: External Network
+
+```yaml
+version: '3.9'
+
+services:
+  app:
+    image: my-app
+    networks:
+      - existing_network
+
+networks:
+  existing_network:
+    external: true
+```
+
+In this case:
+- The service `app` connects to an external network called `existing_network`, which must be pre-created outside of Docker Compose.
+
+### Summary
+
+Docker networks in Compose allow services to communicate in a controlled environment. You can use networks to:
+- Define how services communicate.
+- Isolate services from each other.
+- Use external networks if needed.
+
+With these attributes and commands, Docker Compose gives you flexibility in structuring and managing your containerized applications' networks.
+```
+
+This segment provides an introduction to Docker networks, the relevant attributes for `docker-compose.yml`, commands for managing networks, and simple examples to demonstrate usage. It’s structured to be part of a guide and formatted for easy reading in Git.
 
 
 
