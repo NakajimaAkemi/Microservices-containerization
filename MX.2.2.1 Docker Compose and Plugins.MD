@@ -233,9 +233,16 @@ As we can see, we don't have the name, but only the path. It means that Docker C
 
 
 ### Bind Mount definition
-This is particularly useful during development when you want changes made on the host to be immediately reflected in the container.
-In a nutshell: _we want to use the bind mounts when we need direct access to the host’s filesystem for development, testing, or sharing configuration files._
-```yml
+Bind mounts are particularly useful during development when you want changes made on the host to be immediately reflected in the container.
+
+
+(bind-compose)[https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/bind-compose]
+```
+
+```
+
+
+```yaml
 version: '3.9'
 
 services:
@@ -245,7 +252,7 @@ services:
       - ./html:/var/www/html  # Associa una directory locale a una directory nel container
 
 ```
-
+In a nutshell: _we want to use the bind mounts when we need direct access to the host’s filesystem for development, testing, or sharing configuration files._
 
 
 ## Secrets
