@@ -216,20 +216,19 @@ volumes:
 ```
 
 ### Anonymous Volume definition
+As we can see, we don't have the name nor the top-level attribute declaration, but only the path of reference. Differences aside, it behaves and works as any other volume, it distincts itself due the ephemeral nature.
 
-Nota: mettere una nota per impostare le difference tra bind mount e anonymous volume.
-
-
-```yml
-version: '3.9'
-
+```yaml
+version: '3'
 services:
   web:
-    image: nginx
+    build: ./app
+    ports:
+      - "5000:5000"
     volumes:
-      - /var/www/html  # Volume anonimo
+      - /data  # Volume assignment on the path /data
 ```
-As we can see, we don't have the name, but only the path. It means that Docker Compose will create an anonymous volume without a specific name.
+
 
 
 ### Bind Mount definition
