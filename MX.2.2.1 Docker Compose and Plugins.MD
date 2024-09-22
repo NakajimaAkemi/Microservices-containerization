@@ -233,26 +233,23 @@ As we can see, we don't have the name, but only the path. It means that Docker C
 
 
 ### Bind Mount definition
-Bind mounts are particularly useful during development when you want changes made on the host to be immediately reflected in the container.
+For the bind-mounts there is no need for declaration in the `volumes` top-level attribute, as they depend to the host's path we just need to declare them inside the specific `service` with the format [host path] **:** [...].
 
-
-(bind-compose)[https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/bind-compose]
-```
-
-```
-
+As we can see in the [bind-compose](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/bind-compose) example, we mount the `./app` directory in our host and mapped it to the `/bind` path which we will use to reference the host directory.
 
 ```yaml
-version: '3.9'
-
+version: '3'
 services:
-  web:
-    image: nginx
+  flask:
+    build: ./app
+    ports:
+      - "5000:5000"
     volumes:
-      - ./html:/var/www/html  # Associa una directory locale a una directory nel container
-
+      - ./app:/bind  # Bind mount: collega la directory dell'host con quella del container
 ```
-In a nutshell: _we want to use the bind mounts when we need direct access to the host’s filesystem for development, testing, or sharing configuration files._
+Bind mounts are particularly useful during development when you want changes made on the host to be immediately reflected in the container, thanks to having direct access to the host’s filesystem.
+
+_The [bind-compose](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/bind-compose) is an example of such application, it consists of a Flask server in `debug mode`, basically we can modify the code outside the container run time and thhe container will directly reflect the change._
 
 
 ## Secrets
