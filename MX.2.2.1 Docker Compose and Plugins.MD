@@ -198,6 +198,22 @@ volumes:
   logs:  # Volume definition
       external: true # <---- HERE!
 ```
+#### Naming volumes 
+We can attribute a specific name to the volume and can also be used in conjuction with the `external` option in the `volumes` declaration, if need to. 
+```yaml
+version: '3'
+services:
+  web:
+    build: ./app
+    ports:
+      - "5000:5000"
+    volumes:
+      - logs:/data  # Volume assignment on the path /data
+
+volumes:
+  logs:  # Volume definition
+      name: volume-rel-name # <---- HERE!
+```
 
 ### Anonymous Volume definition
 
