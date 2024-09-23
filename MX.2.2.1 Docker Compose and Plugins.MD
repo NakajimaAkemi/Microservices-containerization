@@ -166,15 +166,17 @@ _Is also important to say that if a service doesn't specify a volumes section, i
 
 
 ### Volume definition and management
-As volumes are a particular feature we can define them in compose file and manage their lifecycle through the ```docker volume <command>``` CLI commands: 
-- ```create <volume_name>```: creates a volume  
-- ```ls```: lists Volumes
-- ```inspect <volume_name>``` : inspect a Volume 
-- ```rm <volume_name>```: removes a Volume
+Volumes can be defined and managed via both the `docker-compose` file and the CLI commands with the format ```docker volume <command>```:
+  - ```create <volume_name>```: creates a volume  
+  - ```ls```: lists Volumes
+  - ```inspect <volume_name>``` : inspect a Volume 
+  - ```rm <volume_name>```: removes a Volume
+
+
+We can define the volume in the `docker-compose.yaml` file via the the `volume` top-level element and declaring the volumes we need, after that we just assign to the specific `service` entries in order to "mount" them to the container images.
 
 In this case we will reference to the [volume example's](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/volume-compose) (basically an echo server that logs the messages in a txt file) compose file.
 
-The fist thing we need to do is to define the `volume` top-level element and then declare the volumes we need, after that we will assign to the specific `service` entries in order to "mount" them to the container images.
 ```yaml
 version: '3'
 
@@ -228,7 +230,7 @@ volumes:
       name: volume-rel-name # <---- HERE!
 ```
 
-### Anonymous Volume definition
+#### Anonymous Volume definition
 As we can see, we don't have the name nor the top-level attribute declaration, but only the path of reference. Differences aside, it behaves and works as any other volume, it distincts itself due the ephemeral nature.
 
 ```yaml
