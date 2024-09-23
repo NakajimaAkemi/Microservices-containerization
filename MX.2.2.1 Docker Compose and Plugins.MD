@@ -468,7 +468,7 @@ We can manage Docker netwroks through CLI, they follow the format `docker networ
 Networks can be explicitly defined in `docker-compose.yml`. By default, Compose creates a single network that connects all the services. To control network behavior, you can define multiple networks and specify which services are connected to each.
 
 #### Top-Level Network Attributes
-When defining networks in `docker-compose.yml`, the following attributes can be specified:
+When defining networks in `docker-compose.yml`, inside the top-level attribute `networks`the following attributes can be specified:
 - **`driver`** : Specifies the network driver (default is `bridge` for single-host networking). 
 - **`driver_opts`**: Allows you to specify custom options for the chosen driver.
 - **`attachable`**: Allows containers to be manually attached to this network.
