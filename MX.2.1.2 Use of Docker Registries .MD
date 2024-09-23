@@ -2,12 +2,15 @@
 In this section we will show a simple guide on how to Download and execute a Container image from the Docker supported registries.
 
 ## Authenticating to a container registry
-In order to pull and push containers from registries other than DockerHub (this includes private registries) we need to execute an authentication procedure, with the following command:
-```bash
-docker login <registry-url>
-```
+If we need to access specific registries or other registries different than DockerHub we need to execute an authentication procedure, with the command `docker login`:
+      - `<registry-url>`: Not neccessary if we want to login to DockerHub
+        - `<port>`: If there's a specific port to connect to.
+
+Right after the CLI will ask your credentials and the login will complete.
+
 > [!NOTE]
 > In some cases the login is tipically executed using cloud-specific tools or commands.
+
 
 
 ## Pulling Docker images
