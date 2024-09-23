@@ -496,7 +496,8 @@ networks:
 ```
 
 #### External Network example
-This is a slight variation of the first example, in this case the service `app` connects to an external network called `existing_network`, which must be pre-created outside of Docker Compose or it will show an error.
+This is a slight variation of the first example, in this case the service `app` connects to an external network called `existing_network`, by using the `external` attribute.
+The network must be pre-created or Docker Compose will show an error.
 
 ```yaml
 version: '3'
@@ -512,7 +513,7 @@ networks:
 ```
 
 
-#### Utilising multiple Networks for Isolation
+### Utilising multiple Networks for Isolation
 A good way to use networks is for isolating side of microservice ecosystem that does not need to be exposed such as databases. 
 ```yaml
 version: '3.9'
@@ -545,8 +546,7 @@ In this example:
 - The `frontend` and `backend` services share the `front_net`, allowing them to communicate.
 - The `backend` and `database` services share the `back_net`, isolating database traffic from the frontend.
 
-### External Networks
-We can connect our services to an existing Docker network (including those defined via CLI commands) using the `external` attribute.
+
 
 
 
