@@ -52,16 +52,18 @@ docker pull registry.example.com/my-repo/my-app:latest
 ```
 Now you have successfully downloaded and, if desired, run a container image using Docker commands.
 
-# How to Upload a Docker Image to a Registry
+## Pushing Docker images
+### Prerequisites
+As prerequisite we need to have a *DockerHub Account* in order to pull image with Docker CLI or other registry services such as  **AWS ECR**, **Google Container Registry** and more.
+
+### Useful commands 
 
 This guide will walk you through the steps to build a Docker image and upload it to a Docker registry using Docker commands.
 
-## Prerequisites
-As prerequisite we need to have a *DockerHub Account* in order to pull image with Docker CLI. In the following step we will use DockerHub registry as example, but other registry services can be used such as  **AWS ECR**, **Google Container Registry** and more.
 
-## Steps
+### Steps
 
-### 1. Build Your Docker Image
+#### 1. Build Your Docker Image
 
 Navigate to the directory containing your `Dockerfile` and run:
 
@@ -78,7 +80,7 @@ docker build -t your-image-name:your-tag .
 docker build -t myapp:latest .
 ```
 
-### 2. Tag the Image for the Registry
+#### 2. Tag the Image for the Registry
 
 Tag your image with the registry URL and your repository name to prepare it for uploading.
 
@@ -92,24 +94,16 @@ docker tag your-image-name:your-tag your-registry-username/your-repo-name:your-t
 docker tag myapp:latest myusername/myapp-repo:latest
 ```
 
-### 3. Log In to the Docker Registry
+#### Notes
 
-Authenticate with your Docker registry account.
+- **Private Registries**: If you're using a private registry, include the registry URL in the tag.
 
-```bash
-docker login
-```
+  ```bash
+  docker tag myapp:latest registry.example.com/myusername/myapp-repo:latest
+  docker push registry.example.com/myusername/myapp-repo:latest
+  ```
 
-- For Docker Hub, simply run `docker login` and enter your credentials.
-- For other registries, you may need to specify the registry URL.
-
-**Example:**
-
-```bash
-docker login
-```
-
-### 4. Push the Image to the Registry
+#### 4. Push the Image to the Registry
 
 Upload your tagged image to the Docker registry.
 
@@ -127,31 +121,8 @@ docker push myusername/myapp-repo:latest
 
 Log in to your Docker registry web interface to ensure the image has been uploaded successfully.
 
-## Summary of Commands
 
-```bash
-# Build the image
-docker build -t myapp:latest .
 
-# Tag the image
-docker tag myapp:latest myusername/myapp-repo:latest
 
-# Log in to Docker registry
-docker login
 
-# Push the image to the registry
-docker push myusername/myapp-repo:latest
-```
-
-## Notes
-
-- **Private Registries**: If you're using a private registry, include the registry URL in the tag.
-
-  ```bash
-  docker tag myapp:latest registry.example.com/myusername/myapp-repo:latest
-  docker push registry.example.com/myusername/myapp-repo:latest
-  ```
-
-- **Authentication**: Make sure you have the necessary permissions to push images to the repository.
-- **Security**: Never expose your Docker registry credentials in your code or repositories.
 
