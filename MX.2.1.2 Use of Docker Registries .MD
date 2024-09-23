@@ -1,53 +1,29 @@
-# Downloading a Container Image using Docker
-In this section we will show a simple guide on how to Download and execute a Container image from the Docker registry.
+# Pull and Pushing Docker Containers
+In this section we will show a simple guide on how to Download and execute a Container image from the Docker supported registries.
 
-## 1. Search for the Docker Image
-If you're unsure about the exact image name, you can search for it on Docker Hub using:
-```bash
-docker search <image-name>
-```
-Example:
+## Pulling Docker images
+### Useful commands 
+In this section we will introduce useful commmands that can be used in order to fetch container images using the following:
+    - `docker search <image-name>`: this will allow us to search for the image in the DockerHub, if we're unsure which image we need
+    - `docker pull <image-name>`: Command to download the image with the specified name
+        - `:<tag>` : It's non mandatory option, we can put if we're searching for a specific container version 
+    - `docker images`: Displays the images that are stored locally, we can use to verify if the download is successful
+
+
+
+#### Example of search
 ```bash
 docker search ubuntu
 ```
 
-## 2. Download (Pull) the Docker Image
-Use the `docker pull` command to download the image. The general syntax is:
-```bash
-docker pull <image-name>:<tag>
-```
-- **image-name**: Name of the image (e.g., `ubuntu`).
-- **tag**: Specific version or variant (e.g., `latest`, `20.04`).
-
-Example:
+#### Example of Docker pull with tag
 ```bash
 docker pull ubuntu:latest
 ```
-
 If you don't specify a tag, Docker will download the `latest` tag by default:
-```bash
-docker pull ubuntu
-```
 
-## 3. Verify the Downloaded Image
-After pulling the image, you can verify that it was downloaded successfully by listing all local Docker images:
-```bash
-docker images
-```
+_ _ _
 
-This command will display the list of images on your system along with their tags, image IDs, and sizes.
-
-## 4. Run the Downloaded Image (Optional)
-If you want to run a container from the downloaded image, use:
-```bash
-docker run -it <image-name>:<tag>
-```
-Example:
-```bash
-docker run -it ubuntu:latest
-```
-This will start a container and open an interactive terminal session within it.
-___
 
 
 Now you have successfully downloaded and, if desired, run a container image using Docker commands.
