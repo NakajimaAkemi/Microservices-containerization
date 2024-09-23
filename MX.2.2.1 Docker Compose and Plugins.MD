@@ -515,6 +515,13 @@ networks:
 
 ### Utilising multiple Networks for Isolation
 A good way to use networks is for isolating side of microservice ecosystem that does not need to be exposed such as databases. 
+In the following case we will define two networks `front_net` and `back_net`, this will allow us
+
+<p align="center">
+  <img src="images/volumes.JPG" alt="Esempio di immagine" />
+</p>
+
+
 ```yaml
 version: '3.9'
 
