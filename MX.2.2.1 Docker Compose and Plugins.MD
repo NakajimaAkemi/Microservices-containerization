@@ -515,46 +515,62 @@ networks:
 
 ### Utilising multiple Networks for Isolation
 A good way to use networks is for isolating side of microservice ecosystem that does not need to be exposed such as databases. 
-In the following case we will define two networks `front_net` and `back_net`, this will allow us
-
-[example](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/isolation-compose)
+In the following [example](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/isolation-compose) we will define two networks `front_net` and `back_net`, this will allow us to hide the side backend side of the network. 
 
 
 <p align="center">
   <img src="images/ecosystem.JPG" alt="Esempio di immagine" />
 </p>
 
+In this example:
+- The `frontend` and `backend` services share the `front_net`, allowing them to communicate.
+- The `backend` and `database` services share the `back_net`, isolating database traffic from the frontend.
+- `Nginx` image is used as a reverse proxy for API requests forwarding them to Flask
+- The `front_net` network does not have access to the PostGre DB in the `back_net` network, ensuring security and isolation
 
 ```yaml
-version: '3.9'
+version: '3'
 
 services:
   frontend:
     image: nginx
+    volumes:
+      - ./frontend/nginx.conf:/etc/nginx/nginx.conf  # Custom NGINX config
     networks:
       - front_net
+    ports:
+      - "80:80"  # Expose the frontend on port 80
 
   backend:
-    image: my-backend
+    build:
+      context: ./backend  # Build backend from the local directory
     networks:
       - front_net
       - back_net
+    environment:
+      - DATABASE_URL=postgresql://user:password@database:5432/mydb
 
   database:
     image: postgres
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: mydb
     networks:
       - back_net
+    volumes:
+      - db_data:/var/lib/postgresql/data  # Persist database data
 
 networks:
   front_net:
     driver: bridge
   back_net:
     driver: bridge
+
+volumes:
+  db_data:
 ```
 
-In this example:
-- The `frontend` and `backend` services share the `front_net`, allowing them to communicate.
-- The `backend` and `database` services share the `back_net`, isolating database traffic from the frontend.
 
 
 
