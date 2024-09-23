@@ -4,9 +4,9 @@ In this section we will show a simple guide on how to Download and execute a Con
 ## Authenticating to a container registry
 If we need to access specific registries or other registries different than DockerHub we need to execute an authentication procedure, with the command `docker login`:
 
-  -`<registry-url>`: Not neccessary if we want to login to DockerHub
+  - `<registry-url>`: Not neccessary if we want to login to DockerHub
 
-   -`<port>`: If there's a specific port to connect to.
+   - `<port>`: If there's a specific port to connect to.
 
 Right after the CLI will ask your credentials and the login will complete.
 
