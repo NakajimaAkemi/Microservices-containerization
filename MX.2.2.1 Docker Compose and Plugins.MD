@@ -463,20 +463,11 @@ Docker allows us to define the networks' behaviour by choosing the `driver` whic
 ### Top-Level Network Attributes
 When defining networks in `docker-compose.yml`, the following attributes can be specified:
 
-- **`driver`**  
-  Specifies the network driver (default is `bridge` for single-host networking).
-  
-- **`driver_opts`**  
-  Allows you to specify custom options for the chosen driver.
-
-- **`attachable`**  
-  Allows containers to be manually attached to this network.
-
-- **`ipam`**  
-  IP Address Management: lets you define custom IP address ranges, subnets, and gateways.
-
-- **`external`**  
-  Indicates if the network is external (i.e., already created outside of Compose).
+- **`driver`** : Specifies the network driver (default is `bridge` for single-host networking). 
+- **`driver_opts`**: Allows you to specify custom options for the chosen driver.
+- **`attachable`**: Allows containers to be manually attached to this network.
+- **`ipam`**: IP Address Management: lets you define custom IP address ranges, subnets, and gateways.
+- **`external`**: Indicates if the network is external (i.e., already created outside of Compose).
 
 ### Commands for Docker Networks
 We can manage Docker netwroks through CLI, they follow the format `docker network <command>`:
