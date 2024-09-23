@@ -6,7 +6,7 @@ If we need to access specific registries or other registries different than Dock
 
   - `<registry-url>`: Not neccessary if we want to login to DockerHub
 
-   - `<port>`: If there's a specific port to connect to.
+     - `<port>`: If there's a specific port to connect to.
 
 Right after the CLI will ask your credentials and the login will complete.
 
