@@ -10,7 +10,7 @@ If we need to access specific registries or other registries different than Dock
 
 Right after the CLI will ask your credentials and the login will complete.
 
-> [!NOTE]
+> [!WARNING]
 > In some cases the login is tipically executed using cloud-specific tools or commands.
 
 
