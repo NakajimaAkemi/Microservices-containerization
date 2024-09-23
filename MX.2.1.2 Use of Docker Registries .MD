@@ -117,7 +117,7 @@ docker push your-registry-username/your-repo-name:your-tag
 docker push myusername/myapp-repo:latest
 ```
 
-### 5. Verify the Uploaded Image
+#### 5. Verify the Uploaded Image
 
 Log in to your Docker registry web interface to ensure the image has been uploaded successfully.
 
