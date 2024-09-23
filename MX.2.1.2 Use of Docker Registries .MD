@@ -1,6 +1,15 @@
 # Pull and Pushing Docker Containers
 In this section we will show a simple guide on how to Download and execute a Container image from the Docker supported registries.
 
+## Authenticating to a container registry
+In order to pull and push containers from registries other than DockerHub (this includes private registries) we need to execute an authentication procedure, with the following command:
+```bash
+docker login <registry-url>
+```
+> [!NOTE]
+> In some cases the login is tipically executed using cloud-specific tools or commands.
+
+
 ## Pulling Docker images
 ### Useful commands 
 In this section we will introduce useful commmands that can be used in order to fetch container images using the following:
@@ -25,9 +34,8 @@ docker pull ubuntu:latest
 ```
 If you don't specify a tag, Docker will download the `latest` tag by default:
 
-_ _ _
-
-
+### Pulling Non-DockerHub images
+After we authenticated we can download images from the registry.
 
 Now you have successfully downloaded and, if desired, run a container image using Docker commands.
 
