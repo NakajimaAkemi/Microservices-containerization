@@ -19,9 +19,6 @@ Contributors : Bilel Arfaoui and Francesco Sartor
 
 # TODO
 
-## Creation of a microservices ecosystem with docker/compose
-## Example of compose
-## How volumes function?
-## How does the networking work?
-## Are replicas supported? How
-## Docker Secrets
+### 1. Creation of a microservices ecosystem with docker/compose
+### 2. Push and Pulling Images
+### 3. Podman differences and particular functionalities
