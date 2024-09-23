@@ -40,8 +40,16 @@ docker pull ubuntu:latest
 If you don't specify a tag, Docker will download the `latest` tag by default:
 
 ### Pulling Non-DockerHub images
-After we authenticated we can download images from the registry.
+After we authenticated we can download images from the registry with following command:
+```bash
+docker pull <registry-url>/<repository>/<image-name>:<tag>
+```
+#### Example
+We want to pull a `my-app` image tagged `latest` residing in the repo `my-repo` from the `registry.example.com` registry.
 
+```
+docker pull registry.example.com/my-repo/my-app:latest
+```
 Now you have successfully downloaded and, if desired, run a container image using Docker commands.
 
 # How to Upload a Docker Image to a Registry
