@@ -518,7 +518,7 @@ A good way to use networks is for isolating side of microservice ecosystem that 
 In the following case we will define two networks `front_net` and `back_net`, this will allow us
 
 <p align="center">
-  <img src="images/volumes.JPG" alt="Esempio di immagine" />
+  <img src="images/isolation.JPG" alt="Esempio di immagine" />
 </p>
 
 
