@@ -4,6 +4,7 @@ In this section we will show a simple guide on how to Download and execute a Con
 ## Pulling Docker images
 ### Useful commands 
 In this section we will introduce useful commmands that can be used in order to fetch container images using the following:
+
 -`docker search <image-name>`: this will allow us to search for the image in the DockerHub, if we're unsure which image we need.
 
 -`docker pull <image-name>`: Command to download the image with the specified name
