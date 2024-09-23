@@ -437,15 +437,11 @@ The sadly for our attacker the output value ENV variables will be the generic pa
 
 
 
-### Networks
+## Networks
 One aspect that makes the Docker engine a powerful tool is the possibility of creating and managing the services' connectivity not necessarily of the same host machine allowing them to communicate safely.
 Docker Compose automatically creates a default network, but you can define custom networks.
 
-
-
-## Networks in Docker Compose
-
-Docker networks allow containers to communicate with each other, whether they’re on the same host or spread across multiple hosts. When using Docker Compose, networks are automatically created for your services, but you can also define custom networks to have more control over connectivity.
+When using Docker Compose, networks are automatically created for your services, but you can also define custom networks to have more control over connectivity.
 
 Docker Compose automatically creates a default network for your services if none is specified, but by defining networks explicitly, you can:
 - Isolate groups of services.
@@ -460,14 +456,6 @@ Docker allows us to define the networks' behaviour by choosing the `driver` whic
   - **None**: No network is configured, useful for isolated containers.
 
 
-### Top-Level Network Attributes
-When defining networks in `docker-compose.yml`, the following attributes can be specified:
-
-- **`driver`** : Specifies the network driver (default is `bridge` for single-host networking). 
-- **`driver_opts`**: Allows you to specify custom options for the chosen driver.
-- **`attachable`**: Allows containers to be manually attached to this network.
-- **`ipam`**: IP Address Management: lets you define custom IP address ranges, subnets, and gateways.
-- **`external`**: Indicates if the network is external (i.e., already created outside of Compose).
 
 ### Commands for Docker Networks
 We can manage Docker netwroks through CLI, they follow the format `docker network <command>`:
@@ -478,6 +466,15 @@ We can manage Docker netwroks through CLI, they follow the format `docker networ
 
 ### Using Networks in Docker Compose
 Networks can be explicitly defined in `docker-compose.yml`. By default, Compose creates a single network that connects all the services. To control network behavior, you can define multiple networks and specify which services are connected to each.
+
+#### Top-Level Network Attributes
+When defining networks in `docker-compose.yml`, the following attributes can be specified:
+- **`driver`** : Specifies the network driver (default is `bridge` for single-host networking). 
+- **`driver_opts`**: Allows you to specify custom options for the chosen driver.
+- **`attachable`**: Allows containers to be manually attached to this network.
+- **`ipam`**: IP Address Management: lets you define custom IP address ranges, subnets, and gateways.
+- **`external`**: Indicates if the network is external (i.e., already created outside of Compose).
+
 
 #### Example 1: Basic Custom Network
 
