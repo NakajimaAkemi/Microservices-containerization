@@ -474,10 +474,11 @@ When defining networks in `docker-compose.yml`, inside the top-level attribute `
 - **`external`**: Indicates if the network is external (i.e., already created outside of Compose).
 
 
-#### Example 1: Basic Custom Network
+#### Basic Custom Network Example
+In this example we define the `app` and `db` services connected to a custom network called `my_custom_network`, using a `bridge` driver, which is the default for single-host setups.
 
 ```yaml
-version: '3.9'
+version: '3'
 
 services:
   app:
@@ -495,12 +496,25 @@ networks:
     driver: bridge
 ```
 
-In this example:
-- Both the `app` and `db` services are connected to a custom network called `my_custom_network`.
-- The network uses the `bridge` driver, which is the default for single-host setups.
+#### External Network example
+This is a slight variation of the first example, in this case the service `app` connects to an external network called `existing_network`, which must be pre-created outside of Docker Compose or it will show an error.
 
-#### Example 2: Multiple Networks for Isolation
+```yaml
+version: '3'
+services:
+  app:
+    image: my-app
+    networks:
+      - existing_network
 
+networks:
+  existing_network:
+    external: true #<-----here!
+```
+
+
+#### Utilising multiple Networks for Isolation
+A good way to use networks is for isolating side of microservice ecosystem that does not need to be exposed such as databases. 
 ```yaml
 version: '3.9'
 
@@ -533,27 +547,9 @@ In this example:
 - The `backend` and `database` services share the `back_net`, isolating database traffic from the frontend.
 
 ### External Networks
+We can connect our services to an existing Docker network (including those defined via CLI commands) using the `external` attribute.
 
-You can connect your services to an existing Docker network using the `external` attribute.
 
-#### Example 3: External Network
-
-```yaml
-version: '3.9'
-
-services:
-  app:
-    image: my-app
-    networks:
-      - existing_network
-
-networks:
-  existing_network:
-    external: true
-```
-
-In this case:
-- The service `app` connects to an external network called `existing_network`, which must be pre-created outside of Docker Compose.
 
 
 
