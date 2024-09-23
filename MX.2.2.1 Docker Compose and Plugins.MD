@@ -437,126 +437,9 @@ The sadly for our attacker the output value ENV variables will be the generic pa
 
 
 
-
-
-
-
-
-
-## Networks
- Un aspetto dell'engine Docker che lo rende potente, è la possibilità di creare e gestire reti di 
-container e servizi Docker. Le reti permettono l'interconnessione dei container Docker con altri 
-container non necessariamente appartenenti allo stesso host e altri dispositivi.
- Il sistema di networking Docker è definito in base alla scelta del driver
-
-
-
-Networks allow containers to communicate with each other securely. Docker Compose automatically creates a default network, but you can define custom networks.
-
-**Example:**
-
-```yaml
-version: '3'
-services:
-  web:
-    image: nginx
-    networks:
-      - frontend
-  db:
-    image: mysql
-    networks:
-      - backend
-networks:
-  frontend:
-  backend:
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-- **Networks**: networking is a passage through which all the isolated container communicate - there are mainly five network drivers in Docker (such as bridge, host, none, overlay, and macvlan); in Docker, networking is indeed a crucial component that allows isolated containers to communicate with each other.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### Networks
-
-### Cos'è una Network?
-
-Una **Network** Docker è un'entità virtuale che permette ai container di comunicare tra loro in un ambiente isolato. Docker crea automaticamente una network chiamata `bridge` per ogni container, ma è possibile creare e configurare network personalizzate.
-
-### Tipi di Networks
-
-- **Bridge**: Network standard per la comunicazione tra container su un singolo host.
-- **Host**: I container condividono la network dell'host, con accesso diretto alle sue interfacce di rete.
-- **Overlay**: Usata per collegare container che risiedono su diversi host Docker.
-- **None**: Nessuna network è configurata; utile per container completamente isolati.
-
-### Creazione e Gestione delle Networks
-
-#### Creare una Network
-
-
-  - the **network**: as the same as volumes, we can create a new network with ```network create``` and remove it with ```network rm```
-
-Per creare una network:
-
-```bash
-docker network create my_network
-```
-
-#### Collegare un Container a una Network
-
-Puoi collegare un container a una network specifica usando l'opzione `--network`:
-
-```bash
-docker run -d --network my_network my_image
-```
-
-#### Ispezionare una Network
-
-Per vedere i dettagli di una network:
-
-```bash
-docker network inspect my_network
-```
-
-#### Rimuovere una Network
-
-Per rimuovere una network non utilizzata:
-
-```bash
-docker network rm my_network
-```
+One aspect that makes the Docker engine a powerful tool is the possibility of creating and managing the services' connectivity not necessarily of the same host machine allowing them to communicate safely.
+Docker Compose automatically creates a default network, but you can define custom networks.
 
 
 
@@ -569,8 +452,15 @@ Docker Compose automatically creates a default network for your services if none
 - Control which services can communicate with each other.
 - Configure advanced network options like driver types and external networks.
 
-### Top-Level Network Attributes
+### Network Drivers
+Docker allows us to define the networks' behaviour by choosing the `driver` which can be:
+  - **Bridge**: Standard network for the communication between containers in single host, tipically the default option.
+  - **Host**: The containers share the host's network with direct access to the network interface.
+  - **Overlay**: Used for containers that reside in different hosts.
+  - **None**: No network is configured, useful for isolated containers.
 
+
+### Top-Level Network Attributes
 When defining networks in `docker-compose.yml`, the following attributes can be specified:
 
 - **`driver`**  
@@ -589,31 +479,13 @@ When defining networks in `docker-compose.yml`, the following attributes can be 
   Indicates if the network is external (i.e., already created outside of Compose).
 
 ### Commands for Docker Networks
-
-Here are the basic Docker network commands:
-
-- **Create a network**  
-  ```bash
-  docker network create <network_name>
-  ```
-
-- **List networks**  
-  ```bash
-  docker network ls
-  ```
-
-- **Inspect a network**  
-  ```bash
-  docker network inspect <network_name>
-  ```
-
-- **Remove a network**  
-  ```bash
-  docker network rm <network_name>
-  ```
+We can manage Docker netwroks through CLI, they follow the format `docker network <command>`:
+  - ```create <network_name>```: creates a network
+  - ```ls``` **List networks**  
+  - ```inspect <network_name>```: inspect a network
+  - ```rm <network_name>```: deletes a network 
 
 ### Using Networks in Docker Compose
-
 Networks can be explicitly defined in `docker-compose.yml`. By default, Compose creates a single network that connects all the services. To control network behavior, you can define multiple networks and specify which services are connected to each.
 
 #### Example 1: Basic Custom Network
