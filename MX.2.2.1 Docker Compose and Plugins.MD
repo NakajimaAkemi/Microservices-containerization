@@ -441,12 +441,10 @@ The sadly for our attacker the output value ENV variables will be the generic pa
 One aspect that makes the Docker engine a powerful tool is the possibility of creating and managing the services' connectivity not necessarily of the same host machine allowing them to communicate safely.
 Docker Compose automatically creates a default network, but you can define custom networks.
 
-When using Docker Compose, networks are automatically created for your services, but you can also define custom networks to have more control over connectivity.
-
-Docker Compose automatically creates a default network for your services if none is specified, but by defining networks explicitly, you can:
-- Isolate groups of services.
-- Control which services can communicate with each other.
-- Configure advanced network options like driver types and external networks.
+When using Docker Compose, networks are automatically created for your services, but you can also define custom networks to have more control over connectivity,by being ablle to:
+  - Isolate groups of services.
+  - Control which services can communicate with each other.
+  - Configure advanced network options like driver types and external networks.
 
 ### Network Drivers
 Docker allows us to define the networks' behaviour by choosing the `driver` which can be:
