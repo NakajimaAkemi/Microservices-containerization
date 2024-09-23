@@ -97,11 +97,4 @@ spec:
       targetPort: 8080
   type: LoadBalancer
 ```
-## Communication inside the Pod
 
-## SELinux and Apparmor
-
-## Logging and Monitoring
-
-
-## CI/CD Pipeline
