@@ -569,15 +569,6 @@ networks:
 In this case:
 - The service `app` connects to an external network called `existing_network`, which must be pre-created outside of Docker Compose.
 
-### Summary
-
-Docker networks in Compose allow services to communicate in a controlled environment. You can use networks to:
-- Define how services communicate.
-- Isolate services from each other.
-- Use external networks if needed.
-
-With these attributes and commands, Docker Compose gives you flexibility in structuring and managing your containerized applications' networks.
-
 
 
 
