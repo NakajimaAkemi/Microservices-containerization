@@ -270,6 +270,7 @@ _The [bind-compose](https://github.com/NakajimaAkemi/Microservices-containerizat
 Secrets are any piece of sensitive data information(e.g., API keys, passwords...), that we want to securely handle and not be accessible to unauthorized processes and entities. 
 
 ### Secrets definition and management
+In the same fashion of volumes, secrets can be both defined and managed via either the `docker-compose.yaml` file or the docker commands in CLI. 
 #### Key commands
 We can manage a Docker's secret lifecycle trough the key `docker secrets <command>`:
   - `create <secret_name> <file>`: creates a secret with the specified name, using the content from the file.
