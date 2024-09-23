@@ -517,8 +517,11 @@ networks:
 A good way to use networks is for isolating side of microservice ecosystem that does not need to be exposed such as databases. 
 In the following case we will define two networks `front_net` and `back_net`, this will allow us
 
+[example](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/isolation-compose)
+
+
 <p align="center">
-  <img src="images/isolation.JPG" alt="Esempio di immagine" />
+  <img src="images/ecosystem.JPG" alt="Esempio di immagine" />
 </p>
 
 
