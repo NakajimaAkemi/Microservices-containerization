@@ -131,9 +131,6 @@ We can verify their reachability with a browser or the `curl` command:
  - http://localhost:32770
 
 
-## Ensuring reliability
-
-
 ## Resource limitation
 In Docker Compose we limit the CPU and Memory usage for containers in order to have a better resource management and preventing that a single container takes over most of the system's resource.
 
