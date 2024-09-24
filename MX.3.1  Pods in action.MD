@@ -23,53 +23,13 @@ Every Podman pod includes an `infra container`. This container holds the namespa
 
 
 
-### Podman exclusive commands
+### Pod management CLI commands
 ```podman pod```: Manages pods, which are groups of one or more containers sharing the same network namespace.
   For ```podman pod```, we can have:
   - ```create``` to **build** a pod;
   - ```start``` to **start** the pod;
   - ```stop``` to **stop** the pod;
   - ```rm``` to **remove** the pod;
-
-
-
-
-
-
-
-## Podman kube
-Podman provides a feature where given a Pod, we can gerate and run a Kubernetes manifest YAML file trough the commmand ```podman <subcommand> kube```:
-  - ```generate``` creates a **YAML** description of a Pod.
-  - ```play``` subcommand that allows Podman to **run** Pods based on a Kubernetes YAML file;
-
-Let's say that we have the Pod `my-nginx-pod` that we defined in the section before, with that we generate the YAML manifest file:
-
-```bash
-podman kube generate my-nginx-pod > my-nginx-pod.yaml
-```
-Now we can run the Pod trough the YAML file file the `play` command:
-```bash
-podman play kube my-nginx-pod.yaml
-```
-
-
-_ _ _
-
-
-
-
-
-
-
-
-
-
-
-
-## Podman in action
-In this paragraph we will show basic functions of Podman, here's how install Podman on your machine:
-
-### Podman installation
 
 
 ### Pods setup
@@ -107,12 +67,10 @@ Or we can inspect the pod, showing information that describes the pod
 ```
 podman pod inspect mypod
 ```
-### Kube play
 
 
 
-
-## Pods networking
+### Pods networking
 Podman uses bridges networks in order to let containers to communicate with eachother, when a pod is created, Podman automatically creates automatically a bridge network.
 For the communication between pods, we need to configure a network in order to allow them to communicate.
 
@@ -135,6 +93,24 @@ podman run -dt --pod pod2 --name db-container postgres:13
 
 
 
+
+
+## Podman kube
+Podman provides a feature where given a Pod, we can gerate and run a Kubernetes manifest YAML file trough the commmand ```podman <subcommand> kube```:
+  - ```generate``` creates a **YAML** description of a Pod.
+  - ```play``` subcommand that allows Podman to **run** Pods based on a Kubernetes YAML file;
+
+Let's say that we have the Pod `my-nginx-pod` that we defined in the section before, with that we generate the YAML manifest file:
+
+```bash
+podman kube generate my-nginx-pod > my-nginx-pod.yaml
+```
+Now we can run the Pod trough the YAML file file the `play` command:
+```bash
+podman play kube my-nginx-pod.yaml
+```
+
+With this we can seamlessly transition the workload to Kubernetes.
 
 
 
