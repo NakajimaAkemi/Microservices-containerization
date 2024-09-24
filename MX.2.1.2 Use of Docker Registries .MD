@@ -97,14 +97,13 @@ After tagging the image with the correct registry URL, you can push it using the
 docker push your-registry-username/your-repo-name:your-tag
 ```
 
-#### 2-3 (alternative). Push the Image to the private registry
+#### 2-3 (alternative steps). Tgging and Pushing the Image to the private registry
 If you're using a private registry, include the registry URL in the tag.
 ```bash
 docker tag myapp:latest registry.example.com/myusername/myapp-repo:latest
 docker push registry.example.com/myusername/myapp-repo:latest
 ```
 **Example:**
-
 ```bash
 docker push myusername/myapp-repo:latest
 ```
