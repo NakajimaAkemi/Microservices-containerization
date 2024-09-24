@@ -23,6 +23,7 @@ Every Podman pod includes an `infra container`. This container holds the namespa
 
 
 
+
 ### Pod management CLI commands
 ```podman pod```: Manages pods, which are groups of one or more containers sharing the same network namespace.
   For ```podman pod```, we can have:
@@ -31,38 +32,17 @@ Every Podman pod includes an `infra container`. This container holds the namespa
      - ```--network <network-name>```: Attaches a network to the pod.
      - ```-p <port-range>```: Exposes the port.
      - ```--volume <..options..>```: attaches a volume into the pod.
-  - ```start``` to **start** the pod;
+     - ```--secret <secret-data>```: attaches a secret into the pod. 
+     - ```-e <MY_VARIABLE>=<my_value>```: attaches an enviroment variable into the pod. 
+  - ```start``` to **start** the existing pod;
   - ```stop``` to **stop** the pod;
   - ```rm``` to **remove** the pod;
   - ```ps``` to **show** running pods;
   - ```top <pod-name>``` to **show** running containers inside the pod;
   - ```inspect <pod-name>``` to **inspect** the running pod;
 
-### Pods setup
-#### Pod creation
-First of all we create our own pod with the following command and check the existense of our pod:
-```bash
-podman pod create --name my-nginx-pod
-podman pod ps
-```
-As we can see from the output, there is a container inside the pod, and that's the default infra container.
-
-#### Running a container inside the pod
-We can a container inside the pod we just created, basically it's just the basic `podman run` command with `--pod <pod-name>` option added.
-```bash
-podman run -d --pod my-nginx-pod --name my-nginx -p 8080:80 nginx:latest
-```
-Everything is setup by command line, may it be the port forwarding, volume attachments and more.
-
-
-#### Volume mounting
-Volumes or Bind mount is attached a to Pod are accessible to all containers inside.
-
-#### Injecting secrets
-When it comes with `secrets`, we need to inject the secret into the container or Pod directly when we execute the podman run command, which Docker can't do.
-```bash
-podman run --pod mypod --secret db_password -e DB_PASSWORD=/run/secrets/db_password postgres:latest
-```
+#### Volume and Secret mounting 
+Volumes or Bind mount is attached a to Pod are accessible to all containers inside. Same thing for `secrets`.
 
 
 #### Pods networking
@@ -80,10 +60,21 @@ As for the communication between pods, we need to configure a network in order t
 
 
 
+### Pods setup
+#### Pod creation
+First of all we create our own pod with the following command and check the existense of our pod:
+```bash
+podman pod create --name my-nginx-pod
+podman pod ps
+```
+As we can see from the output, there is a container inside the pod, and that's the default infra container.
 
-
-
-
+#### Running a container inside the pod
+We can a container inside the pod we just created, basically it's just the basic `podman run` command with `--pod <pod-name>` option added.
+```bash
+podman run -d --pod my-nginx-pod --name my-nginx -p 8080:80 nginx:latest
+```
+Everything is setup by command line, may it be the port forwarding, volume attachments and more.
 
 
 
