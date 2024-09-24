@@ -1,5 +1,5 @@
 # Overview
-In this section we will do advanced applications of Podman, such as Pods networking, Podman kube commands and more.
+In this section we will show more specific applications of Podman, such as Pods and Podman kube functionalities.
 
 
 
@@ -38,16 +38,19 @@ Every Podman pod includes an `infra container`. This container holds the namespa
 
 
 ## Podman kube
-  For ```podman <subcommand> kube```, we can have:
-  - ```generate``` creates a **YAML** description of a Podman container or pod to run in Kubernetes;
-  - ```play``` subcommand that allows Podman to **run** pods based on a Kubernetes YAML file;
-Subcommand group for handling Kubernetes YAML file operation
-podman play kube: Deploys containers based on Kubernetes YAML files.
+Podman provides a feature where given a Pod, we can gerate and run a Kubernetes manifest YAML file trough the commmand ```podman <subcommand> kube```:
+  - ```generate``` creates a **YAML** description of a Pod.
+  - ```play``` subcommand that allows Podman to **run** Pods based on a Kubernetes YAML file;
 
+Let's say that we have the Pod `my-nginx-pod` that we defined in the section before, with that we generate the YAML manifest file:
 
-The new podman play kube feature looks for a directory with the same name as the image used in the YAML file. If that directory exists and there is a Containerfile or Dockerfile present in that directory, Podman builds the container image.
-
-
+```bash
+podman kube generate my-nginx-pod > my-nginx-pod.yaml
+```
+Now we can run the Pod trough the YAML file file the `play` command:
+```bash
+podman play kube my-nginx-pod.yaml
+```
 
 
 _ _ _
