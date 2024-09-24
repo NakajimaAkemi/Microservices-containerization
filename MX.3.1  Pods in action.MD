@@ -27,46 +27,31 @@ Every Podman pod includes an `infra container`. This container holds the namespa
 ```podman pod```: Manages pods, which are groups of one or more containers sharing the same network namespace.
   For ```podman pod```, we can have:
   - ```create``` to **build** a pod;
+     - ```--name```: specifies a name for the Pod, otherwise it's randomly generated.
   - ```start``` to **start** the pod;
   - ```stop``` to **stop** the pod;
   - ```rm``` to **remove** the pod;
-
-
+  - ```ps``` to **show** running pods;
+  - ```top <pod-name>``` to **show** running containers inside the pod;
+  - ```inspect <pod-name>``` to **inspect** the running pod;
 ### Pods setup
 #### Pod creation
 First of all we create our own pod with the following command and check the existense of our pod:
-```
-podman pod create --name mypod
+```bash
+podman pod create --name my-nginx-pod
 podman pod ps
 ```
 As we can see from the output, there is a container inside the pod, and that's the default infra container.
 
 #### Running a container inside the pod
-We can a container inside the pod we just created.
+We can a container inside the pod we just created, basically it's just the basic `podman run` command with `--pod <pod-name>` option added.
+```bash
+podman run -d --pod my-nginx-pod --name my-nginx -p 8080:80 nginx:latest
 ```
-podman run -dt --name myubi --pod mypod registry.access.redhat.com/ubi8/ubi /bin/bash
-```
-This time if we run the `podman pod ps` command we can see that the number of pods increased to 2 containers. And if we run:
-```
-podman ps -a --pod
-```
-We can list all pods and the images associated with them.
-###
+Everything is setup by command line, may it be the port forwarding, volume attachments and more.
 
 
-It is important to notice that in the microservices folder there are 4 services. Let's analyze each Dockerfile, then we can watch the Docker Compose whose use this files.
 
-#### Pod's informations
-
-We can get information about the processes that are running inside the pod with 
-```
-podman pod top mypod
-```
-
-Or we can inspect the pod, showing information that describes the pod
-```
-podman pod inspect mypod
-```
 
 
 
