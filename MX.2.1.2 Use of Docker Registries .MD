@@ -58,57 +58,41 @@ As prerequisite we need to have a *DockerHub Account* in order to pull image wit
 
 
 ### Steps
+In this procedure we alredy assume that we have a `your-image` image already built locally. Wether it's tagged or not doesn't matter since images can have more than one tag
 
-#### 1. Build Your Docker Image
 
-Navigate to the directory containing your `Dockerfile` and run:
+#### 1. Tag the Image for the Registry
+This an important step for the procedure, because with the tag we indicate were the images are uploaded.
+There are two different cases for tagging:
+  - `<your-registry-username>/<repository>:<your-tag>`: DockerHub registry
+  - `<registy-url>/<username>/<repository>:<your-tag>`: Private registry
 
+_As we can see the only difference is the inclusion of the registry's URL._
+
+
+So let's say i want to upload `my-app:latest` image to my DockerHub repository `myapp-repo` first of all i need to tag the image appropriately.
 ```bash
-docker build -t your-image-name:your-tag .
+docker tag myapp:latest myusername/myapp-repo:your-tag
 ```
 
-- Replace `your-image-name` with the desired name for your image.
-- Replace `your-tag` with a tag like `latest` or `v1.0`.
-
-**Example:**
-
+As second example we tag the same image but this time we specify the registry URL `registry.example.com`
 ```bash
-docker build -t myapp:latest .
+docker tag myapp:latest registry.example.com/myusername/myapp-repo:your-tag
 ```
 
-#### 2. Tag the Image for the Registry
-Tag your image with the registry URL and your repository name to prepare it for uploading.
-
-```bash
-docker tag your-image-name:your-tag your-registry-username/your-repo-name:your-tag
-```
-
-**Example for Docker Hub:**
-
-```bash
-docker tag myapp:latest myusername/myapp-repo:latest
-```
-
-
-#### 3. Push the Image to the Registry
+#### 2. Push the Image to the Registry
 After tagging the image with the correct registry URL, you can push it using the `docker push` command.
 
 ```bash
-docker push your-registry-username/your-repo-name:your-tag
+docker push myusername/myapp-repo:your-tag
+```
+or in the case of private registry
+
+```bash
+docker push registry.example.com/myusername/myapp-repo:your-tag
 ```
 
-#### 2-3 (alternative steps). Tgging and Pushing the Image to the private registry
-If you're using a private registry, include the registry URL in the tag.
-```bash
-docker tag myapp:latest registry.example.com/myusername/myapp-repo:latest
-docker push registry.example.com/myusername/myapp-repo:latest
-```
-**Example:**
-```bash
-docker push myusername/myapp-repo:latest
-```
-
-#### 4. Verify the Uploaded Image
+#### 3. Verify the Uploaded Image
 
 Log in to your Docker registry web interface to ensure the image has been uploaded successfully.
 
