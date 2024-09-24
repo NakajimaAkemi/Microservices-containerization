@@ -24,6 +24,13 @@ Every Podman pod includes an `infra container`. This container holds the namespa
 #### Volume mounting
 Volumes or Bind mount is attached a to Pod are accessible to all containers inside.
 
+#### Injecting secrets
+When it comes with `secrets`, we need to inject the secret into the container or Pod directly when we execute the podman run command, which Docker can't do.
+```bash
+podman run --pod mypod --secret db_password -e DB_PASSWORD=run\secrets\db_password postgres:latest
+```
+
+
 #### Pods networking
 There is no direct link of communication between containers, they sorta live in their own bubble and cannot reach eachother internally, both need to be reachable from the host network to be able to talk to each other. Exposing internal services that only other containers should talk to this way is not recommended since it exposes them out to clients as well.
 <p align="center">
