@@ -22,22 +22,16 @@ Every Podman pod includes an `infra container`. This container holds the namespa
  - **Compatability with Kubernetes**: you can create and manage pods locally using Podman and then easily transition to running them in a Kubernetes environment;
 
 #### Pods networking
-Podman uses bridges networks in order to let containers to communicate with eachother, when a pod is created, Podman automatically creates automatically a bridge network.
-For the communication between pods, we need to configure a network in order to allow them to communicate. The difference is 
-they cannot talk directly to each other since they have a separate network stack, they can of course still communicate outside of the container via Slirp4netns which is the default network setup for rootless containers and pods.
-
-As you can see there are no communication between the containers directly, that's because they live in their own bubble and thus cannot reach each other internally, here both containers needs to be reachable from the host network to be able to talk to each other. Exposing internal services that only other containers should talk to this way is not recommended since it exposes them out to clients as well.
-
-So in the scenario where you need 2 or more containers to talk to each other without exposing unnecessary ports you need to go the pod route, but for standalone single services this is the way to go, more on this in part 8.
-
+There is no direct link of communication between containers, they sorta live in their own bubble and cannot reach eachother internally, both need to be reachable from the host network to be able to talk to each other. Exposing internal services that only other containers should talk to this way is not recommended since it exposes them out to clients as well.
 <p align="center">
   <img src="images/net.JPG" alt="Esempio di immagine" />
 </p>
-
+Using Pods instead automatically creates automatically a bridge network between the containers, it is comes in handy in cases where you need 2 or more containers to talk to each other without exposing unnecessary ports.
 <p align="center">
   <img src="images/pod-net.JPG" alt="Esempio di immagine" />
 </p>
 
+As for the communication between pods, we need to configure a network in order to allow them to communicate. 
 
 ### Pod management CLI commands
 ```podman pod```: Manages pods, which are groups of one or more containers sharing the same network namespace.
@@ -45,7 +39,7 @@ So in the scenario where you need 2 or more containers to talk to each other wit
   - ```create``` to **build** a pod;
      - ```--name <pod-name>```: specifies a name for the Pod, otherwise it's randomly generated.
      - ```--network <network-name>```: Attaches a network to the pod.
-     - ```--p <port-range>```: Exposes the port.
+     - ```-p <port-range>```: Exposes the port.
   - ```start``` to **start** the pod;
   - ```stop``` to **stop** the pod;
   - ```rm``` to **remove** the pod;
@@ -96,8 +90,6 @@ Then we can fetch the key with `curl` or Browser
 ```bash
 curl http://localhost:5000/get/mykey
 ```
-
-#### 3-tier web app with Pods
 
 
 ## Podman kube
