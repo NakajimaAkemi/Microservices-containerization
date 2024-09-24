@@ -54,7 +54,7 @@ A daemon running as root generally does not meet the security requirements and h
 
 Podman containers have always been **rootless**, while Docker is an all-in-1 tool for container management and creation, and including the fact that the architecture is daemon-less, due to the simplified architecture the surface of attack is highly reduced.
 
-#### Reason 2: Systmed integration 
+#### Reason 2: Systemd integration 
 Podman can generate systemd service files, allowing developers/users to manage the containers as sytemd services in Linux-based systems.
 
 #### Reason 3: Pod concept
