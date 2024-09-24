@@ -69,6 +69,10 @@ There are two different cases for tagging:
 
 _As we can see the only difference is the inclusion of the registry's URL._
 
+> [!NOTE]
+> You may ask yourself why is there an additional <your-tag> in the tag, it's a way to version control and not mandatory.
+
+
 ##### Examples
 We are the user `myusername` and let's say i want to upload `my-app:latest` image to my DockerHub repository `myapp-repo`, first of all i need to tag the image appropriately.
 ```bash
