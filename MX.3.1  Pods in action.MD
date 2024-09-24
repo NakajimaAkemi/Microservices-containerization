@@ -57,7 +57,15 @@ podman run -d --pod my-nginx-pod --name my-nginx -p 8080:80 nginx:latest
 Everything is setup by command line, may it be the port forwarding, volume attachments and more.
 
 #### Example of multicontainer Pod
+Now we will try to run a microservice ecoystem in [example](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/isolation-compose), but this time instead of `docker-compose` we will try to use pods. As we defined before we need two networks:
+ - `front_net`: For Nginx to expose to the public.
+ - `back_net`: For the Flask and PostgreSQL communication.
 
+Defining them with the CLI commands: 
+ ```bash
+podman network create back_net
+podman network create front_net
+```
 
 
 
