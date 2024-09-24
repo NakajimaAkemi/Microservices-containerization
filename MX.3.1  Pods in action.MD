@@ -22,6 +22,21 @@ Every Podman pod includes an `infra container`. This container holds the namespa
  - **Compatability with Kubernetes**: you can create and manage pods locally using Podman and then easily transition to running them in a Kubernetes environment;
 
 
+
+### Podman exclusive commands
+```podman pod```: Manages pods, which are groups of one or more containers sharing the same network namespace.
+  For ```podman pod```, we can have:
+  - ```create``` to **build** a pod;
+  - ```start``` to **start** the pod;
+  - ```stop``` to **stop** the pod;
+  - ```rm``` to **remove** the pod;
+
+
+
+
+
+
+
 ## Play kube
 Init containers
 Users of podman play kube told us they want to build images as part of the play process. Because Kubernetes does not have a similar concept, we were at first hesitant to implement the idea. The more play kube gets used, the more it gets compared to Docker compose. That was the tipping point. Our users were right.
@@ -42,17 +57,6 @@ The new podman play kube feature looks for a directory with the same name as the
 
 
 
-
-
-
-<yaml file-name>
-
-### dockerfile
-Thanks to the ```OCI``` format, Podman support the same syntax and can build images from the dockerfile, meaning that Podman can ```pull/push``` images to/from Docker's registries, also the switch of the workflow from Docker to Podman and viceversa easier. 
-
-
-### podman-compose
-Podman supports the ```docker-compose.yml``` file, by processing them into Podman CLI commands with ```podman-compose```, while Podman Compose is better integrated with Podman (as it was designed from the ground up to work with Podman) and makes better use of rootless containers and pods. However, Docker Compose is much more supported, tested and more likely to be stable, while the Podman team is more focused ```podman generate kube``` and ```podman play kube```, which allow Kubernetes (An orchestation software) YAML to be used directly with Podman similar to Compose.
 
 
 ## Podman in action
