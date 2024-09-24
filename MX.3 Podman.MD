@@ -34,15 +34,8 @@ One of Podman's greatest advantages is its CLI compatibility with Docker, becaus
 ```
 $ alias docker=podman
 ```
-You can run other commands, such as ```pull```, ```push```, ```build```, ```commit```, ```tag```, and more with Podman. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
+You can run other commands, such as ```pull```, ```push```, ```build```, ```commit```, ```tag```, and more with Podman. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other. There are exclusive podman commands, but are for more specific use cases.
 
-#### Podman exclusive commands
-```podman pod```: Manages pods, which are groups of one or more containers sharing the same network namespace.
-  For ```podman pod```, we can have:
-  - ```create``` to **build** a pod;
-  - ```start``` to **start** the pod;
-  - ```stop``` to **stop** the pod;
-  - ```rm``` to **remove** the pod;
 
 
 
