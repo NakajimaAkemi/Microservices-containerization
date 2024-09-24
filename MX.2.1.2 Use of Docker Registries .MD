@@ -69,7 +69,7 @@ There are two different cases for tagging:
 
 _As we can see the only difference is the inclusion of the registry's URL._
 
-
+##### Examples
 We are the user `myusername` and let's say i want to upload `my-app:latest` image to my DockerHub repository `myapp-repo`, first of all i need to tag the image appropriately.
 ```bash
 docker tag myapp:latest myusername/myapp-repo:your-tag
@@ -83,6 +83,7 @@ docker tag myapp:latest registry.example.com/myusername/myapp-repo:your-tag
 #### 2. Push the Image to the Registry
 After tagging the image with the correct registry URL, you can push it using the `docker push` command.
 
+##### Examples
 ```bash
 docker push myusername/myapp-repo:your-tag
 ```
