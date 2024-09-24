@@ -37,16 +37,20 @@ Every Podman pod includes an `infra container`. This container holds the namespa
 
 
 
-## Play kube
-Init containers
-Users of podman play kube told us they want to build images as part of the play process. Because Kubernetes does not have a similar concept, we were at first hesitant to implement the idea. The more play kube gets used, the more it gets compared to Docker compose. That was the tipping point. Our users were right.
+## Podman kube
+  For ```podman <subcommand> kube```, we can have:
+  - ```generate``` creates a **YAML** description of a Podman container or pod to run in Kubernetes;
+  - ```play``` subcommand that allows Podman to **run** pods based on a Kubernetes YAML file;
+Subcommand group for handling Kubernetes YAML file operation
+podman play kube: Deploys containers based on Kubernetes YAML files.
+
 
 The new podman play kube feature looks for a directory with the same name as the image used in the YAML file. If that directory exists and there is a Containerfile or Dockerfile present in that directory, Podman builds the container image.
 
 
 
 
-
+_ _ _
 
 
 
@@ -126,86 +130,8 @@ podman run -dt --pod pod1 --name app-container your-app-name
 podman run -dt --pod pod2 --name db-container postgres:13
 ```
 
-Podman compose configuration
-
-```yaml
-version: '3.8'
-services:
-  app:
-    image: your-app-name
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    networks:
-      - mynetwork
-
-  db:
-    image: postgres:13
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: database
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - mynetwork
-
-volumes:
-  postgres_data:
-
-networks:
-  mynetwork:
-    driver: bridge
-
-```
-
-## Podman kube
-YAML file example
-
-```yaml
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: demo-app-deployment
-  labels:
-    app: demo-app
-spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: demo-app
-  template:
-    metadata:
-      labels:
-        app: demo-app
-    spec:
-      containers:
-        - name: demo-app
-          image: demo-app:latest
-          ports:
-            - containerPort: 8080
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: demo-app-service
-spec:
-  selector:
-    app: demo-app
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-  type: LoadBalancer
-```
 
 
-  For ```podman <subcommand> kube```, we can have:
-  - ```generate``` creates a **YAML** description of a Podman container or pod to run in Kubernetes;
-  - ```play``` subcommand that allows Podman to **run** pods based on a Kubernetes YAML file;
-Subcommand group for handling Kubernetes YAML file operation
-podman play kube: Deploys containers based on Kubernetes YAML files.
+
 
 
