@@ -21,6 +21,22 @@ Every Podman pod includes an `infra container`. This container holds the namespa
  - **Resource Sharing**: Containers in a Podman pod can share volumes.
  - **Compatability with Kubernetes**: you can create and manage pods locally using Podman and then easily transition to running them in a Kubernetes environment;
 
+#### Pods networking
+Podman uses bridges networks in order to let containers to communicate with eachother, when a pod is created, Podman automatically creates automatically a bridge network.
+For the communication between pods, we need to configure a network in order to allow them to communicate. The difference is 
+they cannot talk directly to each other since they have a separate network stack, they can of course still communicate outside of the container via Slirp4netns which is the default network setup for rootless containers and pods.
+
+As you can see there are no communication between the containers directly, that's because they live in their own bubble and thus cannot reach each other internally, here both containers needs to be reachable from the host network to be able to talk to each other. Exposing internal services that only other containers should talk to this way is not recommended since it exposes them out to clients as well.
+
+So in the scenario where you need 2 or more containers to talk to each other without exposing unnecessary ports you need to go the pod route, but for standalone single services this is the way to go, more on this in part 8.
+
+<p align="center">
+  <img src="images/net.JPG" alt="Esempio di immagine" />
+</p>
+
+<p align="center">
+  <img src="images/pod-net.JPG" alt="Esempio di immagine" />
+</p>
 
 
 ### Pod management CLI commands
@@ -29,16 +45,13 @@ Every Podman pod includes an `infra container`. This container holds the namespa
   - ```create``` to **build** a pod;
      - ```--name <pod-name>```: specifies a name for the Pod, otherwise it's randomly generated.
      - ```--network <network-name>```: Attaches a network to the pod.
+     - ```--p <port-range>```: Exposes the port.
   - ```start``` to **start** the pod;
   - ```stop``` to **stop** the pod;
   - ```rm``` to **remove** the pod;
   - ```ps``` to **show** running pods;
   - ```top <pod-name>``` to **show** running containers inside the pod;
   - ```inspect <pod-name>``` to **inspect** the running pod;
-
-#### Pods networking
-Podman uses bridges networks in order to let containers to communicate with eachother, when a pod is created, Podman automatically creates automatically a bridge network.
-For the communication between pods, we need to configure a network in order to allow them to communicate.
 
 ### Pods setup
 #### Pod creation
@@ -104,5 +117,8 @@ podman play kube my-nginx-pod.yaml
 
 With this we can seamlessly transition the workload to Kubernetes.
 
+
+## Sources
+ - https://www.osource.se/pages/howtos/202308291847.html#containers
 
 
