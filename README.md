@@ -3,7 +3,9 @@
 This repository will introduce the concept of Containerization, its technologies and a 
 step by step tutorial on how to deploy a Spring application in Docker and Podman.
 
-Contributors : Bilel Arfaoui and Francesco Sartor
+_Contributors_: 
+    - **Bilel Arfaoui**
+    - **Francesco Sartor**
 
 
 <div style="display: flex; justify-content: center;">
