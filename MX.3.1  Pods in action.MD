@@ -21,6 +21,9 @@ Every Podman pod includes an `infra container`. This container holds the namespa
  - **Resource Sharing**: Containers in a Podman pod can share volumes.
  - **Compatability with Kubernetes**: you can create and manage pods locally using Podman and then easily transition to running them in a Kubernetes environment;
 
+#### Volume mounting
+Volumes or Bind mount is attached a to Pod are accessible to all containers inside.
+
 #### Pods networking
 There is no direct link of communication between containers, they sorta live in their own bubble and cannot reach eachother internally, both need to be reachable from the host network to be able to talk to each other. Exposing internal services that only other containers should talk to this way is not recommended since it exposes them out to clients as well.
 <p align="center">
@@ -31,6 +34,7 @@ Using Pods instead automatically creates automatically a bridge network between 
   <img src="images/pod-net.JPG" alt="Esempio di immagine" />
 </p>
 
+
 As for the communication between pods, we need to configure a network in order to allow them to communicate. 
 
 ### Pod management CLI commands
@@ -40,6 +44,7 @@ As for the communication between pods, we need to configure a network in order t
      - ```--name <pod-name>```: specifies a name for the Pod, otherwise it's randomly generated.
      - ```--network <network-name>```: Attaches a network to the pod.
      - ```-p <port-range>```: Exposes the port.
+     - ```--volume <..options..>```: attaches a volume into the pod.
   - ```start``` to **start** the pod;
   - ```stop``` to **stop** the pod;
   - ```rm``` to **remove** the pod;
