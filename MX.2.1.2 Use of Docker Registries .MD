@@ -56,10 +56,6 @@ Now you have successfully downloaded and, if desired, run a container image usin
 ### Prerequisites
 As prerequisite we need to have a *DockerHub Account* in order to pull image with Docker CLI or other registry services such as  **AWS ECR**, **Google Container Registry** and more.
 
-### Useful commands 
-
-This guide will walk you through the steps to build a Docker image and upload it to a Docker registry using Docker commands.
-
 
 ### Steps
 
@@ -81,7 +77,6 @@ docker build -t myapp:latest .
 ```
 
 #### 2. Tag the Image for the Registry
-
 Tag your image with the registry URL and your repository name to prepare it for uploading.
 
 ```bash
@@ -104,8 +99,7 @@ docker tag myapp:latest myusername/myapp-repo:latest
   ```
 
 #### 4. Push the Image to the Registry
-
-Upload your tagged image to the Docker registry.
+After tagging the image with the correct registry URL, you can push it using the `docker push` command.
 
 ```bash
 docker push your-registry-username/your-repo-name:your-tag
