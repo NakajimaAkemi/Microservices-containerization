@@ -70,7 +70,7 @@ There are two different cases for tagging:
 _As we can see the only difference is the inclusion of the registry's URL._
 
 > [!NOTE]
-> You may ask yourself why is there an additional `<your-tag>` in the registry tag, it's a way to version control and not mandatory.
+> If you ask yourself why is there an additional `<your-tag>` in the registry tag, note that it is a way to version control and it's not mandatory.
 
 
 ##### Examples
