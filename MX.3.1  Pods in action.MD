@@ -57,42 +57,34 @@ podman run -d --pod my-nginx-pod --name my-nginx -p 8080:80 nginx:latest
 Everything is setup by command line, may it be the port forwarding, volume attachments and more.
 
 #### Example of multicontainer Pod
-Now we will try to run a microservice ecoystem in [example](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/isolation-compose), but this time instead of `docker-compose` we will try to use pods. As we defined before we need two networks:
- - `front_net`: For Nginx to expose to the public.
- - `back_net`: For the Flask and PostgreSQL communication.
+Now we will try to run a Pod that runs a Flask server with Redis for data collection.
+In the  [example](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/redis-pod) the server is exposed at port 5000, while it communicates locally with the Redis service.
 
-Defining them with the CLI commands: 
- ```bash
-podman network create back_net
-podman network create front_net
-```
-
- ```bash
-podman run -d --name postgres-db \
-  --network back_net \
-  -e POSTGRES_USER=user \
-  -e POSTGRES_PASSWORD=password \
-  -e POSTGRES_DB=mydb \
-  postgres:latest
- ```
-
+First of all we creat the pod `flask-redis-pod`
 ```bash
-podman build -t my-flask-app .
-podman run -d --name flask-container \
-  --network back_net \
-  my-flask-app
+# Create the pod and expose port 5000 and build our Flask image.
+podman pod create --name flask-redis-pod -p 5000:5000
+podman build -t my-flask-redis-app .
 ```
-Nginx
+Then we run our containers inside the Pod.
+```
+podman run -d --pod flask-redis-pod  --name redis redis:latest
+podman run -d --pod flask-redis-pod --name flask-app my-flask-redis-app
+```
+We can test saving the key via `curl` of Postman
 ```bash
-podman run -d --name nginx-container \
-  --network front_net \
-  -v $(pwd)/nginx.conf:/etc/nginx/conf.d/default.conf:ro \
-  -p 8080:80 \
-  nginx:latest
+curl -X POST -H "Content-Type: application/json" -d '{"value": "Hello, Redis!"}' http://localhost:5000/set/mykey
+```
+For windows CMD
+```bash
+curl -X POST -H "Content-Type: application/json" -d "{\"value\": \"Hello, Redis!\"}" http://localhost:5000/set/mykey
+```
+Then we can fetch the key with `curl` or Browser
+```bash
+curl http://localhost:5000/get/mykey
 ```
 
-
-
+#### 3-tier web app with Pods
 
 
 ## Podman kube
