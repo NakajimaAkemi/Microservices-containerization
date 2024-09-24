@@ -21,28 +21,7 @@ Every Podman pod includes an `infra container`. This container holds the namespa
  - **Resource Sharing**: Containers in a Podman pod can share volumes.
  - **Compatability with Kubernetes**: you can create and manage pods locally using Podman and then easily transition to running them in a Kubernetes environment;
 
-#### Volume mounting
-Volumes or Bind mount is attached a to Pod are accessible to all containers inside.
 
-#### Injecting secrets
-When it comes with `secrets`, we need to inject the secret into the container or Pod directly when we execute the podman run command, which Docker can't do.
-```bash
-podman run --pod mypod --secret db_password -e DB_PASSWORD=/run/secrets/db_password postgres:latest
-```
-
-
-#### Pods networking
-There is no direct link of communication between containers, they sorta live in their own bubble and cannot reach eachother internally, both need to be reachable from the host network to be able to talk to each other. Exposing internal services that only other containers should talk to this way is not recommended since it exposes them out to clients as well.
-<p align="center">
-  <img src="images/net.JPG" alt="Esempio di immagine" />
-</p>
-Using Pods instead automatically creates automatically a bridge network between the containers, it is comes in handy in cases where you need 2 or more containers to talk to each other without exposing unnecessary ports.
-<p align="center">
-  <img src="images/pod-net.JPG" alt="Esempio di immagine" />
-</p>
-
-
-As for the communication between pods, we need to configure a network in order to allow them to communicate. 
 
 ### Pod management CLI commands
 ```podman pod```: Manages pods, which are groups of one or more containers sharing the same network namespace.
@@ -74,6 +53,40 @@ We can a container inside the pod we just created, basically it's just the basic
 podman run -d --pod my-nginx-pod --name my-nginx -p 8080:80 nginx:latest
 ```
 Everything is setup by command line, may it be the port forwarding, volume attachments and more.
+
+
+#### Volume mounting
+Volumes or Bind mount is attached a to Pod are accessible to all containers inside.
+
+#### Injecting secrets
+When it comes with `secrets`, we need to inject the secret into the container or Pod directly when we execute the podman run command, which Docker can't do.
+```bash
+podman run --pod mypod --secret db_password -e DB_PASSWORD=/run/secrets/db_password postgres:latest
+```
+
+
+#### Pods networking
+There is no direct link of communication between containers, they sorta live in their own bubble and cannot reach eachother internally, both need to be reachable from the host network to be able to talk to each other. Exposing internal services that only other containers should talk to this way is not recommended since it exposes them out to clients as well.
+<p align="center">
+  <img src="images/net.JPG" alt="Esempio di immagine" />
+</p>
+Using Pods instead automatically creates automatically a bridge network between the containers, it is comes in handy in cases where you need 2 or more containers to talk to each other without exposing unnecessary ports.
+<p align="center">
+  <img src="images/pod-net.JPG" alt="Esempio di immagine" />
+</p>
+
+
+As for the communication between pods, we need to configure a network in order to allow them to communicate. 
+
+
+
+
+
+
+
+
+
+
 
 #### Example of multicontainer Pod
 Now we will try to run a Pod that runs a Flask server with Redis for data collection.
