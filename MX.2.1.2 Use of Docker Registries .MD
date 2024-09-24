@@ -64,13 +64,13 @@ In this procedure we alredy assume that we have a `your-image` image already bui
 #### 1. Tag the Image for the Registry
 This an important step for the procedure, because with the tag we indicate were the images are uploaded.
 There are two different cases for tagging:
-  - `<your-registry-username>/<repository>:<your-tag>`: DockerHub registry
+  - `<username>/<repository>:<your-tag>`: DockerHub registry
   - `<registy-url>/<username>/<repository>:<your-tag>`: Private registry
 
 _As we can see the only difference is the inclusion of the registry's URL._
 
 
-So let's say i want to upload `my-app:latest` image to my DockerHub repository `myapp-repo` first of all i need to tag the image appropriately.
+We are the user `myusername` and let's say i want to upload `my-app:latest` image to my DockerHub repository `myapp-repo`, first of all i need to tag the image appropriately.
 ```bash
 docker tag myapp:latest myusername/myapp-repo:your-tag
 ```
