@@ -67,12 +67,29 @@ podman network create back_net
 podman network create front_net
 ```
 
+ ```bash
+podman run -d --name postgres-db \
+  --network back_net \
+  -e POSTGRES_USER=user \
+  -e POSTGRES_PASSWORD=password \
+  -e POSTGRES_DB=mydb \
+  postgres:latest
+ ```
 
-
-
-
-
-
+```bash
+podman build -t my-flask-app .
+podman run -d --name flask-container \
+  --network back_net \
+  my-flask-app
+```
+Nginx
+```bash
+podman run -d --name nginx-container \
+  --network front_net \
+  -v $(pwd)/nginx.conf:/etc/nginx/conf.d/default.conf:ro \
+  -p 8080:80 \
+  nginx:latest
+```
 
 
 
