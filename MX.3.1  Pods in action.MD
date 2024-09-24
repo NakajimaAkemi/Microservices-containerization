@@ -197,3 +197,11 @@ spec:
   type: LoadBalancer
 ```
 
+
+  For ```podman <subcommand> kube```, we can have:
+  - ```generate``` creates a **YAML** description of a Podman container or pod to run in Kubernetes;
+  - ```play``` subcommand that allows Podman to **run** pods based on a Kubernetes YAML file;
+Subcommand group for handling Kubernetes YAML file operation
+podman play kube: Deploys containers based on Kubernetes YAML files.
+
+
