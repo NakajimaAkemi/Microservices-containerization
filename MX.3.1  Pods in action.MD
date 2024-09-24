@@ -27,7 +27,7 @@ Volumes or Bind mount is attached a to Pod are accessible to all containers insi
 #### Injecting secrets
 When it comes with `secrets`, we need to inject the secret into the container or Pod directly when we execute the podman run command, which Docker can't do.
 ```bash
-podman run --pod mypod --secret db_password -e DB_PASSWORD=run\secrets\db_password postgres:latest
+podman run --pod mypod --secret db_password -e DB_PASSWORD=/run/secrets/db_password postgres:latest
 ```
 
 
