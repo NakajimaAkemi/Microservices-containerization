@@ -6,10 +6,11 @@ step by step tutorial on how to deploy a Spring application in Docker and Podman
 Contributors : Bilel Arfaoui and Francesco Sartor
 
 
-<div>
-  <img src="images/podman-logo.png.webp" alt="Esempio di immagine" />
-  <img src="images/docker.png" alt="Esempio di immagine" />
+<div style="display: flex; justify-content: center;">
+  <img src="images/podman-logo.png.webp" alt="Esempio di immagine" style="width: 200px; height: auto; margin: 0 10px;" />
+  <img src="images/docker.png" alt="Esempio di immagine" style="width: 200px; height: auto; margin: 0 10px;" />
 </div>
+
 
 
 
