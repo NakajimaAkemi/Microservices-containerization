@@ -37,9 +37,6 @@ $ alias docker=podman
 You can run other commands, such as ```pull```, ```push```, ```build```, ```commit```, ```tag```, and more with Podman. Podman’s CLI is similar to Docker’s, so users who are familiar with one are likely to have success with the other.
 
 #### Podman exclusive commands
-Podman other than having the same commands as Docker, it has also exclusive commands, which are ```kube```,
-```systemd``` and ```pod```.
-
 ```podman pod```: Manages pods, which are groups of one or more containers sharing the same network namespace.
   For ```podman pod```, we can have:
   - ```create``` to **build** a pod;
@@ -48,17 +45,23 @@ Podman other than having the same commands as Docker, it has also exclusive comm
   - ```rm``` to **remove** the pod;
 
 
-  For ```podman <subcommand> kube```, we can have:
-  - ```generate``` creates a **YAML** description of a Podman container or pod to run in Kubernetes;
-  - ```play``` subcommand that allows Podman to **run** pods based on a Kubernetes YAML file;
-Subcommand group for handling Kubernetes YAML file operation
-podman play kube: Deploys containers based on Kubernetes YAML files.
-
 
 ## Why should we care about Podman?  
+Podman is fundamentally design with security in mind, paving the way for running containers in high-security enviroments. 
 
-Podman is fundamentally design with security in mind, paving the way for running containers in high-security enviroments. A daemon running as root generally does not meet these requirements and has prevented lots of security-conscious companies from widespread adoption of Docker. Podman containers have always been rootless, while Docker is an all-in-1 tool for container management and creation, and including the fact that the architecture is daemon-less, the surface of attack is highly reduced.
+#### Reason 1: Less surface of attack
+A daemon running as root generally does not meet the security requirements and has prevented lots of security-conscious companies from widespread adoption of Docker. 
 
+Podman containers have always been **rootless**, while Docker is an all-in-1 tool for container management and creation, and including the fact that the architecture is daemon-less, due to the simplified architecture the surface of attack is highly reduced.
+
+#### Reason 2: Systmed integration 
+Podman can generate systemd service files, allowing developers/users to manage the containers as sytemd services in Linux-based systems.
+
+#### Reason 3: Pod concept
+Podman supports the concept of Pods, containers running together in the same network namespace, providing simpler management. 
+
+#### Reason 4: Seamless Kubernetes integration
+Podman can generate Kubernetes YAML files from existing pod and containers, making the integration to the orchestration tool seamless.
 
 ## Sources
 - https://www.redhat.com/en/topics/containers/what-is-podman
