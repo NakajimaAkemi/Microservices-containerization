@@ -66,7 +66,9 @@ Everything is setup by command line, may it be the port forwarding, volume attac
 #### Example of multicontainer Pod
 Now we will try to run a Pod that runs a Flask server with Redis for data collection.
 In the  [example](https://github.com/NakajimaAkemi/Microservices-containerization/tree/master/workdir/redis-pod) the server is exposed at port 5000, while it communicates locally with the Redis service.
-
+<p align="center">
+  <img src="images/cool-pod.JPG" alt="Esempio di immagine" />
+</p>
 First of all we creat the pod `flask-redis-pod`
 ```bash
 # Create the pod and expose port 5000 and build our Flask image.
