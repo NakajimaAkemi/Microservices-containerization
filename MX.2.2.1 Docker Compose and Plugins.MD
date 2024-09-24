@@ -129,6 +129,27 @@ We can verify their reachability with a browser or the `curl` command:
  - http://localhost:32769
  - http://localhost:32770
 
+
+## Ensuring reliability
+
+
+## Resource limitation
+In Docker Compose we limit the CPU and Memory usage for containers in order to have a better resource management and preventing that a single container takes over most of the system's resource.
+
+To apply the resource limitation to a specific `service` we need to add the `resources` and `limits` attribute under `deploy`, and we define the resource limitations we need:
+   - `memory`: specifies how much memory the container can allocate
+   - `cpus`: fractions of CPU cores the container can use
+```yaml
+services:
+  app:
+    image: myapp
+    deploy:
+      resources:
+        limits:
+          memory: 512M    # Set the maximum memory limit (hard limit)
+          cpus: '0.5'     # Restrict CPU usage to 50% of one CPU core
+```
+
 ## Volumes and Bind Mounts
 In this section we introduce `Volumes` and `Bind Mounts` as fundamental items for Docker containers that allow us to mantain to maintain persistent data survining beyond the container lifecycle, facilitating sharing data between containers, backup and restore
 <p align="center">
