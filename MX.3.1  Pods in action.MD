@@ -42,7 +42,7 @@ Every Podman pod includes an `infra container`. This container holds the namespa
   - ```inspect <pod-name>``` to **inspect** the running pod;
 
 #### Volume and Secret mounting 
-Volumes or Bind mount is attached a to Pod are accessible to all containers inside. Same thing for `secrets`.
+`Volumes` or `Bind mount` is attached a to Pod are accessible to all containers inside. Same thing for `secrets`.
 
 
 #### Pods networking
